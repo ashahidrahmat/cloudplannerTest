@@ -1,0 +1,668 @@
+/***
+ * Copyright @ URA 
+ * @author jianmin y070049@gmail.com
+ * @date 12 Aug 2014
+ * @version eplanner 2.0
+ * dark theme CSS for eplanner 2.0
+ * bg-color:rgba(115,115,115,0.95);, border/spliter-color:#686868,font color:#3e3e3e button-color: #4787ed 
+ */ 
+html,body {
+	color:#fff;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.header-color {
+    border-bottom: 1px solid #686868;
+	background-color: rgba(90,90,90,0.95);
+}
+
+
+.maplayers-color,.layerinformation-color,.filter-color {
+	background-color:rgba(115,115,115,0.95);
+	border-right: 1px solid #686868;
+}
+
+.ui-title-color{
+	border-bottom: 1px solid #686868;
+}
+.filter-color {
+    border-top: 1px solid #686868;
+     border-bottom: 1px solid #686868;
+}
+
+.si-title-color {
+    border-bottom-color: #686868;
+    background-color: rgba(90,90,90,0.95);
+}
+
+.layerinformation-color {
+	border-right:1px solid #686868;
+}
+
+.siteinformation-color,.layerdetails-color,.basemap-gallery-color,.bufferinfo-color  {
+    background-color:rgba(115,115,115,0.95);
+	border-left:1px solid #ddd;
+}
+
+
+.back-btn-nav{
+	background: url(../css/themes/images/icons-18-black.png) no-repeat -144px -1px;
+}
+
+.ld-table-wrapper {
+	background:#fff;
+}
+
+#ss-content table td {
+    border-bottom-color:#686868;
+}
+
+.basemap-gallery-color {
+	color: #FFF;
+    border-bottom:1px solid #686868;
+}
+
+.basemap-gallery li {
+    border-color: #F1F1F1;
+}
+
+.basemap-gallery li.selected {
+    color: white;
+    border-color: rgb(136, 180, 250);
+    background-color: rgb(136, 180, 250);
+}
+
+.basemapimage {
+    border-color: #fff;
+	-moz-box-shadow: 0px 0px 6px #727272;
+	-webkit-box-shadow: 0px 0px 6px #727272;
+	box-shadow: 0px 0px 7px #727272;
+}
+
+.underline:hover{
+	color:#4787ed;
+}
+
+.search-icon{
+	background: url(../css/themes/images/icons-36-black.png) no-repeat;
+    background-position: -1224px 0px;
+}
+
+.search-input {
+    border-color: #686868;
+    background-color: #fcfcfc;
+    color:#777777;
+}
+
+.search-input:focus, #cate-search:focus, #searchbookmark:focus,#addbookmark:focus{
+	border-color: #4787ed;
+}
+
+.search-clear-icon {
+	background-image: url(../css/themes/images/icons-36-black.png);
+}
+
+.search-suggest {
+    background-color: rgba(97, 96, 96, 0.9);
+    -moz-box-shadow: 1px 1px 2px 2px rgba(103, 103, 103, 0.5);
+	-webkit-box-shadow: 1px 1px 2px 2px rgba(103, 103, 103, 0.5);
+	box-shadow: 1px 1px 2px 2px rgba(103, 103, 103, 0.5);
+	color: #fff;
+}
+
+#ss-content table td:hover {
+	background: #4787ed;
+	color: #ffffff;
+}
+
+#sbud-text:hover,#mp14-text:hover,#onemap-text:hover,#cadastral-text:hover,#pwb-text:hover,
+#lhap-text:hover,#bhp-text:hover,#agu-text:hover,#groad-text:hover,#gsate-text:hover, #whereto-text:hover {
+	color:#4787ed;
+}
+
+.maplayers-selection-color {
+    background-color:#fff;
+    border-color: #4787ed;
+}
+
+.selected-btn-color {
+    color: #fff;
+	background-color: #4787ed;
+}
+
+.pre-selected-btn-color {
+    background-color: transparent;
+    color: #4787ed;
+}
+
+.cate-search-color {
+    border-color: #686868;
+    color:#777777;
+}
+
+.cate-img {
+	background-color: #FFF;
+}
+
+.cate-search-clear {
+	background-image: url(../css/themes/images/icons-36-black.png);
+}
+
+.maplayers-spliter-color {
+    border-bottom-color: #686868;
+}
+
+.right-close-btn {
+    color: #4787ed;
+    font-weight:400;
+}
+
+.right-close-btn:hover {
+	color:#0E65F0;
+}
+.s-close {
+    background-color: #4787ed;
+    background-image: url(../css/themes/images/icons-18-white.png);
+}
+
+.s-closeall {
+    background-color: #4787ed;
+    background-image: url(../css/themes/images/icons-18-white.png);
+}
+
+.s-close:hover,.s-closeall:hover,.layer-dialog:hover{
+	background-color: rgba(0,0,0,0.3);
+}
+
+.cate-title-wrapper {
+	color:#3e3e3e;
+	border-bottom: 1px solid #686868;
+}
+
+.cate-title-wrapper-click {
+	background-color: #4787ed;
+    color: #fff;
+}
+
+.cate-title {
+    color: #fff;
+}
+
+.cate-title:hover {
+	color: #4787ed;
+}
+
+.layer-dialog {
+    background: rgba(0,0,0,0.2) url(../css/themes/images/icons-36-white.png) no-repeat -536px 2px;
+    /*background: rgba(0,0,0,0.2) url(../css/themes/images/icons-36-white.png) no-repeat -596px 0px;
+    background-size: 960px 25px;*/
+}
+
+.cate-minus-icon {
+	background: url(../css/themes/images/icons-18-black.png) no-repeat -216px -1px;
+}
+.cate-minus-icon-sub {
+	background: url(../css/themes/images/icons-18-black.png) no-repeat -216px -1px;
+}
+
+
+.al-table li {
+    background-color: rgba(90,90,90,0.95);
+    border-bottom-color:#686868;
+    color:#fff;
+}
+
+.layer-name:hover{
+	color:#4787ED;
+}
+
+.al-table-li-disabled {
+	color:#4787ED !important;
+}
+
+.al-layerinfo {
+    background-color: rgba(0,0,0,0.2);
+    background-image: url(../css/themes/images/icons-18-white.png);
+}
+
+.slider {
+    background: #4787ed;
+}
+
+.noUi-origin-lower {
+	background:#fff;
+}
+
+.fancybox-title {
+    color: #3e3e3e;
+}
+
+.layer-select-color {
+    color: #fff;
+    border-color: #4787ed;
+}
+
+.layer-info-color {
+    background-color: #d9edf7;
+	border-color: #bce8f1;
+	color: #31708f;
+}
+
+.secondary-btn-color {
+    color: #FBFF9E;
+}
+
+.secondary-btn-color:hover {
+	color:#0E65F0;
+}
+
+.nav-wrapper-color {
+    border-color: #4787ed;	
+	background-color:#fff;
+}
+
+.ld-table-wrapper {
+	background:none;
+	color:#3e3e3e;
+}
+.more-info{
+	color: rgb(255, 255, 255);
+    background-color: rgb(71, 135, 237);
+}
+.more-info:hover{
+	color:#333;
+}
+.big-words{
+    color:#00297A;
+}
+
+.legend-color {
+    background-color:rgba(115, 115, 115, 0.95);
+	border-left-color:#686868;
+}
+
+#si-address:hover,#si-lot:hover,#si-pol:hover,#si-pa:hover,#si-ps:hover,#si-con:hover,#si-div:hover{
+	color:#4787ed;
+}
+.tools-links li {
+	-webkit-filter: invert(1);
+}
+.tools-selection-color {
+    border-color: #4787ed;
+	background-color:#fff;
+    background-color:#fff;
+}
+
+#lr-ul li,#br-ul li {
+	border-bottom-color: #686868;
+}
+
+#lr-ul li:hover,#br-ul li:hover {
+	color:#4787ed;
+}
+
+.ul-li-grid {
+	background-color: #666;
+	background-color: rgba(0,0,0,0.2);
+    background-image: url(../css/themes/images/icons-18-white.png);
+}
+.ul-li-grid:hover{
+	background-color: rgba(0,0,0,0.3);
+}
+
+.right-links li {
+	-webkit-filter: invert(1);
+}
+.g-table-header{
+	font-weight:bold;
+}
+.g-table-bg{
+	background-color: rgba(115,115,115,0.95);
+}
+
+/*Google Chart CSS*/
+.first-tooltip,.second-tooltip,.third-tooltip{
+    background-color: #fff;
+}
+
+#pieTwo table {
+	border-color: #333;
+}
+
+#pieTwo table th{
+    background: #4787ed; 
+    border: #333;
+    color: #fff;
+}
+
+#pieTwo table td{
+    background: #FFF; 
+    border-color: #333;
+}
+/*Bookmark CSS*/
+.bookmarkinfo-color {
+    background-color:rgba(115,115,115,0.95);
+	border-left: 1px solid #686868;
+}
+
+.addbookmark-color {
+    border-color: #686868;
+	background-color: #fcfcfc;
+    color: #777777;
+}
+
+.searchbookmark-color {
+    border-color: #686868;
+	background-color: #fcfcfc;
+    color: #777777;
+}
+
+.addbookmarkbtn-color {
+    color: #4787ed;
+	background-color: #fff;
+	border-color:#4787ed;
+}
+
+.addbookmarkbtn-color:hover {
+	color: #fff;
+	background-color:#4787ed;
+}
+
+#bookmark-content tr {
+	border-bottom: 1px solid #686868;	
+}
+
+#bookmark-content tr:hover{
+	color:#4787ed;
+}
+
+.bk-search-clear{
+	background-image: url(../css/themes/images/icons-36-black.png);
+}
+
+.toolinfo-color {
+    background-color:#f1f1f1;
+    border-left-color:#686868;
+	border-right-color:#686868;
+}
+
+.buffer-btn {
+    color: #4787ed;
+    background-color: #fff;
+    border-color: #4787ed;
+}
+
+.buffer-btn:hover{
+	color: #fff;
+	background-color: #4787ed;
+}
+
+.buffer-distance-input {
+    border-color: #686868;
+	background-color: #fcfcfc;
+    color: #777777;
+}
+
+.pointbuffer,.polygonbuffer,.clearbuffer{
+    color: #4787ed;
+	background-color: #fff;
+    border-color: #4787ed;
+}
+
+.pointbuffer:hover,.polygonbuffer:hover,.clearbuffer:hover{
+	color: #fff;
+	background-color: #4787ed;
+}
+.buffer-btn-selected {
+	color: #fff;
+	background-color: #4787ed;
+}
+
+.helpinfo-color {
+    background-color:#f1f1f1;
+    border-left-color:#686868;
+	border-right-color:#686868;
+}
+
+.userdisplay-color {
+    color:#fff;
+}
+
+.helpspan:hover{
+	color: #4787ed;
+}
+
+#userinfo-table td {
+    border-color: #999999;
+}
+
+#userinfo-table th {
+	border-color: #999;
+}
+
+.userinfo-color {
+    background-color: rgba(115, 115, 115, 0.95);
+    border-left-color:#686868;
+
+}
+
+.userinfo-details-color {
+    background-color:#f1f1f1;
+}
+
+#userinfo-table th {
+	background-color:#4787ed;
+    color:#ffffff;
+}
+
+.count-input {
+    border-color: #4787ed;
+}
+
+.select {
+	border-color: #4787ed;
+	color: #fff;	
+}
+
+.filter-up-icon{
+	background: url(../css/themes/images/icons-18-black.png) no-repeat -1px -1px;
+}
+.filter-down-icon {
+	background: url(../css/themes/images/icons-18-black.png) no-repeat -39px -1px;
+}
+
+.filter-options-color {
+    color: #fff;
+}
+
+.filter-input{
+    border-color: #686868;
+    color: #3e3e3e;
+}
+
+.filter-go,.filter-x{
+    background-color:#4787ed;
+    color:#fff;
+}
+
+.login-page-color {
+	/*background: #c0d1e2 no-repeat;*/
+	background:#f0f0f0;
+}
+
+.login-top-color {
+    color:#555;
+}
+
+.login-area-color {
+    background-color: #f7f7f7;
+    border-color: rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.e-logo span {
+	background: url('../img/eplanner.png') no-repeat;
+}
+
+.input {
+	border-color: #686868;
+	color: #3e3e3e;
+}
+
+.input:hover,.input:focus {
+	border-color: #4787ed;
+}
+
+.wrong-login-color {
+    color: #dd4b39;
+}
+
+.pw-reminder-color {
+    color: #427fed;
+}
+
+.login-button-color {
+    color: #fff;
+	background-color: #1950AA; 
+}
+
+.login-button-color:hover{
+	background-color: #4787ed; 
+}
+
+.login-info-color {
+    color:#000;
+}
+
+.forgot-pw-color {
+    color: #427fed;
+}
+
+.fancybox-skin {
+    background-color: #FFF;
+}
+
+.close-btn-div {
+   background-color: #C9C9C9;
+   opacity: 0.6;
+}
+
+.mp14-color {
+	background: url(../img/basemaps-s.png) no-repeat -450px 0;
+}
+.whereto-color {
+	background: url(../img/basemaps-s.png) no-repeat -450px 0;
+}
+.onemap-color {
+	background: url(../img/basemaps-s.png) no-repeat -525px 0; 
+}
+.cadastral-color {
+	background: url(../img/basemaps-s.png) no-repeat -150px 0;
+}
+.pwb-color {
+	background: url(../img/basemaps-s.png) no-repeat -675px 0;
+}
+.lhap-color {
+	background: url(../img/basemaps-s.png) no-repeat -375px 0;
+}
+.bhp-color {
+	background: url(../img/basemaps-s.png) no-repeat -75px 0;
+}
+.agu-color {
+	background: url(../img/basemaps-s.png) no-repeat 0 0;
+}
+.sbud-color {
+    background: url(../img/basemaps-s.png) no-repeat -600px 0;
+}
+.groad-color {
+	background: url(../img/basemaps-s.png) no-repeat -225px 0;
+}
+.gsate-color {
+	background: url(../img/basemaps-s.png) no-repeat -300px 0;
+}
+.mp14-bg {
+	background: url(../img/basemaps/mp2014-l.png) no-repeat;
+}
+.whereto-bg {
+	background: url(../img/basemaps/groad-l.png) no-repeat;
+}
+.onemap-bg {
+	background: url(../img/basemaps/onemap-l.png) no-repeat;
+}
+.cadastral-bg {
+	background: url(../img/basemaps/cada-l.png) no-repeat;
+}
+.pwb-bg {
+	background: url(../img/basemaps/water-l.png) no-repeat;
+}
+.lhap-bg {
+	background: url(../img/basemaps/land-l.png) no-repeat;
+}
+.bhp-bg {
+	background: url(../img/basemaps/build-l.png) no-repeat;
+}
+
+.agu-bg {
+	background: url(../img/basemaps/activity-l.png) no-repeat;
+}
+
+.sbud-bg {
+	background: url(../img/basemaps/street-l.png) no-repeat;
+}
+.groad-bg {
+	background: url(../img/basemaps/groad-l.png) no-repeat;
+}
+
+.gsate-bg {
+	background: url(../img/basemaps/gsate-l.png) no-repeat;
+}
+
+.layer-list {
+	 
+}
+.legend {
+	background: url('../img/versions/v1.4/headers-2.png') no-repeat -99px 0;
+	margin: 12px 0px 0px 9px;
+}
+.tool-list {
+	background: url('../img/versions/v1.4/headers-2.png') no-repeat -262px 0;
+	margin: 9px 0 0 9px;
+}
+.bookmark {
+	background: url('../img/versions/v1.4/headers-2.png') no-repeat -229px 0;
+	margin: 8px 0 0 8px;
+
+}
+.locate-me {
+	background: url('../img/versions/v1.4/headers-2.png') no-repeat  -164px 0;
+    margin: 0 0 0 9px;
+	-webkit-filter: invert(1);
+}
+.info-list {
+	background: url('../img/versions/v1.4/headers-2.png') no-repeat -27px 0;
+	margin: 9px 0 0 8px;
+
+}
+.buffer {
+    background: url('../img/versions/v1.4/headers-2.png') no-repeat -358px 0;
+	margin: 9px 0 0 8px;
+}
+.reset {
+    background: url('../img/versions/v1.4/headers-2.png') no-repeat -323px 0;
+	margin: 9px 0 0 8px;
+}
+
+.base-map {
+	background: url('../img/versions/v1.4/headers-2.png') no-repeat 0 0;
+	margin: 9px 5px 0px 0px;
+}
+.base-user {
+	background: url('../img/versions/v1.4/headers-2.png') no-repeat -290px 0;
+	margin: 9px 7px 0px 0px;
+}
+
+.tools-links li .title, .right-links li .title, #locate-me .title {
+    color: #fff;
+    -webkit-filter: inherit;
+}

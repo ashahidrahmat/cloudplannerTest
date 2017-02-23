@@ -1,0 +1,644 @@
+/**-------------------------------------------------------------------------------------------------
+ * PROGRAM ID      : light.css
+ * DESCRIPTION     : ePlanner setting colors in  css
+ * AUTHOR          : yujianmin
+ * DATE            : Aug 14, 2013
+ * VERSION NO      : 2.0
+ * PARAMETERS      :
+ * RETURN          :
+ * USAGE NOTES     : bg-color:#f1f1f1, border/spliter-color:#b3b3b3,font color:#3e3e3e button-color: #4787ed
+ * COMMENTS        :
+---------------------------------------------------------------------------------------------------
+ * CHANGE LOG  	   :
+ * CHANGED BY      :
+ * DATE            :
+ * VERSION NO      :
+ * CHANGES         :
+--------------------------------------------------------------------------------------------------*/
+html,body {
+	color:#3e3e3e;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.header-color {
+    border-bottom: 1px solid #ddd;
+	background-color: #FFFFFF;
+}
+
+.maplayers-color,.layerinformation-color {
+	background-color:rgba(255,255,255,0.95);
+	/*border-right: 3px solid #f1f1f1;*/
+}
+
+.filter-color {
+	background-color:rgba(255,255,255,0.95);
+	border-right: 1px solid #DDD;
+	border-top: 1px solid #ddd;
+ 	border-bottom: 1px solid #ddd;
+}
+
+
+.si-title-color {
+    border-bottom: 1px solid #ECEBEA;
+	background-color: rgba(219,219,219,0.95);
+}
+
+.siteinformation-color,.layerdetails-color,.basemap-gallery-color,.bufferinfo-color  {
+    background-color:rgba(255,255,255,0.95);
+	border-left:1px solid #ddd;
+}
+
+.back-btn-nav{
+	background: url("/Content/css/themes/images/icons-18-black.png") no-repeat -144px -1px;
+}
+
+.ld-table-wrapper {
+	background:none;
+}
+
+#ss-content table td {
+    border-bottom-color:#ddd;
+}
+
+.basemap-gallery-color {
+    border-bottom:1px solid #ddd;
+}
+
+.basemap-gallery li {
+	border-bottom:1px solid #ddd;
+}
+
+.basemap-gallery li.selected {
+    color: white;
+    border-color: #4787ed;
+    background-color: #97B8EB;
+}
+
+.basemapimage {
+    border-color: #fff;
+	-moz-box-shadow: 0px 0px 6px #727272;
+	-webkit-box-shadow: 0px 0px 6px #727272;
+	box-shadow: 0px 0px 7px #727272;
+}
+
+.underline:hover{
+	color:#4787ed;
+}
+
+.search-icon{
+    background-position: -1224px 0px;
+    padding-top: 5px;
+}
+
+.search-input {
+    border-color: #e9e9e9;
+    background-color: rgba(255,255,255,0.95);
+    color:#777777;
+}
+
+.search-wrapper .search-input:focus {
+    border-color: #e9e9e9;
+}
+
+.search-input:focus, #cate-search:focus, #searchbookmark:focus,#addbookmark:focus{
+	border-color: #4787ed;
+}
+
+.search-clear-icon {
+	background-image: url("/Content/css/themes/images/icons-36-black.png");
+}
+
+.search-suggest {
+    background-color: rgba(255,255,255,0.95);
+    border-color: #e9e9e9;
+/*
+    -moz-box-shadow: 1px 1px 2px 2px rgba(103, 103, 103, 0.5);
+	-webkit-box-shadow: 1px 1px 2px 2px rgba(103, 103, 103, 0.5);
+	box-shadow: 1px 1px 2px 2px rgba(103, 103, 103, 0.5);
+*/
+
+}
+
+#ss-content table td:hover,#ss-content table td:focus, #ss-content table tr td:hover, #ss-content table tr td:focus,
+#ss-content table tr:hover, #ss-content table tr:focus {
+    background-color: #cbcbcb;
+    color : black
+}
+
+
+#sbud-text:hover,#mp14-text:hover,#onemap-text:hover,#cadastral-text:hover,#pwb-text:hover,
+#lhap-text:hover,#bhp-text:hover,#agu-text:hover,#groad-text:hover,#gsate-text:hover, #whereto-text:hover {
+	color:#4787ed;
+}
+
+.maplayers-selection-color {
+    background-color:#fff;
+    border-color: #4787ed;
+}
+
+.selected-btn-color {
+    color: #fff;
+	background-color: #4787ed;
+}
+
+.pre-selected-btn-color {
+    background-color: transparent;
+    color: #4787ed;
+}
+
+.cate-search-color {
+    border-color: #ddd;
+    background-color: #fcfcfc;
+    color:#777777;
+}
+
+.cate-img {
+	background-color: transparent;
+}
+
+.cate-search-clear {
+	background-image: url("/Content/css/themes/images/icons-36-black.png");
+}
+
+.maplayers-spliter-color {
+    border-bottom-color: #ddd;
+}
+
+.s-close {
+    background-color: rgba(0,0,0,0.2);
+    background-image: url("/Content/css/themes/images/icons-18-white.png");
+}
+
+.s-closeall {
+    background-color: rgba(0,0,0,0.2);
+    background-image: url("/Content/css/themes/images/icons-18-white.png");
+}
+
+.s-close:hover,.s-closeall:hover {
+	background-color: rgba(0,0,0,0.3);
+}
+
+.cate-title-wrapper {
+	/*color:#3e3e3e;*/
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid #ddd;
+}
+
+.cate-title-wrapper-click {
+	background-color: #4787ed;
+    color: #fff;
+}
+
+.cate-title:hover {
+	color:#4787ed;
+}
+
+.layer-dialog {
+   opacity:0.6;
+}
+.layer-dialog:hover,.layer-dialog:active{
+	opacity:0.95;
+}
+.cate-title-wrapper-color{
+	background-color:none;
+}
+
+.cate-title-wrapper-selected-color{
+	background-color:rgba(247, 247, 247, 0.95);
+}
+
+.cate-minus-icon {
+	background: url("/Content/css/themes/images/icons-18-black.png") no-repeat -1px -1px;
+}
+.cate-minus-icon-sub {
+	background: url("/Content/css/themes/images/icons-18-black.png") no-repeat -1px -1px;
+}
+
+.al-table li {
+    background-color: rgba(247,247,247,0.95);
+    border-bottom-color: #ECEBEA;
+}
+
+.al-table-li-disabled {
+	background-color: #4787ED !important;
+	color: rgba(255, 255, 255, 0.91);
+}
+.al-layerinfo {
+    background-color: rgba(0,0,0,0.2);
+    background-image: url("/Content/css/themes/images/icons-18-white.png");
+}
+
+.slider {
+    background: #4787ed;
+}
+
+.noUi-origin-lower {
+	background:#fff;
+}
+
+.noUi-handle {
+	background: #EEE;
+    border-color: #BFBFBF;
+}
+
+.fancybox-title {
+    color: #3e3e3e;
+}
+
+.layer-select-color {
+    color: #4787ed;
+    border-color: #4787ed;
+}
+
+.layer-info-color {
+    background-color: #d9edf7;
+	border-color: #bce8f1;
+	color: #31708f;
+}
+/***Right Close Btn*/
+.right-close-btn-color {
+    opacity:0.6;
+}
+
+.right-close-btn-color:hover {
+	  opacity:0.95;
+}
+.expand-icon-color{
+	opacity:0.5;
+}
+.expand-icon-color:hover{
+	opacity:0.85;
+}
+.reduce-icon-color{
+	opacity:0.5;
+}
+.reduce-icon-color:hover{
+	opacity:0.85;
+}
+.nav-wrapper-color {
+    border-color: #4787ed;
+	background-color:#fff;
+}
+
+.layerinfo-content-color {
+    /*background:#fff;*/
+}
+.more-info{
+	color: rgb(255, 255, 255);
+    background-color: rgb(71, 135, 237);
+}
+.more-info:hover{
+	color:#333;
+}
+.big-words{
+    color:#00297A;
+}
+
+.legend-color {
+    background-color:rgba(255, 255, 255, 0.95);
+	border-left-color:#ddd;
+}
+
+#si-address:hover,#si-lot:hover,#si-pol:hover,#si-pa:hover,#si-ps:hover,#si-con:hover,#si-div:hover{
+	color:#4787ed;
+}
+
+.tools-selection-color {
+    border-color: #4787ed;
+	background-color:#fff;
+    background-color:#fff;
+}
+
+#lr-ul li,#br-ul li {
+	border-bottom-color: #ddd;
+}
+
+#lr-ul li:hover,#br-ul li:hover {
+	color:#4787ed;
+}
+
+.ul-li-grid {
+	background-color: #666;
+	background-color: rgba(0,0,0,0.2);
+    background-image: url("/Content/css/themes/images/icons-18-white.png");
+}
+.ul-li-grid:hover{
+	background-color: rgba(0,0,0,0.3);
+}
+
+/*Google Chart CSS*/
+.first-tooltip,.second-tooltip,.third-tooltip{
+    background-color: #fff;
+    text-align:center;
+}
+
+#pieTwo table {
+	border-color: #333;
+}
+
+#pieTwo table th{
+    background: #4787ed;
+    border: #333;
+    color: #fff;
+}
+
+#pieTwo table td{
+    background: #FFF;
+    border-color: #333;
+}
+/*Bookmark CSS*/
+.bookmarkinfo-color {
+    background-color:rgba(255,255,255,0.95);
+	border-left: 1px solid #ddd;
+}
+.addbookmark-color {
+    border-color: #ddd;
+	background-color: #fcfcfc;
+    color: #777777;
+}
+.searchbookmark-color {
+    border-color: #ddd;
+	background-color: #fcfcfc;
+    color: #777777;
+}
+.addbookmarkbtn-color {
+    background-color: #ddd;
+	color: #6b6b6b;
+	border: 1px solid #a7a7a7;
+}
+
+.addbookmarkbtn-color:hover {
+	background-color: #A7A5A5;
+	color: #F3F3F3;
+}
+
+#bookmark-content tr {
+	border-bottom: 1px solid #ddd;
+	background: rgba(247,247,247,0.95);
+}
+
+#bookmark-content tr:hover{
+	color:#4787ed;
+}
+
+.bk-search-clear{
+	background-image: url("/Content/css/themes/images/icons-36-black.png");
+}
+
+.toolinfo-color {
+    background-color:#f1f1f1;
+    border-left-color:#ddd;
+	border-right-color:#ddd;
+}
+
+.buffer-btn {
+    color: #4787ed;
+    background-color: #fff;
+    border-color: #4787ed;
+}
+
+.buffer-btn:hover{
+	color: #fff;
+	background-color: #4787ed;
+}
+
+.buffer-distance-input {
+    border-color: #ddd;
+	background-color: #fcfcfc;
+    color: #777777;
+}
+
+.pointbuffer,.polygonbuffer,.clearbuffer{
+    background-color: #ddd;
+	color: #6b6b6b;
+	border: 1px solid #a7a7a7;
+}
+
+.pointbuffer:hover,.polygonbuffer:hover,.clearbuffer:hover{
+	color: #fff;
+	background-color: #4787ed;
+}
+.buffer-btn-selected {
+	color: #fff;
+	background-color: #4787ed;
+}
+
+.exportcsv-btn{
+	color: #fff;
+    border-bottom-color: #686868;
+	background-color: #4787ed;
+    border: 1px solid #a7a7a7;
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    margin: 15px 20%;
+    visibility: hidden;
+}
+
+.exportcsv-btn-show{
+	color: #fff;
+    border-bottom-color: #686868;
+	background-color: #4787ed;
+    border: 1px solid #a7a7a7;
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    margin: 15px 20%;
+    visibility: visible;
+}
+
+.helpinfo-color {
+    background-color:#f1f1f1;
+    border-left-color:#ddd;
+	border-right-color:#ddd;
+}
+
+.userdisplay-color {
+    color:#4787ed;
+}
+
+.helpspan:hover{
+	color:#4787ed;
+}
+
+#userinfo-table td {
+    border-color: #999999;
+}
+
+#userinfo-table th {
+	border-color: #999;
+}
+
+.userinfo-color {
+    background-color:rgba(255, 255, 255, 0.95);
+    border-left-color:#ddd;
+}
+.ui-title-color{
+	border-bottom: 1px solid #ECEBEA;
+}
+.userinfo-details-color {
+    background-color:#f1f1f1;
+}
+
+#userinfo-table th {
+	background-color:#4787ed;
+    color:#ffffff;
+}
+
+.count-input {
+    border-color: #4787ed;
+}
+
+.select {
+	border-color: #4787ed;
+	color: #000;
+}
+
+.filter-up-icon{
+	background: url("/Content/css/themes/images/icons-18-black.png") no-repeat -1px -1px;
+}
+.filter-down-icon {
+	background: url("/Content/css/themes/images/icons-18-black.png") no-repeat -39px -1px;
+}
+
+.filter-options-color {
+    color: #000;
+}
+
+.filter-input{
+    border-color: #ddd;
+    color: #3e3e3e;
+}
+
+.filter-go,.filter-x{
+	background-color: #ddd;
+	color: #6b6b6b;
+	border: 1px solid #a7a7a7;
+}
+
+.login-page-color {
+	/*background: #c0d1e2 no-repeat;*/
+	background:#f0f0f0;
+}
+
+.login-top-color {
+    color:#555;
+}
+
+.login-area-color {
+    background-color: #f7f7f7;
+    border-color: rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.input {
+	border-color: #ddd;
+	color: #3e3e3e;
+}
+
+.input:hover,.input:focus {
+	border-color: #4787ed;
+}
+
+.wrong-login-color {
+    color: #dd4b39;
+}
+
+.pw-reminder-color {
+    color: #427fed;
+}
+
+.login-button-color {
+    color: #fff;
+	background-color: #1950AA;
+}
+
+.login-button-color:hover{
+	background-color: #4787ed;
+}
+
+.login-info-color {
+    color:#000;
+}
+
+.forgot-pw-color {
+    color: #427fed;
+}
+
+.fancybox-skin {
+    background-color: #FFF;
+}
+
+.mp14-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -450px 0;
+}
+.whereto-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -450px 0;
+}
+.onemap-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -525px 0;
+}
+.cadastral-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -150px 0;
+}
+.pwb-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -675px 0;
+}
+.lhap-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -375px 0;
+}
+.bhp-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -75px 0;
+}
+.agu-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat 0 0;
+}
+.sbud-color {
+    background: url("/Content/img/basemaps-s.png") no-repeat -600px 0;
+}
+.groad-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -225px 0;
+}
+.gsate-color {
+	background: url("/Content/img/basemaps-s.png") no-repeat -300px 0;
+}
+.mp14-bg {
+	background: url("/Content/img/basemaps/mp2014-l.png") no-repeat;
+}
+.bwbasemap-bg {
+	background: url("/Content/img/basemaps/bwbasemap-l.png") no-repeat;
+}
+.g-grayscale-bg {
+	background: url("/Content/img/basemaps/g-grayscale-l.png") no-repeat;
+}
+.whereto-bg {
+	background: url("/Content/img/basemaps/whereto-l.png") no-repeat;
+}
+.safmu-bg {
+	background: url("/Content/img/basemaps/safmu-l.png") no-repeat;
+}
+.onemap-bg {
+	background: url("/Content/img/basemaps/onemap-l.png") no-repeat;
+}
+.cadastral-bg {
+	background: url("/Content/img/basemaps/cada-l.png") no-repeat;
+}
+.pwb-bg {
+	background: url("/Content/img/basemaps/water-l.png") no-repeat;
+}
+.lhap-bg {
+	background: url("/Content/img/basemaps/land-l.png") no-repeat;
+}
+.bhp-bg {
+	background: url("/Content/img/basemaps/build-l.png") no-repeat;
+}
+.agu-bg {
+	background: url("/Content/img/basemaps/activity-l.png") no-repeat;
+}
+.sbud-bg {
+	background: url("/Content/img/basemaps/street-l.png") no-repeat;
+}
+.groad-bg {
+	background: url("/Content/img/basemaps/groad-l.png") no-repeat;
+}
+.gsate-bg {
+	background: url("/Content/img/basemaps/gsate-l.png") no-repeat;
+}

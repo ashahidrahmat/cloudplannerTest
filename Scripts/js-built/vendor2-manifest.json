@@ -1,0 +1,31 @@
+{
+  "name": "vendor2",
+  "content": {
+    "./node_modules/perfect-scrollbar/src/js/plugin/instances.js": 8,
+    "./node_modules/perfect-scrollbar/src/js/lib/helper.js": 11,
+    "./node_modules/perfect-scrollbar/src/js/plugin/update-geometry.js": 13,
+    "./node_modules/perfect-scrollbar/src/js/plugin/update-scroll.js": 16,
+    "./node_modules/perfect-scrollbar/src/js/lib/dom.js": 19,
+    "./node_modules/perfect-scrollbar/src/js/lib/class.js": 33,
+    "./node_modules/c3/node_modules/d3/d3.js": 75,
+    "./node_modules/c3/c3.js": 120,
+    "./node_modules/d3/build/d3.js": 121,
+    "./node_modules/datejs/lib/date.js": 122,
+    "./node_modules/fancybox/dist/js/jquery.fancybox.cjs.js": 125,
+    "./node_modules/perfect-scrollbar/index.js": 131,
+    "./node_modules/perfect-scrollbar/src/js/lib/event-manager.js": 132,
+    "./node_modules/perfect-scrollbar/src/js/lib/guid.js": 133,
+    "./node_modules/perfect-scrollbar/src/js/main.js": 134,
+    "./node_modules/perfect-scrollbar/src/js/plugin/default-setting.js": 135,
+    "./node_modules/perfect-scrollbar/src/js/plugin/destroy.js": 136,
+    "./node_modules/perfect-scrollbar/src/js/plugin/handler/click-rail.js": 137,
+    "./node_modules/perfect-scrollbar/src/js/plugin/handler/drag-scrollbar.js": 138,
+    "./node_modules/perfect-scrollbar/src/js/plugin/handler/keyboard.js": 139,
+    "./node_modules/perfect-scrollbar/src/js/plugin/handler/mouse-wheel.js": 140,
+    "./node_modules/perfect-scrollbar/src/js/plugin/handler/native-scroll.js": 141,
+    "./node_modules/perfect-scrollbar/src/js/plugin/handler/selection.js": 142,
+    "./node_modules/perfect-scrollbar/src/js/plugin/handler/touch.js": 143,
+    "./node_modules/perfect-scrollbar/src/js/plugin/initialize.js": 144,
+    "./node_modules/perfect-scrollbar/src/js/plugin/update.js": 145
+  }
+}
