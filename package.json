@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "start" : "Scripts/node_modukes/.bin/webpack --config webpack.dll.js & Scripts/node_modules/.bin/webpack & node index.js"
   },
   "author": "",
   "license": "ISC",
