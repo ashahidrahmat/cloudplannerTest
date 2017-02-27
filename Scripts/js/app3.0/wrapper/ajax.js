@@ -18,7 +18,7 @@
 
 import jquery from 'jquery';
 
-export default class Ajax {
+ class Ajax {
 
     wait(xhrArr, success, fail) {
         return jquery.when.apply(jquery, xhrArr).then(success, fail);
