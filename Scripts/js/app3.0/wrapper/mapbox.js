@@ -24,7 +24,7 @@ import Basemap3DConfig from 'basemap3dconfig';
 import Ajax from 'wrapper/ajax';
 import {ControllerUrl} from 'constants/urlconstants';
 
-export default class Mapbox {
+ class Mapbox {
     constructor(opts) {
         this.defaultConfig = Basemap3DConfig.Mapbox.config;
 
