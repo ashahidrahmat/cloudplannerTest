@@ -27,7 +27,7 @@ const common = {
         filename: 'main-built.js'
     },
     module: {
-        loaders: [{ 
+        loaders: [{
             test: /\.jsx?$/,
             loader: 'babel-loader?cacheDirectory',
             include: PATHS.app,
