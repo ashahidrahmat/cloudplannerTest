@@ -54,7 +54,7 @@ class Basemap {
         if (basemap.subdomains) {
             this.opts.subdomains = basemap.subdomains;
         }
-        //if (this.isArcGisService && this.crs)
+
         if (this.crs) {
             
             Esri.get(this.src, this.internal ? { token: token } : {}

@@ -64,7 +64,7 @@
     "build:dll": "node_modules/.bin/webpack --config=webpack.dll.js",
     "build:dev": "npm run build:dll & npm run dev",
     "build:prd": "npm run build:dll & npm run prd",
-    "start": "node_modules/.bin/webpack-dev-server.cmd",
+    "start": "node_modules/.bin/webpack-dev-server",
     "dev": "node_modules/.bin/webpack.cmd",
     "prd": "node_modules/.bin/webpack -p",
     "speedtest": "set NODE_PATH=%CD%/js/app3.0&& mocha ./test/app3.0/layers/profile.spec.js",
