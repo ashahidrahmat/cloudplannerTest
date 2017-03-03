@@ -7,6 +7,7 @@
     "test": "test"
   },
   "dependencies": {
+    "@turf/turf": "^3.11.2",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "c3": "^0.4.11",
@@ -41,7 +42,6 @@
     "semantic-ui-react": "^0.66.0",
     "simple-statistics": "^2.1.0",
     "tablefilter": "^0.4.42",
-    "turf": "^3.0.14",
     "vis": "^4.17.0"
   },
   "devDependencies": {
