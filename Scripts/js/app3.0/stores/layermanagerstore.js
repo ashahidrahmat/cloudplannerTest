@@ -54,17 +54,17 @@ class LayerManagerStore extends BaseStore {
                 len = layers.length;
 
             //for each layer in category
-            for (var i = len - 1; i >= 0; i--) {
-                var layer = layers[i];
-                let src = layer.src,
-                    pattern = src.split('services/')[1];
+            // for (var i = len - 1; i >= 0; i--) {
+            //     var layer = layers[i];
+            //     let src = layer.src,
+            //         pattern = src.split('services/')[1];
 
-                if ((src.indexOf('//') < 0 && results.indexOf(pattern) < 0)) {
+            //     if ((src.indexOf('//') < 0 && results.indexOf(pattern) < 0)) {
 
-                    //delete layer
-                    layers.splice(i, 1);
-                }
-            }
+            //         //delete layer
+            //         layers.splice(i, 1);
+            //     }
+            // }
 
             if (MapData[j].layers.length <= 0) {
                 MapData.splice(j, 1);
@@ -74,50 +74,6 @@ class LayerManagerStore extends BaseStore {
         this.loadLayers();
         this.emitChanges();
 
-        Ajax.call({
-            url: '',
-            dataType: 'json',
-            async: true,
-            success: rest => {
-                if (rest.result) {
-                    if (rest.result == "error") {
-                        EplActionCreator.logout();
-                    } else {
-
-                        let isOnline = ConfigStore.online,
-                            results = rest.result,
-                            catLen = MapData.length;
-
-                        //for each category
-                        for (var j = catLen - 1; j >= 0; j--) {
-                            let layers = MapData[j].layers,
-                                len = layers.length;
-
-                            //for each layer in category
-                            for (var i = len - 1; i >= 0; i--) {
-                                var layer = layers[i];
-                                let src = layer.src,
-                                    pattern = src.split('services/')[1];
-
-                                if ((!isOnline && layer.internet)
-                                    || (src.indexOf('//') < 0 && results.indexOf(pattern) < 0)) {
-
-                                    //delete layer
-                                    layers.splice(i, 1);
-                                }
-                            }
-
-                            if (MapData[j].layers.length <= 0) {
-                                MapData.splice(j, 1);
-                            }
-                        }
-
-                        this.loadLayers();
-                        this.emitChanges();
-                    }
-                }
-            }
-        });
     }
 
     reset() {

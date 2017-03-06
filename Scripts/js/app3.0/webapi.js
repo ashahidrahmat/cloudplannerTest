@@ -65,8 +65,8 @@ class WebApi {
         let def = Ajax.deferred();
         this.url = UrlConstants.OneMapToken;
         let ajaxUrl = Util.appendUrlWithParams(this.url, {
-            email: "",
-            password: ""
+            email: "plannercloud@gmail.com",
+            password: "plannercloud1"
         });
         let callback = data => {
             def.resolve(data);

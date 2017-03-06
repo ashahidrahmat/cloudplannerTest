@@ -253,7 +253,7 @@ export default class EplReact extends React.Component {
                                 !buildings ? <li id="bookmark" onClick={this.toggleBookmark.bind(this)}><i className="iconfont icon-star"></i><div className="iconfont-name">Bookmark</div></li> : null
                             }
                             {
-                                //!buildings ? <li id="buffer" onClick={this.toggleBuffer.bind(this)}><i className="iconfont icon-buffer"></i><div className="iconfont-name">Buffer</div></li> : null
+                                !buildings ? <li id="buffer" onClick={this.toggleBuffer.bind(this)}><i className="iconfont icon-buffer"></i><div className="iconfont-name">Buffer</div></li> : null
                             }
                             {
                                 !buildings ? <li id="draw" onClick={this.toggleDraw.bind(this)}><i className="iconfont icon-pencil"></i><div className="iconfont-name">Draw</div></li> : null

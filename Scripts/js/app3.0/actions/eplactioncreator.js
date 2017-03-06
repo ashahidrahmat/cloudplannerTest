@@ -214,7 +214,7 @@ class EplActionCreator {
     }
 
     identify(latLng) {
-        //WebApi.querySiteInfo(latLng);
+        WebApi.querySiteInfo(latLng);
         Util.setIdentifyPoint(latLng);
 
         AppDispatcher.dispatch({
