@@ -40,7 +40,39 @@ class LayerManagerStore extends BaseStore {
         this.detailedLayer = null,
         this.layersByCategories = [];
         this.searchedLayersByCategories = [];
+        this.searchedLayersByCategories1 = {"result":["Maps"]}
         this.openedCategory = null;
+
+
+        let 
+                         results = this.searchedLayersByCategories1.result,
+                         catLen = MapData.length;
+
+        //for each category
+        for (var j = catLen - 1; j >= 0; j--) {
+            let layers = MapData[j].layers,
+                len = layers.length;
+
+            //for each layer in category
+            for (var i = len - 1; i >= 0; i--) {
+                var layer = layers[i];
+                let src = layer.src,
+                    pattern = src.split('services/')[1];
+
+                if ((src.indexOf('//') < 0 && results.indexOf(pattern) < 0)) {
+
+                    //delete layer
+                    layers.splice(i, 1);
+                }
+            }
+
+            if (MapData[j].layers.length <= 0) {
+                MapData.splice(j, 1);
+            }
+        }
+
+        this.loadLayers();
+        this.emitChanges();
 
         Ajax.call({
             url: '',
@@ -200,9 +232,9 @@ class LayerManagerStore extends BaseStore {
             };
 
             categoryConfig.layers.forEach(layerConfig => {
-                layerConfig.src = Util.buildToDeployServer(layerConfig.src);
+                
 
-                let layer = LayerFactory.getLayer(layerConfig.class, layerConfig, this.opts.token);
+                let layer = LayerFactory.getLayer(layerConfig.class, layerConfig);
 
                 category.layers.push(layer);
                 this.layersByName[layer.getName()] = layer;
