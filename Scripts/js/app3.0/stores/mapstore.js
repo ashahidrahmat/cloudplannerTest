@@ -19,7 +19,6 @@
 import L from 'leaflet';
 import Esri from 'esri-leaflet';
 import Util from '\\util';
-import ConfigStore from 'stores/configstore';
 import BaseStore from 'stores/basestore';
 import LayerFactory from 'layers/layerfactory';
 import BasemapConfig from 'basemapconfig';
@@ -34,7 +33,6 @@ import LayerManagerStore from 'stores/layermanagerstore';
 import DrawManager from 'drawmanager';
 import Proj4Leaflet from 'proj4leaflet';
 import 'leaflet-draw';
-import DacsStore from 'stores/dacsstore';
 import BufferStore from 'stores/bufferstore';
 import DrawStore from 'stores/drawstore';
 import Map3DStore from 'stores/3dmapstore';
@@ -125,8 +123,7 @@ class MapStore extends BaseStore {
 
         //config draw manager
         this.configDrawManager(map);
-        //DACS interface
-        DacsStore.locationListener(map);
+        //DACS interfaces
 
         //config cluster manager
         this.configClusterManager(map);

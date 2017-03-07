@@ -19,7 +19,6 @@
 import L from 'leaflet';
 import Proj4Leaflet from 'proj4leaflet';
 import React from 'react';
-import ConfigStore from 'stores/configstore';
 import FeatureConstants from 'constants/featureconstants';
 import * as d3 from 'd3';
 import Ps from 'perfect-scrollbar';

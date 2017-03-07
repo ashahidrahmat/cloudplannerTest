@@ -27,7 +27,6 @@ import Layer from 'layers/layer';
 import Masonry from 'react-masonry-component';
 import Lphoto from 'libs/leafletphoto/Leaflet.Photo.js';
 import L from 'leaflet';
-import Cloudinaryupload from 'cloudinary-jquery-file-upload';
 import $ from 'jquery';
 import Ajax from 'wrapper/ajax';
 import fancybox from 'fancybox';

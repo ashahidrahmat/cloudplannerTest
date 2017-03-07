@@ -21,7 +21,6 @@ import UrlConstants from 'constants/urlconstants';
 import SearchStore from 'stores/searchstore';
 import AddressSearch from 'search/addresssearch';
 import Util from 'util';
-import ConfigStore from 'stores/configstore';
 
 export default class OneMapAddressSearch extends AddressSearch {
 

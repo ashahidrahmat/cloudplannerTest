@@ -1,4 +1,4 @@
-﻿const path = require('path');
+const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 
@@ -27,7 +27,7 @@ const common = {
         filename: 'main-built.js'
     },
     module: {
-        loaders: [{
+        loaders: [{ 
             test: /\.jsx?$/,
             loader: 'babel-loader?cacheDirectory',
             include: PATHS.app,
@@ -40,16 +40,32 @@ const common = {
     plugins: [
         //new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"common.bundle.js"),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.OccurrenceOrderPlugin(true),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require(path.join(PATHS.build, "vendor1-manifest.json"))
-        }),
+        }), 
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require(path.join(PATHS.build, "vendor2-manifest.json"))
         }),
-        new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.OccurrenceOrderPlugin(true),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require(path.join(PATHS.build, "vendor3-manifest.json"))
+        }), 
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require(path.join(PATHS.build, "vendor4-manifest.json"))
+        }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require(path.join(PATHS.build, "vendor5-manifest.json"))
+        }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require(path.join(PATHS.build, "vendor6-manifest.json"))
+        }),
         new webpack.DefinePlugin({
             'process.env': {
                 // This has effect on the react lib size
@@ -73,7 +89,7 @@ if (TARGET === 'start') {
             historyApiFallback: false,
             hot: true,
             inline: false,
-            progress: false,
+            progress: true,
 
             // Display only errors to reduce the amount of output.
             stats: 'errors-only',
@@ -114,7 +130,7 @@ if (TARGET === 'start') {
                 beautify: false,
 
                 // Eliminate comments
-                comments: false,
+                comments: true,
 
                 // Compression specific options
                 compress: {

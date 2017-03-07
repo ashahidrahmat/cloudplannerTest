@@ -19,7 +19,6 @@
 import Ajax from 'wrapper/ajax';
 import Util from '\\util';
 import Modal from 'components/modal';
-import ConfigStore from 'stores/configstore';
 import UrlConstants from 'constants/urlconstants';
 import EplActionCreator from 'actions/eplactioncreator';
 import {PlanningArea, Subzone} from 'constants/aggregationconstants';

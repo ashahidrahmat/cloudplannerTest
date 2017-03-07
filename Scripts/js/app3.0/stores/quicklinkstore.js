@@ -35,7 +35,6 @@ class QuicklinkStore extends BaseStore {
     }
     
     clearUI(){
-        console.log("reset ui");
         this.resetUI = true;
 
         this.quicklinks.forEach((btn, i) => {

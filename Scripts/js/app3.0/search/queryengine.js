@@ -21,7 +21,6 @@ import {ControllerUrl} from 'constants/urlconstants';
 import SearchStore from 'stores/searchstore';
 import Search from 'search/search';
 import Util from '\\util';
-import ConfigStore from 'stores/configstore';
 import SpeechStore from 'stores/speechstore';
 import BufferStore from 'stores/bufferstore';
 

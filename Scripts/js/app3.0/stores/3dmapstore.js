@@ -17,7 +17,6 @@
 --------------------------------------------------------------------------------------------------*/
 
 import Mapbox from 'wrapper/mapbox';
-import M from 'libs/mapbox-gl.js';
 import L from 'leaflet';
 import Util from '\\util';
 import AppDispatcher from 'dispatcher/appdispatcher';
@@ -28,7 +27,6 @@ import Basemap3DConfig from 'basemap3dconfig';
 import Ajax from 'wrapper/ajax';
 import {ControllerUrl} from 'constants/urlconstants';
 import $ from 'jquery';
-import ConfigStore from 'stores/configstore';
 import WebApi from 'webapi';
 
 class Map3DStore extends BaseStore {

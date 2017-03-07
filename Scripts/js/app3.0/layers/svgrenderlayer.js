@@ -23,8 +23,8 @@ import Layer from 'layers/layer';
 
 export default class svgRenderLayer extends Layer {
 
-    constructor(opts, token) {
-        super(opts, token);
+    constructor(opts) {
+        super(opts);
         this.renderId = Util.makeid();
         this.drawingId = "svg."+this.renderId;
         this.opacityLevel = 0.7;

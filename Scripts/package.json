@@ -7,13 +7,9 @@
     "test": "test"
   },
   "dependencies": {
-    "@turf/turf": "^3.11.2",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "c3": "^0.4.11",
-    "cal-heatmap": "^3.6.2",
-    "cloudinary-jquery-file-upload": "^2.1.9",
-    "co": "^4.6.0",
     "d3": "^4.6.0",
     "datejs": "1.0.0-rc3",
     "es6-dispatcher": "^2.1.0",
@@ -40,9 +36,7 @@
     "react-masonry-component": "^5.0.3",
     "react-popupbox": "^2.0.0-beta",
     "semantic-ui-react": "^0.66.0",
-    "simple-statistics": "^2.1.0",
-    "tablefilter": "^0.4.42",
-    "vis": "^4.17.0"
+    "tablefilter": "^0.4.42"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -61,7 +55,7 @@
     "webpack-merge": "^3.0.0"
   },
   "scripts": {
-    "build:dll": "node_modules/.bin/webpack --config=webpack.dll.js",
+    "build:dll": "node_modules/.bin/webpack --config=webpack.dll.js -p",
     "build:dev": "npm run build:dll & npm run dev",
     "build:prd": "npm run build:dll & npm run prd",
     "start": "node_modules/.bin/webpack-dev-server",

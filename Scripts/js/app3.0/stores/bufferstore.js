@@ -26,7 +26,6 @@ import LayerManagerStore    from 'stores/layermanagerstore';
 import UrlConstants         from 'constants/urlconstants';
 import Ajax                 from 'wrapper/ajax';
 import Util                 from 'util';
-import ConfigStore          from 'stores/configstore';
 import Esri                 from 'esri-leaflet';
 import SpeechStore          from 'stores/speechstore';
 
@@ -267,9 +266,6 @@ class BufferStore extends BaseStore {
 
         selected.forEach((layer) => {
             //attach token
-            if(!scope._token){
-                scope._token = layer.token;
-            }
             switch (layerType){
                 case 'marker':
                     //circle in leaflet is just a point
@@ -315,7 +311,6 @@ class BufferStore extends BaseStore {
         };
         return Ajax.call({
             url: Util.appendUrlWithParams(UrlConstants.ArcGisBufferService, {
-                token: scope._token || ConfigStore.token,
                 f: 'json',
                 inSR:4326,
                 geometries:JSON.stringify(geometry),

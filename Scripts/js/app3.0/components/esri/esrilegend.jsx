@@ -84,13 +84,12 @@ class EsriLegend extends React.Component {
 
     beautifyLegend(layers) {
         var url = this.props.url,
-            token = this.props.token,
             layerName = layers.layerName,
             content = [];
         //push layer legend title
         content.push(<div className="legend-title">{layerName}</div>); 
         layers.legend.map((legend, i) => {
-            var imageFullUrl = url + "/" + layers.layerId + "/images/" + legend.url + "?token=" + token;
+            var imageFullUrl = url + "/" + layers.layerId + "/images/" + legend.url;
 
             content.push(<div key={i} className="legend-row"><div className="legend-row-img"><img src={imageFullUrl} /></div><div className="legend-row-label">{legend.label}</div></div>);
         });

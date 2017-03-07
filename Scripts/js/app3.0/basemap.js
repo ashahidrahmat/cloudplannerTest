@@ -28,7 +28,7 @@ class Basemap {
         'name', 'class', 'src', 'crs', 'subdomains', 'legend', 'imageUrl', 'description', 'internet', 'useCors'
     ];
 
-    constructor(basemap, token, func) {
+    constructor(basemap, func) {
         var layer,
             scope = this;
 
@@ -44,7 +44,6 @@ class Basemap {
             url: basemap.src,
             minZoom: 12,
             maxZoom: 20,
-            token: (this.internal) ? token : null,
             continuousWorld: true,
             useCors: basemap.useCors | false ,
             zIndex: 0
@@ -55,102 +54,9 @@ class Basemap {
             this.opts.subdomains = basemap.subdomains;
         }
 
-        if (this.crs) {
-            
-            Esri.get(this.src, this.internal ? { token: token } : {}
-            , (error, metadata) => {
-                if (!error) {
-
-                    let i, ci, len, arcgisLOD, correctRes,
-                        origin = metadata.tileInfo.origin,
-                        arcgisLODs = metadata.tileInfo.lods,
-                        correctResolutions = Util.MercatorZoomLevels;
-
-                    scope.obj._metadata = metadata;
-                    scope._lodMap = {};
-
-                    for (i = 0, len = arcgisLODs.length; i < len; i++) {
-                        arcgisLOD = arcgisLODs[i];
-                        for (ci in correctResolutions) {
-                            correctRes = correctResolutions[ci];
-                            if (Util.withinPercentage(arcgisLOD.resolution, correctRes, 0.1)) {
-                                scope._lodMap[ci] = arcgisLOD.level;
-                                break;
-                            }
-                        }
-                    }
-
-                    scope.crs.options.origin = [origin.x, origin.y];
-                    scope.crs._lodMap = scope.obj._lodMap = scope._lodMap;
-
-                    this.obj.push(this.generateLayer());
-
-                    if (func) {
-                        func();
-                    }
-                }
-            });
-            
-        } else {
-            
-            if (this.crs && this.crs.options && this.crs.options._lodMap) {
-                this.crs._lodMap = this._lodMap = this.crs.options._lodMap;
-            }
-
-            this.obj.push(this.generateLayer());
-            
+        if (!this.crs) {
+            this.obj.push(this.generateLayer());        
         }
-
-        /*layer = L.esri.tiledMapLayer(this.opts);
-        this.obj.push(layer);
-
-        if (!isArcGisService) {
-            layer.tileUrl = layer.tileUrl.replace(/\/tile\/{z}\/{y}\/{x}$/, "");
-        }*/
-
-        // Only perform this for non-supported spatial references by leaflet
-        /*if (isArcGisService && this.crs) {
-                    
-            this.crs.scale = function (zoom) {
-                let zoomAttr = this._lodMap ? this._lodMap[zoom] : zoom,
-                    scalesAttr = this._scales ? this._scales : Util.MercatorZoomLevels;
-
-                return scalesAttr[zoomAttr];
-            }
-
-            layer.metadata((function (error, metadata) {
-                if (!error) {
-                    let i, ci, len, arcgisLOD, correctRes,
-                        origin = metadata.tileInfo.origin,
-                        arcgisLODs = metadata.tileInfo.lods,
-                        correctResolutions = Util.MercatorZoomLevels;
-
-                    scope.obj._metadata = metadata;
-                    scope._lodMap = {};
-
-                    for (i = 0, len = arcgisLODs.length; i < len; i++) {
-                        arcgisLOD = arcgisLODs[i];
-                        for (ci in correctResolutions) {
-                            correctRes = correctResolutions[ci];
-                            if (Util.withinPercentage(arcgisLOD.resolution, correctRes, 0.1)) {
-                                scope._lodMap[ci] = arcgisLOD.level;
-                                break;
-                            }
-                        }
-                    }
-
-                    scope.crs.options.origin = [origin.x, origin.y];
-                    scope.crs._lodMap = scope.obj._lodMap = scope._lodMap;
-
-                    if (func) {
-                        func();
-                    }
-                }
-            }));
-
-        } else if (scope.crs && scope.crs.options && scope.crs.options._lodMap) {
-            this.crs._lodMap = layer._lodMap = this._lodMap = this.crs.options._lodMap;
-        }*/
     }
 
     generateLayer() {
@@ -163,9 +69,6 @@ class Basemap {
         return layer;
     }
 
-    /*getId() {
-        return this.id;
-    }*/
 
     remove(map) {
 

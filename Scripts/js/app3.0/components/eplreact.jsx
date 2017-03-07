@@ -46,7 +46,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SpeechStore from 'stores/speechstore';
 import MapBoxGL from 'components/mapboxgl';
 import Map3DStore from 'stores/3dmapstore';
-import ConfigStore from 'stores/configstore';
 import Quicklink from 'components/quicklink/quicklink';
 import GeoTagPhotoDetail from 'components/geophoto/geotagphotodetail';
 import WebApi from 'webapi';
@@ -208,16 +207,12 @@ export default class EplReact extends React.Component {
     render3DButton(){
         let button3D = <li id="3d" onClick={this.toggle3D.bind(this)}><i className="iconfont icon-3d-building"></i><div className="iconfont-name">3D</div></li> 
         let exit3D = <li id="m3d-exit" onClick={this.toggle3D.bind(this)}><i className="iconfont icon-cancel-circled"></i><div id="m3d-exit" className="iconfont-name">Exit 3D</div></li>
-
-        //if(!ConfigStore.extranet){
-            if(!this.state.buildings){
-                return button3D;
-            } else {
-                return exit3D;
-            }        
-        //} else {
-            //return null;
-        //}
+        
+        if(!this.state.buildings){
+            return button3D;
+        } else {
+            return exit3D;
+        }        
 
         return null;
     }
@@ -252,9 +247,7 @@ export default class EplReact extends React.Component {
                             {
                                 !buildings ? <li id="bookmark" onClick={this.toggleBookmark.bind(this)}><i className="iconfont icon-star"></i><div className="iconfont-name">Bookmark</div></li> : null
                             }
-                            {
-                                !buildings ? <li id="buffer" onClick={this.toggleBuffer.bind(this)}><i className="iconfont icon-buffer"></i><div className="iconfont-name">Buffer</div></li> : null
-                            }
+                            <li id="buffer" onClick={this.toggleBuffer.bind(this)}><i className="iconfont icon-buffer"></i><div className="iconfont-name">Buffer</div></li> 
                             {
                                 !buildings ? <li id="draw" onClick={this.toggleDraw.bind(this)}><i className="iconfont icon-pencil"></i><div className="iconfont-name">Draw</div></li> : null
                             }                         
@@ -277,6 +270,9 @@ export default class EplReact extends React.Component {
                                         <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
                                     : null
                             }
+                            {
+                                <div className="search-speech" onClick={speechAction}><i className={speechClass}></i></div>
+                            } 
                             </div>    
                         </div>
                     </div>
@@ -369,10 +365,6 @@ export default class EplReact extends React.Component {
                 <ReactCSSTransitionGroup transitionName="leftpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(showLeftPanel) && !buildings ? <LeftPanel key="leftpanel" layerFilterText={layerFilterText} /> : null}
                 </ReactCSSTransitionGroup>
-
-                <div id='timestamp-holder'>
-                    <div id="current-timestamp"></div> <img id='statistics-chart' className='btn' src='Scripts/js/app/exts/hccc/images/24x24/bar-graph1.png' />
-                </div>
 
                 {uiState.filter !== FilterState.Hidden ? <FilterBox state={uiState.filter} leftPanelState={showLeftPanel} /> : null}
 

@@ -17,7 +17,6 @@
 --------------------------------------------------------------------------------------------------*/
 
 import Modal from 'components/modal';
-import ConfigStore from 'stores/configstore';
 import MapStore from 'stores/mapstore';
 import BaseStore from 'stores/basestore';
 import EplConstants from 'constants/eplconstants';
@@ -38,8 +37,6 @@ class UiStore extends BaseStore {
             identifyLoading: false,
             modalDisplay: null,
             layerFilterText: '',
-            extranet: opts.extranet,
-            username: opts.username,
             layerInfo: false,
             bufferLoading: false,
             searchtext: ''
@@ -172,10 +169,7 @@ class UiStore extends BaseStore {
 
 }
 
-var instance = new UiStore({
-    extranet: ConfigStore.extranet,
-    username: ConfigStore.username
-});
+var instance = new UiStore();
 
 instance.dispatchToken = AppDispatcher.register(function(action) {
 

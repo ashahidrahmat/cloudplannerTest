@@ -23,10 +23,8 @@ import LayerFactory from 'layers/layerfactory';
 import BaseStore from 'stores/basestore';
 import MapData from 'layers/mapdata';
 import MapStore from 'stores/mapstore';
-import ConfigStore from 'stores/configstore';
 import Ajax from 'wrapper/ajax';
 import Util from '\\util';
-
 
 class LayerManagerStore extends BaseStore {
 
@@ -370,10 +368,7 @@ class LayerManagerStore extends BaseStore {
     
 }
 
-var instance = new LayerManagerStore({
-    server: ConfigStore.server,
-    token: ConfigStore.token
-});
+var instance = new LayerManagerStore();
 
 instance.dispatchToken = AppDispatcher.register(function(action) {
 

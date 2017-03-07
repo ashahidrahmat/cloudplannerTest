@@ -18,7 +18,6 @@
 
 "use strict";
 
-import M from 'libs/mapbox-gl.js';
 import EplActionCreator from 'actions/eplactioncreator';
 import Basemap3DConfig from 'basemap3dconfig';
 import Ajax from 'wrapper/ajax';

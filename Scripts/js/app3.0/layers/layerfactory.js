@@ -17,8 +17,6 @@
 --------------------------------------------------------------------------------------------------*/
 
 import Basemap from 'basemap';
-import Osmb from 'layers/basemaps/osmb';
-
 import Layer from 'layers/layer';
 //import {default as All} from 'layers/entities/index';
 
@@ -31,18 +29,15 @@ class LayerFactory {
             this.classes[className] = All[className];
         }
         */
-        this.basemaps = {
-            'Osmb': Osmb
-        };
     }
 
-    getLayer(name, opts, token) {
+    getLayer(name, opts) {
         var layerClass = this.classes[name] ? this.classes[name] : Layer;
         return new layerClass(opts);
     }
 
     getBasemap(name, opts, func) {
-        var basemapClass = this.basemaps[name] ? this.basemaps[name] : Basemap;
+        var basemapClass = Basemap;
         return new basemapClass(opts, func);
     }
 }

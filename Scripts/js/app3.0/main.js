@@ -17,7 +17,6 @@
 --------------------------------------------------------------------------------------------------*/
 
 import Ajax             from 'wrapper/ajax'
-import ConfigStore      from 'stores/configstore';
 import React            from 'react';
 import ReactDOM         from 'react-dom';
 import EplReact         from 'components/eplreact';

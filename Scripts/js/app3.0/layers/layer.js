@@ -23,7 +23,6 @@ import Ajax from 'wrapper/ajax';
 import Util from '\\util';
 import Esri from 'esri-leaflet';
 import React from 'react';
-import ConfigStore from 'stores/configstore';
 import LayerColFunc from 'layers/layercolfunc'
 import EsriLegend from 'components/esri/esrilegend';
 import Unavailable from 'components/displays/unavailable';
@@ -40,8 +39,7 @@ export default class Layer {
         'dateFieldColumnName', 'queryOptions', 'legendFootnote', 'search'
     ];
 
-    constructor(opts, token) {
-        this.token = token;
+    constructor(opts) {
         this.drawings = [];
         this.events = {};
         this.eventList = {
@@ -55,7 +53,7 @@ export default class Layer {
         this.summary = "";
         this.defaultSettings = {
             defaultOpacity: opts.defaultOpacity || 1,
-            exportCSV: !ConfigStore.extranet && (typeof opts.exportCSV !== 'undefined' ? opts.exportCSV : true),
+            exportCSV: opts.exportCSV,
             featureHighlightIndex: opts.highlight || 0,
             filterBoxShowsOpacitySlider: typeof opts.opacitySlider !== 'undefined' ? opts.opacitySlider : true,
             identifyTolerance: opts.tolerance || 10,
@@ -71,7 +69,6 @@ export default class Layer {
         this.map = layerObj({
             url: opts.src,
             layers: opts.layers,
-            token: token,
             opacity: 1,
             useCors: false
         });
@@ -92,9 +89,7 @@ export default class Layer {
                 //MapStore.enableMapOnClickIdentifyHandler();
                 this.setZIndex(this.options.zIndex);
             });
-        }
-
-        
+        }       
 
         this.setIdentifyLayers(this.opts.identifyid);
         this.setLegend(this.opts.legend, false);
@@ -117,10 +112,6 @@ export default class Layer {
         else if(this.displayCache.props.children){
             EplActionCreator.exportCSV(this.getName(), this.displayCache.props.children[0].props.display);
         }
-    }
-
-    getToken() {
-        return this.token;
     }
 
     getMapServiceUrl() {
@@ -235,7 +226,6 @@ export default class Layer {
     retrieveSummary() {
         return Ajax.call({
             url: Util.appendUrlWithParams(this.getMapServiceUrl(), {
-                token: this.getToken(),
                 f: 'json'
             }),
             crossDomain: true,
@@ -300,7 +290,7 @@ export default class Layer {
         if ((typeof legend == "string") && legend.match(/\.(jpg|png|gif)$/gi)) {
             legendDisplay = <Img src={legend} />;
         } else if (this.legendLayers) {
-            legendDisplay = <EsriLegend url={this.opts.src} title={this.opts.name} layers={this.legendLayers} legendIds={legend} token={this.getToken()} />;
+            legendDisplay = <EsriLegend url={this.opts.src} title={this.opts.name} layers={this.legendLayers} legendIds={legend} />;
         }
 
         return legendDisplay;
@@ -310,7 +300,6 @@ export default class Layer {
 
         for(var i in legendLayers){
             Esri.get(this.getMapServiceUrl() + "/" + legendLayers[i].layerId,
-                { token : this.getToken() },
                 (error,response) => {
                     if(!error){
                         this.setLegendFootnote(response);
@@ -529,9 +518,7 @@ export default class Layer {
         if (!this.legendLayers) {
             //TODO: wrap $ into ajax class, path appending to Util
             Esri.Support.cors = false;
-            Esri.get(this.getLegendUrl(), {
-                token: this.getToken()
-            }, (error, response) => {
+            Esri.get(this.getLegendUrl(), (error, response) => {
                 if (!error) {
                     scope.legendLayers = response.layers;
 
@@ -785,7 +772,6 @@ export default class Layer {
         }
 
         params.layerDefs = layerDefs;
-        params.token = this.token;
         params.mapExtent = [extent.xmin, extent.ymin, extent.xmax, extent.ymax];
         params.imageDisplay = [size.x, size.y, 96];
         params.geometry = polygon;

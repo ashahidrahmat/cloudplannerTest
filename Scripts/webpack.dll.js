@@ -13,18 +13,32 @@ module.exports = {
             "react-dom",
             "eventemitter2",
             "flux",
+            "jquery",
+            "tablefilter"
+        ],
+        vendor2: [
+            "d3",
+            "c3"
+        ],
+        vendor3:[
             "leaflet",
             "esri-leaflet",
             "leaflet-draw",
             "proj4leaflet",
-            "jquery",
         ],
-        vendor2: [
-            "d3",
-            "c3",
-            "datejs",
+        vendor4:[
+            "react-masonry-component",
+            "react-popupbox",
             'fancybox',
+            "react-addons-css-transition-group",
+            "react-addons-transition-group",
             "perfect-scrollbar",
+        ],
+        vendor5:[
+            "semantic-ui-react"            
+        ],
+        vendor6:[
+            "datejs"
         ]
     },
     output: {
@@ -49,7 +63,7 @@ module.exports = {
             beautify: false,
 
             // Eliminate comments
-            comments: false,
+            comments: true,
 
             // Compression specific options
             compress: {

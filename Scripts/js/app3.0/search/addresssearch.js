@@ -21,7 +21,6 @@ import UrlConstants from 'constants/urlconstants';
 import SearchStore from 'stores/searchstore';
 import Search from 'search/search';
 import Util from '\\util';
-import ConfigStore from 'stores/configstore';
 
 export default class AddressSearch extends Search {
 }

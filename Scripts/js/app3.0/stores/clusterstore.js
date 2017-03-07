@@ -25,7 +25,6 @@ import EplActionCreator from 'actions/eplactioncreator';
 import Lphoto from 'libs/leafletphoto/Leaflet.Photo.js';
 import L from 'leaflet';
 import EXIF from 'exif-js'; 
-import Cloudinaryupload from 'cloudinary-jquery-file-upload';
 import $ from 'jquery';
 import Ajax from 'wrapper/ajax';
 
@@ -47,21 +46,21 @@ class ClusterStore extends BaseStore {
         //start fetching from UAT using ajax
         //"~/Scripts/js/app3.0/libs/turf/turf.min.js",
 
-        Ajax.call({ 
-            dataType: 'json',
-            async: true,
-            url:'/Scripts/js/app3.0/libs/json/UATImages.json',  
-            success: jsonData => {
+        // Ajax.call({ 
+        //     dataType: 'json',
+        //     async: true,
+        //     url:'/Scripts/js/app3.0/libs/json/UATImages.json',  
+        //     success: jsonData => {
                
-                this.uatJsonData = jsonData.UATImages;
+        //         this.uatJsonData = jsonData.UATImages;
         
-                return ;
+        //         return ;
 
-            },
-            error: function (request, status, error) {
-                console.log(error)
-            }
-        });  
+        //     },
+        //     error: function (request, status, error) {
+        //         console.log(error)
+        //     }
+        // });  
     } 
 
     
