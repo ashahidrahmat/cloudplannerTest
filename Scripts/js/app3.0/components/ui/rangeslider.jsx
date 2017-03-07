@@ -27,6 +27,7 @@ class RangeSlider extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.propsToState(props);
+        this.delayTimer;
     }
 
     propsToState(props) {
@@ -46,14 +47,19 @@ class RangeSlider extends React.Component {
             suffix: props.suffix || '',
             title: props.title || '',
             inverted: props.inverted || false,
-            handleStyle: props.handleStyle || null
+            handleStyle: props.handleStyle || null,
+            value: props.defaultValue || (!props.range? 0 : [props.min,props.max]),
+            reset: props.reset || false
         };
     }
 
-    onChange(e) {
-        if (this.props.onChange) {
-            this.props.onChange(e);
-        }
+    onChange(e) {      
+        this.state.range === 1 ? this.setState({value: [e[0],e[1]]}) : this.setState({value: e})
+        this.delayTimer = setTimeout(() => {
+            if (this.props.onChange) {
+                this.props.onChange(e);
+            }
+        }, 700);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -64,11 +70,11 @@ class RangeSlider extends React.Component {
         return <div className="ui_component">
             { this.state.title ? <div className="ui_component_label">{this.state.title}:</div> : null }
             <div style={this.state.style}>
-                <Slider range={this.state.range} allowCross={this.state.allowCross} inverted={this.state.inverted} step={this.state.step} marks={this.state.marks} handle={<CustomHandle range={this.state.range} style={this.state.handleStyle} prefix={this.state.prefix} suffix={this.state.suffix} />} onChange={this.onChange.bind(this)} defaultValue={this.state.defaultValue} min={this.state.min} max={this.state.max}/>
+                <Slider range={this.state.range} allowCross={this.state.allowCross} inverted={this.state.inverted} step={this.state.step} marks={this.state.marks} handle={<CustomHandle range={this.state.range} style={this.state.handleStyle} prefix={this.state.prefix} suffix={this.state.suffix} />} onChange={this.onChange.bind(this)} {...this.state.reset ? {value: this.state.value} : {}} defaultValue={this.state.defaultValue} min={this.state.min} max={this.state.max}/>
             </div>
         </div>;
-    }
-}
+                }
+                }
 
 const wrapperStyle = { width: 400, margin: 50 };
 
@@ -84,6 +90,7 @@ const wrapperStyle = { width: 400, margin: 50 };
         textAlign: 'center',
         'zIndex': '1',
         boxShadow: '#4787ed 0px 0px 1px 2px;',
+        border: 'solid'
     };
 
 const CustomHandle = React.createClass({

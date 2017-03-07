@@ -22,8 +22,7 @@
   left: 0;
   height: 4px;
   border-radius: 6px;
-  /*background-color: #4787ed;*/
-  background: linear-gradient(to right, #ffffcc, #ffeda0, #fed976, #feb24c, #fd8d3c, #fc4e2a);
+  background: #4787ed;
 }
 .rc-slider-handle {
   position: absolute;

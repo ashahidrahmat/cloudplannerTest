@@ -48,8 +48,8 @@ class Map3DStore extends BaseStore {
             [400,'#e31a1c']
         ];
 
-        this.selectedBuildingsProps = Basemap3DConfig.Mapbox.layers.selectedBuildings;
-        this.basemaps = Basemap3DConfig.Mapbox.styles;
+        // this.basemaps = Basemap3DConfig.Mapbox.styles;
+        this.resetStatus = false;
         this.siteInfo = {};
     }
 
@@ -89,7 +89,7 @@ class Map3DStore extends BaseStore {
         this.disableMapOnClickIdentifyHandler();
         Mapbox.reset();
         this._map = Mapbox.getMap();   
-
+        this.setResetStatus(true);
         this.addBuildingLayers();
         this.enableMapOnClickIdentifyHandler();
     }
@@ -108,36 +108,28 @@ class Map3DStore extends BaseStore {
 
     addBuildingLayers(){
         this._map.once('sourcedata', () => {
-            this.layerHeights.forEach((layer, i) => {
-                if (i !== 0){
-                    var tempLayer = {
-                        'id': 'building_layer-' + i,
-                        'type': 'fill-extrusion',
-                        'source': 'mapbox',
-                        'paint': {
-                            'fill-extrusion-color': layer[1],
-                            'fill-extrusion-opacity': 0.6,
-                            'fill-extrusion-height': {
-                                'type': 'identity',
-                                'property': 'height'
-                            },
-                            'fill-extrusion-base': {
-                                'type': 'identity',
-                                'property': 'min_height'
-                            }
-                        },
-                        'source-layer': 'building' 
+            var buildingLayer = {
+                'id': 'building_layer',
+                'type': 'fill-extrusion',
+                'source': 'mapbox',
+                'paint': {
+                    'fill-extrusion-color': {
+                        property: 'height',
+                        stops: this.layerHeights
+                    },
+                    'fill-extrusion-opacity': 1,
+                    'fill-extrusion-height': {
+                        'type': 'identity',
+                        'property': 'height'
+                    },
+                    'fill-extrusion-base': {
+                        'type': 'identity',
+                        'property': 'min_height'
                     }
-                    this.addLayer(tempLayer);
-                }
-            });    
-            this.addLayer(this.selectedBuildingsProps);
-            this.layerHeights.forEach((layer, i) => {
-                if (i !== 0){
-                    var filters = ['all', ['<=', 'height', layer[0]],['>=', 'height', this.layerHeights[i - 1][0]]];
-                    this._map.setFilter('building_layer-' + i, filters);
-                }
-            });
+                },
+                'source-layer': 'building' 
+            }
+            this.addLayer(buildingLayer);
         });   
     }
 
@@ -161,13 +153,21 @@ class Map3DStore extends BaseStore {
         return this.siteInfo;
     }
 
+    setResetStatus(status){
+        this.resetStatus = status;
+    }
+
+    getResetStatus(){
+        return this.resetStatus;
+    }
+
     setBasemap(style){
         for(var i = 0; i < this.basemaps.length; i++){
             if(style === this.basemaps[i].name){
                 this.disableMapOnClickIdentifyHandler();
                 Mapbox.setStyle(this.basemaps[i].style);
                 this._map = Mapbox.getMap();  
-
+                this.setResetStatus(true);
                 this.addBuildingLayers();
                 this.enableMapOnClickIdentifyHandler();
             }          
@@ -246,32 +246,16 @@ class Map3DStore extends BaseStore {
         this._map.off('mousemove');
         this._map.off('click');
     }
-   
-    enableMapOnClickIdentifyHandler(){
+
+    enableMapOnClickIdentifyHandler(){        
         this._map.on('load', () => {
             var all_added_layers = []
-            this.layerHeights.forEach((layer, i) => {
-                if(i !==0){
-                    all_added_layers.push('building_layer-' + i);
-                }             
-            })
-            this._map.on('click', (e) => {
+            all_added_layers.push('building_layer');
+            this._map.on('click', e => {
                 EplActionCreator.identify(L.latLng(e.lngLat.lat, e.lngLat.lng));
 
                 var features = this._map.queryRenderedFeatures(e.point, {layers: all_added_layers});
-                this._map.setFilter(this.selectedBuildingsProps.id, ["==", "height", false]); 
-                
                 if (features.length > 0) {
-                    for(var i = 1; i < this.layerHeights.length; i++){
-                        this._map.setPaintProperty('building_layer-' + i,'fill-extrusion-opacity',0.3);
-                        
-                        if(features[0].properties.height <= this.layerHeights[i][0] && this.layerHeights[i-1][0] <= features[0].properties.height){
-                            this._map.setPaintProperty(this.selectedBuildingsProps.id,'fill-extrusion-color',Util.colorLuminance(this.layerHeights[i][1],-0.2));
-                            //this._map.setFilter(this.selectedBuildingsProps.id, ["==", "height", features[0].properties.height]); 
-                            this._map.setFilter(this.selectedBuildingsProps.id, ["==", "osm_id", features[0].properties.osm_id]); 
-                        }              
-                    }
-
                     this.removeMarkers();
 
                     let div = '<p>Building height: <b>' + Math.round(features[0].properties.height) + '</b> meters</p>';
@@ -280,12 +264,9 @@ class Map3DStore extends BaseStore {
                         div+= '<p>Name: <b>'+features[0].properties.name +'</b></p>';
                     }
                        
-                    this.setPopup(e.lngLat,div);            
+                    this.setPopup(e.lngLat,div);     
  
                 } else {
-                    for(var i = 1; i < this.layerHeights.length; i++){
-                        this._map.setPaintProperty('building_layer-' + i,'fill-extrusion-opacity',0.7);
-                    }
                     this.removePopup();
                 }
             });
@@ -299,21 +280,18 @@ class Map3DStore extends BaseStore {
             });
         });
     }
+   
 
-    setHeight(min, max){   
-        this._map.setFilter(this.selectedBuildingsProps.id, ["==", "height", false]);
+    filter(min, max){   
         this.removePopup();
-        this.layerHeights.forEach((layer, i) => {   
-            if (i !== 0){
-                this._map.setPaintProperty('building_layer-' + i,'fill-extrusion-opacity',0.7);
-                if(max >= layer[0] && min < this.layerHeights[i][0]){
-                    var filters = ['all', ['<=', 'height', layer[0]], ['>=', 'height', this.layerHeights[i - 1][0]]];
-                    this._map.setFilter('building_layer-' + i, filters);
-                } else {
-                    this._map.setFilter('building_layer-' + i, ["==", "height", false]);
-                }
-            }
-        }); 
+        var filters = ['all',['>=', 'height', min], ['<=', 'height', max]];      
+        this._map.setFilter('building_layer', filters);
+        Mapbox.loadingInProgress();
+        this._map.once('styledata',()=>{
+            setTimeout(()=>{
+                Mapbox.loadingComplete();
+            },2500)
+        })        
     }
 }
 

@@ -24,61 +24,61 @@ import ReactDOM from 'react-dom';
 import Map3DStore from 'stores/3dmapstore';
 import RangeSlider from 'components/ui/rangeslider';
 import $ from 'jquery';
+import EplConstants from 'constants/eplconstants';
+import EplActionCreator from 'actions/eplactioncreator';
 
 class MapBoxGL extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.defaultHeightValues = [0,300];
+
+        this.heightValues = this.defaultHeightValues;
+
+        this._reset = this._reset.bind(this);
+    }
+
+    _reset(){
+        if(Map3DStore.getResetStatus()){
+            this.heightValues = this.defaultHeightValues;
+            Map3DStore.setResetStatus(false);
+        }
+    }
+
     componentDidMount() {
         Map3DStore.initialize(this.props.mapId, ReactDOM.findDOMNode(this));
+        Map3DStore.addChangeListener(this._reset);
     }
 
     componentWillUnmount() {
         Map3DStore.destroy(ReactDOM.findDOMNode(this));
+        Map3DStore.removeChangeListener(this._reset);
     }
 
     render() {
-        const marks = {
+        const heightMarks = {
             0: '',
-            15: '',
-            30: '',
-            50: '',
-            100: '',
-            200: '',
             300: ''
         };
+
     
-        let onChange = e => {
-            let min = e[0], max = e[1],layers = Map3DStore.getLayers(), colors = '';
-
-            Map3DStore.setHeight(min,max);
-
-            for(var i = 1; i< layers.length; i++){
-                if(max >= layers[i][0] && min <= layers[i-1][0]){
-                    colors += layers[i][1] + ',';                  
-                }
-            }
-            colors = colors.replace(/,\s*$/, "");
-            $('.rc-slider-track').css('background','linear-gradient(to right,'+colors+')');
+        let onHeightChange = e => {
+            this.heightValues = [e[0],e[1]]
+            Map3DStore.filter(this.heightValues[0],this.heightValues[1]);
         }
 
-        let handleStyle = {
-            position: 'absolute',
-            transform: 'translate(-50%, -50%)',
-            cursor: 'pointer',
-            padding: '5px',
-            backgroundColor: '#fff',
-            color: 'rgb(254, 178, 76)',
-            borderRadius: '3px',
-            fontSize: '14px',
-            textAlign: 'center',
-            'zIndex': '1',
-            boxShadow: 'rgb(254, 178, 76) 0px 0px 1px 2px;',
-        };
-
-        var slider = <div className='mapbox-slider-container'><div className='mapbox-slider'><h2>Building Height</h2><span>Use right mouse button to navigate 3d space.</span><br />
-                        <span>Click on the base of a building to see its height.</span><RangeSlider range={1} inverted={false} marks={marks} min={0} max={300} onChange={onChange} suffix='m' handleStyle={handleStyle}/></div></div>;
-        return <div id={this.props.id}>{slider}</div>;
-    }
-
-}
+        var slider = <div className='mapbox-slider-container'>
+                        <div className='mapbox-slider'>
+                            <div style={{margin:'12px 24px 0px 24px'}}>           
+                                <p style={{paddingTop:'16px',marginBottom: '-8px'}}>Use right mouse button to navigate 3D space. Click on the base of a building for more info.</p>                    
+                                <h2>Building height</h2>
+                                <RangeSlider style={{margin:'24px 16px 8px 18px', width:'444px'}} reset={true} inverted={false} range={1} step={5} marks={heightMarks} defaultValue={this.heightValues} min={0} max={300} onChange={onHeightChange} suffix={'m'} />
+                            </div>
+                        </div>
+                     </div>;
+        return <div id={this.props.id}>{slider}</div>;     
+                                }
+                                }
 
 export default MapBoxGL;

@@ -29,7 +29,7 @@ import {ControllerUrl} from 'constants/urlconstants';
         this.defaultConfig = Basemap3DConfig.Mapbox.config;
 
         this.config = {
-            style: "",
+            style: this.defaultConfig.style,
             center: this.defaultConfig.center,
             zoom: this.defaultConfig.zoom,
             bearing: this.defaultConfig.bearing,
@@ -51,17 +51,16 @@ import {ControllerUrl} from 'constants/urlconstants';
             pitch: this.config.pitch,
             maxBounds: this.config.maxBounds
         });
+        this.map.addControl(new mapboxgl.NavigationControl());
         this.loadingInProgress();
         if(this.map){
-            var scope = this;
             this.map.off('load');
-            this.map.on('load',function(e){scope.loadingComplete()});
+            this.map.on('load',(e) => {this.loadingComplete()});
         }
     }
 
     reset() {
         this.map.remove();
-        this.layers = [];
         this.config = this.defaultConfig;
         this.initialize();
     }
@@ -122,32 +121,15 @@ import {ControllerUrl} from 'constants/urlconstants';
 
     addLayer(layerProp){
         this.map.addLayer(layerProp);
-        this.layers.push(layerProp.id);
     }
 
     getLayer(id){
-        for(var i = 0; i < this.layers.length; i++){
-            if(id === this.layers[i]){
-                return true;
-            }
-        }  
-        return false;
+        return this.map.getLayer(id);
     }
 
     removeLayer(id){
-        for(var i = 0; i < this.layers.length; i++){
-            console.log(this.layers[i]);
-            if(id == this.layers[i]){
-                this.map.removeLayer(id);
-                break;
-            }
-        }  
-    }
-
-    removeAllLayers(){
-        for (var i = 0; i < this.layers.length; i++){
-            this.map.removeLayer(this.layers[i]);
-            this.layers = [];
+        if(this.getLayer(id)){
+            this.map.removeLayer(id);
         }
     }
 
@@ -164,9 +146,9 @@ import {ControllerUrl} from 'constants/urlconstants';
     }
 
     removeMarkers(){
-        for (var i = 0; i < this.markers.length; i++){
-            this.markers[i].remove();
-        }
+        this.markers.forEach((marker)=>{
+            marker.remove();
+        });
     }
 
     setPopup(lngLat,content){
@@ -204,30 +186,6 @@ import {ControllerUrl} from 'constants/urlconstants';
 
         this.map.remove();  
         this.initialize();
-    }
-
-    setCenter(center){
-        this.map.setCenter(center);
-    }
-
-    setZoom(zoom){
-        this.map.setZoom(zoom);
-    }
-
-    setBearing(bearing){
-        this.map.setBearing(bearing);
-    }
-
-    setPitch(pitch){
-        this.map.setPitch(pitch);
-    }
-
-    setBasemap(basemap) {
-        this.map.setBasemap(basemap);
-    }
-
-    setBounds(bounds){
-        this.map.setMaxBounds(bounds);
     }
 
     getCenter() {

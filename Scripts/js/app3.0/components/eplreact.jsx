@@ -297,7 +297,9 @@ export default class EplReact extends React.Component {
                                 //!buildings ? <li id="base-user" onClick={this.toggleUserProfile.bind(this)}><i className="iconfont icon-user"></i><div className="iconfont-name">Profile</div></li> : null
                             }
                             
-                            <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}><i className="iconfont icon-globe"></i><div className="iconfont-name">Basemap</div></li>
+                            {
+                                !buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}><i className="iconfont icon-globe"></i><div className="iconfont-name">Basemap</div></li>
+                            }
                             {
                                 this.render3DButton()
                             }             
@@ -322,7 +324,7 @@ export default class EplReact extends React.Component {
 
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {
-                        (uiState.displayMenu === MenuConstants.Basemap) ?
+                        (uiState.displayMenu === MenuConstants.Basemap) && !buildings ?
                         <div className="basemap-gallery basemap-gallery-color">
                             <div className="si-title-wrapper si-title-color">
                                 <span className="si-title">Basemap</span>

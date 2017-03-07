@@ -9,7 +9,7 @@
  * USAGE NOTES     : bg-color:#f1f1f1, border/spliter-color:#b3b3b3,font color:#3e3e3e button-color: #4787ed
  * COMMENTS        :
 ---------------------------------------------------------------------------------------------------
- * CHANGE LOG  	   :
+ * CHANGE LOG      :
  * CHANGED BY      :
  * DATE            :
  * VERSION NO      :
@@ -26,6 +26,27 @@ html, body {
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+@-webkit-keyframes color_change {
+    from { fill: red; }
+    to { fill: #c20d0d; }
+}
+@-moz-keyframes color_change {
+    from { fill: red; }
+    to { fill: #c20d0d; }
+}
+@-ms-keyframes color_change {
+    from { fill: red; }
+    to { fill: #c20d0d; }
+}
+@-o-keyframes color_change {
+    from { fill: red; }
+    to { fill: #c20d0d; }
+}
+@keyframes color_change {
+    from { fill: red; }
+    to { fill: #c20d0d; }
 }
 
 input {
@@ -88,6 +109,20 @@ button {
     display: inline-block;
     margin-left: 45px;
     cursor: pointer;
+}
+
+.dptools-arrow {
+    float: left;
+    display: inline-block;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.dptools-icon{    
+    width: 32px;
+    vertical-align: middle;
+    padding-bottom: 6px;
+    padding-top: 6px;
 }
 
 .logo-img {
@@ -268,6 +303,23 @@ button {
     -webkit-transform: scale(0.8,0.8);
     opacity: 0.5;
     left: 8px;
+}
+
+.mic-icon-off {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    right: 5px;
+    fill: #827f7f;
+}
+
+.mic-icon-on {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    right: 5px;
+    fill: rgb(254,46,46);
+    animation: color_change 1s infinite alternate;
 }
 
 .search-wrapper .search-icon {
@@ -926,19 +978,38 @@ button {
 .right-close-btn {
     position: absolute;
     cursor: pointer;
-    margin: 14px;
-    right: -3px;
+    margin: 7px;
+    right: 35px;
+    fill: #524e4e;
+}
+
+.export-csv-btn-div {    
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    margin: 7px;
+    right: 80px;
 }
 
 .export-csv-btn {
-    position: absolute;
     cursor: pointer;
-    margin: 13px;
-    right: 34px;
-    color : #6b6b6b;
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    margin: 7px 0px 0px 3px;
+    fill: #524e4e;
 }
 
 .chart-export-csv-btn {
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    margin: 0px 0px 0px 5px;
+    fill: #524e4e;
+}
+
+.chart-export-csv-btn-div {
     position: relative;
     cursor: pointer;
     margin: 13px;
@@ -950,22 +1021,29 @@ button {
     outline: none;
 }
 
+.expand-icon-div {
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    margin: 7px;
+    right: 80px;
+}
+
 .expand-icon {
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    margin: 7px 0px 0px 3px;
+    fill: #524e4e;
+}
+
+.siteinfo-close-div {
     cursor: pointer;
     font-size: 24px;
     position: absolute;
     margin: 7px;
     right: 48px;
-}
-
-.reduce-icon {
-    cursor: pointer;
-    height: 32px;
-    width: 32px;
-    position: absolute;
-    margin: 9px;
-    right: 48px;
-    margin-top: 13px;
 }
 
 /**Common Select Option Box*/
@@ -1710,7 +1788,7 @@ x
     margin: 15px 0 15px 24px;
 }
 
-.pointbuffer, .polygonbuffer, .clearbuffer {
+.pointbuffer, .polygonbuffer, .isochronebuffer, .clearbuffer {
     width: 100px;
     height: 35px;
     font-size: 14px;
@@ -1785,6 +1863,46 @@ x
 .helpspan {
     cursor: pointer;
     background: none;
+}
+
+.dptools-header{  
+    font-family: sans-serif;
+    font-size: 11px;
+    font-weight: normal; 
+    margin: 17px 15px 13px;
+}
+
+.dptool{
+    padding-left: 10px;
+    cursor:pointer;
+}
+
+.dptool:hover{
+    padding-left: 10px;
+    cursor: pointer;
+    background:#e8e8e8;
+    /*background: #f9f9ff;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: blue;*/
+}
+
+.dptool-name{    
+    margin: -11px 8px 8px;
+}
+
+#dptools-panel {
+    position: absolute;
+    left: 40px;
+    top: 55px;
+    z-index: 99;
+    width: 240px;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-left-width: 2px;
+    border-right-width: 0px;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 5px 0 rgba(50,50,50,.25);
 }
 
 /*User Profile CSS*/
@@ -1873,7 +1991,7 @@ x
 }
 
 .ui_component{
-    padding-bottom:13px;
+    padding-bottom: 16px;
 }
 
 .count-input {
@@ -2012,8 +2130,8 @@ x
     bottom: 0;
     right: 0;
     /*position: relative;
-	top: 50%;
-	transform: translateY(-50%);*/
+    top: 50%;
+    transform: translateY(-50%);*/
 }
 
 .login-top {
@@ -2023,6 +2141,7 @@ x
 }
 
 .login-area {
+    position:relative;
     padding: 20px 48px 20px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -2049,6 +2168,7 @@ x
     margin: auto;
     margin-bottom: 10px;
 }
+ 
 
 .margin {
     margin-bottom: 8px;
@@ -2471,14 +2591,14 @@ input[type="checkbox"] {
 }
 .close-icon-img{
     float:right;
-	position:absolute;
-	width: 17px;
-	height: 17px;
-	top: -10px;
-	right: -10px;
-	padding: 15px;
-	z-index: 10;
-	cursor:pointer;
+    position:absolute;
+    width: 17px;
+    height: 17px;
+    top: -10px;
+    right: -10px;
+    padding: 15px;
+    z-index: 10;
+    cursor:pointer;
 }
 /*[draggable=true] {
     cursor: move;
@@ -2907,6 +3027,17 @@ input[type="checkbox"] {
     padding: 5px;
     border-radius: 10px;
 }
+
+.loading-bar-icon {
+    width: 25px;
+    height: 25px;
+    z-index: 99;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    fill:#4787ed;
+}
+
 
 .loading-bar {
     display: none;
@@ -3885,6 +4016,116 @@ table.jobdistribution-table{
     animation: color_change 1s infinite alternate;
 }
 
+/***Customized svg icon colors***/
+.icon-leftpanel {
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+.icon-grey{
+    fill:rgba(0, 0, 0, 0.7);
+}
+
+.icon-header {
+    width: 25px;
+    height: 25px;
+    padding: 0 5px;
+    vertical-align: middle;
+    fill: #4787ed; 
+}
+
+.icon-header-inactive {
+    width: 25px;
+    height: 25px;
+    padding: 0 5px;
+    vertical-align: middle;
+    fill: #827f7f; 
+}
+
+
+.menu-btn{
+    width: 20px;
+    height: 20px;
+    padding: 17px 12px;
+    vertical-align: middle;
+    fill: #4787ed;
+}
+
+.search-bar{
+    width: 25px;
+    height: 25px;
+    fill: #777777;
+}
+
+.icon-edit {
+    fill: #5283C7;
+}
+.icon-leaf {
+    fill: #85B05A;
+}
+.icon-housing {
+    fill: #EF5668;
+}
+.icon-demographics {
+    fill: #F69A33;
+}
+.icon-employment {
+    fill: #846D75;
+}
+.icon-users {
+    fill: #5e88bf;
+}
+.icon-commercial {
+    fill: #F28020;
+}
+.icon-urban_design {
+    fill: #C94337;
+}
+.icon-people_flow {
+    fill: #5F9EA0;
+}
+.icon-chat-empty {
+    fill: #CD5C5C;
+}
+.icon-chart-line {
+    fill: #84AF5B;
+}
+.icon-bank {
+    fill: #D7A74A;
+}
+.icon-carparks {
+    fill: #1C6DAC;
+}
+.icon-heartbeat {
+    fill: #D74C5B;
+}
+.icon-transport {
+    fill: #B56E99;
+}
+.icon-cycling {
+    fill: #84AF5B;
+}
+.icon-infrastructure {
+    fill: #F69A33;
+}
+.icon-droplet {
+    fill: #22A9DD;
+}
+.icon-security {
+    fill: #34929A;
+}
+.icon-commerical-building {
+    fill: #DB5E5C;
+}
+.icon-table {
+    fill: #7FA1B5;
+}
+.icon-underground {
+    fill: #8D6750;
+}
+
 /***Customized icon colors***/
 .icon-edit:before {
     color: #5283C7;
@@ -4005,7 +4246,7 @@ table.jobdistribution-table{
     position: absolute;
     bottom: 0px;
     left: 10px;
-    padding: 0px 10px;
+         /*padding: 0px 10px;*/
     margin-bottom: 30px;
     z-index: 1;
  }
@@ -4013,9 +4254,9 @@ table.jobdistribution-table{
  .mapbox-slider-container {
     position: absolute;
     bottom: 0px;
-    top: 70px;
+    top: 45px;
     left: 10px;
-    padding: 0px 10px;
+     /*padding: 0px 10px;*/
     margin-bottom: 30px;
     z-index: 1;
     height: 60px;
@@ -4024,7 +4265,7 @@ table.jobdistribution-table{
   .mapbox-slider {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     background-color: white; /*background color of legend*/
-    padding: 1px 24px 5px 24px; /*around stuff inside of legend*/
+     /*padding: 1px 24px 5px 24px;around stuff inside of legend*/
     border-radius: 10px; /*round the edges of the legend div*/
     -webkit-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.25);
     -moz-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.25);
@@ -4050,6 +4291,7 @@ table.jobdistribution-table{
     height: 20px;
     margin-left: 5px; /*position of circle*/
     margin-right: 15px;
+    border: 0.5px solid;
  }
 
  #m3d-exit{
@@ -4112,14 +4354,12 @@ table.jobdistribution-table{
     text-align: center;
     border-radius: 2px;
     margin: 0 5px 5px 0;
-
+}
 #one {
   background-color: gray;
   float:left;
    
 }
-
- 
 
 @media screen and (max-width: 400px) {
    #one { 
@@ -4130,4 +4370,3 @@ table.jobdistribution-table{
     border-bottom:2px solid #000;    
   }
 }
- 
