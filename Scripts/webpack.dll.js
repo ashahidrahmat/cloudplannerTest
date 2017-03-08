@@ -13,26 +13,24 @@ module.exports = {
             "react-dom",
             "eventemitter2",
             "flux",
-            "jquery",
-            "tablefilter"
+            "jquery"          
         ],
         vendor2: [
             "d3",
-            "c3"
+            "c3"           
         ],
         vendor3:[
             "leaflet",
             "esri-leaflet",
             "leaflet-draw",
-            "proj4leaflet",
+            "proj4leaflet",	
         ],
         vendor4:[
             "react-masonry-component",
             "react-popupbox",
             'fancybox',
-            "react-addons-css-transition-group",
-            "react-addons-transition-group",
             "perfect-scrollbar",
+	    "tablefilter"
         ],
         vendor5:[
             "semantic-ui-react"            

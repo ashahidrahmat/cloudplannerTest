@@ -1,8 +1,6 @@
 {
   "name": "vendor2",
   "content": {
-    "./node_modules/c3/node_modules/d3/d3.js": 365,
-    "./node_modules/c3/c3.js": 552,
-    "./node_modules/d3/build/d3.js": 597
+    "./node_modules/d3/build/d3.js": 596
   }
 }
