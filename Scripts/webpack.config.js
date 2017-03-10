@@ -53,18 +53,6 @@ const common = {
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require(path.join(PATHS.build, "vendor3-manifest.json"))
-        }), 
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require(path.join(PATHS.build, "vendor4-manifest.json"))
-        }),
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require(path.join(PATHS.build, "vendor5-manifest.json"))
-        }),
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require(path.join(PATHS.build, "vendor6-manifest.json"))
         }),
         new webpack.DefinePlugin({
             'process.env': {
