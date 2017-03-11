@@ -11,12 +11,15 @@ const PATHS = {
 };
 
 const common = {
+    node: {
+        fs: "empty"
+    },
     cache: true,
     // Entry accepts a path or an object of entries. We'll be using the
     // latter form given it's convenient with more complex configurations.
     resolve: {
         modulesDirectories: ['', 'node_modules'],
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx', '.json']
     },
     entry: {
         app: path.join(PATHS.app, 'main.js'),
@@ -27,11 +30,19 @@ const common = {
         filename: 'main-built.js'
     },
     module: {
-        loaders: [{ 
+        preLoaders: [
+            { test: /\.json$/, include: /node_modules/, loader: 'json' },
+        ],
+        loaders: [{
             test: /\.jsx?$/,
             loader: 'babel-loader?cacheDirectory',
             include: PATHS.app,
             exclude: /node_modules/
+        }],
+        rules: [{
+            test: /\.json$/,
+            use: 'json-loader',
+            include: /node_modules/
         }]
     },
     externals: {
@@ -41,11 +52,11 @@ const common = {
         //new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"common.bundle.js"),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.OccurrenceOrderPlugin(true),
+        new webpack.optimize.OccurrenceOrderPlugin(true),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require(path.join(PATHS.build, "vendor1-manifest.json"))
-        }), 
+        }),
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require(path.join(PATHS.build, "vendor2-manifest.json"))
@@ -134,7 +145,7 @@ if (TARGET === 'start') {
                     except: ['$'],
 
                     // Don't care about IE8
-                    screw_ie8 : true,
+                    screw_ie8: true,
 
                     // Don't mangle function names
                     keep_fnames: true

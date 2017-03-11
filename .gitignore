@@ -23,6 +23,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 js-built/
+Scripts/js-built/
 
 # Visual Studio 2015 cache/options directory
 .vs/
