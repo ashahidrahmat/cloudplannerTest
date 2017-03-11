@@ -20,7 +20,7 @@
 
 "use strict";
 
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 import ToggleButton from 'components/ui/togglebutton';
 

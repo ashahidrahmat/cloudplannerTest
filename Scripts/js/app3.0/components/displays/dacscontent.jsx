@@ -17,7 +17,7 @@
 --------------------------------------------------------------------------------------------------*/
 "use strict";
 
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 
 class DacsContent extends React.Component {

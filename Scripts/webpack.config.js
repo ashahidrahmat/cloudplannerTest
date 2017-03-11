@@ -11,15 +11,18 @@ const PATHS = {
 };
 
 const common = {
-    node: {
-        fs: "empty"
+    "node": {
+        "fs": "empty",
+        "net": "empty",
+        "tls": "empty",
+        "console": true
     },
     cache: true,
     // Entry accepts a path or an object of entries. We'll be using the
     // latter form given it's convenient with more complex configurations.
     resolve: {
-        modulesDirectories: ['', 'node_modules'],
-        extensions: ['', '.js', '.jsx', '.json']
+        modules: [path.resolve('js/app3.0'), 'node_modules'],
+        extensions: ['.js', '.jsx']
     },
     entry: {
         app: path.join(PATHS.app, 'main.js'),
@@ -30,19 +33,11 @@ const common = {
         filename: 'main-built.js'
     },
     module: {
-        preLoaders: [
-            { test: /\.json$/, include: /node_modules/, loader: 'json' },
-        ],
         loaders: [{
             test: /\.jsx?$/,
             loader: 'babel-loader?cacheDirectory',
             include: PATHS.app,
             exclude: /node_modules/
-        }],
-        rules: [{
-            test: /\.json$/,
-            use: 'json-loader',
-            include: /node_modules/
         }]
     },
     externals: {
@@ -51,7 +46,6 @@ const common = {
     plugins: [
         //new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"common.bundle.js"),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(true),
         new webpack.DllReferencePlugin({
             context: __dirname,
@@ -88,7 +82,6 @@ if (TARGET === 'start') {
             historyApiFallback: false,
             hot: true,
             inline: false,
-            progress: true,
 
             // Display only errors to reduce the amount of output.
             stats: 'errors-only',
@@ -129,7 +122,7 @@ if (TARGET === 'start') {
                 beautify: false,
 
                 // Eliminate comments
-                comments: true,
+                comments: false,
 
                 // Compression specific options
                 compress: {

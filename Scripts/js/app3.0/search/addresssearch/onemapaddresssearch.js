@@ -20,11 +20,11 @@ import Ajax from 'wrapper/ajax';
 import UrlConstants from 'constants/urlconstants';
 import SearchStore from 'stores/searchstore';
 import AddressSearch from 'search/addresssearch';
-import Util from 'util';
+import Util from 'utils';
 
 export default class OneMapAddressSearch extends AddressSearch {
 
-    searchPromise(){
+    searchPromise() {
         this.url = UrlConstants.OneMapSearch;
         let ajaxUrl = Util.appendUrlWithParams(this.url, {
             searchVal: this.searchText,
@@ -33,31 +33,31 @@ export default class OneMapAddressSearch extends AddressSearch {
         });
         let callback = data => {
             var results = data.results;
-                results = results.map((row, i) => {
-                    let coord = [parseFloat(row.LATITUDE), parseFloat(row.LONGITUDE)];
-                    return {
-                        id: i,
-                        zoom: 17,
-                        center: coord,
-                        display: row.SEARCHVAL + ", " + row.ADDRESS,
-                        geometry: Util.toPointObject(...coord)
-                    };
-                });
+            results = results.map((row, i) => {
+                let coord = [parseFloat(row.LATITUDE), parseFloat(row.LONGITUDE)];
+                return {
+                    id: i,
+                    zoom: 17,
+                    center: coord,
+                    display: row.SEARCHVAL + ", " + row.ADDRESS,
+                    geometry: Util.toPointObject(...coord)
+                };
+            });
 
             this.deferred.resolve(results);
         };
 
         let ajaxOptions = {
-                url: ajaxUrl,
-                crossDomain: true,
-                dataType: 'json',
-                success: callback,
-                error: (error) => {
-                    this.deferred.resolve([]);
-                }
-            };
+            url: ajaxUrl,
+            crossDomain: true,
+            dataType: 'json',
+            success: callback,
+            error: (error) => {
+                this.deferred.resolve([]);
+            }
+        };
 
-         Ajax.call(ajaxOptions);
+        Ajax.call(ajaxOptions);
 
         return this.deferred.promise();
     }

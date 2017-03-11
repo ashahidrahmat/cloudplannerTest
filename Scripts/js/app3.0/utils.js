@@ -1,4 +1,4 @@
-﻿/**-------------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------
  * PROGRAM ID      : util.js
  * DESCRIPTION     : static data file for eplanner basemap
  * AUTHOR          : louisz
@@ -57,7 +57,7 @@ class Util {
     }
 
     /*use by geo photo*/
-    getMap(){
+    getMap() {
         return this._map;
     }
 
@@ -72,31 +72,30 @@ class Util {
         });
     }
 
-    getUniqueArray(sourceArray){
-        if(sourceArray instanceof Array)
-        {return sourceArray.filter(function(item,index,inputArray){return inputArray.indexOf(item)==index});}
+    getUniqueArray(sourceArray) {
+        if (sourceArray instanceof Array) { return sourceArray.filter(function(item, index, inputArray) { return inputArray.indexOf(item) == index }); }
     }
 
-    removeUndefinedFromArray(sourceArray){
-        if(sourceArray instanceof Array)
-        {return sourceArray.filter(function(element){return element!=undefined;});}
+    removeUndefinedFromArray(sourceArray) {
+        if (sourceArray instanceof Array) { return sourceArray.filter(function(element) { return element != undefined; }); }
     }
 
-    searchProperty(nestedObj , propertyName){
-        
-        if(nestedObj){
+    searchProperty(nestedObj, propertyName) {
+
+        if (nestedObj) {
             var objectsFound = [];
-            if (nestedObj instanceof Object){
+            if (nestedObj instanceof Object) {
 
-                for(var property in nestedObj){  
-                    if(nestedObj.hasOwnProperty(property) && property ==propertyName ){
+                for (var property in nestedObj) {
+                    if (nestedObj.hasOwnProperty(property) && property == propertyName) {
                         objectsFound.push(nestedObj[property]);
-                    }else if(nestedObj.hasOwnProperty(property)){ 
-                        objectsFound=objectsFound.concat(this.searchProperty(nestedObj[property] , propertyName));
-                    } }
+                    } else if (nestedObj.hasOwnProperty(property)) {
+                        objectsFound = objectsFound.concat(this.searchProperty(nestedObj[property], propertyName));
+                    }
+                }
 
-            }else if(nestedObj instanceof Array){
-                nestedObj.map((per)=>{objectsFound=objectsFound.concat(this.searchProperty(per, propertyName ));})
+            } else if (nestedObj instanceof Array) {
+                nestedObj.map((per) => { objectsFound = objectsFound.concat(this.searchProperty(per, propertyName)); })
             }
             return objectsFound;
         }
@@ -111,8 +110,8 @@ class Util {
         if (this.supportGeolocation()) {
             var options = {
                 enableHighAccuracy: false,
-                timeout: 15000,     // milliseconds (15 seconds)
-                maximumAge: 180000  // milliseconds (3 minutes)
+                timeout: 15000, // milliseconds (15 seconds)
+                maximumAge: 180000 // milliseconds (3 minutes)
             };
             navigator.geolocation.getCurrentPosition(handleGeoSuccess, handleGeoError, options);
         }
@@ -126,8 +125,8 @@ class Util {
         return (typeof item !== "undefined") && item.constructor === Array;
     }
 
-    withinPercentage (a, b, percentage) {
-        var diff = Math.abs((a/b) - 1);
+    withinPercentage(a, b, percentage) {
+        var diff = Math.abs((a / b) - 1);
         return diff < percentage;
     }
 
@@ -146,34 +145,26 @@ class Util {
         }
 
         return url + paramsInStr.slice(0, -1);
-    } 
+    }
 
     toPointObject(x, y) {
         return {
-            coordinates: [[x, y]],
+            coordinates: [
+                [x, y]
+            ],
             type: FeatureConstants.Point
         }
     }
 
-    emptyPromise(val=null) {
+    emptyPromise(val = null) {
         return new Promise((resolve) => { resolve(val); });
     }
 
-    arrayToList(arr, useValue=true) {
+    arrayToList(arr, useValue = true) {
         return arr.map((value, index) => {
             return {
                 'title': value,
                 'value': useValue ? value : index
-            }
-        });
-    }
-
-    listToOptions(list, selected) {
-        return list.map(row => {
-            if (row.value === selected){
-                return (<option key={row.title} value={row.value} selected>{row.title}</option>);
-            } else {
-                return (<option key={row.title} value={row.value}>{row.title}</option>);
             }
         });
     }
@@ -190,8 +181,8 @@ class Util {
             geometry = [switchFunc(obj.coordinates)];
         } else {
             geometry = obj.coordinates.map((region, i) => {
-                switch(type) {
-                    case FeatureConstants.Line: 
+                switch (type) {
+                    case FeatureConstants.Line:
                         return switchFunc(region);
                         break;
                     case FeatureConstants.Polygon:
@@ -218,22 +209,22 @@ class Util {
     }
 
     //TODO: refactor this function
-    checkFeatureNullValue (value, defaultValue='N/A') {
+    checkFeatureNullValue(value, defaultValue = 'N/A') {
         //case 0, '0'
-        if (value == '0'){
+        if (value == '0') {
             return value;
         }
         //case undefined, null
-        if (!value){
+        if (!value) {
             return defaultValue;
         }
         //case '' or  '  '
-        if(!(''+value).trim().length){
+        if (!('' + value).trim().length) {
             return defaultValue;
         }
 
-        let temp = (''+value).toUpperCase();
-        if (['NIL', 'NULL', 'UNDEFINED'].indexOf(temp) > -1){
+        let temp = ('' + value).toUpperCase();
+        if (['NIL', 'NULL', 'UNDEFINED'].indexOf(temp) > -1) {
             return defaultValue;
         }
 
@@ -241,8 +232,8 @@ class Util {
     }
 
     //TODO: refactor this function
-    addressFormatter (building, blk, street, floor, unit, postal) {
-        var result = ''; 
+    addressFormatter(building, blk, street, floor, unit, postal) {
+        var result = '';
         if (this.checkFeatureNullValue(building) != 'N/A') {
             result += building + ' ';
         }
@@ -268,14 +259,14 @@ class Util {
     }
 
     //Convert long number to 1,122,333,222 format
-    formatNumbers (string=0) {
+    formatNumbers(string = 0) {
         //Seperates the components of the number
         let n = string.toString().split(".");
         //Comma-fies the first part
         n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         //Combines the two sections
         n = n.join(".");
-       
+
         return n.toString();
     }
 
@@ -290,7 +281,7 @@ class Util {
     }
 
     parseInt(val, to) {
-        val = (''+ val).replace(/,/g, '').trim();
+        val = ('' + val).replace(/,/g, '').trim();
         var invalidOrZero = !val || !val.length || isNaN(val);
         to = to || 10;
         return invalidOrZero ? 0 : parseInt(val, to);
@@ -305,25 +296,25 @@ class Util {
     }
 
     //Returns true if it is a DOM node
-    isDomNode(o){
+    isDomNode(o) {
         return (
-            typeof Node === "object" ? o instanceof Node : 
-            o && typeof o === "object" && typeof o.nodeType === "number" && typeof o.nodeName==="string"
+            typeof Node === "object" ? o instanceof Node :
+            o && typeof o === "object" && typeof o.nodeType === "number" && typeof o.nodeName === "string"
         );
     }
 
     //Returns true if it is a DOM element    
-    isDomElement(o){
+    isDomElement(o) {
         return (
             typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
-            o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
+            o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName === "string"
         );
     }
 
     getFeatureCenter(geometry) {
         var center;
-        try{
-            switch(geometry.type) {
+        try {
+            switch (geometry.type) {
                 case FeatureConstants.Point:
                     center = [geometry.coordinates[0][0], geometry.coordinates[0][1]];
                     break;
@@ -337,7 +328,7 @@ class Util {
                     center = new L.Polygon(geometry.coordinates).getBounds().getCenter();
                     break;
             }
-        } catch(err) {
+        } catch (err) {
             //do nothing
         }
         return center;
@@ -364,110 +355,110 @@ class Util {
     }());*/
 
     parseFloat(val, rounding) {
-        var invalidOrZero = !val || !(''+val).length || isNaN(''+val);
-        rounding = rounding || 2;
-        return invalidOrZero ? 0 : parseFloat(val).toFixed(rounding);
-    }
-    //format number 12345 to 12,345 and 22222.098 to 22,222.09
-    niceNumberFormat(number, digits=4, acceptNullToZero=false){
-        if (acceptNullToZero && number === "Null") {
-            return 0;
+            var invalidOrZero = !val || !('' + val).length || isNaN('' + val);
+            rounding = rounding || 2;
+            return invalidOrZero ? 0 : parseFloat(val).toFixed(rounding);
         }
-        
-        if (isNaN(number)){
-            return number;
+        //format number 12345 to 12,345 and 22222.098 to 22,222.09
+    niceNumberFormat(number, digits = 4, acceptNullToZero = false) {
+            if (acceptNullToZero && number === "Null") {
+                return 0;
+            }
+
+            if (isNaN(number)) {
+                return number;
+            }
+            //prevent adding more precision
+            let temp = (number + '');
+            if (temp.indexOf('.') > -1) {
+                let precision = temp.split('.')[1].length;
+                digits = digits > precision ? precision : digits;
+            }
+
+            return (parseInt(number) != number) ? d3.format(',.' + digits + 'f')(number) :
+                d3.format(',d')(number);
         }
-        //prevent adding more precision
-        let temp = (number + '');
-        if(temp.indexOf('.') > -1){
-            let precision = temp.split('.')[1].length;
-            digits = digits > precision ? precision : digits;
-        }
-        
-        return (parseInt(number) != number) ? d3.format(',.'+digits+'f')(number) : 
-                                              d3.format(',d')(number);
-    }
-    //only show c3js chart tooltip for content with number > 0 
-    formatChartTooltipByContent(d){
+        //only show c3js chart tooltip for content with number > 0 
+    formatChartTooltipByContent(d) {
         var vals = [];
-        for(let ele of d){
-            if(ele && ele.value > 0){
+        for (let ele of d) {
+            if (ele && ele.value > 0) {
                 vals.push(ele);
             }
         }
         let html = '<div style="background-color:#fff; border:1px solid #eee; padding: 5px; font-size:12px">';
-        for(let val of vals){
+        for (let val of vals) {
             html += '<span>' + val.name + ': ' + d3.format(',d')(val.value) + '</span><br>';
         }
         html += '</div>';
         return html;
     }
 
-    formatChartLabelNumber(v){
-        return ( v > 0 ) ? d3.format(',d')(v) :  '';
+    formatChartLabelNumber(v) {
+        return (v > 0) ? d3.format(',d')(v) : '';
     }
 
-    convertSquareMetersToHa(sqmeters){
-        if (typeof sqmeters === 'string'){
+    convertSquareMetersToHa(sqmeters) {
+        if (typeof sqmeters === 'string') {
             let temp = +sqmeters.replace(/,/g, '');
-            if (isNaN(temp)){
+            if (isNaN(temp)) {
                 return sqmeters;
-            }else{
+            } else {
                 return this.niceNumberFormat(temp * 0.0001);
             }
-        }else if (!isNaN(sqmeters)){
+        } else if (!isNaN(sqmeters)) {
             return this.niceNumberFormat(+sqmeters * 0.0001);
         }
 
         return sqmeters;
     }
 
-    makeid()
-    {
+    makeid() {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-        for( var i=0; i < 5; i++ )
+        for (var i = 0; i < 5; i++)
             text += possible.charAt(Math.floor(Math.random() * possible.length));
 
         return text;
     }
 
-    
-    setIdentifyPoint(latLng){
+
+    setIdentifyPoint(latLng) {
         let point = this._map.latLngToContainerPoint(latLng);
         this._identifyPoint = {
-            latLng: latLng, 
+            latLng: latLng,
             point: point
         };
     }
 
-    getIdentifyPoint(){
+    getIdentifyPoint() {
         return this._identifyPoint;
     }
 
-    centerMap(){
+    centerMap() {
         this._map.panTo(this._identifyPoint.latLng);
     }
-    
-    setPerfectScrollbar(content){
-        if(content && Ps){
-            Ps.initialize(content);    }
+
+    setPerfectScrollbar(content) {
+        if (content && Ps) {
+            Ps.initialize(content);
+        }
     }
 
-    updatePerfectScroll(content,yPos){
+    updatePerfectScroll(content, yPos) {
         content.scrollTop = yPos;
         Ps.update(content);
     }
 
-    removePerfectScroll(content){
-        if(content && Ps){
+    removePerfectScroll(content) {
+        if (content && Ps) {
             Ps.destroy(content);
         }
     }
 
     splitParagraphByLen(text, len) {
-        let regExp = new RegExp(".{"+len+"}\\S*\\s+", "g");
+        let regExp = new RegExp(".{" + len + "}\\S*\\s+", "g");
         return text.replace(regExp, "$&@").split(/\s+@/);
     }
 
@@ -476,25 +467,27 @@ class Util {
     }
 
     humanize(number) {
-        if(number % 100 >= 11 && number % 100 <= 13)
+        if (number % 100 >= 11 && number % 100 <= 13)
             return number + "th";
-        
-        switch(number % 10) {
-            case 1: return number + "st";
-            case 2: return number + "nd";
-            case 3: return number + "rd";
+
+        switch (number % 10) {
+            case 1:
+                return number + "st";
+            case 2:
+                return number + "nd";
+            case 3:
+                return number + "rd";
         }
-        
+
         return number + "th";
     }
 
-    toTitleCase(str)
-    {
-        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
     }
 
-    convertDate(date){
-        let monthChar = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sep','Oct','Nov','Dec'];
+    convertDate(date) {
+        let monthChar = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         var yyyy = date.getFullYear().toString();
         var mm = date.getMonth();
         var dd = date.getDate().toString();
@@ -502,10 +495,10 @@ class Util {
         var mmChars = monthChar[mm];
         var ddChars = dd.split('');
 
-        return dd +'-'+mmChars+'-'+yyyy;
+        return dd + '-' + mmChars + '-' + yyyy;
     }
 
-    sqlToJsDate(sqlDate){
+    sqlToJsDate(sqlDate) {
         //sqlDate in SQL DATETIME format ("yyyy-mm-dd hh:mm:ss.ms")
         var sqlDateArr1 = sqlDate.split("-");
         //format of sqlDateArr1[] = ['yyyy','mm','dd hh:mm:ms']
@@ -522,58 +515,51 @@ class Util {
         //format of sqlDateArr4[] = ['ss','ms']
         var sSecond = sqlDateArr4[0];
         var sMillisecond = sqlDateArr4[1];
-    
-        return new Date(sYear,sMonth,sDay,sHour,sMinute,sSecond,sMillisecond);
+
+        return new Date(sYear, sMonth, sDay, sHour, sMinute, sSecond, sMillisecond);
     }
 
 
 
     generateCSVString(table) {
         let csvStr = "",
-            dataString="";
+            dataString = "";
 
-        table.forEach(function(rowArray, rowIndex){
-            dataString="";
-            if (rowIndex==0){
+        table.forEach(function(rowArray, rowIndex) {
+            dataString = "";
+            if (rowIndex == 0) {
                 dataString = rowArray.join(",");
-                dataString = dataString.indexOf("ID") === 0 ? dataString.replace("ID","_ID") : dataString;
-                csvStr += rowIndex < table.length ? dataString+ "\n" : dataString;
-            }
-            else{
-                rowArray.forEach(function(item,colIndex){
-                    if (typeof item == "object"){
-                        if(item.props.text){
-                            dataString+= item.props.text + ",";
-                        }
-                        else if(item.props.children){
+                dataString = dataString.indexOf("ID") === 0 ? dataString.replace("ID", "_ID") : dataString;
+                csvStr += rowIndex < table.length ? dataString + "\n" : dataString;
+            } else {
+                rowArray.forEach(function(item, colIndex) {
+                    if (typeof item == "object") {
+                        if (item.props.text) {
+                            dataString += item.props.text + ",";
+                        } else if (item.props.children) {
                             var objStr = "";
-                            item.props.children.forEach( arrEl => {                                    
-                                if(typeof arrEl != "object" && arrEl.trim() != ""){
-                                    objStr+= arrEl.trim().replace(/[\n\r|\r\n|\n|\r]/gm," ").replace(/'/g,"\'") + " "; 
-                                }                                    
+                            item.props.children.forEach(arrEl => {
+                                if (typeof arrEl != "object" && arrEl.trim() != "") {
+                                    objStr += arrEl.trim().replace(/[\n\r|\r\n|\n|\r]/gm, " ").replace(/'/g, "\'") + " ";
+                                }
                             });
                             dataString += "\"" + objStr + "\",";
-                        }
-                        else{
+                        } else {
                             dataString += ",";
                         }
-                    }
-                    else if (typeof item!="undefined" && item!="Null"){
-                        if(item.toString().indexOf(",")>0)
-                        {
-                            dataString+= "\"" + item +  "\",";
+                    } else if (typeof item != "undefined" && item != "Null") {
+                        if (item.toString().indexOf(",") > 0) {
+                            dataString += "\"" + item + "\",";
+                        } else {
+                            dataString += item.toString().replace(/[\n\r|\r\n|\n|\r]/gm, " ").replace(/'/g, "\'") + ",";
                         }
-                        else{
-                            dataString+= item.toString().replace(/[\n\r|\r\n|\n|\r]/gm," ").replace(/'/g,"\'") + ",";
-                        }
-                    }
-                    else{
-                        dataString+= item+ ",";
+                    } else {
+                        dataString += item + ",";
                     }
                 });
-                dataString= dataString.substring(0,dataString.length-1);
-                csvStr += rowIndex < table.length ? dataString+ "\n" : dataString;
-            }      
+                dataString = dataString.substring(0, dataString.length - 1);
+                csvStr += rowIndex < table.length ? dataString + "\n" : dataString;
+            }
         });
 
         return csvStr;
@@ -581,88 +567,80 @@ class Util {
 
 
     generateChartCSVString(headerArr, table) {
-        let csvStr= "",
-            dataString= "",
-            header = "", 
-            dateField = "", 
+        let csvStr = "",
+            dataString = "",
+            header = "",
+            dateField = "",
             isDate = false,
-            months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-        if(headerArr){ 
-            header = headerArr.reduce((a,b)=>{
+        if (headerArr) {
+            header = headerArr.reduce((a, b) => {
                 return a + "~" + b;
             });
 
-            csvStr += "X,=\"" + header.replace(/~/g , "\",=\"")+ "\"\n";
+            csvStr += "X,=\"" + header.replace(/~/g, "\",=\"") + "\"\n";
         }
 
-        table.forEach(function(rowArray, rowIndex){
-            dataString="";
+        table.forEach(function(rowArray, rowIndex) {
+            dataString = "";
 
-            if(rowArray.constructor === Array){
+            if (rowArray.constructor === Array) {
 
-                rowArray.forEach(function(item,colIndex){
-                
-                    if(item && item.toString().indexOf(",")>0)
-                    {
-                        dataString+= "\"" + item +  "\",";
+                rowArray.forEach(function(item, colIndex) {
+
+                    if (item && item.toString().indexOf(",") > 0) {
+                        dataString += "\"" + item + "\",";
+                    } else if (item) {
+                        var str = item.toString().replace(/[\n\r|\r\n|\n|\r]/gm, " ").replace(/'/g, "\'");
+                        dataString += Math.abs(str) ? Math.abs(str) + "," : str + ",";
+                    } else {
+                        dataString += item + ",";
                     }
-                    else if(item){
-                        var str = item.toString().replace(/[\n\r|\r\n|\n|\r]/gm," ").replace(/'/g,"\'");
-                        dataString+= Math.abs(str) ? Math.abs(str) + "," : str + ",";
-                    }
-                    else{
-                        dataString+= item+  ",";
-                    }               
                 });
-            }
-            else{
-                if(header === ""){
-                    for(var prop in rowArray){
+            } else {
+                if (header === "") {
+                    for (var prop in rowArray) {
 
-                        if(prop.toUpperCase() === "DATE"){
+                        if (prop.toUpperCase() === "DATE") {
                             isDate = true;
                             dateField = prop;
                         }
 
-                        if(prop.toString().indexOf(",")>0)
-                        {
-                            dataString+= "=\"" + prop +  "\",";
+                        if (prop.toString().indexOf(",") > 0) {
+                            dataString += "=\"" + prop + "\",";
+                        } else {
+                            dataString += "=\"" + prop.toString().replace(/(\r\n|\n|\r)/gm, "").replace("'", "\'") + "\",";
                         }
-                        else{
-                            dataString+= "=\"" + prop.toString().replace(/(\r\n|\n|\r)/gm,"").replace("'","\'") + "\",";
-                        } 
-                        
+
                         header += prop.toString() + ", ";
                     }
 
-                    dataString= dataString.substring(0,dataString.length-1);
-                    csvStr += rowIndex < table.length ? dataString+ "\n" : dataString;
-                    dataString= "";
+                    dataString = dataString.substring(0, dataString.length - 1);
+                    csvStr += rowIndex < table.length ? dataString + "\n" : dataString;
+                    dataString = "";
                 }
 
-                for(var prop in rowArray){
-                    
-                    if(isDate == true && prop === dateField){
+                for (var prop in rowArray) {
+
+                    if (isDate == true && prop === dateField) {
                         var dateObj = new Date(parseInt(rowArray[prop]) * 1000);
                         var year = dateObj.getFullYear();
                         var month = months[dateObj.getMonth()];
                         var date = dateObj.getDate();
 
-                        dataString+= date + " " + month + " "+ year + ",";
+                        dataString += date + " " + month + " " + year + ",";
+                    } else if (rowArray[prop].toString().indexOf(",") > 0) {
+                        dataString += "\"" + rowArray[prop] + "\",";
+                    } else {
+                        var str = rowArray[prop].toString().replace(/[\n\r|\r\n|\n|\r]/gm, " ").replace(/'/g, "\'");
+                        dataString += Math.abs(str) ? Math.abs(str) + "," : str + ",";
                     }
-                    else if(rowArray[prop].toString().indexOf(",")>0){
-                        dataString+= "\"" + rowArray[prop] +  "\",";
-                    }
-                    else{
-                        var str = rowArray[prop].toString().replace(/[\n\r|\r\n|\n|\r]/gm," ").replace(/'/g,"\'");
-                        dataString+= Math.abs(str) ? Math.abs(str) + "," : str + ",";
-                    }
-                    
+
                 }
             }
-            dataString= dataString.substring(0,dataString.length-1);
-            csvStr += rowIndex < table.length ? dataString+ "\n" : dataString;
+            dataString = dataString.substring(0, dataString.length - 1);
+            csvStr += rowIndex < table.length ? dataString + "\n" : dataString;
         });
 
         return csvStr;
@@ -678,31 +656,32 @@ class Util {
     }
 
     colorLuminance(hex, lum) {
-       /*
-            colorLuminance("#69c", 0);		// returns "#6699cc"
-            colorLuminance("6699CC", 0.2);	// "#7ab8f5" - 20% lighter
-            colorLuminance("69C", -0.5);	// "#334d66" - 50% darker
-            colorLuminance("000", 1);		// "#000000" - true black cannot be made lighter!
-        */
+        /*
+             colorLuminance("#69c", 0);		// returns "#6699cc"
+             colorLuminance("6699CC", 0.2);	// "#7ab8f5" - 20% lighter
+             colorLuminance("69C", -0.5);	// "#334d66" - 50% darker
+             colorLuminance("000", 1);		// "#000000" - true black cannot be made lighter!
+         */
         // validate hex string
         hex = String(hex).replace(/[^0-9a-f]/gi, '');
         if (hex.length < 6) {
-            hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+            hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
         }
         lum = lum || 0;
 
         // convert to decimal and change luminosity
-        var rgb = "#", c, i;
+        var rgb = "#",
+            c, i;
         for (i = 0; i < 3; i++) {
-            c = parseInt(hex.substr(i*2,2), 16);
+            c = parseInt(hex.substr(i * 2, 2), 16);
             c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-            rgb += ("00"+c).substr(c.length);
+            rgb += ("00" + c).substr(c.length);
         }
 
         return rgb;
     }
 
-    jsonArrayToArray(jsonArray){
+    jsonArrayToArray(jsonArray) {
         let arr = [];
         arr.push(Object.keys(jsonArray[0]));
         jsonArray.forEach(array => {

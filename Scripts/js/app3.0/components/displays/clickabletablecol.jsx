@@ -18,7 +18,7 @@
 "use strict";
 
 import React from 'react';
-import Util from '\\util';
+import Util from 'utils';
 
 class ClickableTableCol extends React.Component {
     render() {

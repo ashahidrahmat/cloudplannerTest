@@ -17,7 +17,7 @@
 --------------------------------------------------------------------------------------------------*/
 
 import Ajax from 'wrapper/ajax';
-import Util from '\\util';
+import Util from 'utils';
 import Modal from 'components/modal';
 import UrlConstants from 'constants/urlconstants';
 import EplActionCreator from 'actions/eplactioncreator';

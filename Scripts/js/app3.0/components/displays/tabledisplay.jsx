@@ -17,7 +17,7 @@
 --------------------------------------------------------------------------------------------------*/
 "use strict";
 
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 import EllipsisText from 'components/displays/ellipsistext';
 import {ChartOrientation} from 'constants/chartconstants';

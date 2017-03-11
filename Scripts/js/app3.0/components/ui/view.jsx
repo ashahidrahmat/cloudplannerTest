@@ -18,7 +18,7 @@
  * CHANGES         :
 --------------------------------------------------------------------------------------------------*/
 
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 
 class View extends React.Component {

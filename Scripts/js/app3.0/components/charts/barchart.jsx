@@ -18,7 +18,7 @@
 
 "use strict";
 
-import Util from '\\util';
+import Util from 'utils';
 import Chart from 'components/charts/chart';
 import React from 'react';
 import EplActionCreator from 'actions/eplactioncreator';

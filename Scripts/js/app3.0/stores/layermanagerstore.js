@@ -24,7 +24,7 @@ import BaseStore from 'stores/basestore';
 import MapData from 'layers/mapdata';
 import MapStore from 'stores/mapstore';
 import Ajax from 'wrapper/ajax';
-import Util from '\\util';
+import Util from 'utils';
 
 class LayerManagerStore extends BaseStore {
 
