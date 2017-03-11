@@ -19,7 +19,7 @@
 
 import React from 'react';
 import {ProtoTypes}from 'react';
-import Util from '\\util';
+import Util from 'utils';
 
 export default class TextArea extends React.Component {
 

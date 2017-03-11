@@ -20,7 +20,7 @@ import Ajax from 'wrapper/ajax';
 import {ControllerUrl} from 'constants/urlconstants';
 import SearchStore from 'stores/searchstore';
 import Search from 'search/search';
-import Util from '\\util';
+import Util from 'utils';
 import SpeechStore from 'stores/speechstore';
 import BufferStore from 'stores/bufferstore';
 

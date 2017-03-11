@@ -18,7 +18,7 @@
 
 "use strict";
 
-import Util from 'util';
+import Util from 'utils';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Map3DStore from 'stores/3dmapstore';

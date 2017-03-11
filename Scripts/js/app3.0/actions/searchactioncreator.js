@@ -19,7 +19,7 @@
 
 import L from 'leaflet';
 import Esri from 'esri-leaflet';
-import Util from '\\util';
+import Util from 'utils';
 import Ajax from 'wrapper/ajax';
 import UrlConstants from 'constants/urlconstants';
 import FeatureConstants from 'constants/featureconstants';

@@ -21,7 +21,7 @@ import MapStore from 'stores/mapstore';
 import EplConstants from 'constants/eplconstants';
 import MenuConstants from 'constants/menuconstants';
 import AppDispatcher from 'dispatcher/appdispatcher';
-import Util from '\\util';
+import Util from 'utils';
 
 class EplActionCreator {
 
@@ -229,7 +229,7 @@ class EplActionCreator {
         });
     }
 
-    removeIdentifyMarker(){
+    removeIdentifyMarker() {
         AppDispatcher.dispatch({
             actionType: EplConstants.RemoveIdentifyMarker
         });
@@ -274,18 +274,19 @@ class EplActionCreator {
     }
 
     addBookmark(name) {
-        var center = MapStore.getCenter(), 
+        var center = MapStore.getCenter(),
             zoom = MapStore.getZoom();
 
         AppDispatcher.dispatch({
             actionType: EplConstants.AddBookmark,
             name: name,
             center: center,
-            zoom, zoom
+            zoom,
+            zoom
         });
     }
 
-    removeBookmark(key){
+    removeBookmark(key) {
         AppDispatcher.dispatch({
             actionType: EplConstants.RemoveBookmark,
             key: key
@@ -338,38 +339,38 @@ class EplActionCreator {
             results: results
         });
     }
-    
-    drawMarker(){
+
+    drawMarker() {
         AppDispatcher.dispatch({
             actionType: EplConstants.DrawMarker
         });
     }
 
-    drawPolygon(){
+    drawPolygon() {
         AppDispatcher.dispatch({
             actionType: EplConstants.DrawPolygon
         });
     }
 
-    drawLine(){
+    drawLine() {
         AppDispatcher.dispatch({
             actionType: EplConstants.DrawLine
         });
     }
 
-    drawRectangle(){
+    drawRectangle() {
         AppDispatcher.dispatch({
             actionType: EplConstants.DrawRectangle
         });
     }
 
-    drawCircle(){
+    drawCircle() {
         AppDispatcher.dispatch({
             actionType: EplConstants.DrawCircle
         });
     }
 
-    updateDrawnItemColor(colorId){
+    updateDrawnItemColor(colorId) {
         AppDispatcher.dispatch({
             actionType: EplConstants.UpdateDrawnItemColor,
             colorId: colorId
@@ -377,81 +378,81 @@ class EplActionCreator {
         });
     }
 
-    clearDrawing(){
+    clearDrawing() {
         AppDispatcher.dispatch({
             actionType: EplConstants.ClearDrawing
         });
     }
 
-    drawDone (result){
+    drawDone(result) {
         AppDispatcher.dispatch({
             actionType: EplConstants.DrawDone,
             result: result
         });
     }
-    
-    buffer(){
-     AppDispatcher.dispatch({
+
+    buffer() {
+        AppDispatcher.dispatch({
             actionType: EplConstants.Buffer
         });
     }
 
-    pointBuffer(){
+    pointBuffer() {
         AppDispatcher.dispatch({
             actionType: EplConstants.PointBuffer
         });
     }
 
-    polygonBuffer(){
+    polygonBuffer() {
         AppDispatcher.dispatch({
             actionType: EplConstants.PolygonBuffer
         });
     }
 
-    exportCSV(layerName, data){
+    exportCSV(layerName, data) {
         AppDispatcher.dispatch({
             actionType: EplConstants.ExportCSV,
             layerName: layerName,
             data: data
         });
-    } 
+    }
 
-    exportChart(layerName, data){
+    exportChart(layerName, data) {
         AppDispatcher.dispatch({
             actionType: EplConstants.ExportChart,
             layerName: layerName,
             data: data
         });
-    } 
+    }
 
-    addFeatureCollection(layerName, data){
+    addFeatureCollection(layerName, data) {
         AppDispatcher.dispatch({
             actionType: EplConstants.AddFeatureCollection,
             layerName: layerName,
             data: data
         });
-    } 
+    }
 
-    bufferDone(){
+    bufferDone() {
         AppDispatcher.dispatch({
             actionType: EplConstants.BufferDone
         });
     }
 
-    bufferSliderChange(value){
+    bufferSliderChange(value) {
         AppDispatcher.dispatch({
             actionType: EplConstants.BufferSliderChange,
             value: value
         });
     }
 
-    clearBuffer(){
+    clearBuffer() {
         AppDispatcher.dispatch({
             actionType: EplConstants.ClearBuffer
         });
     }
 
-    clearHighlights(){
+    clearHighlights() {
         AppDispatcher.dispatch({
             actionType: EplConstants.ClearHighlights
         });
@@ -496,7 +497,7 @@ class EplActionCreator {
         });
     }
 
-    setMapsView(center,zoom) {
+    setMapsView(center, zoom) {
         AppDispatcher.dispatch({
             actionType: EplConstants.SetMapsView,
             center: center,
@@ -518,7 +519,7 @@ class EplActionCreator {
         });
     }
 
-    toggleGeoPhotoQuicklink(){
+    toggleGeoPhotoQuicklink() {
         AppDispatcher.dispatch({
             actionType: EplConstants.ToggleGeoPhotoQuicklink
         });
@@ -528,7 +529,7 @@ class EplActionCreator {
         AppDispatcher.dispatch({
             actionType: EplConstants.ToggleGeoTagPhotoDetail
         });
-    } 
+    }
 
     closeGeoPhotoMenu() {
         AppDispatcher.dispatch({
@@ -539,11 +540,11 @@ class EplActionCreator {
     updateNearbyJsonData(data) {
         AppDispatcher.dispatch({
             actionType: EplConstants.UpdateNearbyJsonData,
-            updateData:data
+            updateData: data
         });
     }
 
-    
+
     customGeoPhotoData(customData) {
         AppDispatcher.dispatch({
             actionType: EplConstants.CustomGeoPhotoData,
@@ -563,7 +564,7 @@ class EplActionCreator {
         });
     }
 
-   
+
 }
 
 export default new EplActionCreator();

@@ -23,7 +23,7 @@
 import Chart from 'components/charts/chart';
 import React from 'react';
 import {ChartOrientation, ChartPropOptPairs} from 'constants/chartconstants';
-import Util from 'util';
+import Util from 'utils';
 import * as d3 from 'd3';
 import c3 from 'c3';
 

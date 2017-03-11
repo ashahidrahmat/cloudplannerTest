@@ -18,7 +18,7 @@
 
 import L from 'leaflet';
 import Esri from 'esri-leaflet';
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 import BasemapDesc from 'components/displays/basemapdesc';
 
@@ -45,7 +45,7 @@ class Basemap {
             minZoom: 12,
             maxZoom: 20,
             continuousWorld: true,
-            useCors: basemap.useCors | false ,
+            useCors: basemap.useCors | false,
             zIndex: 0
         };
 
@@ -55,7 +55,7 @@ class Basemap {
         }
 
         if (!this.crs) {
-            this.obj.push(this.generateLayer());        
+            this.obj.push(this.generateLayer());
         }
     }
 
@@ -87,7 +87,7 @@ class Basemap {
     // if it has not been created
     addTo(map) {
 
-        var layer, 
+        var layer,
             found = false;
 
         for (var i = this.obj.length - 1; i >= 0; i--) {
@@ -104,10 +104,10 @@ class Basemap {
             this.obj.push(layer);
         }
 
-        if(this.crs && this.crs.options && this.crs.options._lodMap){
+        if (this.crs && this.crs.options && this.crs.options._lodMap) {
             layer._lodMap = this._lodMap;
         }
-        
+
         layer.mapId = map.mapId;
         layer.addTo(map);
     }
@@ -117,7 +117,9 @@ class Basemap {
     }
 
     getInfo() {
-        return <BasemapDesc imageUrl={this.getImageUrl()} desc={this.getDescription()} />;
+        return <BasemapDesc imageUrl = { this.getImageUrl() }
+        desc = { this.getDescription() }
+        />;
     }
 
     getImageUrl() {

@@ -20,7 +20,7 @@ import Ajax from 'wrapper/ajax';
 import UrlConstants from 'constants/urlconstants';
 import SearchStore from 'stores/searchstore';
 import Search from 'search/search';
-import Util from '\\util';
+import Util from 'utils';
 
 export default class AddressSearch extends Search {
 }

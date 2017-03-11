@@ -24,7 +24,7 @@
 
 "use strict";
 
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 
 export default class DropDownList extends React.Component {

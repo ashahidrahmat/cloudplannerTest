@@ -24,7 +24,7 @@ import Map3DStore from 'stores/3dmapstore';
 import IdentifyDisplay from 'components/identifydisplay';
 import LayerManagerStore from 'stores/layermanagerstore';
 import EplActionCreator from 'actions/eplactioncreator';
-import Util from '\\util';
+import Util from 'utils';
 import GeoPhotoDiv from 'components/geophoto/geophotodiv'
 import ClusterStore from 'stores/clusterstore'; 
 import L from 'leaflet';

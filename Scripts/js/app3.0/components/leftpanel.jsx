@@ -24,7 +24,7 @@ import SelectedRow from 'components/selectedrow';
 import LayerComponent from 'components/layer';
 import LayerManagerStore from 'stores/layermanagerstore';
 import EplActionCreator from 'actions/eplactioncreator';
-import Util from '\\util';
+import Util from 'utils';
 import Quicklink from 'components/quicklink/quicklink';
 
 class LeftPanel extends React.Component {

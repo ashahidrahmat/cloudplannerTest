@@ -17,7 +17,7 @@
 --------------------------------------------------------------------------------------------------*/
 
 import Ajax from 'wrapper/ajax';
-import Util from '\\util';
+import Util from 'utils';
 import Search from 'search/search';
 import SearchStore from 'stores/searchstore';
 import SearchConstants from 'constants/searchconstants';

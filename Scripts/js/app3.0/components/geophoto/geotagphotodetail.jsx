@@ -22,7 +22,7 @@ import LayerManagerStore from 'stores/layermanagerstore';
 import EplActionCreator from 'actions/eplactioncreator';
 import ClusterStore from 'stores/clusterstore';
 import UiStore from 'stores/uistore';
-import Util from '\\util';
+import Util from 'utils';
 import Layer from 'layers/layer';
 import Masonry from 'react-masonry-component';
 import Lphoto from 'libs/leafletphoto/Leaflet.Photo.js';

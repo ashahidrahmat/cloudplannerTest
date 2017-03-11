@@ -18,7 +18,7 @@
 
 import Mapbox from 'wrapper/mapbox';
 import L from 'leaflet';
-import Util from '\\util';
+import Util from 'utils';
 import AppDispatcher from 'dispatcher/appdispatcher';
 import EplActionCreator from 'actions/eplactioncreator';
 import BaseStore from 'stores/basestore';

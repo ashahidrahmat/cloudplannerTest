@@ -17,7 +17,7 @@
 --------------------------------------------------------------------------------------------------*/
 "use strict";
 
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 import Slider from 'components/ui/slider';
 import DropDownList from 'components/ui/dropdownlist';

@@ -18,7 +18,7 @@
 
 
 import d3 from 'libs/d3/3.4.13/d3';
-import Util from 'util';
+import Util from 'utils';
 import Layer from 'layers/layer';
 
 export default class svgRenderLayer extends Layer {

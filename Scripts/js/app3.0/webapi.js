@@ -17,7 +17,7 @@
 --------------------------------------------------------------------------------------------------*/
 
 import Ajax from 'wrapper/ajax';
-import Util from '\\util';
+import Util from 'utils';
 import Modal from 'components/modal';
 import UrlConstants from 'constants/urlconstants';
 import EplActionCreator from 'actions/eplactioncreator';
@@ -29,14 +29,14 @@ class WebApi {
         Ajax.wait([
             this.queryAddress(latLng)
         ], (addressResponse) => {
-            
+
             let address = '';
             if (addressResponse) {
                 let data = addressResponse,
                     feature = (data.GeocodeInfo && data.GeocodeInfo.length > 0) ? data.GeocodeInfo[0] : null;
 
                 if (feature && !feature.ErrorMessage) {
-                    address = Util.addressFormatter((feature.BUILDINGNAME|| null), (feature.BLOCK|| null), feature.ROAD, null, null, (feature.POSTALCODE|| null));
+                    address = Util.addressFormatter((feature.BUILDINGNAME || null), (feature.BLOCK || null), feature.ROAD, null, null, (feature.POSTALCODE || null));
                 } else {
                     address = null;
                 }
@@ -48,7 +48,7 @@ class WebApi {
         }, error => {
             EplActionCreator.displayMessage("Error retrieving site info");
         });
-        
+
     }
 
     queryAddress(latLng) {
@@ -61,7 +61,7 @@ class WebApi {
         })
     }
 
-    getOneMapToken(){
+    getOneMapToken() {
         let def = Ajax.deferred();
         this.url = UrlConstants.OneMapToken;
         let ajaxUrl = Util.appendUrlWithParams(this.url, {

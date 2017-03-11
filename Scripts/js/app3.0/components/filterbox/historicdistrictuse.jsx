@@ -18,7 +18,7 @@
 
 "use strict";
 
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 import DropDownList from 'components/ui/dropdownlist';
 import EplActionCreator from 'actions/eplactioncreator';

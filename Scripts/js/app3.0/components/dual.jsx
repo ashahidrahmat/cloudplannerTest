@@ -18,7 +18,7 @@
 "use strict";
 
 import React from 'react';
-import EsriLeaflet from 'esrileaflet';
+import EsriLeaflet from 'esri-leaflet';
 import MapConstants from 'constants/mapconstants';
 import EplActionCreator from 'actions/eplactioncreator';
 

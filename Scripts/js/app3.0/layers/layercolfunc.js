@@ -16,7 +16,7 @@
  * CHANGES         :
 --------------------------------------------------------------------------------------------------*/
 import Url from 'components/displays/url';
-import Util from '\\util';
+import Util from 'utils';
 import React from 'react';
 import EplActionCreator from 'actions/eplactioncreator';
 

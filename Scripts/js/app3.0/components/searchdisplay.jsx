@@ -20,7 +20,7 @@
 import React from 'react';
 import SearchStore from 'stores/searchstore';
 import SearchDisplayRows from 'components/searchdisplayrows';
-import Util from 'util';
+import Util from 'utils';
 
 class SearchDisplay extends React.Component {
 

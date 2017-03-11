@@ -21,7 +21,7 @@
 import React from 'react';
 import EplActionCreator from 'actions/eplactioncreator';
 import Button from '../ui/button';
-import Util from 'util';
+import Util from 'utils';
 
 
 class Chart extends React.Component { 

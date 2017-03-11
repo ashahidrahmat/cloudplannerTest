@@ -18,7 +18,7 @@
 
 import L from 'leaflet';
 import Esri from 'esri-leaflet';
-import Util from '\\util';
+import Util from 'utils';
 import BaseStore from 'stores/basestore';
 import LayerFactory from 'layers/layerfactory';
 import BasemapConfig from 'basemapconfig';
@@ -36,7 +36,7 @@ import 'leaflet-draw';
 import BufferStore from 'stores/bufferstore';
 import DrawStore from 'stores/drawstore';
 import Map3DStore from 'stores/3dmapstore';
-import ClusterManager from 'clustermanager';
+import ClusterManager from 'stores/clustermanager';
 import Clusterstore from 'stores/clusterstore';
 import QuicklinkStore from 'stores/quicklinkstore';
 
@@ -62,8 +62,8 @@ class MapStore extends BaseStore {
             iconUrl: 'Content/img/information.png',
             iconAnchor: [16, 37]
         });
-        this.identifyMarker = L.marker([0, 0], {icon: this.icon});
-        this.mapOnClickIdentifyHandler = function(e){
+        this.identifyMarker = L.marker([0, 0], { icon: this.icon });
+        this.mapOnClickIdentifyHandler = function(e) {
             EplActionCreator.identify(e.latlng);
         };
         this.circles = [];
@@ -129,14 +129,14 @@ class MapStore extends BaseStore {
         this.configClusterManager(map);
     }
 
-    destroy(mapId) {     
+    destroy(mapId) {
         for (var i = 0, mapLength = this._maps.length; i < mapLength; i++) {
-            if(mapId === 0){
+            if (mapId === 0) {
                 EplActionCreator.reset();
             }
 
             if (mapId === this._maps[i].mapId) {
-                this._maps[i].remove(); 
+                this._maps[i].remove();
                 this._maps.splice(i, 1);
                 break;
             }
@@ -183,7 +183,7 @@ class MapStore extends BaseStore {
             L.DomUtil.get('loading-div').style.display = 'block';
             layer.addTo(this.firstMap);
             layer.setOpacity(layer.defaultSettings.defaultOpacity);
-            
+
         }
     }
 
@@ -233,7 +233,7 @@ class MapStore extends BaseStore {
         return basemapName === this.currBasemapName[mapId];
     }
 
-    setBasemap(newBasemapName, overwrite=false) {
+    setBasemap(newBasemapName, overwrite = false) {
         if (this.configMap) {
             this.setBasemapByMap(this.configMap, newBasemapName, overwrite);
         } else {
@@ -250,13 +250,13 @@ class MapStore extends BaseStore {
     }
 
     //TODO: refactor map logic into map class
-    setBasemapByMap(map, newBasemapName, overwrite=false) {
-        
+    setBasemapByMap(map, newBasemapName, overwrite = false) {
+
         // same basemap, nothing to change
         if (!map || (!overwrite && this.isCurrBasemap(map.mapId, newBasemapName))) {
             //return;
         }
-        
+
         let center = map.getCenter();
 
         //REQUIRED for CRS changing: https://github.com/Leaflet/Leaflet/issues/2553
@@ -296,7 +296,7 @@ class MapStore extends BaseStore {
         });
     }
 
-    loadBasemap() {     
+    loadBasemap() {
         this.BasemapConfig = BasemapConfig;
         this.BasemapConfig.forEach(config => {
 
@@ -304,7 +304,7 @@ class MapStore extends BaseStore {
             var func = () => {
                 this.setBasemap(this.defaultBasemapName, true);
             };
-            
+
             this.basemaps[config.name] = LayerFactory.getBasemap(config.class, config, (config.name === this.defaultBasemapName) ? func : null);
         });
     }
@@ -315,10 +315,10 @@ class MapStore extends BaseStore {
 
         Esri.DynamicMapLayer.prototype.setZIndex = function(zIndex) {
             this.options.zIndex = zIndex;
-            
+
             if (this._currentImage) {
                 this._currentImage.setZIndex(zIndex);
-            }  
+            }
         }
 
         L.ImageOverlay.prototype.setZIndex = function(zIndex) {
@@ -332,7 +332,7 @@ class MapStore extends BaseStore {
             }
         }
 
-        L.Proj.CRS.prototype.scale = function (zoom) {
+        L.Proj.CRS.prototype.scale = function(zoom) {
             let zoomAttr = this._lodMap ? this._lodMap[zoom] : zoom,
                 scalesAttr = this._scales ? this._scales : Util.MercatorZoomLevels;
 
@@ -369,7 +369,7 @@ class MapStore extends BaseStore {
                 0.5971657776648887,
                 0.2984505969011938
             ],
-            _lodMap: {11: 0, 12: 1, 13: 2, 14: 3, 15: 4, 16: 5, 17: 6, 18: 7, 19: 8}
+            _lodMap: { 11: 0, 12: 1, 13: 2, 14: 3, 15: 4, 16: 5, 17: 6, 18: 7, 19: 8 }
         });
     }
 
@@ -399,14 +399,14 @@ class MapStore extends BaseStore {
         );
     }
 
-    createCircle(latlng,radius,opts){
-        let circle = L.circle(latlng, radius, opts).addTo(this._maps[0]); 
+    createCircle(latlng, radius, opts) {
+        let circle = L.circle(latlng, radius, opts).addTo(this._maps[0]);
         this.circles.push(circle);
         return circle;
     }
 
-    removeCircles(){
-        this.circles.forEach((circle)=>{
+    removeCircles() {
+        this.circles.forEach((circle) => {
             circle.remove();
         })
         this.circles = [];
@@ -416,7 +416,7 @@ class MapStore extends BaseStore {
         L.Icon.Default.imagePath = 'Content/img/leaflet/'
         let marker,
             map = this._maps[0],
-            markerOpts =  {
+            markerOpts = {
                 zIndex: 1000,
                 clickable: false
             };
@@ -458,8 +458,7 @@ class MapStore extends BaseStore {
 
         if (center && zoom) {
             this.setMapsView(center, zoom);
-        }
-        else if(zoom){
+        } else if (zoom) {
             this.setMapsView(marker.getBounds().getCenter(), zoom);
         }
     }
@@ -470,7 +469,7 @@ class MapStore extends BaseStore {
         });
     }
 
-    removeIdentifyMarker(){
+    removeIdentifyMarker() {
         this._maps.map((map) => {
             this.identifyMarker.remove();
         });
@@ -494,19 +493,19 @@ class MapStore extends BaseStore {
     }
 
     //init drawing tool
-    configDrawManager(map){
+    configDrawManager(map) {
         this.drawManager = new DrawManager(map);
         this.drawManager.initialize();
     }
 
     //clustering
-    configClusterManager(map){
+    configClusterManager(map) {
         this.clusterManager = new ClusterManager(map);
         this.clusterManager.initialize();
     }
-    
+
     //disable map on click identify task 
-    disableMapOnClickIdentifyHandler(){
+    disableMapOnClickIdentifyHandler() {
         var map = this.firstMap;
         if (!map) {
             return;
@@ -516,7 +515,7 @@ class MapStore extends BaseStore {
     }
 
     //enable map on click identify task 
-    enableMapOnClickIdentifyHandler(){
+    enableMapOnClickIdentifyHandler() {
         var map = this.firstMap;
         if (!map) {
             return;
@@ -530,8 +529,8 @@ class MapStore extends BaseStore {
 var instance = new MapStore();
 
 instance.dispatchToken = AppDispatcher.register(function(action) {
-    if(!Map3DStore.isInitialized()){
-        switch(action.actionType) {
+    if (!Map3DStore.isInitialized()) {
+        switch (action.actionType) {
             case EplConstants.SetBasemap:
                 instance.setBasemap(action.basemapName);
                 instance.emitChanges();
@@ -596,7 +595,7 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
             default:
                 //no op
         }
-    }  
+    }
 });
 
 export default instance;
