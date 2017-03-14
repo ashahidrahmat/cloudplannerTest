@@ -557,6 +557,11 @@ class EplActionCreator {
             customData: customData
         });
     }
+    toggleMobileNavBtn() {
+        AppDispatcher.dispatch({
+            actionType: EplConstants.ToggleMobileNavBtn
+        });
+    }
 
    
 }

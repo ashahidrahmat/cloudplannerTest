@@ -180,24 +180,24 @@ class LeftPanel extends React.Component {
                         <button className={selectedBtnClass} onClick={this.showSelectedLayers.bind(this)}>Selected ({selected.length})</button>
                     </div>
                 </div>
-                <div className="cate-search cate-search-color">
+                <div className="cate-search cate-search-color" style={{webkitBoxSizing:'border-box'}}>
                     <span className="search-icon"><i className="iconfont icon-search"></i></span>
-                    <input id="cate-search" className="cate-search-color" type="text" value={this.props.layerFilterText} placeholder="Search dataset..." onChange={this.onChange.bind(this)} />
-                </div>
+                    <input id="cate-search" style={{width:'100%',height:'100%'}} className="cate-search-color" type="text" value={this.props.layerFilterText} placeholder="Search dataset..." onChange={this.onChange.bind(this)} />
+                        </div>
 
-                {
-                    this.props.layerFilterText.length > 0 ?
-                        <span className="cate-search-clear" onClick={this.clearSearchDataset.bind(this)}></span>
-                        : null
-                }
+                        {
+                            this.props.layerFilterText.length > 0 ?
+                                <span className="cate-search-clear" onClick={this.clearSearchDataset.bind(this)}></span>
+                                : null
+                        }
 
                 
 
-                {
-                    (<div id="available-layers" className={this.isState(this.States.All) ? showCss : hideCss}>
-                          <div ref="cateContent" className="cate-content">{categoriesArr}</div>
-                    </div>)
-                }
+                        {
+                            (<div id="available-layers" className={this.isState(this.States.All) ? showCss : hideCss}>
+                                  <div ref="cateContent" className="cate-content">{categoriesArr}</div>
+                            </div>)
+                    }
 
                 {
                     (<div id="selected-layers" className={this.isState(this.States.Selected) ? showCss : hideCss}>

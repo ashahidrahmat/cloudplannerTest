@@ -94,5 +94,6 @@ export default {
     UpdateNearbyJsonData:74,
     GeophotoMenu:80,
     CustomGeoPhotoData:81,
-    ClearPhotoTempMarker:82
+    ClearPhotoTempMarker:82,
+    ToggleMobileNavBtn:83
 };

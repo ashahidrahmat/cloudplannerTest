@@ -27,7 +27,8 @@ export default {
     LeftPanelWithSummary: 7,
     RightPanel: 8,
     Modal: 9,
-    GeoTagPhotoDetail:10
+    GeoTagPhotoDetail:10,
+    ToggleMobileNavBtn:11
 }
 
 export let FilterState = {

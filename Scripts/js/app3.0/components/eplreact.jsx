@@ -49,6 +49,12 @@ import Map3DStore from 'stores/3dmapstore';
 import Quicklink from 'components/quicklink/quicklink';
 import GeoTagPhotoDetail from 'components/geophoto/geotagphotodetail';
 import WebApi from 'webapi';
+import DesktopBreakpoint from 'libs/responsive_utilities/desktop_breakpoint';
+import TabletBreakpoint from 'libs/responsive_utilities/tablet_breakpoint';
+import PhoneBreakpoint from 'libs/responsive_utilities/phone_breakpoint';
+import {Navbar,FormGroup,FormControl,Button,Nav,NavItem} from 'react-bootstrap';
+import { Grid, Image } from 'semantic-ui-react';
+import $ from 'jquery'
 
 export default class EplReact extends React.Component {
     constructor(props) {
@@ -58,11 +64,16 @@ export default class EplReact extends React.Component {
             uiState: UiStore.getUiState(),
             searchText: UiStore.getSearchText(),
             speech: SpeechStore.getSpeechState(),
-            buildings: false
+            buildings: false,
+            showMobileSearch:false,
+            toggleNavButton:false,
+            siteInfo: MapStore.getSiteInfo() || Map3DStore.getSiteInfo(),
+             
         };
 
         this._onUiChange = this._onUiChange.bind(this);
         this._onSpeechChange = this._onSpeechChange.bind(this);
+        this._onSiteInfoChange = this._onSiteInfoChange.bind(this);
 
         WebApi.getOneMapToken();
     }
@@ -70,11 +81,23 @@ export default class EplReact extends React.Component {
     componentDidMount() {
         UiStore.addChangeListener(this._onUiChange);
         SpeechStore.addChangeListener(this._onSpeechChange);
+        MapStore.addChangeListener(this._onSiteInfoChange);
     }
 
     componentWillUnmount() {
         UiStore.removeChangeListener(this._onUiChange);
         SpeechStore.removeChangeListener(this._onSpeechChange);
+        MapStore.removeChangeListener(this._onSiteInfoChange);
+    }
+
+    _onSiteInfoChange() {
+        var siteInfo = {};
+
+        Map3DStore.isInitialized() ? siteInfo = Map3DStore.getSiteInfo() : siteInfo = MapStore.getSiteInfo();
+
+        this.setState({
+            siteInfo: siteInfo
+        });
     }
 
     _onUiChange() {
@@ -103,7 +126,35 @@ export default class EplReact extends React.Component {
     }
 
     toggleLeftPanel() {
+
+        //hide location
+        this.setState({
+            siteInfo:  ''
+        });
+
         EplActionCreator.toggleLeftPanel();
+    }
+
+    toggleMobileNavBtn() {
+
+        var uiState = this.state.uiState;
+        var mobileNavBtn = uiState.displayMenu === MenuConstants.ToggleMobileNavBtn
+         
+        //hide shown mobile search
+        if(this.state.showMobileSearch == true){
+     
+            this.toggleLeftPanel();
+            this.setState({
+                showMobileSearch: false
+            })
+        }
+
+        if(mobileNavBtn == false){
+            this.toggleLeftPanel();
+        }
+        
+        
+        EplActionCreator.toggleMobileNavBtn();
     }
 
     toggleUserProfile() {
@@ -116,6 +167,7 @@ export default class EplReact extends React.Component {
 
     toggleBasemapMenu() {
         EplActionCreator.toggleBasemap();
+        $('.navbar-toggle').click();
     }
 
     toggleLegend() {
@@ -124,14 +176,17 @@ export default class EplReact extends React.Component {
 
     toggleBookmark() {
         EplActionCreator.toggleBookmark();
+        $('.navbar-toggle').click();
     }
 
     toggleBuffer() {
         EplActionCreator.toggleBuffer();
+        $('.navbar-toggle').click();
     }
 
     toggleDraw() {
         EplActionCreator.toggleDraw();
+        $('.navbar-toggle').click();
     }
 
     showMetadata() {
@@ -190,31 +245,59 @@ export default class EplReact extends React.Component {
     }
 
     toggle3D(){
+        $('.navbar-toggle').click();
         this.closeRightMenu();
         if(this.state.buildings){
             this.toggleLeftPanel();
             this.setState({
-                buildings: false
+                buildings: false 
             })
         } else {
             this.state.uiState.dualScreen = false;
             this.setState({
                 buildings: true
             })
-        }      
+        }
     }
 
-    render3DButton(){
-        let button3D = <li id="3d" onClick={this.toggle3D.bind(this)}><i className="iconfont icon-3d-building"></i><div className="iconfont-name">3D</div></li> 
-        let exit3D = <li id="m3d-exit" onClick={this.toggle3D.bind(this)}><i className="iconfont icon-cancel-circled"></i><div id="m3d-exit" className="iconfont-name">Exit 3D</div></li>
-        
-        if(!this.state.buildings){
-            return button3D;
-        } else {
-            return exit3D;
-        }        
 
-        return null;
+    render3DButton(){
+        let button3D = <li id="3d" onClick={this.toggle3D.bind(this)}><i className="iconfont icon-3d-building" style={{color:'#4787ed'}}></i><div className="iconfont-name">3D</div></li>
+    let exit3D = <li id="m3d-exit" onClick={this.toggle3D.bind(this)}><i className="iconfont icon-cancel-circled"></i><div id="m3d-exit" className="iconfont-name">Exit 3D</div></li>
+
+    if(!this.state.buildings){
+        return button3D;
+    } else {
+        return exit3D;
+    }
+
+    return null;
+}
+ 
+    mobileSearch(){
+
+        var uiState = this.state.uiState;
+        var mobileNavBtn = uiState.displayMenu === MenuConstants.ToggleMobileNavBtn
+        var leftpanel = uiState.displayMenu === MenuConstants.LeftPanel
+     
+        //check for nav mobile btn
+        //if menu is not shown
+        if(!mobileNavBtn){ 
+             
+            //set mobile search state false
+            
+            if(this.state.showMobileSearch){
+                EplActionCreator.toggleLeftPanel();
+                this.setState({
+                    showMobileSearch: false
+                })
+            } else{
+                EplActionCreator.closeLeftPanel();
+                this.setState({
+                    showMobileSearch: true
+                })
+            }  
+        } 
     }
 
     render() {
@@ -227,187 +310,331 @@ export default class EplReact extends React.Component {
             searchPlaceholder = this.state.speech ? 'Speak into microphone now':'Search address e.g. 45 Maxwell Road',
             layerWithInfo = LayerManagerStore.getLatestLayer(),
             buildings = this.state.buildings;
+         
 
         const logoSpacing = {
             marginLeft: '15px'
         };
-        
+
+        const GridExampleDividedNumber = () => (
+          <Grid columns={3} divided textAlign='center'>
+            <Grid.Row>
+              <Grid.Column>
+                  {
+                    !buildings ? <li id="bookmark" onClick={this.toggleBookmark.bind(this)}><i className="iconfont icon-star"></i><div className="iconfont-name">Bookmark</div></li> : null
+                }
+              </Grid.Column>
+              <Grid.Column>
+                 <NavItem>
+                      <li id="buffer" onClick={this.toggleBuffer.bind(this)}><i className="iconfont icon-buffer"></i><div className="iconfont-name">Buffer</div></li>
+                      </NavItem>
+              </Grid.Column>
+              <Grid.Column>
+                 {
+                   !buildings ? <li id="draw" onClick={this.toggleDraw.bind(this)}><i className="iconfont icon-pencil"></i><div className="iconfont-name">Draw</div></li> : null
+                    }
+              </Grid.Column>
+            </Grid.Row>
+
+            <Grid.Row>
+              <Grid.Column>
+          
+                {
+                    !buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}><i className="iconfont icon-globe"></i><div className="iconfont-name">Basemap</div></li>
+                    }
+              </Grid.Column>
+              <Grid.Column>
+                {
+                    this.render3DButton()
+                } 
+              </Grid.Column>
+              <Grid.Column>
+                 <li id="reset" onClick={this.reset.bind(this)}><i className="iconfont icon-cw-1"></i><div className="iconfont-name">Reset</div></li>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>   
+)
+ 
+let addressBarBottom;
+    if(this.state.siteInfo.address != null){
+        addressBarBottom =  <PhoneBreakpoint> <Navbar fixedBottom>
+    <Navbar.Header>
+      <Navbar.Brand style={{height:'inherit'}}>
+        {this.state.siteInfo.address}
+      </Navbar.Brand>
+       
+    </Navbar.Header>
+   
+  </Navbar>
+  </PhoneBreakpoint>
+      } 
+
         return (
-            <div className="map-content">
-                <div id="header-top" className="header-top header-color">
-                    <div className="tools">
-                            {
-                                !buildings ? <div className="layer-list-div" onClick={this.toggleLeftPanel.bind(this)}><i className="iconfont icon-menu layer-list"></i></div> : null
-                            }
 
-                            {
-                                !buildings? <div className="logo" onClick={this.reset.bind(this)}><img src="/Content/img/header/logo.png" className="logo-img" /></div> :  <div style={logoSpacing} className="logo" onClick={this.reset.bind(this)}><img src="/Content/img/header/logo.png" className="logo-img" /></div>
-                            }
-                        <ul className="tools-links">
-                            {
-                                !buildings ? <li id="bookmark" onClick={this.toggleBookmark.bind(this)}><i className="iconfont icon-star"></i><div className="iconfont-name">Bookmark</div></li> : null
-                            }
-                            <li id="buffer" onClick={this.toggleBuffer.bind(this)}><i className="iconfont icon-buffer"></i><div className="iconfont-name">Buffer</div></li> 
-                            {
-                                !buildings ? <li id="draw" onClick={this.toggleDraw.bind(this)}><i className="iconfont icon-pencil"></i><div className="iconfont-name">Draw</div></li> : null
-                            }                         
-                            <li id="reset" onClick={this.reset.bind(this)}><i className="iconfont icon-cw-1"></i><div className="iconfont-name">Reset</div></li>
-                        </ul>
-                    </div>
-      
-                    <div className="searchbox">
-                        <div className="search-wrapper">
-                            <span className="search-icon"><i className="iconfont icon-search"></i></span>
-                            <input ref='searchInput' id="query-search" className="search-input" placeholder={searchPlaceholder} value={this.state.searchText} onChange={this.onChange.bind(this)} />
+         <div className="map-content">  
+             
+            {   
+               this.state.siteInfo.address != null &&
+           <div>{addressBarBottom}</div> 
+            } 
 
-                            <div id="locate-me" onClick={this.locateUser.bind(this)}><i className="iconfont icon-locate"></i><div className="iconfont-name">Locate</div></div>
+           <Navbar fluid fixedTop collapseOnSelect style={{backgroundColor:'#FFFFFF',borderBottom:'1px solid #ddd',boxShadow:'0 1px 5px 0 rgba(50,50,50,.25);'}} >
+          
+            <Navbar.Header>
+              <Navbar.Brand>
+                <a href="#" onClick={this.toggleLeftPanel.bind(this)}><i className="iconfont icon-menu layer-list"></i></a>
+                <div className="logo" onClick={this.reset.bind(this)}><img src="/Content/img/devices-icon.png" className="logo-img" /></div>
+                  
+                 <PhoneBreakpoint>
+                    <div id="locate-me" style={{marginTop:'-1px',position:'absolute',right:'100px'}}  onClick={this.mobileSearch.bind(this)}><i className="iconfont icon-search"></i></div>
+                    <div id="locate-me" style={{marginTop:'-1px',position:'absolute',right:'60px'}} onClick={this.locateUser.bind(this)}><i className="iconfont icon-locate"></i></div>
+                   </PhoneBreakpoint>
 
-                            <SearchDisplay ref="searchSuggest" setSearchText={this.setSearchText.bind(this)} />
+               <DesktopBreakpoint>
+                <div className="tools" style={{marginTop:'-14px'}}>
+                    <ul className="tools-links">
+                      {
+                                    !buildings ? <li id="bookmark" onClick={this.toggleBookmark.bind(this)}><i className="iconfont icon-star"></i><div className="iconfont-name">Bookmark</div></li> : null
+                        }
+                                                    <li id="buffer" onClick={this.toggleBuffer.bind(this)}><i className="iconfont icon-buffer"></i><div className="iconfont-name">Buffer</div></li>
+                        {
+                            !buildings ? <li id="draw" onClick={this.toggleDraw.bind(this)}><i className="iconfont icon-pencil"></i><div className="iconfont-name">Draw</div></li> : null
+                        }
+            <li id="reset" onClick={this.reset.bind(this)}><i className="iconfont icon-cw-1"></i><div className="iconfont-name">Reset</div></li>
+            </ul>
+            </div>
 
-                            <div className="search-icons-div">
-                            {
-                                this.state.searchText.length > 0 ?
-                                        <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
-                                    : null
+
+
+
+    </DesktopBreakpoint>
+
+    <DesktopBreakpoint>
+
+                <div className="searchbox">
+                    <div className="search-wrapper">
+                        <span className="search-icon"><i className="iconfont icon-search"></i></span>
+                        <input ref='searchInput' id="query-search" className="search-input" placeholder={searchPlaceholder} value={this.state.searchText} onChange={this.onChange.bind(this)} />
+
+                        <div id="locate-me" onClick={this.locateUser.bind(this)}><i className="iconfont icon-locate"></i><div className="iconfont-name">Locate</div></div>
+
+                        <SearchDisplay ref="searchSuggest" setSearchText={this.setSearchText.bind(this)} />
+
+                        <div className="search-icons-div">
+                        {
+                            this.state.searchText.length > 0 ?
+                                    <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
+                                        : null
+    }
+    {
+        <div className="search-speech" onClick={speechAction}><i className={speechClass}></i></div>
+        }
+    </div>
+    </div>
+    </div>
+
+    </DesktopBreakpoint>
+
+ 
+          
+    { 
+ 
+        this.state.showMobileSearch?
+                <PhoneBreakpoint>
+                <div className="searchbox" style={{position:'absolute',marginLeft:'-15px',marginTop:'40px'}}>
+                    <div className="search-wrapper">
+                        <span className="search-icon"><i className="iconfont icon-search"></i></span>
+                        <input ref='searchInput' id="query-search" style={{maxWidth:'100%'}} className="search-input" placeholder={searchPlaceholder} value={this.state.searchText} onChange={this.onChange.bind(this)} />
+
+                        
+
+                        <SearchDisplay ref="searchSuggest" setSearchText={this.setSearchText.bind(this)} />
+
+                        <div className="search-icons-div"  style={{right:'4px'}}>
+                        {
+                            this.state.searchText.length > 0 ?
+                                    <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
+                                        : null
+                        }
+                        {
+                            <div className="search-speech" onClick={speechAction}><i className={speechClass}></i></div>
                             }
-                            {
-                                <div className="search-speech" onClick={speechAction}><i className={speechClass}></i></div>
-                            } 
-                            </div>    
                         </div>
-                    </div>
-                    <div className="right-tools">
+                        </div>
+                        </div>
+                        
+</PhoneBreakpoint>
+                        :null
+}  
+        
+
+
+
+    </Navbar.Brand>
+<Navbar.Toggle onClick={this.toggleMobileNavBtn.bind(this)} />
+    </Navbar.Header>
+    <Navbar.Collapse>
+
+
+    <Nav pullRight>
+
+         
+         <DesktopBreakpoint>
+         <NavItem>
+              <div className="right-tools">
                         <ul className="right-links">
 
                              
                             {
                                 //!buildings ? <li id="legend" onClick={this.toggleLegend.bind(this)}><i className="iconfont icon-th-list"></i><div className="iconfont-name">Legend</div></li> : null
                             }   
-                            {
-                                !buildings ? <li id="dual-screen" onClick={this.toggleDualScreen.bind(this)}><i className="iconfont icon-columns"></i><div className="iconfont-name">Dual</div></li> : null
-                            }                           
-                            {
-                                //<li id="info-list" onClick={this.showMetadata.bind(this)}><i className="iconfont icon-info"></i><div className="iconfont-name">Metadata</div></li>
-                            }
-                            {
-                                //!buildings ? <li id="base-user" onClick={this.toggleUserProfile.bind(this)}><i className="iconfont icon-user"></i><div className="iconfont-name">Profile</div></li> : null
-                            }
+        {
+            !buildings ? <li id="dual-screen" onClick={this.toggleDualScreen.bind(this)}><i className="iconfont icon-columns"></i><div className="iconfont-name">Dual</div></li> : null
+        }                           
+        {
+            //<li id="info-list" onClick={this.showMetadata.bind(this)}><i className="iconfont icon-info"></i><div className="iconfont-name">Metadata</div></li>
+        }
+        {
+            //!buildings ? <li id="base-user" onClick={this.toggleUserProfile.bind(this)}><i className="iconfont icon-user"></i><div className="iconfont-name">Profile</div></li> : null
+        }
                             
-                            {
-                                !buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}><i className="iconfont icon-globe"></i><div className="iconfont-name">Basemap</div></li>
-                            }
-                            {
-                                this.render3DButton()
-                            }             
+        {
+            !buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}><i className="iconfont icon-globe"></i><div className="iconfont-name">Basemap</div></li>
+        }
+        {
+            this.render3DButton()
+        }             
                            
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="loading-div" className="loading-bar"><i className="icon-spin5 animate-spin"></i></div>
-                <div id="dacs-area"><span id="dacs-plotted-cases"></span><span> plotted</span></div>
-                {
-                    !buildings ? <EsriLeaflet id="map-canvas" mapId={MapConstants.Main} /> : <MapBoxGL id="map-canvas" mapId={MapConstants.Main} />
-                } 
-
-                {
-                    uiState.dualScreen ? <Dual /> : null
-                }
-
-                {
-                    uiState.layerInfo ? <LayerInfo info={layerWithInfo.getLayerInfo()} delay={layerWithInfo.getDelay() || 5000} /> : null
-                }
-
-                <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    {
-                        (uiState.displayMenu === MenuConstants.Basemap) && !buildings ?
-                        <div className="basemap-gallery basemap-gallery-color">
-                            <div className="si-title-wrapper si-title-color">
-                                <span className="si-title">Basemap</span>
-                                <span id="bm-back" className="right-close-btn right-close-btn-color" onClick={this.closeMenu.bind(this)}><i className="icon-cancel-circled"></i></span>
-                            </div>
-                                {
-                                    !buildings ? 
-                                <div className="basemap-gallery-wrapper">
-                                    <ul className="gallery-table">
-                                        {basemaps.map((basemap,i) => {
-                                            return <li key={i}>
-                                                <div id="mp14-color"></div>
-                                                <div id="mp14-text basemap-text" onClick={this.setBasemap.bind(this, basemap.name)}>
-                                                    <div className="mp14-text basemap-text">{basemap.name}</div>
-                                                </div>
-                                                <div id="mp14-info basemap-info" onClick={this.showBasemapInfo.bind(this, basemap.name)}>
-                                                    <div className="mp14-info basemap-info"></div>
-                                                </div>
-                                            </li>;
-                                        })}
-                                    </ul>
-                                </div> :
-                                <div className="basemap-gallery-wrapper">
-                                    <ul className="gallery-table">
-                                        {basemaps.map((basemap,i) => {
-                                            return <li key={i}>
-                                                <div id="mp14-color"></div>
-                                                <div id="mp14-text basemap-text" onClick={this.setBasemap.bind(this, basemap.name)}>
-                                                    <div className="mp14-text basemap-text">{basemap.name}</div>
-                                                </div>
-                                            </li>;
-                                        })}
-                                    </ul>
-                                </div>
-                                }
+        </ul>
+    </div>
  
-                        </div>
-                        : null
-                    }
-                </ReactCSSTransitionGroup>
+    </NavItem>
 
-                <ReactCSSTransitionGroup transitionName="leftpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    {(showLeftPanel) && !buildings ? <LeftPanel key="leftpanel" layerFilterText={layerFilterText} /> : null}
-                </ReactCSSTransitionGroup>
+     </DesktopBreakpoint>
 
-                {uiState.filter !== FilterState.Hidden ? <FilterBox state={uiState.filter} leftPanelState={showLeftPanel} /> : null}
+    <PhoneBreakpoint>
+    <NavItem eventKey={1}>
+    <GridExampleDividedNumber/>
+    </NavItem>
+    </PhoneBreakpoint>
 
-                <div className="ura-logo"><img src="/Content/img/ura_logo_transparency.png" /></div>
-                
-                {
-                    uiState.displayMenu === MenuConstants.LeftPanelWithSummary ? <LayerSummary /> : null
-                }
+    </Nav>
+    </Navbar.Collapse>
 
-                <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    {(uiState.displayMenu === MenuConstants.RightPanel) ? <RightPanel key="rightpanel" /> : null}
-                </ReactCSSTransitionGroup>
-                    
-                <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    {(uiState.displayMenu === MenuConstants.Buffer) ? <Buffer key="buffer" /> : null}
-                </ReactCSSTransitionGroup>
+    </Navbar>
 
-                <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    {(uiState.displayMenu === MenuConstants.Draw) ? <Draw key="draw" /> : null}
-                </ReactCSSTransitionGroup>
+    
 
-                <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    { (uiState.displayMenu === MenuConstants.Legend) ? <Legend key="legend" /> : null }
-                </ReactCSSTransitionGroup>
+ 
+          
+               
+              
 
-                { (uiState.displayMenu === MenuConstants.Modal) ? <Modal display={uiState.modalDisplay} /> : null }
-                
-                <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    { (uiState.displayMenu === MenuConstants.Bookmark) ? <Bookmark key="bookmark" /> : null }
-                </ReactCSSTransitionGroup>
 
-                <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                {
-                    (uiState.displayMenu === MenuConstants.UserProfile) ? <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet} /> : null
-                }
-                </ReactCSSTransitionGroup>
+    <div id="loading-div" className="loading-bar"><i className="icon-spin5 animate-spin"></i></div>
+    <div id="dacs-area"><span id="dacs-plotted-cases"></span><span> plotted</span></div>
+    {
+        !buildings ? <EsriLeaflet id="map-canvas" mapId={MapConstants.Main} /> : <MapBoxGL id="map-canvas" mapId={MapConstants.Main} />
+        }
 
-                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    { (uiState.displayMenu === MenuConstants.GeoTagPhotoDetail) ? <GeoTagPhotoDetail key="geotagphotodetail" /> : null }
-                </ReactCSSTransitionGroup>
+    {
+        uiState.dualScreen ? <Dual /> : null
+    }
 
-                <TourGuide />
-            </div>
-        );
+    {
+        uiState.layerInfo ? <LayerInfo info={layerWithInfo.getLayerInfo()} delay={layerWithInfo.getDelay() || 5000} /> : null
+    }
+
+    <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+        {
+            (uiState.displayMenu === MenuConstants.Basemap) && !buildings ?
+            <div className="basemap-gallery basemap-gallery-color">
+                <div className="si-title-wrapper si-title-color">
+                    <span className="si-title">Basemap</span>
+                    <span id="bm-back" className="right-close-btn right-close-btn-color" onClick={this.closeMenu.bind(this)}><i className="icon-cancel-circled"></i></span>
+                </div>
+    {
+        !buildings ?
+    <div className="basemap-gallery-wrapper">
+        <ul className="gallery-table">
+            {basemaps.map((basemap,i) => {
+                return <li key={i}>
+                    <div id="mp14-color"></div>
+                    <div id="mp14-text basemap-text" onClick={this.setBasemap.bind(this, basemap.name)}>
+                        <div className="mp14-text basemap-text">{basemap.name}</div>
+                    </div>
+                    <div id="mp14-info basemap-info" onClick={this.showBasemapInfo.bind(this, basemap.name)}>
+                        <div className="mp14-info basemap-info"></div>
+                    </div>
+                </li>;
+            })}
+        </ul>
+    </div> :
+    <div className="basemap-gallery-wrapper">
+        <ul className="gallery-table">
+            {basemaps.map((basemap,i) => {
+                return <li key={i}>
+                    <div id="mp14-color"></div>
+                    <div id="mp14-text basemap-text" onClick={this.setBasemap.bind(this, basemap.name)}>
+                        <div className="mp14-text basemap-text">{basemap.name}</div>
+                    </div>
+                </li>;
+            })}
+        </ul>
+    </div>
+    }
+    </div>: null
+    }
+                    </ReactCSSTransitionGroup>
+
+    <ReactCSSTransitionGroup transitionName="leftpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+        {(showLeftPanel) && !buildings ? <LeftPanel key="leftpanel" layerFilterText={layerFilterText} /> : null}
+    </ReactCSSTransitionGroup>
+
+    {uiState.filter !== FilterState.Hidden ? <FilterBox state={uiState.filter} leftPanelState={showLeftPanel} /> : null}
+
+                    <div className="ura-logo"><img src="/Content/img/ura_logo_transparency.png" /></div>
+
+    {
+        uiState.displayMenu === MenuConstants.LeftPanelWithSummary ? <LayerSummary /> : null
+    }
+
+    <DesktopBreakpoint>
+    <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+        {(uiState.displayMenu === MenuConstants.RightPanel) ? <RightPanel key="rightpanel" /> : null}
+    </ReactCSSTransitionGroup>
+     </DesktopBreakpoint>
+
+    <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+        {(uiState.displayMenu === MenuConstants.Buffer) ? <Buffer key="buffer" /> : null}
+    </ReactCSSTransitionGroup>
+
+    <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+        {(uiState.displayMenu === MenuConstants.Draw) ? <Draw key="draw" /> : null}
+    </ReactCSSTransitionGroup>
+
+    <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+        { (uiState.displayMenu === MenuConstants.Legend) ? <Legend key="legend" /> : null }
+    </ReactCSSTransitionGroup>
+
+    { (uiState.displayMenu === MenuConstants.Modal) ? <Modal display={uiState.modalDisplay} /> : null }
+
+    <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+        { (uiState.displayMenu === MenuConstants.Bookmark) ? <Bookmark key="bookmark" /> : null }
+    </ReactCSSTransitionGroup>
+
+    <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+    {
+        (uiState.displayMenu === MenuConstants.UserProfile) ? <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet} /> : null
+    }
+    </ReactCSSTransitionGroup>
+
+     <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+        { (uiState.displayMenu === MenuConstants.GeoTagPhotoDetail) ? <GeoTagPhotoDetail key="geotagphotodetail" /> : null }
+    </ReactCSSTransitionGroup>
+
+    <TourGuide />
+    </div>
+            );
     }
 }

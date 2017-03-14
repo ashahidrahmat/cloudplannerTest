@@ -324,6 +324,10 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
             instance.closeGeoPhotoMenu();
             instance.emitChanges();
             break;
+        case EplConstants.ToggleMobileNavBtn:
+            instance.toggleGroupMenu(MenuConstants.ToggleMobileNavBtn);
+            instance.emitChanges();
+            break;
         default:
             //no op
     }
