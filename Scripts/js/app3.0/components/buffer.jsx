@@ -79,13 +79,13 @@ class Buffer extends React.Component {
         BufferStore.getQueried() ? BufferStore.setQueried(false) : BufferStore.pointBuffer();
     }
 
-    onBufferDone(){   
+    onBufferDone(){
         this.setState({
             point:BufferStore.getPointBufferStatus(),
             polygon: BufferStore.getPolygonBufferStatus(),
             radius: BufferStore.getRadius()
         });
-       
+
     }
 
     componentWillMount(){
@@ -99,7 +99,7 @@ class Buffer extends React.Component {
         MapStore.disableMapOnClickIdentifyHandler();
         UiStore.addChangeListener(this._onUiChange);
         BufferStore._isBufferOn = true;
-        
+
         let content = this.refs.bufferResults;
         Util.setPerfectScrollbar(content);
     }
@@ -152,10 +152,10 @@ class Buffer extends React.Component {
         if(!this.state.polygon){
             EplActionCreator.polygonBuffer();
         }
-    }   
+    }
 
     bufferDone(){
-        EplActionCreator.bufferDone();       
+        EplActionCreator.bufferDone();
     }
 
     clearBuffer(){
@@ -200,7 +200,7 @@ class Buffer extends React.Component {
         this.setState({
             bufferOptionExpanded: !this.state.bufferOptionExpanded
         });
-    }   
+    }
 
     render () {
         //inline css
@@ -218,6 +218,8 @@ class Buffer extends React.Component {
             resizeInfoClass = expanded ? "icon-resize-small" : "icon-resize-full",
             resizeStyleMap = expanded ? { width: '66%' } : { width: '33%' };
 
+            var scrollMobile = {height:'90%',overflow:'auto'}
+
         //display buffer result in two alternative ways:
         //1. normal table format
         //2. charts or any other customized format
@@ -233,7 +235,7 @@ class Buffer extends React.Component {
                     <span id="bufferinfo-close" className="right-close-btn right-close-btn-color" onClick={this.closeMenu.bind(this)}><i className="icon-cancel-circled"></i></span>
                 </div>
                 <div id="bt-content">
-                    <div className="buffer-wrapper">
+                    <div className="buffer-wrapper" style={scrollMobile}>
                         <div id="buffer-options" onClick={this.toggleBufferOption.bind(this)}>
                             <div className="lr-title-wrapper">
                                 <span className="lr-title">Buffer Option</span>
@@ -261,7 +263,7 @@ class Buffer extends React.Component {
                      </div>
 
                     <div className="si-title-wrapper si-title-color">
-                        <span className="si-title">Buffer Results</span>                         
+                        <span className="si-title">Buffer Results</span>
                         <span className="bf-loading"><i className="icon-spin1 animate-spin"></i></span>
                     </div>
                     <div ref="bufferResults" className="buffer-results">

@@ -22,6 +22,7 @@ import EplActionCreator from 'actions/eplactioncreator';
 import DrawStore from 'stores/drawstore';
 import DrawConstants, {DrawColors} from 'constants/drawconstants';
 import BufferStore from 'stores/bufferstore';
+import Util from '\\util';
 
 class Draw extends React.Component {
 
@@ -44,6 +45,10 @@ class Draw extends React.Component {
     }
 
     componentDidMount() {
+
+        let content = this.refs.cateContent;
+        Util.setPerfectScrollbar(content)
+
         DrawStore.addChangeListener(this.onDrawDone);
         //DrawStore.disableMapOnClickIdentifyHandler();
         BufferStore.disableBufferDrawHandler();
@@ -53,14 +58,14 @@ class Draw extends React.Component {
     componentWillUnmount() {
         DrawStore.removeChangeListener(this.onDrawDone);
         DrawStore.disableDrawHandler();
-        //enable 
+        //enable
         //DrawStore.enableMapOnClickIdentifyHandler();
     }
-    
+
     closeMenu() {
         EplActionCreator.closeMenu();
     }
-    
+
     drawMarker(){
         //prevent multiple clicks to dispatch
         if(!this.state.button[DrawConstants.Marker]){
@@ -105,12 +110,12 @@ class Draw extends React.Component {
         var selectedClass = " draw-selected-color";
         return spanIds.map(spanId => {
             return (
-                <span key={spanId} 
-                      id={spanId} 
+                <span key={spanId}
+                      id={spanId}
                       className={"color-button " + spanId + (this.state.colorId === spanId ? selectedClass : "")}>
                 </span>);
         });
-    
+
     }
 
     render () {
@@ -121,13 +126,15 @@ class Draw extends React.Component {
         }
         var displaySpans = this.generateSpans(spanIds);
 
+        var scrollMobile = {height:'90%',overflow:'auto'}
+
         return (
             <div id="draw-tool" className="draw-color">
                 <div className="si-title-wrapper si-title-color">
                     <span className="si-title">Draw Tool</span>
                     <span id="draw-close-btn" className="right-close-btn right-close-btn-color" onClick={this.closeMenu.bind(this)}><i className="icon-cancel-circled"></i></span>
                 </div>
-                <div className="draw-wrapper">
+                <div className="draw-wrapper" style={scrollMobile}>
                     <div>
                         <div><span>Select Color</span></div>
                         <div id="color-palette" onClick={this.updateDrawnItemColor.bind(this)}>
@@ -161,7 +168,7 @@ class Draw extends React.Component {
                                     <span>Draw a rectangle</span>
                                 </td>
                             </tr>
-                            <tr id="draw-circle" className={"draw-circle-tr" + (this.state.button[DrawConstants.Circle] ? selectedClass : "")} onClick={this.drawCircle.bind(this)}> 
+                            <tr id="draw-circle" className={"draw-circle-tr" + (this.state.button[DrawConstants.Circle] ? selectedClass : "")} onClick={this.drawCircle.bind(this)}>
                                 <td width="60px">
                                     <span className="draw-circle"></span>
                                 </td>

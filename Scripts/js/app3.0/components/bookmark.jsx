@@ -20,6 +20,7 @@
 import React from 'react';
 import BookmarkStore from 'stores/bookmarkstore';
 import EplActionCreator from 'actions/eplactioncreator';
+import Util from '\\util';
 
 class Bookmark extends React.Component {
 
@@ -36,6 +37,9 @@ class Bookmark extends React.Component {
     }
 
     componentDidMount() {
+        let content = this.refs.cateContent;
+        Util.setPerfectScrollbar(content)
+
         BookmarkStore.addChangeListener(this._onChange);
     }
 
@@ -67,10 +71,10 @@ class Bookmark extends React.Component {
 
     focusToBookmark(key) {
         let bookmark = BookmarkStore.getBookmark(key);
-             
+
         if (bookmark) {
             EplActionCreator.highlightZoomCenterMap(null, parseInt(bookmark.zoom), {
-                lat: bookmark.lat, 
+                lat: bookmark.lat,
                 lng: bookmark.lng
             });
         }
@@ -111,7 +115,7 @@ class Bookmark extends React.Component {
                     <span className="si-title">Bookmark</span>
                     <span id="bk-title-close" className="right-close-btn right-close-btn-color" onClick={this.closeMenu.bind(this)}><i className="icon-cancel-circled"></i></span>
                 </div>
-                <div className="bookmark-wrapper">
+                <div className="bookmark-wrapper" ref="cateContent">
                     <div className="bookmark-add">
                         <table>
                             <tbody>
