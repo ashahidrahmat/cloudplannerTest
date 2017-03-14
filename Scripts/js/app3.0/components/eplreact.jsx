@@ -163,7 +163,7 @@ export default class EplReact extends React.Component {
 
     toggleBasemapMenu() {
         EplActionCreator.toggleBasemap();
-        $('.navbar-toggle').click();
+        //$('.navbar-toggle').click();
     }
 
     toggleLegend() {
@@ -172,17 +172,17 @@ export default class EplReact extends React.Component {
 
     toggleBookmark() {
         EplActionCreator.toggleBookmark();
-        $('.navbar-toggle').click();
+        //$('.navbar-toggle').click();
     }
 
     toggleBuffer() {
         EplActionCreator.toggleBuffer();
-        $('.navbar-toggle').click();
+        //$('.navbar-toggle').click();
     }
 
     toggleDraw() {
         EplActionCreator.toggleDraw();
-        $('.navbar-toggle').click();
+        //$('.navbar-toggle').click();
     }
 
     showMetadata() {
@@ -541,7 +541,7 @@ export default class EplReact extends React.Component {
                                                     </li>
                                                 : null
                                             }
-                
+
                                             {!buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}>
                                                 <i className="iconfont icon-globe"></i>
                                                 <div className="iconfont-name">Basemap</div>
@@ -557,7 +557,7 @@ export default class EplReact extends React.Component {
                             </DesktopBreakpoint>
 
                             <PhoneBreakpoint>
-                                <NavItem eventKey={1}>
+                                <NavItem>
                                     <GridExampleDividedNumber/>
                                 </NavItem>
                             </PhoneBreakpoint>

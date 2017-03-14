@@ -18568,7 +18568,6 @@ ol.ui.horizontal.list li:before,
   -ms-flex-direction: row;
   flex-direction: row;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
   -webkit-box-pack: inherit;
   -ms-flex-pack: inherit;
   justify-content: inherit;
