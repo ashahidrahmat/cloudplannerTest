@@ -328,7 +328,7 @@ export default class EplReact extends React.Component {
                                     <div className="iconfont-name">Bookmark</div>
                                 </li>
                             : null
-                        }
+}
                     </Grid.Column>
                     <Grid.Column>
                         <NavItem>
@@ -345,7 +345,7 @@ export default class EplReact extends React.Component {
                                     <div className="iconfont-name">Draw</div>
                                 </li>
                             : null
-                        }
+}
                     </Grid.Column>
                 </Grid.Row>
 
@@ -356,11 +356,11 @@ export default class EplReact extends React.Component {
                             <i className="iconfont icon-globe"></i>
                             <div className="iconfont-name">Basemap</div>
                         </li>
-                    }
+}
                     </Grid.Column>
                     <Grid.Column>
                         {this.render3DButton()
-                        }
+}
                     </Grid.Column>
                     <Grid.Column>
                         <li id="reset" onClick={this.reset.bind(this)}>
@@ -394,7 +394,7 @@ export default class EplReact extends React.Component {
             <div className="map-content">
 
                 {this.state.siteInfo.address != null && <div>{addressBarBottom}</div>
-        }
+}
 
                 <Navbar fluid fixedTop collapseOnSelect style={{
                     backgroundColor: '#FFFFFF',
@@ -437,7 +437,7 @@ export default class EplReact extends React.Component {
                                                     <div className="iconfont-name">Bookmark</div>
                                                 </li>
                                             : null
-                                        }
+}
                                         <li id="buffer" onClick={this.toggleBuffer.bind(this)}>
                                             <i className="iconfont icon-buffer"></i>
                                             <div className="iconfont-name">Buffer</div>
@@ -448,7 +448,7 @@ export default class EplReact extends React.Component {
                                                     <div className="iconfont-name">Draw</div>
                                                 </li>
                                             : null
-                                        }
+}
                                         <li id="reset" onClick={this.reset.bind(this)}>
                                             <i className="iconfont icon-cw-1"></i>
                                             <div className="iconfont-name">Reset</div>
@@ -478,7 +478,7 @@ export default class EplReact extends React.Component {
                                             {this.state.searchText.length > 0
                                                 ? <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
                                                 : null
-                                            }
+}
                                             {< div className = "search-speech" onClick = {
                                                 speechAction
                                             } > <i className={speechClass}></i> < /div>}
@@ -511,7 +511,7 @@ export default class EplReact extends React.Component {
                                                     {this.state.searchText.length > 0
                                                         ? <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
                                                         : null
-                                                    }
+}
                                                     {< div className = "search-speech" onClick = {
                                                         speechAction
                                                     } > <i className={speechClass}></i> < /div>}
@@ -521,7 +521,7 @@ export default class EplReact extends React.Component {
 
                                     </PhoneBreakpoint>
                                 : null
-                            }
+}
 
                         </Navbar.Brand>
                         <Navbar.Toggle onClick={this.toggleMobileNavBtn.bind(this)}/>
@@ -534,8 +534,6 @@ export default class EplReact extends React.Component {
                                 <NavItem>
                                     <div className="right-tools">
                                         <ul className="right-links">
-
-                                            {//!buildings ? <li id="legend" onClick={this.toggleLegend.bind(this)}><i className="iconfont icon-th-list"></i><div className="iconfont-name">Legend</div></li> : null}
                                             {!buildings
                                                 ? <li id="dual-screen" onClick={this.toggleDualScreen.bind(this)}>
                                                         <i className="iconfont icon-columns"></i>
@@ -543,16 +541,13 @@ export default class EplReact extends React.Component {
                                                     </li>
                                                 : null
                                             }
-                                            {//<li id="info-list" onClick={this.showMetadata.bind(this)}><i className="iconfont icon-info"></i><div className="iconfont-name">Metadata</div></li>}
-                                            {//!buildings ? <li id="base-user" onClick={this.toggleUserProfile.bind(this)}><i className="iconfont icon-user"></i><div className="iconfont-name">Profile</div></li> : null}
-
+                
                                             {!buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}>
                                                 <i className="iconfont icon-globe"></i>
                                                 <div className="iconfont-name">Basemap</div>
                                             </li>
-                                        }
-                                            {this.render3DButton()
                                             }
+                                            {this.render3DButton()}
 
                                         </ul>
                                     </div>
@@ -582,18 +577,17 @@ export default class EplReact extends React.Component {
                 </div>
                 {!buildings
                     ? <EsriLeaflet id="map-canvas" mapId={MapConstants.Main}/>
-                    : <MapBoxGL id="map-canvas" mapId={MapConstants.Main}/>
-            }
+                    : <MapBoxGL id="map-canvas" mapId={MapConstants.Main}/>}
 
                 {uiState.dualScreen
                     ? <Dual/>
                     : null
-                }
+}
 
                 {uiState.layerInfo
                     ? <LayerInfo info={layerWithInfo.getLayerInfo()} delay={layerWithInfo.getDelay() || 5000}/>
                     : null
-                }
+}
 
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Basemap) && !buildings
@@ -632,10 +626,10 @@ export default class EplReact extends React.Component {
                                             })}
                                         </ul>
                                     </div>
-                                }
+}
                             </div>
                         : null
-                    }
+}
                 </ReactCSSTransitionGroup>
 
                 <ReactCSSTransitionGroup transitionName="leftpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
@@ -653,7 +647,7 @@ export default class EplReact extends React.Component {
                 {uiState.displayMenu === MenuConstants.LeftPanelWithSummary
                     ? <LayerSummary/>
                     : null
-                }
+}
 
                 <DesktopBreakpoint>
                     <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
@@ -695,7 +689,7 @@ export default class EplReact extends React.Component {
                     {(uiState.displayMenu === MenuConstants.UserProfile)
                         ? <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet}/>
                         : null
-                    }
+}
                 </ReactCSSTransitionGroup>
 
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
