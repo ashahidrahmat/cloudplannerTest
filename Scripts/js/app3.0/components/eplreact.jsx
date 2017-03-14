@@ -136,6 +136,7 @@ export default class EplReact extends React.Component {
 
     toggleMobileNavBtn() {
 
+/*
         var uiState = this.state.uiState;
         var mobileNavBtn = uiState.displayMenu === MenuConstants.ToggleMobileNavBtn
 
@@ -149,8 +150,8 @@ export default class EplReact extends React.Component {
         if (mobileNavBtn == false) {
             this.toggleLeftPanel();
         }
-
-        EplActionCreator.toggleMobileNavBtn();
+*/
+        //EplActionCreator.toggleMobileNavBtn();
     }
 
     toggleUserProfile() {
@@ -162,7 +163,12 @@ export default class EplReact extends React.Component {
     }
 
     toggleBasemapMenu() {
+
+        <PhoneBreakpoint>
+            $('.navbar-toggle').click();
+        </PhoneBreakpoint>
         EplActionCreator.toggleBasemap();
+
         //$('.navbar-toggle').click();
     }
 
@@ -171,17 +177,30 @@ export default class EplReact extends React.Component {
     }
 
     toggleBookmark() {
+<PhoneBreakpoint>
+        console.log("mobile bookmark")
+    </PhoneBreakpoint>
         EplActionCreator.toggleBookmark();
+
         //$('.navbar-toggle').click();
     }
 
     toggleBuffer() {
+        <PhoneBreakpoint>
+            $('.navbar-toggle').click();
+        </PhoneBreakpoint>
         EplActionCreator.toggleBuffer();
+
+
         //$('.navbar-toggle').click();
     }
 
     toggleDraw() {
+        <PhoneBreakpoint>
+            $('.navbar-toggle').click();
+        </PhoneBreakpoint>
         EplActionCreator.toggleDraw();
+
         //$('.navbar-toggle').click();
     }
 
