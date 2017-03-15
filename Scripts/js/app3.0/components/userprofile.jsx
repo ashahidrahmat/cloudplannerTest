@@ -22,6 +22,7 @@ import React from 'react';
 import Button from 'components/ui/button';
 import UpdateProfile from 'components/updateprofile';
 import EplActionCreator from 'actions/eplactioncreator';
+import SocialLogin from 'components/sociallogin'
 
 export default class UserProfile extends React.Component {
 
@@ -54,7 +55,7 @@ export default class UserProfile extends React.Component {
                         <span id="userdisplay" className="userdisplay-color">Welcome, { this.props.username }</span>
                     </div>
                     {
-                        this.props.extranet ? 
+                        this.props.extranet ?
                         <div className="si-title-wrapper ui-title-color helpspan" onClick={this.changePasswordFunc.bind(this)}>
                             <span id="change-pw">Change Password</span>
                         </div> : null
