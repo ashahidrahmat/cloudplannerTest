@@ -24,6 +24,7 @@ import UpdateProfile from 'components/updateprofile';
 import EplActionCreator from 'actions/eplactioncreator';
 import SocialLogin from 'components/sociallogin'
 
+
 export default class UserProfile extends React.Component {
 
     constructor(opts) {
@@ -43,7 +44,9 @@ export default class UserProfile extends React.Component {
         EplActionCreator.showModal(modelContainer);
     }
 
+
     render () {
+ 
         return (
             <div id="userinfo" className="userinfo-color">
                 <div className="si-title-wrapper si-title-color">
@@ -51,6 +54,16 @@ export default class UserProfile extends React.Component {
                     <span id="profile-title-close" className="right-close-btn right-close-btn-color" onClick={this.props.onClose}><i className="icon-cancel-circled"></i></span>
                 </div>
                 <div className="userinfo-wrapper">
+
+
+
+                     <SocialLogin/>
+
+
+                    <div className="si-title-wrapper ui-title-color">
+                        {this.state.profile  && this.state.profile}
+                    </div>
+
                     <div className="si-title-wrapper ui-title-color">
                         <span id="userdisplay" className="userdisplay-color">Welcome, { this.props.username }</span>
                     </div>
@@ -60,6 +73,9 @@ export default class UserProfile extends React.Component {
                             <span id="change-pw">Change Password</span>
                         </div> : null
                     }
+
+
+
                     {/*<div className="si-title-wrapper ui-title-color helpspan">
                         <span id="begin-tour">Take A Tour</span>
                     </div>*/}
