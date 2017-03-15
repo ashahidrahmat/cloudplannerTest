@@ -342,12 +342,11 @@ export default class EplReact extends React.Component {
                 <Grid.Row>
                     <Grid.Column>
                         {!buildings
-                            ? <li id="bookmark" onClick={this.toggleBookmark.bind(this)}>
+                            && <li id="bookmark" onClick={this.toggleBookmark.bind(this)}>
                                     <i className="iconfont icon-star"></i>
                                     <div className="iconfont-name">Bookmark</div>
                                 </li>
-                            : null
-}
+                          }
                     </Grid.Column>
                     <Grid.Column>
                         <NavItem>
@@ -359,12 +358,11 @@ export default class EplReact extends React.Component {
                     </Grid.Column>
                     <Grid.Column>
                         {!buildings
-                            ? <li id="draw" onClick={this.toggleDraw.bind(this)}>
+                            && <li id="draw" onClick={this.toggleDraw.bind(this)}>
                                     <i className="iconfont icon-pencil"></i>
                                     <div className="iconfont-name">Draw</div>
                                 </li>
-                            : null
-}
+                            }
                     </Grid.Column>
                 </Grid.Row>
 
@@ -374,12 +372,10 @@ export default class EplReact extends React.Component {
                         {!buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}>
                             <i className="iconfont icon-globe"></i>
                             <div className="iconfont-name">Basemap</div>
-                        </li>
-}
+                        </li>}
                     </Grid.Column>
                     <Grid.Column>
-                        {this.render3DButton()
-}
+                        {this.render3DButton()}
                     </Grid.Column>
                     <Grid.Column>
                         <li id="reset" onClick={this.reset.bind(this)}>
@@ -412,8 +408,7 @@ export default class EplReact extends React.Component {
 
             <div className="map-content">
 
-                {this.state.siteInfo.address != null && <div>{addressBarBottom}</div>
-}
+                {this.state.siteInfo.address != null && <div>{addressBarBottom}</div>}
 
                 <Navbar fluid fixedTop collapseOnSelect style={{
                     backgroundColor: '#FFFFFF',
@@ -451,23 +446,19 @@ export default class EplReact extends React.Component {
                                 }}>
                                     <ul className="tools-links">
                                         {!buildings
-                                            ? <li id="bookmark" onClick={this.toggleBookmark.bind(this)}>
+                                            && <li id="bookmark" onClick={this.toggleBookmark.bind(this)}>
                                                     <i className="iconfont icon-star"></i>
                                                     <div className="iconfont-name">Bookmark</div>
-                                                </li>
-                                            : null
-}
+                                                </li>}
                                         <li id="buffer" onClick={this.toggleBuffer.bind(this)}>
                                             <i className="iconfont icon-buffer"></i>
                                             <div className="iconfont-name">Buffer</div>
                                         </li>
                                         {!buildings
-                                            ? <li id="draw" onClick={this.toggleDraw.bind(this)}>
+                                            && <li id="draw" onClick={this.toggleDraw.bind(this)}>
                                                     <i className="iconfont icon-pencil"></i>
                                                     <div className="iconfont-name">Draw</div>
-                                                </li>
-                                            : null
-}
+                                                </li>}
                                         <li id="reset" onClick={this.reset.bind(this)}>
                                             <i className="iconfont icon-cw-1"></i>
                                             <div className="iconfont-name">Reset</div>
@@ -495,9 +486,7 @@ export default class EplReact extends React.Component {
 
                                         <div className="search-icons-div">
                                             {this.state.searchText.length > 0
-                                                ? <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
-                                                : null
-}
+                                                && <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>}
                                             {< div className = "search-speech" onClick = {
                                                 speechAction
                                             } > <i className={speechClass}></i> < /div>}
@@ -508,7 +497,7 @@ export default class EplReact extends React.Component {
                             </DesktopBreakpoint>
 
                             {this.state.showMobileSearch
-                                ? <PhoneBreakpoint>
+                                && <PhoneBreakpoint>
                                         <div className="searchbox" style={{
                                             position: 'absolute',
                                             marginLeft: '-15px',
@@ -528,9 +517,8 @@ export default class EplReact extends React.Component {
                                                     right: '4px'
                                                 }}>
                                                     {this.state.searchText.length > 0
-                                                        ? <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
-                                                        : null
-}
+                                                        && <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
+                                                        }
                                                     {< div className = "search-speech" onClick = {
                                                         speechAction
                                                     } > <i className={speechClass}></i> < /div>}
@@ -539,8 +527,7 @@ export default class EplReact extends React.Component {
                                         </div>
 
                                     </PhoneBreakpoint>
-                                : null
-}
+                                }
 
                         </Navbar.Brand>
                         <Navbar.Toggle onClick={this.toggleMobileNavBtn.bind(this)}/>
@@ -554,11 +541,10 @@ export default class EplReact extends React.Component {
                                     <div className="right-tools">
                                         <ul className="right-links">
                                             {!buildings
-                                                ? <li id="dual-screen" onClick={this.toggleDualScreen.bind(this)}>
+                                                && <li id="dual-screen" onClick={this.toggleDualScreen.bind(this)}>
                                                         <i className="iconfont icon-columns"></i>
                                                         <div className="iconfont-name">Dual</div>
                                                     </li>
-                                                : null
                                             }
 
                                             {!buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}>
@@ -566,6 +552,9 @@ export default class EplReact extends React.Component {
                                                 <div className="iconfont-name">Basemap</div>
                                             </li>
                                             }
+                                            {
+                                                !buildings && <li id="base-user" onClick={this.toggleUserProfile.bind(this)}><svg className="icon-header icon-user"><use xlinkHref="/Content/img/svg/symbol-defs.svg#icon-user"></use></svg><div className="iconfont-name">Profile</div></li>
+                                             }
                                             {this.render3DButton()}
 
                                         </ul>
@@ -598,15 +587,13 @@ export default class EplReact extends React.Component {
                     ? <EsriLeaflet id="map-canvas" mapId={MapConstants.Main}/>
                     : <MapBoxGL id="map-canvas" mapId={MapConstants.Main}/>}
 
-                {uiState.dualScreen
-                    ? <Dual/>
-                    : null
-}
+                {
+                    uiState.dualScreen && <Dual/>
+                }
 
-                {uiState.layerInfo
-                    ? <LayerInfo info={layerWithInfo.getLayerInfo()} delay={layerWithInfo.getDelay() || 5000}/>
-                    : null
-}
+                {
+                    uiState.layerInfo &&<LayerInfo info={layerWithInfo.getLayerInfo()} delay={layerWithInfo.getDelay() || 5000}/>
+                }
 
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Basemap) && !buildings
@@ -645,10 +632,10 @@ export default class EplReact extends React.Component {
                                             })}
                                         </ul>
                                     </div>
-}
+                                }
                             </div>
                         : null
-}
+                 }
                 </ReactCSSTransitionGroup>
 
                 <ReactCSSTransitionGroup transitionName="leftpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
@@ -658,63 +645,53 @@ export default class EplReact extends React.Component {
                 </ReactCSSTransitionGroup>
 
                 {uiState.filter !== FilterState.Hidden
-                    ? <FilterBox state={uiState.filter} leftPanelState={showLeftPanel}/>
-                    : null}
+                    && <FilterBox state={uiState.filter} leftPanelState={showLeftPanel}/>}
 
                 <div className="ura-logo"><img src="/Content/img/ura_logo_transparency.png"/></div>
 
                 {uiState.displayMenu === MenuConstants.LeftPanelWithSummary
-                    ? <LayerSummary/>
-                    : null
-}
+                    && <LayerSummary/>}
 
                 <DesktopBreakpoint>
                     <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                         {(uiState.displayMenu === MenuConstants.RightPanel)
-                            ? <RightPanel key="rightpanel"/>
-                            : null}
+                            && <RightPanel key="rightpanel"/>}
                     </ReactCSSTransitionGroup>
                 </DesktopBreakpoint>
 
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Buffer)
-                        ? <Buffer key="buffer"/>
-                        : null}
+                        && <Buffer key="buffer"/>}
                 </ReactCSSTransitionGroup>
 
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Draw)
-                        ? <Draw key="draw"/>
-                        : null}
+                        && <Draw key="draw"/>}
                 </ReactCSSTransitionGroup>
 
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Legend)
-                        ? <Legend key="legend"/>
-                        : null}
+                        && <Legend key="legend"/>}
                 </ReactCSSTransitionGroup>
 
                 {(uiState.displayMenu === MenuConstants.Modal)
-                    ? <Modal display={uiState.modalDisplay}/>
-                    : null}
+                    && <Modal display={uiState.modalDisplay}/>}
 
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Bookmark)
-                        ? <Bookmark key="bookmark"/>
-                        : null}
+                        &&<Bookmark key="bookmark"/>}
                 </ReactCSSTransitionGroup>
 
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.UserProfile)
-                        ? <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet}/>
-                        : null
-}
+                        && <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet}/>
+                    }
                 </ReactCSSTransitionGroup>
 
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.GeoTagPhotoDetail)
-                        ? <GeoTagPhotoDetail key="geotagphotodetail"/>
-                        : null}
+                        && <GeoTagPhotoDetail key="geotagphotodetail"/>
+                    }
                 </ReactCSSTransitionGroup>
 
                 <TourGuide/>
