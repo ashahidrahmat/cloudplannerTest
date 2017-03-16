@@ -44,9 +44,18 @@ export default class UserProfile extends React.Component {
         EplActionCreator.showModal(modelContainer);
     }
 
+    /*
+    <div className="si-title-wrapper ui-title-color">
+        <span id="userdisplay" className="userdisplay-color">Welcome, { this.props.username }</span>
+    </div>
+
+                        <div className="si-title-wrapper ui-title-color">
+                            {this.state.profile  && this.state.profile}
+                        </div>
+    */
 
     render () {
- 
+
         return (
             <div id="userinfo" className="userinfo-color">
                 <div className="si-title-wrapper si-title-color">
@@ -60,13 +69,9 @@ export default class UserProfile extends React.Component {
                      <SocialLogin/>
 
 
-                    <div className="si-title-wrapper ui-title-color">
-                        {this.state.profile  && this.state.profile}
-                    </div>
 
-                    <div className="si-title-wrapper ui-title-color">
-                        <span id="userdisplay" className="userdisplay-color">Welcome, { this.props.username }</span>
-                    </div>
+
+
                     {
                         this.props.extranet ?
                         <div className="si-title-wrapper ui-title-color helpspan" onClick={this.changePasswordFunc.bind(this)}>

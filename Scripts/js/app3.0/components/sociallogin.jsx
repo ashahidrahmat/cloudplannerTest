@@ -27,6 +27,7 @@ import {
  Col,
  Thumbnail
 } from 'react-bootstrap';
+import AWS from 'aws-sdk';
 
 export default class SocialLogin extends React.Component {
 
@@ -37,6 +38,58 @@ export default class SocialLogin extends React.Component {
             profile:null
         }
     }
+
+    componentDidMount() {
+
+        //config for cognito use pool
+        //cloudplanner
+
+
+
+    }
+
+    awsCognitoAuthFlow(fbAuthAccessToken){
+
+        var params = {
+               IdentityPoolId: 'us-east-1:abbfcfb1-f03b-4bf2-8668-f8091b55cd4c',
+                Logins: { 'graph.facebook.com': fbAuthAccessToken }
+        };
+
+        // set the Amazon Cognito region
+        AWS.config.region = 'us-east-1';
+        // initialize the Credentials object with our parameters
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials(params);
+
+        // We can set the get method of the Credentials object to retrieve
+        // the unique identifier for the end user (identityId) once the provider
+        // has refreshed itself
+        AWS.config.credentials.get(function(err) {
+        	if (err) {
+        		console.log("Error: "+err);
+        		return;
+        	}
+
+
+            /*
+        	// Other service clients will automatically use the Cognito Credentials provider
+        	// configured in the JavaScript SDK.
+        	var cognitoSyncClient = new AWS.CognitoSync();
+
+        	cognitoSyncClient.listDatasets({
+        		IdentityId: AWS.config.credentials.identityId,
+        		IdentityPoolId: "YOUR_COGNITO_IDENTITY_POOL_ID"
+        	}, function(err, data) {
+        		if ( !err ) {
+        			console.log(JSON.stringify(data));
+        		}
+        	});
+*/
+
+        });
+
+
+    }
+
 
     facebookLogin(){
 
@@ -84,6 +137,17 @@ export default class SocialLogin extends React.Component {
 
 
 */
+
+var online = function(session) {
+	var currentTime = (new Date()).getTime() / 1000;
+	return session && session.access_token && session.expires > currentTime;
+};
+
+var fb = Hello('facebook').getAuthResponse();
+
+
+                scope.awsCognitoAuthFlow(fb.access_token);
+
                scope.setState({
                    profile: r
                })
@@ -97,16 +161,12 @@ export default class SocialLogin extends React.Component {
 
     render () {
 
-        if(this.state.profile != null){
-console.log(this.state.profile)
- }
-
 //227854817681063
         return (
                 <div>
                     {this.state.profile == null ?
-                <div className="si-title-wrapper ui-title-color" id="special">
-                <button onClick={this.facebookLogin.bind(this)}>Fb</button>
+                <div className="si-title-wrapper ui-title-color">
+                <img src="http://www.freeiconspng.com/uploads/facebook-transparent-12.png" style={{height:'40px'}} onClick={this.facebookLogin.bind(this)} />
                 </div> :     <Grid>
                       <Row>
                           <Col xs={6} md={4}>
