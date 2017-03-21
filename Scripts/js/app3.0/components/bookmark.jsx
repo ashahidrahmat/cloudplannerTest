@@ -20,7 +20,7 @@
 import React from 'react';
 import BookmarkStore from 'stores/bookmarkstore';
 import EplActionCreator from 'actions/eplactioncreator';
-import Util from '\\util';
+import Util from 'utils';
 
 class Bookmark extends React.Component {
 
