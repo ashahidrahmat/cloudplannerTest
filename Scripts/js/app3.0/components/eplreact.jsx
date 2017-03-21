@@ -647,7 +647,7 @@ export default class EplReact extends React.Component {
                 {uiState.filter !== FilterState.Hidden
                     && <FilterBox state={uiState.filter} leftPanelState={showLeftPanel}/>}
 
-                <div className="ura-logo"><img src="/Content/img/ura_logo_transparency.png"/></div>
+                
 
                 {uiState.displayMenu === MenuConstants.LeftPanelWithSummary
                     && <LayerSummary/>}
