@@ -95,5 +95,6 @@ export default {
     GeophotoMenu:80,
     CustomGeoPhotoData:81,
     ClearPhotoTempMarker:82,
-    ToggleMobileNavBtn:83
+    ToggleMobileNavBtn:83,
+    ToggleChatBot:84
 };

@@ -167,6 +167,10 @@ class UiStore extends BaseStore {
         this.uiState.displayMenu = MenuConstants.RightPanel;
     }
 
+    toggleChatBot(){
+        this.uiState.displayMenu = MenuConstants.ChatBot;
+    }
+
 }
 
 var instance = new UiStore();
@@ -326,6 +330,10 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
             break;
         case EplConstants.ToggleMobileNavBtn:
             instance.toggleGroupMenu(MenuConstants.ToggleMobileNavBtn);
+            instance.emitChanges();
+            break;
+        case EplConstants.ToggleChatBot:
+            instance.toggleGroupMenu(MenuConstants.ChatBot);
             instance.emitChanges();
             break;
         default:

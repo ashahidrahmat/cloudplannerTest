@@ -61,7 +61,8 @@ import {
     NavItem
 } from 'react-bootstrap';
 import {Grid, Image} from 'semantic-ui-react';
-import $ from 'jquery'
+import $ from 'jquery';
+import ChatBot from 'components/chatbot'
 
 export default class EplReact extends React.Component {
     constructor(props) {
@@ -314,6 +315,10 @@ export default class EplReact extends React.Component {
         }
     }
 
+    toggleChatBot(){
+        EplActionCreator.toggleChatBot();
+    }
+
     render() {
         var basemaps = !this.state.buildings
                 ? MapStore.getBasemaps()
@@ -553,6 +558,12 @@ export default class EplReact extends React.Component {
                                             </li>
                                             }
                                             {
+                                                <li id="base-map" onClick={this.toggleChatBot.bind(this)}>
+                                                    <i className="iconfont icon-chat-1"></i>
+                                                    <div className="iconfont-name">Chatbot</div>
+                                                </li>
+                                            }
+                                            {
                                                 !buildings && <li id="base-user" onClick={this.toggleUserProfile.bind(this)}><svg className="icon-header icon-user"><use xlinkHref="/Content/img/svg/symbol-defs.svg#icon-user"></use></svg><div className="iconfont-name">Profile</div></li>
                                              }
                                             {this.render3DButton()}
@@ -685,6 +696,12 @@ export default class EplReact extends React.Component {
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.UserProfile)
                         && <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet}/>
+                    }
+                </ReactCSSTransitionGroup>
+
+                <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+                    {(uiState.displayMenu === MenuConstants.ChatBot)
+                        && <ChatBot key="chatbot" />
                     }
                 </ReactCSSTransitionGroup>
 

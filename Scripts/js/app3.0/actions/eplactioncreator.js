@@ -558,13 +558,18 @@ class EplActionCreator {
             customData: customData
         });
     }
+
     toggleMobileNavBtn() {
         AppDispatcher.dispatch({
             actionType: EplConstants.ToggleMobileNavBtn
         });
     }
 
-
+    toggleChatBot() {
+        AppDispatcher.dispatch({
+            actionType: EplConstants.ToggleChatBot
+        });
+    }
 }
 
 export default new EplActionCreator();

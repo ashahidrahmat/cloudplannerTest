@@ -28,7 +28,8 @@ export default {
     RightPanel: 8,
     Modal: 9,
     GeoTagPhotoDetail:10,
-    ToggleMobileNavBtn:11
+    ToggleMobileNavBtn:11,
+    ChatBot:12
 }
 
 export let FilterState = {

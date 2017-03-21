@@ -4267,6 +4267,7 @@ table.jobdistribution-table{
     margin-bottom: 30px;
     z-index: 1;
     height: 60px;
+    max-width: 400px;
  }
 
   .mapbox-slider {
