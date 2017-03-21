@@ -22,7 +22,7 @@ import EplActionCreator from 'actions/eplactioncreator';
 import DrawStore from 'stores/drawstore';
 import DrawConstants, {DrawColors} from 'constants/drawconstants';
 import BufferStore from 'stores/bufferstore';
-import Util from '\\util';
+import Util from 'utils';
 
 class Draw extends React.Component {
 
