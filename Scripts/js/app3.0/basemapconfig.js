@@ -44,6 +44,13 @@ let BasemapConfig = [{
     "internal": 0,
     "description": "Street map from Google. Please refer to Google Map's Term and Condition for the updateness of the map."
 }, {
+    "name": "Google Map Satellite",
+    "src": "https://mt{s}.googleapis.com/vt?x={x}&y={y}&z={z}&lyrs=s",
+    "subdomains": '123',
+    "legend": "N/A",
+    "internal": 0,
+    "description": "Satellite map from Google. Please refer to Google Map's Term and Condition for the updateness of the map."
+}, {
     "name": "Parks & Waterbodies Plan",
     "crs": "EPSG3857",
     "src": "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_PW_gaz_maps/MapServer",

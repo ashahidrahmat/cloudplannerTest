@@ -18,7 +18,7 @@
 "use strict";
 
 import React from 'react';
-import EsriLeaflet from 'esri-leaflet';
+import EsriLeaflet from 'components/esrileaflet';
 import MapConstants from 'constants/mapconstants';
 import EplActionCreator from 'actions/eplactioncreator';
 
@@ -107,7 +107,7 @@ class Dual extends React.Component {
                 <div id="right-basemap" onClick={this.toggleDualBasemapMenu.bind(this)}>
                     <div className="right-basemap-icon"><i className="iconfont icon-globe"></i><div className="iconfont-name">Basemap</div></div>
                 </div>
-                <EsriLeaflet id="right-map-canvas" mapId={MapConstants.Dual} />
+                <EsriLeaflet id="right-map-canvas" mapId={MapConstants.Dual}/>
             </div>
         );
                 }

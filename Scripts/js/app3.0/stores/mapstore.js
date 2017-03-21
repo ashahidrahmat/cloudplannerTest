@@ -45,8 +45,8 @@ class MapStore extends BaseStore {
     constructor() {
         super();
         //this.initDevEnv();
-        this.defaultBasemapName = "OneMap 2.0";
-        this.dualDefaultName = "OpenStreetMap";
+        this.defaultBasemapName = "OneMap 2.0 (Grey)";
+        this.dualDefaultName = "Google Map";
         this.currBasemapName = {};
         this.center = [1.3607837274175492, 103.8059931081907];
         this.zoom = 12;

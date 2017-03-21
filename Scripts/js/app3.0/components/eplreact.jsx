@@ -558,7 +558,7 @@ export default class EplReact extends React.Component {
                                             </li>
                                             }
                                             {
-                                                <li id="base-map" onClick={this.toggleChatBot.bind(this)}>
+                                                <li id="chat-bot" onClick={this.toggleChatBot.bind(this)}>
                                                     <i className="iconfont icon-chat-1"></i>
                                                     <div className="iconfont-name">Chatbot</div>
                                                 </li>
