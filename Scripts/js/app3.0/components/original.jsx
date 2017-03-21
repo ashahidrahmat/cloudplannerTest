@@ -21,9 +21,7 @@
         <div id="header-top" class="header-top header-color">
             <div class="tools disable-selection">
                 <div class="layer-list-div"><i class="iconfont layer-list">&#xf0025;</i></div>
-                <div class="logo">
-                    <img src="/Content/img/header/logo.png" class="logo-img" />
-                </div>
+                
                 <ul class="tools-links">
                     <li id="bookmark"><i class="iconfont">&#xf0144;</i><div class="iconfont-name">Bookmark</div></li>
                     <li id="buffer"><i class="iconfont">&#xf01ea;</i><div class="iconfont-name">Buffer</div></li>
