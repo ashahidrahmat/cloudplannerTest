@@ -106,9 +106,8 @@ import {ControllerUrl} from 'constants/urlconstants';
         return this.map;
     }
 
-    flyTo(lngLat){
-        var lnglat = this.convertToLngLat(lngLat);
-        this.map.flyTo({center: lnglat});
+    flyTo(options){
+        this.map.flyTo(options);
     }
 
     panTo(lngLat){

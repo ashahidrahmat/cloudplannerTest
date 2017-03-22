@@ -566,7 +566,8 @@ export default class EplReact extends React.Component {
                                             {
                                                 !buildings && <li id="base-user" onClick={this.toggleUserProfile.bind(this)}>
                                                     <i className="iconfont icon-user"></i>
-                                                    <div className="iconfont-name">Profile</div></li>
+                                                    <div className="iconfont-name">Profile</div>
+                                                </li>
                                              }
                                             {this.render3DButton()}
 

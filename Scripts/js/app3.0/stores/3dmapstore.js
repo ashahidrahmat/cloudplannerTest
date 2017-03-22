@@ -92,6 +92,21 @@ class Map3DStore extends BaseStore {
         this.enableMapOnClickIdentifyHandler();
     }
 
+    animate(){
+        let bearing = -180;
+        if(this._map.getBearing() == -180 || this._map.getBearing() == 180){
+            bearing = 0;
+        }
+        let flyDestination = {
+            bearing: bearing,
+            speed: 0.1,
+            //curve:
+            duration:30000
+            //zoom:,
+        }
+        Mapbox.flyTo(flyDestination)
+    }
+
     addLayer(layerProp) {
         Mapbox.addLayer(layerProp);
     }
@@ -128,6 +143,8 @@ class Map3DStore extends BaseStore {
                 'source-layer': 'building' 
             }
             this.addLayer(buildingLayer);
+            this.animate()
+            this.interval = setInterval(()=>{this.animate()},31000);
         });   
     }
 
@@ -276,6 +293,7 @@ class Map3DStore extends BaseStore {
                     this._map.getCanvas().style.cursor = '';
                 }
             });
+            clearInterval(this.interval)
         });
     }
    
