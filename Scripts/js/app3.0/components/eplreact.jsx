@@ -564,7 +564,9 @@ export default class EplReact extends React.Component {
                                                 </li>
                                             }
                                             {
-                                                !buildings && <li id="base-user" onClick={this.toggleUserProfile.bind(this)}><svg className="icon-header icon-user"><use xlinkHref="/Content/img/svg/symbol-defs.svg#icon-user"></use></svg><div className="iconfont-name">Profile</div></li>
+                                                !buildings && <li id="base-user" onClick={this.toggleUserProfile.bind(this)}>
+                                                    <i className="iconfont icon-user"></i>
+                                                    <div className="iconfont-name">Profile</div></li>
                                              }
                                             {this.render3DButton()}
 
