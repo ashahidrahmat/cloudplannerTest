@@ -389,6 +389,21 @@ export default class EplReact extends React.Component {
                         </li>
                     </Grid.Column>
                 </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column>
+                        {
+                            <li id="chat-bot" onClick={this.toggleChatBot.bind(this)}>
+                                <i className="iconfont icon-chat-1"></i>
+                                <div className="iconfont-name">Chatbot</div>
+                            </li>
+                        }
+                    </Grid.Column>
+                    <Grid.Column>
+                    </Grid.Column>
+                    <Grid.Column>
+                    </Grid.Column>
+                </Grid.Row>
+
             </Grid>
         )
 
