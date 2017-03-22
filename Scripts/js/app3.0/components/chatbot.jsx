@@ -21,18 +21,20 @@
 import React from 'react';
 import EplActionCreator from 'actions/eplactioncreator';
 import UiStore from 'stores/uistore';
+//import { Chat } from 'botframework-webchat';
+//import uuid from 'uuid';
 
 class ChatBot extends React.Component {
 
-
     constructor(opts) {
         super(opts);
+        //this.id = uuid.v4();
     }
 
     render() {
         let containerStyle = {
             width: '20%',
-            height: '70%',
+            height: '80%',
             zIndex: '99',
             right:'0px',
             position: 'absolute',
@@ -47,8 +49,12 @@ class ChatBot extends React.Component {
             borderWidth:'0px'
         }
 
-        return <div style={containerStyle}><iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe></div>
+        return <div style={containerStyle}>
+            <iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
+        </div>
     }
 }
 
 export default ChatBot;
+//<iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
+//<Chat directLine={{ secret: "MYTAsrJRpRY.cwA.Rtc.gjVLBuThZsa15y2ysd_LGRQL6u6d1KQEzQX4yT-dfvs" }} user={{ id: this.id, name: 'Me' }}/>

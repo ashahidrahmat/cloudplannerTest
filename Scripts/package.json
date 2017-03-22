@@ -10,6 +10,7 @@
     "aws-sdk": "^2.28.0",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-polyfill": "^6.23.0",
+    "botframework-webchat": "^0.10.4",
     "c3": "^0.4.11",
     "d3": "^4.6.0",
     "datejs": "1.0.0-rc3",

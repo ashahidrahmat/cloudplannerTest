@@ -47,7 +47,18 @@ const common = {
         //new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"common.bundle.js"),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.optimize.OccurrenceOrderPlugin(true),
-
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require(path.join(PATHS.build, "vendor1-manifest.json"))
+        }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require(path.join(PATHS.build, "vendor2-manifest.json"))
+        }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require(path.join(PATHS.build, "vendor3-manifest.json"))
+        }),
         new webpack.DefinePlugin({
             'process.env': {
                 // This has effect on the react lib size
