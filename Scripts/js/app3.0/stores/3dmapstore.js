@@ -25,7 +25,7 @@ import BaseStore from 'stores/basestore';
 import EplConstants from 'constants/eplconstants';
 import Basemap3DConfig from 'basemap3dconfig';
 import Ajax from 'wrapper/ajax';
-import {ControllerUrl} from 'constants/urlconstants';
+import { ControllerUrl } from 'constants/urlconstants';
 import $ from 'jquery';
 import WebApi from 'webapi';
 
@@ -36,14 +36,14 @@ class Map3DStore extends BaseStore {
         this._map = null;
 
         this.layerHeights = [
-            [3,'#ffffcc'],
-            [15,'#ffffcc'],
-            [30,'#ffeda0'],
-            [50,'#fed976'],
-            [100,'#feb24c'],
-            [200,'#fd8d3c'],
-            [300,'#fc4e2a'],
-            [400,'#e31a1c']
+            [3, '#ffffcc'],
+            [15, '#ffffcc'],
+            [30, '#ffeda0'],
+            [50, '#fed976'],
+            [100, '#feb24c'],
+            [200, '#fd8d3c'],
+            [300, '#fc4e2a'],
+            [400, '#e31a1c']
         ];
 
         // this.basemaps = Basemap3DConfig.Mapbox.styles;
@@ -51,15 +51,15 @@ class Map3DStore extends BaseStore {
         this.siteInfo = {};
     }
 
-    isInitialized(){
+    isInitialized() {
         return Mapbox.isInitialized();
     }
 
-    initialize(mapId, domNode) {     
-        this.initMapbox(domNode);            
+    initialize(mapId, domNode) {
+        this.initMapbox(domNode);
     }
 
-    initMapbox(domNode){
+    initMapbox(domNode) {
         Mapbox.setContainer(domNode);
         Mapbox.initialize();
         this._map = Mapbox.getMap();
@@ -70,39 +70,39 @@ class Map3DStore extends BaseStore {
     destroy() {
         Mapbox.destroy();
     }
-    
-    getBasemaps(){
+
+    getBasemaps() {
         return this.basemaps;
     }
 
     identify(center) {
         this.addMarker({
-            icon:"Content/img/information.png",
-            width:32,
-            height:37
-        },center);
+            icon: "Content/img/information.png",
+            width: 32,
+            height: 37
+        }, center);
     }
 
     reset() {
         this.disableMapOnClickIdentifyHandler();
         Mapbox.reset();
-        this._map = Mapbox.getMap();   
+        this._map = Mapbox.getMap();
         this.setResetStatus(true);
         this.addBuildingLayers();
         this.enableMapOnClickIdentifyHandler();
     }
 
-    animate(){
+    animate() {
         let bearing = -180;
-        if(this._map.getBearing() == -180 || this._map.getBearing() == 180){
+        if (this._map.getBearing() == -180 || this._map.getBearing() == 180) {
             bearing = 0;
         }
         let flyDestination = {
             bearing: bearing,
             speed: 0.1,
             //curve:
-            duration:30000
-            //zoom:,
+            duration: 30000
+                //zoom:,
         }
         Mapbox.flyTo(flyDestination)
     }
@@ -113,13 +113,13 @@ class Map3DStore extends BaseStore {
 
     addLayers(layerProps) {
         this._map.once('sourcedata', () => {
-            for(var i = 0; i < layerProps.length; i++){
+            for (var i = 0; i < layerProps.length; i++) {
                 this.addLayer(layerProps[i]);
             }
         });
     }
 
-    addBuildingLayers(){
+    addBuildingLayers() {
         this._map.once('sourcedata', () => {
             var buildingLayer = {
                 'id': 'building_layer',
@@ -140,23 +140,24 @@ class Map3DStore extends BaseStore {
                         'property': 'min_height'
                     }
                 },
-                'source-layer': 'building' 
+                'source-layer': 'building'
             }
             this.addLayer(buildingLayer);
-            this.animate()
-            this.interval = setInterval(()=>{this.animate()},31000);
-        });   
+            this.animate();
+            this.interval = setInterval(() => { this.animate() }, 31000);
+        });
+
     }
 
-    getLayer(id){
+    getLayer(id) {
         return Mapbox.getLayer(id);
     }
 
-    getLayers(){
+    getLayers() {
         return this.layerHeights;
     }
 
-    removeLayer(id){
+    removeLayer(id) {
         Mapbox.removeLayer(id);
     }
 
@@ -168,57 +169,57 @@ class Map3DStore extends BaseStore {
         return this.siteInfo;
     }
 
-    setResetStatus(status){
+    setResetStatus(status) {
         this.resetStatus = status;
     }
 
-    getResetStatus(){
+    getResetStatus() {
         return this.resetStatus;
     }
 
-    setBasemap(style){
-        for(var i = 0; i < this.basemaps.length; i++){
-            if(style === this.basemaps[i].name){
+    setBasemap(style) {
+        for (var i = 0; i < this.basemaps.length; i++) {
+            if (style === this.basemaps[i].name) {
                 this.disableMapOnClickIdentifyHandler();
                 Mapbox.setStyle(this.basemaps[i].style);
-                this._map = Mapbox.getMap();  
+                this._map = Mapbox.getMap();
                 this.setResetStatus(true);
                 this.addBuildingLayers();
                 this.enableMapOnClickIdentifyHandler();
-            }          
+            }
         }
     }
 
-    setCenter(center){
+    setCenter(center) {
         Mapbox.panTo(center);
     }
 
-    setZoom(zoom){
+    setZoom(zoom) {
         this._map.setZoom(zoom);
     }
 
     getCenter() {
         return this._map.getCenter();
     }
-    
-    setPopup(lngLat,content){
-        Mapbox.setPopup(lngLat,content);
+
+    setPopup(lngLat, content) {
+        Mapbox.setPopup(lngLat, content);
     }
 
     setMapsView(center, zoom) {
         Mapbox.flyTo(center);
     }
 
-    removePopup(){
+    removePopup() {
         Mapbox.removePopup();
     }
 
-    addMarker(icon,center){
+    addMarker(icon, center) {
         this.removeMarkers();
-        Mapbox.addMarker(icon,center);
+        Mapbox.addMarker(icon, center);
     }
 
-    removeMarkers(){
+    removeMarkers() {
         Mapbox.removeMarkers();
     }
 
@@ -226,7 +227,7 @@ class Map3DStore extends BaseStore {
         Util.getCurrentPosition(
             position => {
                 let latlng = Util.toPointObject(position.coords.latitude, position.coords.longitude);
-                this.highlightZoomCenter(null,null, latlng.coordinates[0]);
+                this.highlightZoomCenter(null, null, latlng.coordinates[0]);
             },
             error => {
                 switch (error.code) {
@@ -248,74 +249,76 @@ class Map3DStore extends BaseStore {
         );
     }
 
-    highlightZoomCenter(geometry, zoom, center){
+    highlightZoomCenter(geometry, zoom, center) {
         this.setCenter(center);
         this.addMarker({
-            icon:"Content/img/leaflet/marker-icon.png", 
+            icon: "Content/img/leaflet/marker-icon.png",
             width: 25,
             height: 41
         }, center);
     }
-    
-    disableMapOnClickIdentifyHandler(){
+
+    disableMapOnClickIdentifyHandler() {
         this._map.off('mousemove');
         this._map.off('click');
     }
 
-    enableMapOnClickIdentifyHandler(){        
+    enableMapOnClickIdentifyHandler() {
         this._map.on('load', () => {
             var all_added_layers = []
             all_added_layers.push('building_layer');
             this._map.on('click', e => {
                 EplActionCreator.identify(L.latLng(e.lngLat.lat, e.lngLat.lng));
 
-                var features = this._map.queryRenderedFeatures(e.point, {layers: all_added_layers});
+                var features = this._map.queryRenderedFeatures(e.point, { layers: all_added_layers });
                 if (features.length > 0) {
                     this.removeMarkers();
 
                     let div = '<p>Building height: <b>' + Math.round(features[0].properties.height) + '</b> meters</p>';
 
-                    if(features[0].properties.name){
-                        div+= '<p>Name: <b>'+features[0].properties.name +'</b></p>';
+                    if (features[0].properties.name) {
+                        div += '<p>Name: <b>' + features[0].properties.name + '</b></p>';
                     }
-                       
-                    this.setPopup(e.lngLat,div);     
- 
+
+                    this.setPopup(e.lngLat, div);
+
                 } else {
                     this.removePopup();
                 }
             });
-            this._map.on('mousemove', (e) =>{ //set cursor
-                var features = this._map.queryRenderedFeatures(e.point, {all_added_layers});
-                if (features.length > 0){
+            this._map.on('mousemove', (e) => { //set cursor
+                var features = this._map.queryRenderedFeatures(e.point, { all_added_layers });
+                if (features.length > 0) {
                     this._map.getCanvas().style.cursor = (features[0].properties.height != null) ? 'pointer' : '';
                 } else {
                     this._map.getCanvas().style.cursor = '';
                 }
+                clearInterval(this.interval)
             });
-            clearInterval(this.interval)
         });
     }
-   
 
-    filter(min, max){   
+
+    filter(min, max) {
         this.removePopup();
-        var filters = ['all',['>=', 'height', min], ['<=', 'height', max]];      
+        var filters = ['all', ['>=', 'height', min],
+            ['<=', 'height', max]
+        ];
         this._map.setFilter('building_layer', filters);
         Mapbox.loadingInProgress();
-        this._map.once('styledata',()=>{
-            setTimeout(()=>{
+        this._map.once('styledata', () => {
+            setTimeout(() => {
                 Mapbox.loadingComplete();
-            },2500)
-        })        
+            }, 3500)
+        })
     }
 }
 
 var instance = new Map3DStore();
 
 instance.dispatchToken = AppDispatcher.register(function(action) {
-    if(Mapbox.isInitialized()){
-        switch(action.actionType) {
+    if (Mapbox.isInitialized()) {
+        switch (action.actionType) {
             case EplConstants.Reset:
                 instance.reset();
                 instance.emitChanges();
