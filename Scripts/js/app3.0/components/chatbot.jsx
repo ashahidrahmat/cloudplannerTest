@@ -71,9 +71,9 @@ class ChatBot extends React.Component {
         }
         
         if(this.state.showAll){
-            divs = <div className="hidden" style={containerStyle}><Chat directLine={{ secret: "MYTAsrJRpRY.cwA.Rtc.gjVLBuThZsa15y2ysd_LGRQL6u6d1KQEzQX4yT-dfvs" }} user={{ id: this.id, name: 'Me' }}/></div>
+            divs = <iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
         } else {
-            divs = <div style={containerStyle}><Chat directLine={{ secret: "MYTAsrJRpRY.cwA.Rtc.gjVLBuThZsa15y2ysd_LGRQL6u6d1KQEzQX4yT-dfvs" }} user={{ id: this.id, name: 'Me' }}/></div>
+            divs = <iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
         }
         
         return (<div>{divs}</div>);
