@@ -694,11 +694,11 @@ export default class EplReact extends React.Component {
                         && <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet}/>
                     }
                 </ReactCSSTransitionGroup>
-
+                <ReactCSSTransitionGroup transitionName="slideup" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.ChatBot)
                         && <ChatBot key="chatbot" />
                     }
-
+                </ReactCSSTransitionGroup>
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.GeoTagPhotoDetail)
                         && <GeoTagPhotoDetail key="geotagphotodetail"/>

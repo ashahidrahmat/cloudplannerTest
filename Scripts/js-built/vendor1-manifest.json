@@ -26,7 +26,7 @@
       "meta": {}
     },
     "./node_modules/fbjs/lib/ExecutionEnvironment.js": {
-      "id": 14,
+      "id": 10,
       "meta": {}
     },
     "./node_modules/fbjs/lib/emptyFunction.js": {
@@ -197,12 +197,12 @@
       "id": 87,
       "meta": {}
     },
-    "./node_modules/node-libs-browser/node_modules/process/browser.js": {
-      "id": 95,
+    "./node_modules/process/browser.js": {
+      "id": 94,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/msfnz.js": {
-      "id": 96,
+      "id": 95,
       "meta": {}
     },
     "./node_modules/fbjs/lib/EventListener.js": {
@@ -357,420 +357,424 @@
       "id": 154,
       "meta": {}
     },
-    "./node_modules/leaflet/dist/leaflet-src.js": {
+    "./node_modules/webpack/buildin/global.js": {
       "id": 193,
       "meta": {}
     },
-    "./node_modules/react-dom/index.js": {
+    "./node_modules/leaflet/dist/leaflet-src.js": {
       "id": 194,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/camelize.js": {
-      "id": 211,
+    "./node_modules/react-dom/index.js": {
+      "id": 195,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/camelizeStyleName.js": {
+    "./node_modules/fbjs/lib/camelize.js": {
       "id": 212,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/containsNode.js": {
+    "./node_modules/fbjs/lib/camelizeStyleName.js": {
       "id": 213,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/createArrayFromMixed.js": {
+    "./node_modules/fbjs/lib/containsNode.js": {
       "id": 214,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/createNodesFromMarkup.js": {
+    "./node_modules/fbjs/lib/createArrayFromMixed.js": {
       "id": 215,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/getMarkupWrap.js": {
+    "./node_modules/fbjs/lib/createNodesFromMarkup.js": {
       "id": 216,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/getUnboundedScrollPosition.js": {
+    "./node_modules/fbjs/lib/getMarkupWrap.js": {
       "id": 217,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/hyphenate.js": {
+    "./node_modules/fbjs/lib/getUnboundedScrollPosition.js": {
       "id": 218,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/hyphenateStyleName.js": {
+    "./node_modules/fbjs/lib/hyphenate.js": {
       "id": 219,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/isNode.js": {
+    "./node_modules/fbjs/lib/hyphenateStyleName.js": {
       "id": 220,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/isTextNode.js": {
+    "./node_modules/fbjs/lib/isNode.js": {
       "id": 221,
       "meta": {}
     },
-    "./node_modules/fbjs/lib/memoizeStringOnly.js": {
+    "./node_modules/fbjs/lib/isTextNode.js": {
       "id": 222,
       "meta": {}
     },
-    "./node_modules/proj4/lib/Proj.js": {
+    "./node_modules/fbjs/lib/memoizeStringOnly.js": {
       "id": 223,
       "meta": {}
     },
-    "./node_modules/proj4/lib/common/gN.js": {
+    "./node_modules/proj4/lib/Proj.js": {
       "id": 224,
       "meta": {}
     },
-    "./node_modules/proj4/lib/common/imlfn.js": {
+    "./node_modules/proj4/lib/common/gN.js": {
       "id": 225,
       "meta": {}
     },
-    "./node_modules/proj4/lib/common/pj_mlfn.js": {
+    "./node_modules/proj4/lib/common/imlfn.js": {
       "id": 226,
       "meta": {}
     },
-    "./node_modules/proj4/lib/common/qsfnz.js": {
+    "./node_modules/proj4/lib/common/pj_mlfn.js": {
       "id": 227,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ARIADOMPropertyConfig.js": {
+    "./node_modules/proj4/lib/common/qsfnz.js": {
       "id": 228,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/AutoFocusUtils.js": {
+    "./node_modules/react-dom/lib/ARIADOMPropertyConfig.js": {
       "id": 229,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/BeforeInputEventPlugin.js": {
+    "./node_modules/react-dom/lib/AutoFocusUtils.js": {
       "id": 230,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/CSSPropertyOperations.js": {
+    "./node_modules/react-dom/lib/BeforeInputEventPlugin.js": {
       "id": 231,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ChangeEventPlugin.js": {
+    "./node_modules/react-dom/lib/CSSPropertyOperations.js": {
       "id": 232,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/Danger.js": {
+    "./node_modules/react-dom/lib/ChangeEventPlugin.js": {
       "id": 233,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/DefaultEventPluginOrder.js": {
+    "./node_modules/react-dom/lib/Danger.js": {
       "id": 234,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/EnterLeaveEventPlugin.js": {
+    "./node_modules/react-dom/lib/DefaultEventPluginOrder.js": {
       "id": 235,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/FallbackCompositionState.js": {
+    "./node_modules/react-dom/lib/EnterLeaveEventPlugin.js": {
       "id": 236,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/HTMLDOMPropertyConfig.js": {
+    "./node_modules/react-dom/lib/FallbackCompositionState.js": {
       "id": 237,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactChildReconciler.js": {
+    "./node_modules/react-dom/lib/HTMLDOMPropertyConfig.js": {
       "id": 238,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactComponentBrowserEnvironment.js": {
+    "./node_modules/react-dom/lib/ReactChildReconciler.js": {
       "id": 239,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactCompositeComponent.js": {
+    "./node_modules/react-dom/lib/ReactComponentBrowserEnvironment.js": {
       "id": 240,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOM.js": {
+    "./node_modules/react-dom/lib/ReactCompositeComponent.js": {
       "id": 241,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMComponent.js": {
+    "./node_modules/react-dom/lib/ReactDOM.js": {
       "id": 242,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMContainerInfo.js": {
+    "./node_modules/react-dom/lib/ReactDOMComponent.js": {
       "id": 243,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMEmptyComponent.js": {
+    "./node_modules/react-dom/lib/ReactDOMContainerInfo.js": {
       "id": 244,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMFeatureFlags.js": {
+    "./node_modules/react-dom/lib/ReactDOMEmptyComponent.js": {
       "id": 245,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMIDOperations.js": {
+    "./node_modules/react-dom/lib/ReactDOMFeatureFlags.js": {
       "id": 246,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMInput.js": {
+    "./node_modules/react-dom/lib/ReactDOMIDOperations.js": {
       "id": 247,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMOption.js": {
+    "./node_modules/react-dom/lib/ReactDOMInput.js": {
       "id": 248,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMSelection.js": {
+    "./node_modules/react-dom/lib/ReactDOMOption.js": {
       "id": 249,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMTextComponent.js": {
+    "./node_modules/react-dom/lib/ReactDOMSelection.js": {
       "id": 250,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMTextarea.js": {
+    "./node_modules/react-dom/lib/ReactDOMTextComponent.js": {
       "id": 251,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDOMTreeTraversal.js": {
+    "./node_modules/react-dom/lib/ReactDOMTextarea.js": {
       "id": 252,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDefaultBatchingStrategy.js": {
+    "./node_modules/react-dom/lib/ReactDOMTreeTraversal.js": {
       "id": 253,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactDefaultInjection.js": {
+    "./node_modules/react-dom/lib/ReactDefaultBatchingStrategy.js": {
       "id": 254,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactElementSymbol.js": {
+    "./node_modules/react-dom/lib/ReactDefaultInjection.js": {
       "id": 255,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactEventEmitterMixin.js": {
+    "./node_modules/react-dom/lib/ReactElementSymbol.js": {
       "id": 256,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactEventListener.js": {
+    "./node_modules/react-dom/lib/ReactEventEmitterMixin.js": {
       "id": 257,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactInjection.js": {
+    "./node_modules/react-dom/lib/ReactEventListener.js": {
       "id": 258,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactMarkupChecksum.js": {
+    "./node_modules/react-dom/lib/ReactInjection.js": {
       "id": 259,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactMultiChild.js": {
+    "./node_modules/react-dom/lib/ReactMarkupChecksum.js": {
       "id": 260,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactOwner.js": {
+    "./node_modules/react-dom/lib/ReactMultiChild.js": {
       "id": 261,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactPropTypesSecret.js": {
+    "./node_modules/react-dom/lib/ReactOwner.js": {
       "id": 262,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactReconcileTransaction.js": {
+    "./node_modules/react-dom/lib/ReactPropTypesSecret.js": {
       "id": 263,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactRef.js": {
+    "./node_modules/react-dom/lib/ReactReconcileTransaction.js": {
       "id": 264,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactServerRenderingTransaction.js": {
+    "./node_modules/react-dom/lib/ReactRef.js": {
       "id": 265,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactServerUpdateQueue.js": {
+    "./node_modules/react-dom/lib/ReactServerRenderingTransaction.js": {
       "id": 266,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactVersion.js": {
+    "./node_modules/react-dom/lib/ReactServerUpdateQueue.js": {
       "id": 267,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SVGDOMPropertyConfig.js": {
+    "./node_modules/react-dom/lib/ReactVersion.js": {
       "id": 268,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SelectEventPlugin.js": {
+    "./node_modules/react-dom/lib/SVGDOMPropertyConfig.js": {
       "id": 269,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SimpleEventPlugin.js": {
+    "./node_modules/react-dom/lib/SelectEventPlugin.js": {
       "id": 270,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticAnimationEvent.js": {
+    "./node_modules/react-dom/lib/SimpleEventPlugin.js": {
       "id": 271,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticClipboardEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticAnimationEvent.js": {
       "id": 272,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticCompositionEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticClipboardEvent.js": {
       "id": 273,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticDragEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticCompositionEvent.js": {
       "id": 274,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticFocusEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticDragEvent.js": {
       "id": 275,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticInputEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticFocusEvent.js": {
       "id": 276,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticKeyboardEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticInputEvent.js": {
       "id": 277,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticTouchEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticKeyboardEvent.js": {
       "id": 278,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticTransitionEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticTouchEvent.js": {
       "id": 279,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/SyntheticWheelEvent.js": {
+    "./node_modules/react-dom/lib/SyntheticTransitionEvent.js": {
       "id": 280,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/adler32.js": {
+    "./node_modules/react-dom/lib/SyntheticWheelEvent.js": {
       "id": 281,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/dangerousStyleValue.js": {
+    "./node_modules/react-dom/lib/adler32.js": {
       "id": 282,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/findDOMNode.js": {
+    "./node_modules/react-dom/lib/dangerousStyleValue.js": {
       "id": 283,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/flattenChildren.js": {
+    "./node_modules/react-dom/lib/findDOMNode.js": {
       "id": 284,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/getEventKey.js": {
+    "./node_modules/react-dom/lib/flattenChildren.js": {
       "id": 285,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/getIteratorFn.js": {
+    "./node_modules/react-dom/lib/getEventKey.js": {
       "id": 286,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/getNextDebugID.js": {
+    "./node_modules/react-dom/lib/getIteratorFn.js": {
       "id": 287,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/getNodeForCharacterOffset.js": {
+    "./node_modules/react-dom/lib/getNextDebugID.js": {
       "id": 288,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/getVendorPrefixedEventName.js": {
+    "./node_modules/react-dom/lib/getNodeForCharacterOffset.js": {
       "id": 289,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/quoteAttributeValueForBrowser.js": {
+    "./node_modules/react-dom/lib/getVendorPrefixedEventName.js": {
       "id": 290,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/renderSubtreeIntoContainer.js": {
+    "./node_modules/react-dom/lib/quoteAttributeValueForBrowser.js": {
       "id": 291,
       "meta": {}
     },
-    "./node_modules/react/lib/KeyEscapeUtils.js": {
+    "./node_modules/react-dom/lib/renderSubtreeIntoContainer.js": {
       "id": 292,
       "meta": {}
     },
-    "./node_modules/react/lib/PooledClass.js": {
+    "./node_modules/react/lib/KeyEscapeUtils.js": {
       "id": 293,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactChildren.js": {
+    "./node_modules/react/lib/PooledClass.js": {
       "id": 294,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactClass.js": {
+    "./node_modules/react/lib/ReactChildren.js": {
       "id": 295,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactDOMFactories.js": {
+    "./node_modules/react/lib/ReactClass.js": {
       "id": 296,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactPropTypes.js": {
+    "./node_modules/react/lib/ReactDOMFactories.js": {
       "id": 297,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactPropTypesSecret.js": {
+    "./node_modules/react/lib/ReactPropTypes.js": {
       "id": 298,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactPureComponent.js": {
+    "./node_modules/react/lib/ReactPropTypesSecret.js": {
       "id": 299,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactVersion.js": {
+    "./node_modules/react/lib/ReactPureComponent.js": {
       "id": 300,
       "meta": {}
     },
-    "./node_modules/react/lib/onlyChild.js": {
+    "./node_modules/react/lib/ReactVersion.js": {
       "id": 301,
       "meta": {}
     },
-    "./node_modules/react/lib/traverseAllChildren.js": {
+    "./node_modules/react/lib/onlyChild.js": {
       "id": 302,
       "meta": {}
     },
-    "./node_modules/mgrs/mgrs.js": {
-      "id": 368,
+    "./node_modules/react/lib/traverseAllChildren.js": {
+      "id": 303,
       "meta": {}
     },
-    "./node_modules/proj4/lib/common/pj_enfn.js": {
+    "./node_modules/mgrs/mgrs.js": {
       "id": 369,
       "meta": {}
     },
-    "./node_modules/proj4/lib/common/pj_inv_mlfn.js": {
+    "./node_modules/proj4/lib/common/pj_enfn.js": {
       "id": 370,
       "meta": {}
     },
-    "./node_modules/proj4/lib/common/toPoint.js": {
+    "./node_modules/proj4/lib/common/pj_inv_mlfn.js": {
       "id": 371,
       "meta": {}
     },
-    "./node_modules/proj4/lib/defs.js": {
+    "./node_modules/proj4/lib/common/toPoint.js": {
       "id": 372,
       "meta": {}
     },
-    "./node_modules/proj4/lib/extend.js": {
+    "./node_modules/proj4/lib/defs.js": {
       "id": 373,
       "meta": {}
     },
-    "./node_modules/proj4/lib/projString.js": {
+    "./node_modules/proj4/lib/extend.js": {
       "id": 374,
       "meta": {}
     },
-    "./node_modules/proj4/lib/projections/tmerc.js": {
+    "./node_modules/proj4/lib/projString.js": {
       "id": 375,
       "meta": {}
     },
-    "./node_modules/proj4/lib/transform.js": {
+    "./node_modules/proj4/lib/projections/tmerc.js": {
       "id": 376,
       "meta": {}
     },
-    "./node_modules/proj4/lib/wkt.js": {
+    "./node_modules/proj4/lib/transform.js": {
       "id": 377,
+      "meta": {}
+    },
+    "./node_modules/proj4/lib/wkt.js": {
+      "id": 378,
       "meta": {}
     },
     "./node_modules/esri-leaflet/dist/esri-leaflet-debug.js": {

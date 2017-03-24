@@ -76,7 +76,7 @@ class ChatBot extends React.Component {
             divs = <iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
         }
         
-        return (<div>{divs}</div>);
+        return (<div style={containerStyle}>{divs}</div>);
     }
 }
 
