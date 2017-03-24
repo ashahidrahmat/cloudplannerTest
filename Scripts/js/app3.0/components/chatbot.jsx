@@ -21,8 +21,8 @@
 import React from 'react';
 import EplActionCreator from 'actions/eplactioncreator';
 import UiStore from 'stores/uistore';
-import { Chat } from 'botframework-webchat';
-import uuid from 'uuid';
+//import { Chat } from 'botframework-webchat';
+//import uuid from 'uuid';
 
 class ChatBot extends React.Component {
 
@@ -31,7 +31,7 @@ class ChatBot extends React.Component {
         this.state = {
             showAll: false
         };
-        this.id = uuid.v4();
+        //this.id = uuid.v4();
     }
 
     showMore(evt) {
