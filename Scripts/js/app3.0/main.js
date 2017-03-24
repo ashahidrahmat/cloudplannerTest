@@ -20,9 +20,10 @@ import Ajax             from 'wrapper/ajax'
 import React            from 'react';
 import ReactDOM         from 'react-dom';
 import EplReact         from 'components/eplreact';
+import Login			from 'components/login';
 
 ReactDOM.render(
-    <EplReact />,
+    <Login />,
     document.getElementById('epl')
 );
 

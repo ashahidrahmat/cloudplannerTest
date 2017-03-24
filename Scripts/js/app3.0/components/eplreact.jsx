@@ -62,7 +62,7 @@ import {
 } from 'react-bootstrap';
 import {Grid, Image} from 'semantic-ui-react';
 import $ from 'jquery';
-import ChatBot from 'components/chatbot'
+import ChatBot from 'components/chatbot';
 
 export default class EplReact extends React.Component {
     constructor(props) {
@@ -389,21 +389,6 @@ export default class EplReact extends React.Component {
                         </li>
                     </Grid.Column>
                 </Grid.Row>
-                <Grid.Row>
-                    <Grid.Column>
-                        {
-                            <li id="chat-bot" onClick={this.toggleChatBot.bind(this)}>
-                                <i className="iconfont icon-chat-1"></i>
-                                <div className="iconfont-name">Chatbot</div>
-                            </li>
-                        }
-                    </Grid.Column>
-                    <Grid.Column>
-                    </Grid.Column>
-                    <Grid.Column>
-                    </Grid.Column>
-                </Grid.Row>
-
             </Grid>
         )
 
@@ -426,8 +411,7 @@ export default class EplReact extends React.Component {
 
         return (
 
-            <div className="map-content">
-
+            <div className="map-content">               
                 {this.state.siteInfo.address != null && <div>{addressBarBottom}</div>}
 
                 <Navbar fluid fixedTop collapseOnSelect style={{
@@ -573,12 +557,6 @@ export default class EplReact extends React.Component {
                                             </li>
                                             }
                                             {
-                                                <li id="chat-bot" onClick={this.toggleChatBot.bind(this)}>
-                                                    <i className="iconfont icon-chat-1"></i>
-                                                    <div className="iconfont-name">Chatbot</div>
-                                                </li>
-                                            }
-                                            {
                                                 !buildings && <li id="base-user" onClick={this.toggleUserProfile.bind(this)}>
                                                     <i className="iconfont icon-user"></i>
                                                     <div className="iconfont-name">Profile</div>
@@ -717,11 +695,9 @@ export default class EplReact extends React.Component {
                     }
                 </ReactCSSTransitionGroup>
 
-                <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.ChatBot)
                         && <ChatBot key="chatbot" />
                     }
-                </ReactCSSTransitionGroup>
 
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.GeoTagPhotoDetail)
@@ -729,7 +705,9 @@ export default class EplReact extends React.Component {
                     }
                 </ReactCSSTransitionGroup>
 
-                <TourGuide/>
+                <div className="chatbot-btn" style={{background:'white',zIndex:'500',width:'60px',height:'60px',bottom:'30px',right:'30px',position:'absolute',borderRadius:'60px', boxShadow:'3px 3px 7px #888888'}} onClick={this.toggleChatBot.bind(this)}>
+                        <i style={{margin:'13px',lineHeight: '3.7'}} className="iconfont icon-chat-1"></i>
+                </div>
             </div>
         );
     }

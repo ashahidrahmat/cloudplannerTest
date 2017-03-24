@@ -21,20 +21,41 @@
 import React from 'react';
 import EplActionCreator from 'actions/eplactioncreator';
 import UiStore from 'stores/uistore';
-//import { Chat } from 'botframework-webchat';
-//import uuid from 'uuid';
+import { Chat } from 'botframework-webchat';
+import uuid from 'uuid';
 
 class ChatBot extends React.Component {
 
-    constructor(opts) {
-        super(opts);
-        //this.id = uuid.v4();
+    constructor() {
+        super();
+        this.state = {
+            showAll: false
+        };
+        this.id = uuid.v4();
+    }
+
+    showMore(evt) {
+        this.setState({
+            showAll: true
+        });
+    }
+
+    hideDivs(evt) {
+        this.setState({
+            showAll: false
+        });
+    }
+
+    getState() {
+        return this.state;
     }
 
     render() {
+        let divs = null;
+
         let containerStyle = {
             width: '20%',
-            height: '80%',
+            height: '75%',
             zIndex: '99',
             right:'0px',
             position: 'absolute',
@@ -48,13 +69,18 @@ class ChatBot extends React.Component {
             height: '100%',
             borderWidth:'0px'
         }
-
-        return <div style={containerStyle}>
-            <iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
-        </div>
+        
+        if(this.state.showAll){
+            divs = <div className="hidden" style={containerStyle}><Chat directLine={{ secret: "MYTAsrJRpRY.cwA.Rtc.gjVLBuThZsa15y2ysd_LGRQL6u6d1KQEzQX4yT-dfvs" }} user={{ id: this.id, name: 'Me' }}/></div>
+        } else {
+            divs = <div style={containerStyle}><Chat directLine={{ secret: "MYTAsrJRpRY.cwA.Rtc.gjVLBuThZsa15y2ysd_LGRQL6u6d1KQEzQX4yT-dfvs" }} user={{ id: this.id, name: 'Me' }}/></div>
+        }
+        
+        return (<div>{divs}</div>);
     }
 }
 
 export default ChatBot;
+
 //<iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
 //<Chat directLine={{ secret: "MYTAsrJRpRY.cwA.Rtc.gjVLBuThZsa15y2ysd_LGRQL6u6d1KQEzQX4yT-dfvs" }} user={{ id: this.id, name: 'Me' }}/>

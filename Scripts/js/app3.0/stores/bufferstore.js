@@ -25,7 +25,7 @@ import L                    from 'leaflet';
 import LayerManagerStore    from 'stores/layermanagerstore';
 import UrlConstants         from 'constants/urlconstants';
 import Ajax                 from 'wrapper/ajax';
-import Util                 from 'util';
+import Util                 from 'utils';
 import Esri                 from 'esri-leaflet';
 import SpeechStore          from 'stores/speechstore';
 

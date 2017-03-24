@@ -27,7 +27,7 @@ import UiStore              from 'stores/uistore';
 import LayerManagerStore    from 'stores/layermanagerstore';
 import jQuery               from 'jquery';
 import DrawStore from 'stores/drawstore';
-import Util                 from 'util';
+import Util                 from 'utils';
 
 class Buffer extends React.Component {
 
@@ -101,7 +101,9 @@ class Buffer extends React.Component {
         BufferStore._isBufferOn = true;
 
         let content = this.refs.bufferResults;
-        Util.setPerfectScrollbar(content);
+        setTimeout(()=>{
+            Util.setPerfectScrollbar(content);
+        },0)
     }
 
 
