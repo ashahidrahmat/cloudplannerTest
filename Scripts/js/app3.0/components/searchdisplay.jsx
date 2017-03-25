@@ -56,8 +56,7 @@ class SearchDisplay extends React.Component {
             <div>
             {
                 searchResults.length > 0 ?
-                <div>
-                    <div className="search-suggest">
+                    <div className="search-suggest" style={this.props.style}>
                         <div ref="ssContent" id="ss-content">
                             <SearchDisplayRows data={searchResults} setSearchText={this.props.setSearchText} />
                             {
@@ -65,7 +64,6 @@ class SearchDisplay extends React.Component {
                             }
                         </div>
                     </div>
-                </div>
                 : null
             }
             </div>

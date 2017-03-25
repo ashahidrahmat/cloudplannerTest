@@ -360,7 +360,7 @@ button {
     border-style: solid;
     border-width: 0px 2px 0px 2px;
     height: 53px;
-    max-width: 200px;
+    max-width: 250px;
     padding: 0px 50px 0px 50px;
     font-size: 14px;
     font-family: "Lucida Sans Unicode", sans-serif;
@@ -400,7 +400,7 @@ button {
 .search-suggest {
     position: absolute;
     z-index: 115;
-    top: 55px;
+    top: 54px;
     left: 0px;
     width: 350px;
     border-style: solid;
@@ -578,7 +578,7 @@ button {
 .maplayers {
     position: absolute;
     z-index: 99;
-    top: 55px;
+    top: 52px;
     width: 280px;
     height: calc(100vh - 55px);
     left: 0px;
@@ -3181,49 +3181,6 @@ input[type="checkbox"] {
     text-align: center;
     display: none;
 }
-.dacs-info {
-    font-size: 14px;
-    color: #000;
-}
-.dacs-info table {
-    padding: 0;
-    margin: 0;
-    max-height: 450px;
-}
-.dacs-td-1 {
-    width: 100px;
-    font-weight: bold;
-}
-.dacs-td-2 {
-    width: 230px;
-}
-.dacs-info table tr:nth-child(even) {
-    background: #eee;
-}
-.dacs-info table tr:nth-child(odd) {
-    background: #ddd;
-}
-.dacs-info-link {
-    text-decoration: underline;
-    color: #4787ed;
-    cursor: pointer;
-    background: #fff;
-}
-#dacs-area {
-    display: none;
-    position: absolute;
-    z-index: 99;
-    width: 124px;
-    height: 30px;
-    background-color: #4787ed;
-    right: 14px;
-    top: 68px;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1.2em;
-    line-height: 1.7;
-    text-align: center;
-}
 
 /*CSS overidden*/
 .gm-style .gm-style-iw {
@@ -3448,8 +3405,8 @@ input[type="checkbox"] {
 .hccc-resource-row-title .hccc-incident-title {
     width: 100%;
 }
-.hccc-incident-row + .hccc-incident-row,
-.hccc-resource-row + .hccc-resource-row {
+.hccc-incident-row+.hccc-incident-row,
+.hccc-resource-row+.hccc-resource-row {
     border-top: solid 1px #bbb;
 }
 .hccc-incident-row ul {
@@ -3973,16 +3930,19 @@ table.jobdistribution-table {
     width: 6px;
     height: 6px;
 }
+
 /* this targets the default scrollbar (compulsory) */
 ::-webkit-scrollbar-track {
     background-color: transparent;
     border-radius: 10px;
 }
+
 /* the new scrollbar will have a flat appearance with the set background color */
 ::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
+
 /* this will style the thumb, ignoring the track */
 
 /* React Animation */
@@ -4348,22 +4308,15 @@ table.jobdistribution-table {
     bottom: 0px;
     top: 45px;
     left: 10px;
-    /*padding: 0px 10px;*/
-    
     margin-bottom: 30px;
     z-index: 1;
     height: 60px;
-    max-width: 300px;
+    width: 300px;
 }
 .mapbox-slider {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     background-color: white;
-    /*background color of legend*/
-    /*padding: 1px 24px 5px 24px;around stuff inside of legend*/
-    
     border-radius: 10px;
-    /*round the edges of the legend div*/
-    
     -webkit-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.25);
     -moz-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.25);
     box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.25);
@@ -4485,23 +4438,48 @@ table.jobdistribution-table {
 .hidden {
     display: none;
 }
-.gps_ring {
+.logo-div-pulse {
     background-repeat: no-repeat;
     position: relative;
-    top: 45%;
+    top: 40%;
     display: block;
     margin: auto;
     transform: translate(-50%, -50%);
     -webkit-animation: pulsate 2s ease-out;
     -webkit-animation-iteration-count: infinite;
 }
-.gps_ring_no_animate {
+.logo-div {
     background-repeat: no-repeat;
     position: relative;
-    top: 45%;
+    top: 40%;
     display: block;
     margin: auto;
     text-align: center;
+}
+@keyframes pulsate {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -o-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+    
+    50% {
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        transform: scale(0.8);
+    }
+    
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -o-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
 }
 @-webkit-keyframes pulsate {
     0% {
@@ -4528,14 +4506,12 @@ table.jobdistribution-table {
         transform: scale(1);
     }
 }
-
-.login{
+.login {
     width: 50%;
     margin: 0 auto;
     top: 55%;
 }
-
-.login-button{
+.login-button {
     background-color: #6BBE92;
     width: 50px;
     border: 0;
@@ -4547,10 +4523,9 @@ table.jobdistribution-table {
     font-size: 14px;
     border-radius: 0px 3px 3px 0px;
 }
-
 .login-input {
     background-color: #eee;
-    padding: 6px 20px 9.5px 10px;
+    padding: 6px 20px 9px 10px;
     min-height: 25px;
     line-height: 25px;
     overflow: hidden;
@@ -4559,39 +4534,42 @@ table.jobdistribution-table {
     color: #000;
     border-radius: 3px 0px 0px 3px;
     animation: fadein 2s;
-    -moz-animation: fadein 2s; /* Firefox */
-    -webkit-animation: fadein 2s; /* Safari and Chrome */
-    -o-animation: fadein 2s; /* Opera */
+    -moz-animation: fadein 2s;
+    /* Firefox */
+    
+    -webkit-animation: fadein 2s;
+    /* Safari and Chrome */
+    
+    -o-animation: fadein 2s;
+    /* Opera */
 }
-
 @keyframes fadein {
     from {
-        opacity:0;
+        opacity: 0;
     }
+    
     to {
-        opacity:1;
+        opacity: 1;
     }
 }
-@-moz-keyframes fadein { /* Firefox */
+@-moz-keyframes fadein {
+    /* Firefox */
+    
     from {
-        opacity:0;
+        opacity: 0;
     }
+    
     to {
-        opacity:1;
+        opacity: 1;
     }
 }
-@-webkit-keyframes fadein { /* Safari and Chrome */
+@-webkit-keyframes fadein {
+    /* Safari and Chrome */
+    
     from {
-        opacity:0;
+        opacity: 0;
     }
-    to {
-        opacity:1;
-    }
-}
-@-o-keyframes fadein { /* Opera */
-    from {
-        opacity:0;
-    }
+    
     to {
         opacity: 1;
     }

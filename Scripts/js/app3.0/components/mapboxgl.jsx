@@ -62,7 +62,6 @@ class MapBoxGL extends React.Component {
             300: ''
         };
 
-    
         let onHeightChange = e => {
             this.heightValues = [e[0],e[1]]
             Map3DStore.filter(this.heightValues[0],this.heightValues[1]);
@@ -71,8 +70,7 @@ class MapBoxGL extends React.Component {
         var slider = <div className='mapbox-slider-container'>
                         <div className='mapbox-slider'>
                             <div style={{margin:'12px 24px 0px 24px'}}>           
-                                <p style={{paddingTop:'16px',marginBottom: '-8px'}}>Use right mouse button to navigate 3D space. Click on the base of a building for more info.</p>                    
-                                <h3>Building height</h3>
+                                <h3 style={{paddingTop:'12px'}}>Building height</h3>
                                 <RangeSlider style={{margin:'24px 16px 8px 18px', width:'85%', maxWidth:'300px'}} reset={true} inverted={false} range={1} step={5} marks={heightMarks} defaultValue={this.heightValues} min={0} max={300} onChange={onHeightChange} suffix={'m'} />
                             </div>
                         </div>

@@ -19,6 +19,7 @@
 
 import Url from 'components/displays/url';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import UiStore from 'stores/uistore';
 import MapStore from 'stores/mapstore';
 import MapConstants from 'constants/mapconstants';
@@ -30,7 +31,6 @@ import UserProfile from 'components/userprofile';
 import FilterBox from 'components/filterbox';
 import Legend from 'components/legend';
 import EsriLeaflet from 'components/esrileaflet';
-import TourGuide from 'components/tourguide';
 import SearchDisplay from 'components/searchdisplay';
 import LayerSummary from 'components/layersummary';
 import LayerInfo from 'components/layerinfo';
@@ -62,7 +62,7 @@ import {
 } from 'react-bootstrap';
 import {Grid, Image} from 'semantic-ui-react';
 import $ from 'jquery';
-import ChatBot from 'components/chatbot';
+// import ChatBot from 'components/chatbot';
 
 export default class EplReact extends React.Component {
     constructor(props) {
@@ -73,7 +73,6 @@ export default class EplReact extends React.Component {
             searchText: UiStore.getSearchText(),
             speech: SpeechStore.getSpeechState(),
             buildings: false,
-            showMobileSearch: false,
             toggleNavButton: false,
             siteInfo: MapStore.getSiteInfo() || Map3DStore.getSiteInfo()
         };
@@ -178,11 +177,7 @@ export default class EplReact extends React.Component {
     }
 
     toggleBookmark() {
-<PhoneBreakpoint>
-        console.log("mobile bookmark")
-    </PhoneBreakpoint>
         EplActionCreator.toggleBookmark();
-
         //$('.navbar-toggle').click();
     }
 
@@ -191,8 +186,6 @@ export default class EplReact extends React.Component {
             $('.navbar-toggle').click();
         </PhoneBreakpoint>
         EplActionCreator.toggleBuffer();
-
-
         //$('.navbar-toggle').click();
     }
 
@@ -289,34 +282,30 @@ export default class EplReact extends React.Component {
         } else {
             return exit3D;
         }
-
-        return null;
     }
 
-    mobileSearch() {
+    // mobileSearch() {
+    //     var uiState = this.state.uiState;
+    //     var mobileNavBtn = uiState.displayMenu === MenuConstants.ToggleMobileNavBtn
+    //     var leftpanel = uiState.displayMenu === MenuConstants.LeftPanel
 
-        var uiState = this.state.uiState;
-        var mobileNavBtn = uiState.displayMenu === MenuConstants.ToggleMobileNavBtn
-        var leftpanel = uiState.displayMenu === MenuConstants.LeftPanel
-
-        //check for nav mobile btn
-        //if menu is not shown
-        if (!mobileNavBtn) {
-
-            //set mobile search state false
-
-            if (this.state.showMobileSearch) {
-                EplActionCreator.toggleLeftPanel();
-                this.setState({showMobileSearch: false})
-            } else {
-                EplActionCreator.closeLeftPanel();
-                this.setState({showMobileSearch: true})
-            }
-        }
-    }
+    //     //check for nav mobile btn
+    //     //if menu is not shown
+    //     if (!mobileNavBtn) {
+    //         //set mobile search state false
+    //         if (this.state.showMobileSearch) {
+    //             EplActionCreator.toggleLeftPanel();
+    //             this.setState({showMobileSearch: false})
+    //         } else {
+    //             EplActionCreator.closeLeftPanel();
+    //             this.setState({showMobileSearch: true})
+    //         }
+    //     }
+    // }
 
     toggleChatBot(){
-        EplActionCreator.toggleChatBot();
+        $(this.refs.chatbot).toggle();
+        //EplActionCreator.toggleChatBot();
     }
 
     render() {
@@ -336,11 +325,32 @@ export default class EplReact extends React.Component {
                 ? 'Speak into microphone now'
                 : 'Search address e.g. 45 Maxwell Road',
             layerWithInfo = LayerManagerStore.getLatestLayer(),
-            buildings = this.state.buildings;
+            buildings = this.state.buildings,
+            chatBot = this.state.chatBot;
 
         const logoSpacing = {
             marginLeft: '15px'
         };
+
+        let containerStyle = {
+            width: '20%',
+            height: '75%',
+            zIndex: '99',
+            right:'0px',
+            position: 'absolute',
+            top: '55px',
+            background: 'white',
+            minWidth: '300px'
+        };
+
+        let iframeStyle = {
+            width: '100%',
+            height: '100%',
+            borderWidth:'0px'
+        }
+
+        //hide chatbot at the next tick
+        setTimeout(()=>{$(this.refs.chatbot).hide()},0);
 
         const GridExampleDividedNumber = () => (
             <Grid columns={3} divided textAlign='center'>
@@ -410,16 +420,14 @@ export default class EplReact extends React.Component {
         }
 
         return (
-
             <div className="map-content">               
                 {this.state.siteInfo.address != null && <div>{addressBarBottom}</div>}
 
                 <Navbar fluid fixedTop collapseOnSelect style={{
-                    backgroundColor: '#FFFFFF',
-                    borderBottom: '1px solid #ddd',
-                    boxShadow: '0 1px 5px 0 rgba(50,50,50,.25);'
-                }}>
-
+                        backgroundColor: '#FFFFFF',
+                        borderBottom: '1px solid #ddd',
+                        boxShadow: '0 1px 5px 0 rgba(50,50,50,.25);'
+                    }}>
                     <Navbar.Header>
                         <Navbar.Brand>
                             <a href="#" onClick={this.toggleLeftPanel.bind(this)}>
@@ -428,26 +436,33 @@ export default class EplReact extends React.Component {
                             <div className="logo" onClick={this.reset.bind(this)}><img src="/Content/img/devices-icon.png" className="logo-img"/></div>
 
                             <PhoneBreakpoint>
-                                <div id="locate-me" style={{
-                                    marginTop: '-1px',
-                                    position: 'absolute',
-                                    right: '100px'
-                                }} onClick={this.mobileSearch.bind(this)}>
-                                    <i className="iconfont icon-search"></i>
+                                 <div className="searchbox" style = {{position: 'absolute',left: '75px'}}>
+                                    <div className="search-wrapper">
+                                        <span className="search-icon">
+                                            <i className="iconfont icon-search"></i>
+                                        </span>
+                                        <input style={{height:'50px',maxWidth:'45vw'}} ref='searchInput' id="query-search" className="search-input" placeholder={searchPlaceholder} value={this.state.searchText} onChange={this.onChange.bind(this)}/>
+
+                                        <SearchDisplay style={{top:'51px',width:'120%'}} ref="searchSuggest" setSearchText={this.setSearchText.bind(this)}/>
+
+                                        <div className="search-icons-div" style={{ right: '8px'}}>
+                                            {this.state.searchText.length > 0
+                                                && <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>}
+                                            {<div className = "search-speech" onClick = {speechAction}> <i className={speechClass}></i> </div>}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="locate-me" style={{
                                     marginTop: '-1px',
                                     position: 'absolute',
-                                    right: '60px'
+                                    right: '42px'
                                 }} onClick={this.locateUser.bind(this)}>
                                     <i className="iconfont icon-locate"></i>
                                 </div>
                             </PhoneBreakpoint>
 
                             <DesktopBreakpoint>
-                                <div className="tools" style={{
-                                    marginTop: '-14px'
-                                }}>
+                                <div className="tools" style={{marginTop: '-14px'}}>
                                     <ul className="tools-links">
                                         {!buildings
                                             && <li id="bookmark" onClick={this.toggleBookmark.bind(this)}>
@@ -493,53 +508,19 @@ export default class EplReact extends React.Component {
                                                 && <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>}
                                             {< div className = "search-speech" onClick = {
                                                 speechAction
-                                            } > <i className={speechClass}></i> < /div>}
+                                            } > <i className={speechClass}></i> </div>}
                                         </div>
                                     </div>
                                 </div>
 
-                            </DesktopBreakpoint>
-
-                            {this.state.showMobileSearch
-                                && <PhoneBreakpoint>
-                                        <div className="searchbox" style={{
-                                            position: 'absolute',
-                                            marginLeft: '-15px',
-                                            marginTop: '40px'
-                                        }}>
-                                            <div className="search-wrapper">
-                                                <span className="search-icon">
-                                                    <i className="iconfont icon-search"></i>
-                                                </span>
-                                                <input ref='searchInput' id="query-search" style={{
-                                                    maxWidth: '100%'
-                                                }} className="search-input" placeholder={searchPlaceholder} value={this.state.searchText} onChange={this.onChange.bind(this)}/>
-
-                                                <SearchDisplay ref="searchSuggest" setSearchText={this.setSearchText.bind(this)}/>
-
-                                                <div className="search-icons-div" style={{
-                                                    right: '4px'
-                                                }}>
-                                                    {this.state.searchText.length > 0
-                                                        && <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>
-                                                        }
-                                                    {< div className = "search-speech" onClick = {
-                                                        speechAction
-                                                    } > <i className={speechClass}></i> < /div>}
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </PhoneBreakpoint>
-                                }
+                            </DesktopBreakpoint>                      
 
                         </Navbar.Brand>
                         <Navbar.Toggle onClick={this.toggleMobileNavBtn.bind(this)}/>
                     </Navbar.Header>
+                    
                     <Navbar.Collapse>
-
                         <Nav pullRight>
-
                             <DesktopBreakpoint>
                                 <NavItem>
                                     <div className="right-tools">
@@ -566,42 +547,31 @@ export default class EplReact extends React.Component {
 
                                         </ul>
                                     </div>
-
                                 </NavItem>
-
                             </DesktopBreakpoint>
-
                             <PhoneBreakpoint>
                                 <NavItem>
                                     <GridExampleDividedNumber/>
                                 </NavItem>
                             </PhoneBreakpoint>
-
                         </Nav>
                     </Navbar.Collapse>
-
                 </Navbar>
 
                 <div id="loading-div" className="loading-bar">
                     <i className="icon-spin5 animate-spin"></i>
                 </div>
-                <div id="dacs-area">
-                    <span id="dacs-plotted-cases"></span>
-                    <span>
-                        plotted</span>
-                </div>
+
                 {!buildings
                     ? <EsriLeaflet id="map-canvas" mapId={MapConstants.Main}/>
-                    : <MapBoxGL id="map-canvas" mapId={MapConstants.Main}/>}
-
+                    : <MapBoxGL id="map-canvas" mapId={MapConstants.Main}/>
+                }
                 {
                     uiState.dualScreen && <Dual/>
                 }
-
                 {
                     uiState.layerInfo &&<LayerInfo info={layerWithInfo.getLayerInfo()} delay={layerWithInfo.getDelay() || 5000}/>
                 }
-
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Basemap) && !buildings
                         ? <div className="basemap-gallery basemap-gallery-color">
@@ -644,51 +614,39 @@ export default class EplReact extends React.Component {
                         : null
                  }
                 </ReactCSSTransitionGroup>
-
                 <ReactCSSTransitionGroup transitionName="leftpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(showLeftPanel) && !buildings
                         ? <LeftPanel key="leftpanel" layerFilterText={layerFilterText}/>
                         : null}
                 </ReactCSSTransitionGroup>
-
                 {uiState.filter !== FilterState.Hidden
                     && <FilterBox state={uiState.filter} leftPanelState={showLeftPanel}/>}
-
-                
-
                 {uiState.displayMenu === MenuConstants.LeftPanelWithSummary
                     && <LayerSummary/>}
-
                 <DesktopBreakpoint>
                     <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                         {(uiState.displayMenu === MenuConstants.RightPanel)
                             && <RightPanel key="rightpanel"/>}
                     </ReactCSSTransitionGroup>
                 </DesktopBreakpoint>
-
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Buffer)
                         && <Buffer key="buffer"/>}
                 </ReactCSSTransitionGroup>
-
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Draw)
                         && <Draw key="draw"/>}
                 </ReactCSSTransitionGroup>
-
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Legend)
                         && <Legend key="legend"/>}
                 </ReactCSSTransitionGroup>
-
                 {(uiState.displayMenu === MenuConstants.Modal)
                     && <Modal display={uiState.modalDisplay}/>}
-
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Bookmark)
                         &&<Bookmark key="bookmark"/>}
                 </ReactCSSTransitionGroup>
-
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.UserProfile)
                         && <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet}/>
@@ -696,7 +654,7 @@ export default class EplReact extends React.Component {
                 </ReactCSSTransitionGroup>
                 <ReactCSSTransitionGroup transitionName="slideup" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.ChatBot)
-                        && <ChatBot key="chatbot" />
+                        && <div style={containerStyle}><iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe></div>
                     }
                 </ReactCSSTransitionGroup>
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
@@ -705,6 +663,7 @@ export default class EplReact extends React.Component {
                     }
                 </ReactCSSTransitionGroup>
 
+                <div ref="chatbot" className="chatbot" style={containerStyle}><iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe></div>
                 <div className="chatbot-btn" style={{background:'white',zIndex:'500',width:'60px',height:'60px',bottom:'30px',right:'30px',position:'absolute',borderRadius:'60px', boxShadow:'3px 3px 7px #888888'}} onClick={this.toggleChatBot.bind(this)}>
                         <i style={{margin:'13px',lineHeight: '3.7'}} className="iconfont icon-chat-1"></i>
                 </div>
