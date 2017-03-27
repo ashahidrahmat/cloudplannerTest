@@ -37,11 +37,8 @@ class Bookmark extends React.Component {
     }
 
     componentDidMount() {
-        let content = this.refs.cateContent;
-        
-        setTimeout(()=>{
-             Util.setPerfectScrollbar(content);
-         },0)
+        let content = this.refs.cateContent;    
+        Util.setPerfectScrollbar(content);
        
         BookmarkStore.addChangeListener(this._onChange);
     }

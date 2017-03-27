@@ -36,14 +36,13 @@ class Basemap {
         //this.id = Util.getObjId("basemap");
         this.basemap = basemap;
         this.internal = !Util.isAbsUrl(basemap.src);
-        //this.src = basemap.src = Util.buildToDeployServer(basemap.src);
         this.crs = L.CRS[basemap.name] || L.CRS[basemap.crs];
         this.obj = [];
 
         this.opts = {
             url: basemap.src,
             minZoom: 12,
-            maxZoom: 20,
+            maxZoom: 18,
             continuousWorld: true,
             useCors: basemap.useCors | false,
             zIndex: 0
@@ -117,9 +116,7 @@ class Basemap {
     }
 
     getInfo() {
-        return <BasemapDesc imageUrl = { this.getImageUrl() }
-        desc = { this.getDescription() }
-        />;
+        return <BasemapDesc imageUrl={this.getImageUrl()} desc={this.getDescription()}/>;
     }
 
     getImageUrl() {

@@ -49,20 +49,23 @@ import Map3DStore from 'stores/3dmapstore';
 import Quicklink from 'components/quicklink/quicklink';
 import GeoTagPhotoDetail from 'components/geophoto/geotagphotodetail';
 import WebApi from 'webapi';
-import DesktopBreakpoint from 'libs/responsive_utilities/desktop_breakpoint';
-import TabletBreakpoint from 'libs/responsive_utilities/tablet_breakpoint';
-import PhoneBreakpoint from 'libs/responsive_utilities/phone_breakpoint';
+import DesktopBreakpoint from 'components/breakpoints/desktop_breakpoint';
+import TabletBreakpoint from 'components/breakpoints/tablet_breakpoint';
+import PhoneBreakpoint from 'components/breakpoints/phone_breakpoint';
 import {
     Navbar,
     FormGroup,
     FormControl,
     Button,
+    ButtonGroup,
     Nav,
     NavItem
 } from 'react-bootstrap';
 import {Grid, Image} from 'semantic-ui-react';
 import $ from 'jquery';
+import {Menu,MainButton,ChildButton} from 'react-mfb-custom';
 // import ChatBot from 'components/chatbot';
+import Util from 'utils';
 
 export default class EplReact extends React.Component {
     constructor(props) {
@@ -76,6 +79,11 @@ export default class EplReact extends React.Component {
             toggleNavButton: false,
             siteInfo: MapStore.getSiteInfo() || Map3DStore.getSiteInfo()
         };
+
+        //don't show default left panel on mobile
+        if(Util.isMobile()) {
+            this.state.uiState.displayMenu = null;
+        }
 
         this._onUiChange = this._onUiChange.bind(this);
         this._onSpeechChange = this._onSpeechChange.bind(this);
@@ -127,31 +135,10 @@ export default class EplReact extends React.Component {
     }
 
     toggleLeftPanel() {
-
         //hide location
         this.setState({siteInfo: ''});
 
         EplActionCreator.toggleLeftPanel();
-    }
-
-    toggleMobileNavBtn() {
-
-/*
-        var uiState = this.state.uiState;
-        var mobileNavBtn = uiState.displayMenu === MenuConstants.ToggleMobileNavBtn
-
-        //hide shown mobile search
-        if (this.state.showMobileSearch == true) {
-
-            this.toggleLeftPanel();
-            this.setState({showMobileSearch: false})
-        }
-
-        if (mobileNavBtn == false) {
-            this.toggleLeftPanel();
-        }
-*/
-        //EplActionCreator.toggleMobileNavBtn();
     }
 
     toggleUserProfile() {
@@ -163,13 +150,7 @@ export default class EplReact extends React.Component {
     }
 
     toggleBasemapMenu() {
-
-        <PhoneBreakpoint>
-            $('.navbar-toggle').click();
-        </PhoneBreakpoint>
         EplActionCreator.toggleBasemap();
-
-        //$('.navbar-toggle').click();
     }
 
     toggleLegend() {
@@ -178,24 +159,14 @@ export default class EplReact extends React.Component {
 
     toggleBookmark() {
         EplActionCreator.toggleBookmark();
-        //$('.navbar-toggle').click();
     }
 
     toggleBuffer() {
-        <PhoneBreakpoint>
-            $('.navbar-toggle').click();
-        </PhoneBreakpoint>
         EplActionCreator.toggleBuffer();
-        //$('.navbar-toggle').click();
     }
 
     toggleDraw() {
-        <PhoneBreakpoint>
-            $('.navbar-toggle').click();
-        </PhoneBreakpoint>
         EplActionCreator.toggleDraw();
-
-        //$('.navbar-toggle').click();
     }
 
     showMetadata() {
@@ -253,11 +224,12 @@ export default class EplReact extends React.Component {
         EplActionCreator.onKeyUp(event);
     }
 
-    toggle3D() {
-        $('.navbar-toggle').click();
+    toggle3D(status) {
         this.closeRightMenu();
-        if (this.state.buildings) {
-            this.toggleLeftPanel();
+        if (!status) {
+            if(!Util.isMobile()){
+                this.toggleLeftPanel();
+            }
             this.setState({buildings: false})
         } else {
             this.state.uiState.dualScreen = false;
@@ -271,6 +243,7 @@ export default class EplReact extends React.Component {
                 color: '#4787ed'
             }}></i>
             <div className="iconfont-name">3D</div>
+
         </li>
         let exit3D = <li id="m3d-exit" onClick={this.toggle3D.bind(this)}>
             <i className="iconfont icon-cancel-circled"></i>
@@ -283,25 +256,6 @@ export default class EplReact extends React.Component {
             return exit3D;
         }
     }
-
-    // mobileSearch() {
-    //     var uiState = this.state.uiState;
-    //     var mobileNavBtn = uiState.displayMenu === MenuConstants.ToggleMobileNavBtn
-    //     var leftpanel = uiState.displayMenu === MenuConstants.LeftPanel
-
-    //     //check for nav mobile btn
-    //     //if menu is not shown
-    //     if (!mobileNavBtn) {
-    //         //set mobile search state false
-    //         if (this.state.showMobileSearch) {
-    //             EplActionCreator.toggleLeftPanel();
-    //             this.setState({showMobileSearch: false})
-    //         } else {
-    //             EplActionCreator.closeLeftPanel();
-    //             this.setState({showMobileSearch: true})
-    //         }
-    //     }
-    // }
 
     toggleChatBot(){
         $(this.refs.chatbot).toggle();
@@ -323,84 +277,40 @@ export default class EplReact extends React.Component {
                 : this.onSpeech.bind(this),
             searchPlaceholder = this.state.speech
                 ? 'Speak into microphone now'
-                : 'Search address e.g. 45 Maxwell Road',
+                : 'Search...',
             layerWithInfo = LayerManagerStore.getLatestLayer(),
             buildings = this.state.buildings,
-            chatBot = this.state.chatBot;
+            chatBot = this.state.chatBot,
+            mapSwitchBtnText = buildings ? '3D' : '2D';
 
         const logoSpacing = {
             marginLeft: '15px'
         };
 
-        let containerStyle = {
+        const containerStyle = {
             width: '20%',
             height: '75%',
             zIndex: '99',
             right:'0px',
             position: 'absolute',
-            top: '55px',
+            top: '54px',
             background: 'white',
             minWidth: '300px'
         };
 
-        let iframeStyle = {
+        const iframeStyle = {
             width: '100%',
             height: '100%',
             borderWidth:'0px'
         }
 
+        let mapSwitchBtnStyle = {background:'white',zIndex:'98',top:'64px', left: '45%',position:'absolute', cursor:'pointer'};
+
+        Util.isMobile() ? mapSwitchBtnStyle.left = '40%' : mapSwitchBtnStyle.left = '50%'
         //hide chatbot at the next tick
-        setTimeout(()=>{$(this.refs.chatbot).hide()},0);
-
-        const GridExampleDividedNumber = () => (
-            <Grid columns={3} divided textAlign='center'>
-                <Grid.Row>
-                    <Grid.Column>
-                        {!buildings
-                            && <li id="bookmark" onClick={this.toggleBookmark.bind(this)}>
-                                    <i className="iconfont icon-star"></i>
-                                    <div className="iconfont-name">Bookmark</div>
-                                </li>
-                          }
-                    </Grid.Column>
-                    <Grid.Column>
-                        <NavItem>
-                            <li id="buffer" onClick={this.toggleBuffer.bind(this)}>
-                                <i className="iconfont icon-buffer"></i>
-                                <div className="iconfont-name">Buffer</div>
-                            </li>
-                        </NavItem>
-                    </Grid.Column>
-                    <Grid.Column>
-                        {!buildings
-                            && <li id="draw" onClick={this.toggleDraw.bind(this)}>
-                                    <i className="iconfont icon-pencil"></i>
-                                    <div className="iconfont-name">Draw</div>
-                                </li>
-                            }
-                    </Grid.Column>
-                </Grid.Row>
-
-                <Grid.Row>
-                    <Grid.Column>
-
-                        {!buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}>
-                            <i className="iconfont icon-globe"></i>
-                            <div className="iconfont-name">Basemap</div>
-                        </li>}
-                    </Grid.Column>
-                    <Grid.Column>
-                        {this.render3DButton()}
-                    </Grid.Column>
-                    <Grid.Column>
-                        <li id="reset" onClick={this.reset.bind(this)}>
-                            <i className="iconfont icon-cw-1"></i>
-                            <div className="iconfont-name">Reset</div>
-                        </li>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-        )
+        setTimeout(()=>{
+            $(this.refs.chatbot).hide();
+        },0);
 
         let addressBarBottom;
         if (this.state.siteInfo.address != null) {
@@ -420,48 +330,39 @@ export default class EplReact extends React.Component {
         }
 
         return (
-            <div className="map-content">               
+            <div className="map-content">
                 {this.state.siteInfo.address != null && <div>{addressBarBottom}</div>}
 
-                <Navbar fluid fixedTop collapseOnSelect style={{
+                <Navbar fluid fixedTop style={{
                         backgroundColor: '#FFFFFF',
                         borderBottom: '1px solid #ddd',
-                        boxShadow: '0 1px 5px 0 rgba(50,50,50,.25);'
                     }}>
                     <Navbar.Header>
                         <Navbar.Brand>
                             <a href="#" onClick={this.toggleLeftPanel.bind(this)}>
                                 <i className="iconfont icon-menu layer-list"></i>
                             </a>
-                            <div className="logo" onClick={this.reset.bind(this)}><img src="/Content/img/devices-icon.png" className="logo-img"/></div>
 
                             <PhoneBreakpoint>
-                                 <div className="searchbox" style = {{position: 'absolute',left: '75px'}}>
-                                    <div className="search-wrapper">
+                                 <div className="searchbox" style = {{position: 'absolute',left: '50px', width:'100%'}}>
+                                    <div className="search-wrapper" style={{width:'100%'}}>
                                         <span className="search-icon">
                                             <i className="iconfont icon-search"></i>
                                         </span>
-                                        <input style={{height:'50px',maxWidth:'45vw'}} ref='searchInput' id="query-search" className="search-input" placeholder={searchPlaceholder} value={this.state.searchText} onChange={this.onChange.bind(this)}/>
+                                        <input style={{height:'50px',width:'80%',maxWidth: 'none', borderWidth: '0px 0px 0px 2px'}} ref='searchInput' id="query-search" className="search-input" placeholder={searchPlaceholder} value={this.state.searchText} onChange={this.onChange.bind(this)}/>
 
-                                        <SearchDisplay style={{top:'51px',width:'120%'}} ref="searchSuggest" setSearchText={this.setSearchText.bind(this)}/>
+                                        <SearchDisplay style={{top:'51px',width:'84vw'}} ref="searchSuggest" setSearchText={this.setSearchText.bind(this)}/>
 
                                         <div className="search-icons-div" style={{ right: '8px'}}>
-                                            {this.state.searchText.length > 0
-                                                && <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>}
-                                            {<div className = "search-speech" onClick = {speechAction}> <i className={speechClass}></i> </div>}
+                                            <span className="search-clear-icon" style={{marginRight:'50px', float:'none'}} onClick={this.clearSearchResults.bind(this)}></span>
+                                            <div className = "search-speech" onClick = {speechAction}> <i className={speechClass}></i> </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="locate-me" style={{
-                                    marginTop: '-1px',
-                                    position: 'absolute',
-                                    right: '42px'
-                                }} onClick={this.locateUser.bind(this)}>
-                                    <i className="iconfont icon-locate"></i>
                                 </div>
                             </PhoneBreakpoint>
 
                             <DesktopBreakpoint>
+                            <div className="logo" onClick={this.reset.bind(this)}><img src="/Content/img/devices-icon.png" className="logo-img"/></div>
                                 <div className="tools" style={{marginTop: '-14px'}}>
                                     <ul className="tools-links">
                                         {!buildings
@@ -469,10 +370,12 @@ export default class EplReact extends React.Component {
                                                     <i className="iconfont icon-star"></i>
                                                     <div className="iconfont-name">Bookmark</div>
                                                 </li>}
-                                        <li id="buffer" onClick={this.toggleBuffer.bind(this)}>
-                                            <i className="iconfont icon-buffer"></i>
-                                            <div className="iconfont-name">Buffer</div>
-                                        </li>
+                                        {!buildings
+                                            && <li id="buffer" onClick={this.toggleBuffer.bind(this)}>
+                                                    <i className="iconfont icon-buffer"></i>
+                                                    <div className="iconfont-name">Buffer</div>
+                                                </li>
+                                        }
                                         {!buildings
                                             && <li id="draw" onClick={this.toggleDraw.bind(this)}>
                                                     <i className="iconfont icon-pencil"></i>
@@ -484,7 +387,6 @@ export default class EplReact extends React.Component {
                                         </li>
                                     </ul>
                                 </div>
-
                             </DesktopBreakpoint>
 
                             <DesktopBreakpoint>
@@ -512,6 +414,7 @@ export default class EplReact extends React.Component {
                                     </div>
                                 </div>
                             </DesktopBreakpoint>
+
                             <DesktopBreakpoint>
                                 <div className="right-tools" style={{float:"right"}}>
                                         <ul className="right-links">
@@ -533,43 +436,28 @@ export default class EplReact extends React.Component {
                                                     <div className="iconfont-name">Profile</div>
                                                 </li>
                                              }
-                                            {this.render3DButton()}
-
                                         </ul>
                                     </div>
                             </DesktopBreakpoint>
-
                         </Navbar.Brand>
-                        <Navbar.Toggle onClick={this.toggleMobileNavBtn.bind(this)}/>
                     </Navbar.Header>
-                    <PhoneBreakpoint>
-                        <Navbar.Collapse>
-                            <Nav pullRight>
-                                <NavItem>
-                                    <GridExampleDividedNumber/>
-                                </NavItem>   
-                            </Nav>
-                        </Navbar.Collapse>
-                    </PhoneBreakpoint>
                 </Navbar>
 
                 <div id="loading-div" className="loading-bar">
                     <i className="icon-spin5 animate-spin"></i>
                 </div>
 
-                {!buildings
-                    ? <EsriLeaflet id="map-canvas" mapId={MapConstants.Main}/>
-                    : <MapBoxGL id="map-canvas" mapId={MapConstants.Main}/>
-                }
                 {
-                    uiState.dualScreen && <Dual/>
+                    !buildings ? <EsriLeaflet id="map-canvas" mapId={MapConstants.Main}/> : <MapBoxGL id="map-canvas" mapId={MapConstants.Main}/>
                 }
+
                 {
                     uiState.layerInfo &&<LayerInfo info={layerWithInfo.getLayerInfo()} delay={layerWithInfo.getDelay() || 5000}/>
                 }
+
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Basemap) && !buildings
-                        ? <div className="basemap-gallery basemap-gallery-color">
+                        && <div className="basemap-gallery basemap-gallery-color">
                                 <div className="si-title-wrapper si-title-color">
                                     <span className="si-title">Basemap</span>
                                     <span id="bm-back" className="right-close-btn right-close-btn-color" onClick={this.closeMenu.bind(this)}>
@@ -606,13 +494,14 @@ export default class EplReact extends React.Component {
                                     </div>
                                 }
                             </div>
-                        : null
                  }
                 </ReactCSSTransitionGroup>
+                <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+                    {uiState.dualScreen && <Dual/>}
+                </ReactCSSTransitionGroup>
                 <ReactCSSTransitionGroup transitionName="leftpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
-                    {(showLeftPanel) && !buildings
-                        ? <LeftPanel key="leftpanel" layerFilterText={layerFilterText}/>
-                        : null}
+                    {((showLeftPanel) && !buildings)
+                        && <LeftPanel key="leftpanel" layerFilterText={layerFilterText}/>}
                 </ReactCSSTransitionGroup>
                 {uiState.filter !== FilterState.Hidden
                     && <FilterBox state={uiState.filter} leftPanelState={showLeftPanel}/>}
@@ -657,11 +546,60 @@ export default class EplReact extends React.Component {
                         && <GeoTagPhotoDetail key="geotagphotodetail"/>
                     }
                 </ReactCSSTransitionGroup>
-
+                <PhoneBreakpoint>
+                    <Menu effect={'zoomin'} method={'click'} position={'br'} style={{position:'absolute'}}>
+                        <MainButton ref="fab" iconResting="iconfont icon-cog" iconActive="iconfont icon-cog"/>
+                        <ChildButton
+                            onClick={this.toggleBuffer.bind(this)}
+                            icon="iconfont icon-buffer"
+                            label="Buffer"
+                        />
+                        <ChildButton
+                            onClick={this.toggleDraw.bind(this)}
+                            icon="iconfont icon-pencil"
+                            label="Draw"
+                        />
+                        <ChildButton
+                            onClick={this.reset.bind(this)}
+                            icon="iconfont icon-cw-1"
+                            label="Reset"
+                        />
+                        <ChildButton
+                            onClick={this.toggleBookmark.bind(this)}
+                            icon="iconfont icon-star"
+                            label="Bookmark"
+                        />
+                        <ChildButton
+                            onClick={this.reset.bind(this)}
+                            icon="iconfont icon-cw-1"
+                            label="Reset"
+                        />
+                        <ChildButton
+                            onClick={this.toggleUserProfile.bind(this)}
+                            icon="iconfont icon-user"
+                        />
+                        <ChildButton
+                            onClick={this.toggleBasemapMenu.bind(this)}
+                            icon="iconfont icon-globe"
+                        />
+                        <ChildButton
+                            onClick={this.toggleChatBot.bind(this)}
+                            icon="iconfont icon-chat-1"
+                        />
+                    </Menu>
+                </PhoneBreakpoint>
                 <div ref="chatbot" className="chatbot" style={containerStyle}><iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe></div>
-                <div className="chatbot-btn" style={{background:'white',zIndex:'500',width:'60px',height:'60px',bottom:'30px',right:'30px',position:'absolute',borderRadius:'60px', boxShadow:'3px 3px 7px #888888'}} onClick={this.toggleChatBot.bind(this)}>
-                        <i style={{margin:'13px',lineHeight: '3.7'}} className="iconfont icon-chat-1"></i>
-                </div>
+                {
+                    !Util.isMobile() &&  
+                        <div className="chatbot-btn" style={{background:'white',zIndex:'500',width:'60px',height:'60px',bottom:'30px',right:'30px',position:'absolute',borderRadius:'60px', boxShadow:'3px 3px 7px #888888'}} onClick={this.toggleChatBot.bind(this)}>
+                            <i style={{margin:'13px',lineHeight: '3.7'}} className="iconfont icon-chat-1"></i>
+                        </div>
+
+                }
+                <ButtonGroup style={mapSwitchBtnStyle}>
+                    <Button onClick={this.toggle3D.bind(this,false)} active={!buildings} style={{outlineStyle: 'none'}}>2D</Button>
+                    <Button onClick={this.toggle3D.bind(this,true)} active={buildings} style={{outlineStyle: 'none'}}>3D</Button>
+                </ButtonGroup>
             </div>
         );
     }

@@ -49,7 +49,7 @@ class MapStore extends BaseStore {
         this.dualDefaultName = "Google Map";
         this.currBasemapName = {};
         this.center = [1.3607837274175492, 103.8059931081907];
-        this.zoom = 12;
+        this.zoom = 11;
         this.basemaps = {};
         this.loadCrs();
         this.loadBasemap();
@@ -339,23 +339,6 @@ class MapStore extends BaseStore {
             return scalesAttr[zoomAttr];
         }
 
-        /*
-        L.CRS['WGS_1984_Web_Mercator_Auxiliary_Sphere_SAFMU'] = new L.Proj.CRS('EPSG:3857', 'PROJCS["WGS_1984_Web_Mercator_Auxiliary_Sphere",GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Mercator_Auxiliary_Sphere"],PARAMETER["False_Easting",0.0],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",0.0],PARAMETER["Standard_Parallel_1",0.0],PARAMETER["Auxiliary_Sphere_Type",0.0],UNIT["Meter",1.0],AUTHORITY["ESRI","102100"]]', {
-            origin: [-20037508.342787, 20037508.342787],
-            resolutions: [
-                76.43702828507324,
-                38.21851414253662,
-                19.10925707126831,
-                9.554628535634155,
-                4.77731426794937,
-                2.388657133974685,
-                1.1943285668550503,
-                0.5971642835598172,
-                0.29858214164761665
-            ],
-            _lodMap: {11: 0, 12: 1, 13: 2, 14: 3, 15: 4, 16: 5, 17: 6, 18: 7, 19: 8}
-        });
-        */
         L.CRS['SVY21'] = new L.Proj.CRS('EPSG:3414', 'PROJCS["SVY21",GEOGCS["SVY21[WGS84]",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["False_Easting",28001.642],PARAMETER["False_Northing",38744.572],PARAMETER["Central_Meridian",103.8333333333333],PARAMETER["Scale_Factor",1.0],PARAMETER["Latitude_Of_Origin",1.366666666666667],UNIT["Meter",1.0]]', {
             origin: [-5878011.89743302, 10172511.897433],
             resolutions: [

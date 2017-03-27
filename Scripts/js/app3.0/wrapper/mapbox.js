@@ -107,7 +107,9 @@ import {ControllerUrl} from 'constants/urlconstants';
     }
 
     flyTo(options){
-        this.map.flyTo(options);
+        if(this.map){
+            this.map.flyTo(options);     
+        }
     }
 
     panTo(lngLat){
@@ -118,7 +120,9 @@ import {ControllerUrl} from 'constants/urlconstants';
     }
 
     addLayer(layerProp){
-        this.map.addLayer(layerProp);
+        if(this.map){
+            this.map.addLayer(layerProp);
+        }     
     }
 
     getLayer(id){
@@ -126,7 +130,7 @@ import {ControllerUrl} from 'constants/urlconstants';
     }
 
     removeLayer(id){
-        if(this.getLayer(id)){
+        if(this.map && this.getLayer(id)){
             this.map.removeLayer(id);
         }
     }

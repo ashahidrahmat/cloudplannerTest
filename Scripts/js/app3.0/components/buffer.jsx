@@ -101,9 +101,7 @@ class Buffer extends React.Component {
         BufferStore._isBufferOn = true;
 
         let content = this.refs.bufferResults;
-        setTimeout(()=>{
-            Util.setPerfectScrollbar(content);
-        },0)
+        Util.setPerfectScrollbar(content);
     }
 
 

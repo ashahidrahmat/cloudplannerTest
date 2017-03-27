@@ -24,6 +24,7 @@ import MenuConstants, {FilterState} from 'constants/menuconstants';
 import AppDispatcher from 'dispatcher/appdispatcher';
 import EplActionCreator from 'actions/eplactioncreator';
 import LayerManagerStore from "stores/layermanagerstore";
+import Util from 'utils';
 
 class UiStore extends BaseStore {
 
@@ -106,7 +107,9 @@ class UiStore extends BaseStore {
     }
 
     openMenu() {
-        this.uiState.displayMenu = MenuConstants.LeftPanel;
+        if(!Util.isMobile()){
+            this.uiState.displayMenu = MenuConstants.LeftPanel;
+        }
     }
 
     closeMenu() {

@@ -18,6 +18,7 @@
 "use strict";
 
 import React from 'react';
+import ReactDOM from 'react-dom'
 import UiStore from 'stores/uistore';
 import MapStore from 'stores/mapstore';
 import Map3DStore from 'stores/3dmapstore';
@@ -26,14 +27,15 @@ import LayerManagerStore from 'stores/layermanagerstore';
 import EplActionCreator from 'actions/eplactioncreator';
 import Util from 'utils';
 import GeoPhotoDiv from 'components/geophoto/geophotodiv'
-import ClusterStore from 'stores/clusterstore'; 
+import ClusterStore from 'stores/clusterstore';
 import L from 'leaflet';
+import Jrangeslider from 'components/ui/jrangeslider'
 
 class RightPanel extends React.Component {
 
     constructor(props) {
         super(props);
-            
+
         this.state = {
             showId: 0,
             expanded: false,
@@ -73,7 +75,7 @@ class RightPanel extends React.Component {
         this.setState({
             selected: LayerManagerStore.getSelected()
         });
-       
+
     }
 
     _onUiChange() {
@@ -129,8 +131,8 @@ class RightPanel extends React.Component {
             iconClass = showSiteInfo ? "cate-up-icon" :  "cate-minus-icon",
             siteClass = showSiteInfo ? "show" : "hide",
             siteInfo = this.state.siteInfo;
-            
-       
+
+
         var featureImgStyle;
 
         var tempLatLng = {
@@ -139,40 +141,40 @@ class RightPanel extends React.Component {
         }
 
         var temp = true, geoTagPhoto = [], photoCount = this.state.nearbyJsonData.length, currentDiameter, bounding;
-        
+
         MapStore.removeCircles();
 
         //use circle marker as a reference
         if(!Map3DStore.isInitialized()) {
             currentDiameter = MapStore.createCircle([tempLatLng.lat,tempLatLng.lng], 100,{fill: false,
                 color: 'none',
-                opacity: 0}); 
+                opacity: 0});
             bounding = currentDiameter.getBounds();
         }
 
         //getNearbydata currently get all and check for nearby
-        this.state.nearbyJsonData.map((nearbyData, j) => { 
-            
+        this.state.nearbyJsonData.map((nearbyData, j) => {
+
             //is it in the buffer range?
             if(bounding && bounding.contains([nearbyData.LatLng.lat,nearbyData.LatLng.lng])){
                 geoTagPhoto.push({nearbyData})
-            }  
-    
+            }
+
         });
 
-        if(geoTagPhoto.length > 0){ 
-             
+        if(geoTagPhoto.length > 0){
+
             featureImgStyle={
                 display:'block'
             }
 
-        }else{ 
-               
+        }else{
+
             featureImgStyle={
                 display:'none'
             }
         }
-        
+
 
         return (
             <div ref="siteInfoPanel" id="siteinformation" className="siteinformation-color" style={resizeStyleMap}>
@@ -202,13 +204,14 @@ class RightPanel extends React.Component {
                                     <tr><td>MP Name</td><td>{siteInfo.mp}</td></tr>
                                 </tbody>
                             </table>
-                            
+
                             <div className="featured-image-wrapper">
-                        
-                         <div id="two" style={featureImgStyle}><GeoPhotoDiv photoCount={geoTagPhoto.length} geophoto ={geoTagPhoto}/></div>  
-                        
+
+                         <div id="two" style={featureImgStyle}><GeoPhotoDiv photoCount={geoTagPhoto.length} geophoto ={geoTagPhoto}/></div>
+
                         </div>
                         </div>
+                        <Jrangeslider/>
                     </div>
                 </div>
             </div>

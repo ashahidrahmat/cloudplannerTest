@@ -27,7 +27,6 @@ import * as D from 'datejs';
 class Util {
     constructor() {
         this.MercatorZoomLevels = {
-            '0': 156543.03392799999,
             '1': 78271.516963999893,
             '2': 39135.758482000099,
             '3': 19567.879240999901,
@@ -442,7 +441,9 @@ class Util {
 
     setPerfectScrollbar(content) {
         if (content && Ps) {
-            Ps.initialize(content);
+            setTimeout(()=>{
+                Ps.initialize(content)
+            },0);
         }
     }
 
@@ -645,9 +646,7 @@ class Util {
 
         return csvStr;
     }
-
-
-
+    
     capitalizeFirstLetter(str) {
         return str.split(' ').map(s => {
             //todo: remove hardcode
@@ -689,6 +688,14 @@ class Util {
         })
 
         return arr;
+    }
+
+    isMobile(){
+        if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

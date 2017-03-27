@@ -162,12 +162,10 @@ html,body {
 
 .s-close {
     background-color: rgba(0,0,0,0.2);
-    background-image: url("/Content/css/themes/images/icons-18-white.png");
 }
 
 .s-closeall {
     background-color: rgba(0,0,0,0.2);
-    background-image: url("/Content/css/themes/images/icons-18-white.png");
 }
 
 .s-close:hover,.s-closeall:hover {

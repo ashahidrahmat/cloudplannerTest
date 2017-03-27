@@ -30,7 +30,7 @@ class Dual extends React.Component {
         this.startX = 0;
         this.state = {
             dragging: false,
-            width: 750
+            width: 450
         }
 
         this.onBoxDrag = this.onBoxDrag.bind(this);
@@ -41,7 +41,7 @@ class Dual extends React.Component {
     componentDidMount() {
         var width = this.refs.map.offsetWidth;
         this.setState({
-            'width': width >= 750 ? width : 750
+            'width': width >= 450 ? width : 450
         });
         EplActionCreator.resetMapSize();
     }

@@ -33,9 +33,7 @@ class MapBoxGL extends React.Component {
         super(props);
 
         this.defaultHeightValues = [0,300];
-
         this.heightValues = this.defaultHeightValues;
-
         this._reset = this._reset.bind(this);
     }
 
