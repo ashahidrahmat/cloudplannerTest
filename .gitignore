@@ -24,6 +24,7 @@ bld/
 [Oo]bj/
 js-built/*
 Scripts/js-built/*
+*.dll.js
 
 # Visual Studio 2015 cache/options directory
 .vs/

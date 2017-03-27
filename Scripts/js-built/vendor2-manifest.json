@@ -2,15 +2,15 @@
   "name": "vendor2",
   "content": {
     "./node_modules/c3/node_modules/d3/d3.js": {
-      "id": 357,
+      "id": 363,
       "meta": {}
     },
     "./node_modules/c3/c3.js": {
-      "id": 529,
+      "id": 537,
       "meta": {}
     },
     "./node_modules/d3/build/d3.js": {
-      "id": 530,
+      "id": 538,
       "meta": {}
     }
   }

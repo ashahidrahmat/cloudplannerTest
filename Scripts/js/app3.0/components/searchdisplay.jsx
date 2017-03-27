@@ -45,9 +45,11 @@ class SearchDisplay extends React.Component {
         });
     }
 
-    setScrollbar(content){
-        Util.removePerfectScroll(content);
-        Util.setPerfectScrollbar(content);
+    setScrollbar(){
+        if(this.refs.ssContent){
+            Util.removePerfectScroll(this.refs.ssContent);
+            Util.setPerfectScrollbar(this.refs.ssContent);
+        }      
     }
 
     render() {
@@ -56,14 +58,16 @@ class SearchDisplay extends React.Component {
             <div>
             {
                 searchResults.length > 0 ?
-                    <div className="search-suggest" style={this.props.style}>
-                        <div ref="ssContent" id="ss-content">
-                            <SearchDisplayRows data={searchResults} setSearchText={this.props.setSearchText} />
+                <div>
+                    <div className="search-suggest">
+                        <div ref="ssContent" id="ss-content" onMouseEnter={this.setScrollbar.bind(this)}>                     
                             {
                                 this.setScrollbar(this.refs.ssContent)
                             }
+                            <SearchDisplayRows data={searchResults} setSearchText={this.props.setSearchText} />
                         </div>
                     </div>
+                </div>
                 : null
             }
             </div>
