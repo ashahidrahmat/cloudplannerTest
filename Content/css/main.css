@@ -47,15 +47,6 @@ body {
     }
 }
 
-@-ms-keyframes color_change {
-    from {
-        fill: red;
-    }
-    to {
-        fill: #c20d0d;
-    }
-}
-
 @-o-keyframes color_change {
     from {
         fill: red;
@@ -276,8 +267,8 @@ button {
 
 .right-tools {
     display: block;
-    right: 5px;
-    margin-top: -8px;
+    margin: -15px -45px 0 0px;
+    position: relative;
     cursor: pointer;
 }
 
@@ -367,17 +358,13 @@ button {
     float: left;
 }
 
-
-/*
-    .search-input:focus, #cate-search:focus, #searchbookmark:focus, #addbookmark:focus {
-        border-style: solid;
-        border-width: 1px;
+@media screen and (max-width: 816px) {
+    .search-input {
+        max-width: 200px;
     }
-*/
+}
 
 .search-clear-icon {
-    background-repeat: no-repeat;
-    background-position: -144px 1px;
     width: 36px;
     height: 36px;
     opacity: 0.4;
@@ -386,7 +373,12 @@ button {
     -webkit-transform: scale(0.7, 0.7);
     display: inline-block;
     float: left;
-    margin-top: 9px;
+    margin-top: 15px;
+    margin-right: -10px;
+}
+
+.search-clear-icon:after {
+    content: '❌';
 }
 
 .search-speech {
@@ -443,7 +435,7 @@ button {
     position: absolute;
     right: 0;
     z-index: 99;
-    top: 55px;
+    top: 54px;
     width: 316px;
 }
 
@@ -556,7 +548,7 @@ button {
     height: 100%;
     width: 100%;
     z-index: 1;
-    margin-top: 55px;
+    margin-top: 54px;
     height: 720px;
     overflow: hidden;
     transform: translateZ(0px);
@@ -1077,7 +1069,7 @@ button {
 
 #layerinformation {
     position: absolute;
-    top: 55px;
+    top: 54px;
     z-index: 20;
     height: calc(100vh - 55px);
     width: calc(100vw - 280px);
@@ -1258,7 +1250,7 @@ button {
 #legend-div {
     position: absolute;
     right: 0px;
-    top: 55px;
+    top: 54px;
     z-index: 99;
     width: 33%;
     height: calc(100vh - 55px);
@@ -1270,7 +1262,7 @@ button {
 #draw-tool {
     position: absolute;
     right: 0px;
-    top: 55px;
+    top: 54px;
     z-index: 99;
     width: 33%;
     height: calc(100vh - 55px);
@@ -1416,7 +1408,7 @@ button {
 #siteinformation {
     position: absolute;
     right: 0px;
-    top: 55px;
+    top: 54px;
     z-index: 99;
     width: 33%;
     height: calc(100vh - 55px);
@@ -1653,7 +1645,7 @@ button {
 #bufferinfo {
     position: absolute;
     right: 0;
-    top: 55px;
+    top: 54px;
     z-index: 99;
     width: 33%;
     height: calc(100vh - 55px);
@@ -1779,7 +1771,7 @@ x
 
 #bookmarkinfo {
     position: absolute;
-    top: 55px;
+    top: 54px;
     z-index: 99;
     width: 33%;
     right: 0;
@@ -1884,7 +1876,7 @@ x
 #toolinfo {
     position: absolute;
     left: 154px;
-    top: 55px;
+    top: 54px;
     z-index: 10;
     display: none;
     width: 240px;
@@ -1990,7 +1982,7 @@ x
 #helpinfo {
     position: absolute;
     left: 188px;
-    top: 55px;
+    top: 54px;
     z-index: 10;
     display: none;
     width: 240px;
@@ -2073,7 +2065,7 @@ x
 #dptools-panel {
     position: absolute;
     left: 40px;
-    top: 55px;
+    top: 54px;
     z-index: 99;
     width: 240px;
     border-left-style: solid;
@@ -2090,7 +2082,7 @@ x
 #userinfo {
     position: absolute;
     right: 0px;
-    top: 55px;
+    top: 54px;
     z-index: 99;
     width: 240px;
     border-left-style: solid;
@@ -2101,7 +2093,7 @@ x
 #userinfo-details {
     position: absolute;
     right: 242px;
-    top: 55px;
+    top: 54px;
     z-index: 9;
     display: none;
     width: 356px;
@@ -2576,9 +2568,9 @@ input[type="checkbox"] {
         height: 100%;
         width: 100%;
     }
-    .right-tools {
+/*    .right-tools {
         display: none;
-    }
+    }*/
     .filter-drop {
         display: inline-block;
     }
@@ -2637,8 +2629,6 @@ input[type="checkbox"] {
     float: right;
 }
 
-
-}
 .red-to-green {
     position: relative;
     width: 100%;
@@ -2938,7 +2928,7 @@ input[type="checkbox"] {
     width: 49%;
     background: #fff;
     height: calc(100vh - 55px);
-    top: 55px;
+    top: 54px;
     border-left: 2px solid #fff;
     min-width: 40px;
 }
@@ -3172,7 +3162,6 @@ input[type="checkbox"] {
     height: 32px;
     z-index: 99;
     top: 50%;
-    left: 50%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -3260,7 +3249,7 @@ input[type="checkbox"] {
     background-color: rgba(255, 255, 255, 0.95);
     border-left: 1px solid #ddd;
     position: absolute;
-    top: 55px;
+    top: 54px;
     right: 0px;
     bottom: 0px;
     z-index: 7;
@@ -3316,7 +3305,7 @@ input[type="checkbox"] {
     position: absolute;
     z-index: 7;
     right: 0px;
-    top: 55px;
+    top: 54px;
 }
 #hccc-infobox-content {
     /*height: 100%;
@@ -3536,7 +3525,7 @@ hccc-incident-firno {
     height: 100%;
     pointer-events: none;
     position: absolute;
-    top: 55px;
+    top: 54px;
     width: 100%;
     z-index: 2;
 }
@@ -4507,6 +4496,7 @@ table.jobdistribution-table {
     }
 }
 .login {
+    min-width: 320px;
     width: 50%;
     margin: 0 auto;
     top: 55%;
@@ -4516,7 +4506,6 @@ table.jobdistribution-table {
     width: 50px;
     border: 0;
     padding: 10px 0;
-    margin: 5px 0;
     text-align: center;
     color: #fff;
     font-weight: bold;
@@ -4572,5 +4561,11 @@ table.jobdistribution-table {
     
     to {
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .right-tools{
+        display:none;
     }
 }

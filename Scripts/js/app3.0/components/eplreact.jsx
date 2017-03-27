@@ -488,7 +488,6 @@ export default class EplReact extends React.Component {
                             </DesktopBreakpoint>
 
                             <DesktopBreakpoint>
-
                                 <div className="searchbox">
                                     <div className="search-wrapper">
                                         <span className="search-icon">
@@ -506,24 +505,15 @@ export default class EplReact extends React.Component {
                                         <div className="search-icons-div">
                                             {this.state.searchText.length > 0
                                                 && <span className="search-clear-icon" onClick={this.clearSearchResults.bind(this)}></span>}
-                                            {< div className = "search-speech" onClick = {
+                                            {<div className = "search-speech" onClick = {
                                                 speechAction
-                                            } > <i className={speechClass}></i> </div>}
+                                            }> <i className={speechClass}></i> </div>}
                                         </div>
                                     </div>
                                 </div>
-
-                            </DesktopBreakpoint>                      
-
-                        </Navbar.Brand>
-                        <Navbar.Toggle onClick={this.toggleMobileNavBtn.bind(this)}/>
-                    </Navbar.Header>
-                    
-                    <Navbar.Collapse>
-                        <Nav pullRight>
+                            </DesktopBreakpoint>
                             <DesktopBreakpoint>
-                                <NavItem>
-                                    <div className="right-tools">
+                                <div className="right-tools" style={{float:"right"}}>
                                         <ul className="right-links">
                                             {!buildings
                                                 && <li id="dual-screen" onClick={this.toggleDualScreen.bind(this)}>
@@ -547,15 +537,20 @@ export default class EplReact extends React.Component {
 
                                         </ul>
                                     </div>
-                                </NavItem>
                             </DesktopBreakpoint>
-                            <PhoneBreakpoint>
+
+                        </Navbar.Brand>
+                        <Navbar.Toggle onClick={this.toggleMobileNavBtn.bind(this)}/>
+                    </Navbar.Header>
+                    <PhoneBreakpoint>
+                        <Navbar.Collapse>
+                            <Nav pullRight>
                                 <NavItem>
                                     <GridExampleDividedNumber/>
-                                </NavItem>
-                            </PhoneBreakpoint>
-                        </Nav>
-                    </Navbar.Collapse>
+                                </NavItem>   
+                            </Nav>
+                        </Navbar.Collapse>
+                    </PhoneBreakpoint>
                 </Navbar>
 
                 <div id="loading-div" className="loading-bar">
