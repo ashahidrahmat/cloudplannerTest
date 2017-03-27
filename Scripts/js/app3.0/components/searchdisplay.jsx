@@ -58,8 +58,7 @@ class SearchDisplay extends React.Component {
             <div>
             {
                 searchResults.length > 0 ?
-                <div>
-                    <div className="search-suggest">
+                    <div className="search-suggest" style={this.props.style}>
                         <div ref="ssContent" id="ss-content" onMouseEnter={this.setScrollbar.bind(this)}>                     
                             {
                                 this.setScrollbar(this.refs.ssContent)
@@ -67,7 +66,6 @@ class SearchDisplay extends React.Component {
                             <SearchDisplayRows data={searchResults} setSearchText={this.props.setSearchText} />
                         </div>
                     </div>
-                </div>
                 : null
             }
             </div>
