@@ -304,7 +304,7 @@ export default class EplReact extends React.Component {
             borderWidth:'0px'
         }
 
-        let mapSwitchBtnStyle = {background:'white',zIndex:'98',top:'64px', left: '45%',position:'absolute', cursor:'pointer'};
+        let mapSwitchBtnStyle = {zIndex:'98',top:'64px', left: '50%',position:'absolute', cursor:'pointer'};
 
         Util.isMobile() ? mapSwitchBtnStyle.left = '40%' : mapSwitchBtnStyle.left = '50%'
         //hide chatbot at the next tick
@@ -558,11 +558,6 @@ export default class EplReact extends React.Component {
                             onClick={this.toggleDraw.bind(this)}
                             icon="iconfont icon-pencil"
                             label="Draw"
-                        />
-                        <ChildButton
-                            onClick={this.reset.bind(this)}
-                            icon="iconfont icon-cw-1"
-                            label="Reset"
                         />
                         <ChildButton
                             onClick={this.toggleBookmark.bind(this)}
