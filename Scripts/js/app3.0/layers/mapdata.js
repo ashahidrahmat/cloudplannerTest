@@ -35,12 +35,14 @@ var MapData = [
             {
                 "name":"Parks & Waterbodies Plan",
                 "src": "https://wuat.ura.gov.sg/ArcGis/rest/services/maps2/MP14_PW_gaz_maps/MapServer",
+                "identify" : "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_PW_gaz_maps/MapServer",
                 "layers": [0],
                 "identifyid": [0] 
             },
             {
                 "name": "Master Plan (Approved Amendments Incorporated)",
                 "src": "https://wuat.ura.gov.sg/ArcGis/rest/services/maps2/Updated_Gaz_MP14_Land_Use_Maps/MapServer",
+                "identify" : "https://www.ura.gov.sg/ArcGis/rest/services/maps2/Updated_Gaz_MP14_Land_Use_Maps/MapServer",
                 "layers": [0],
                 "identifyid": [0],
                 "legend": [0,1,2]
@@ -48,41 +50,41 @@ var MapData = [
             {
                 "name": "Master Plan 2014",
                 "src": "https://wuat.ura.gov.sg/ArcGis/rest/services/maps2/MP14_Land_Use_gaz_maps/MapServer",
+                "identify" : "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_Land_Use_gaz_maps/MapServer",
                 "layers": [0,1,2],
                 "identifyid": [0,1,2],
-                "layerinfo": "Currently showing all water network except for treated water type. Zoom in to view treated water network</a>",
                 "legend": [0,1]
             },
             {
                 "name": "Landed Housing Areas Plan",
                 "src": "https://wuat.ura.gov.sg/ArcGis/rest/services/maps2/MP14_LHA_gaz_maps/MapServer",
+                "identify" : "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_LHA_gaz_maps/MapServer",
                 "layers": [0,1,2],
                 "identifyid": [0,1,2],
-                "layerinfo": "Currently showing all water network except for treated water type. Zoom in to view treated water network</a>",
                 "legend": [0,1]
             },
             {
                 "name": "Building Height Plan",
                 "src": "https://wuat.ura.gov.sg/ArcGis/rest/services/maps2/MP14_BLDG_HT_gaz_maps/MapServer",
+                "identify" : "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_BLDG_HT_gaz_maps/MapServer",
                 "layers": [0,1,2],
                 "identifyid": [0,1,2],
-                "layerinfo": "Currently showing all water network except for treated water type. Zoom in to view treated water network</a>",
                 "legend": [0,1]
             },
             {
                 "name": "Activity Generating Uses Plan",
                 "src": "https://wuat.ura.gov.sg/ArcGis/rest/services/maps2/MP14_AGU_gaz_maps/MapServer",
+                "identify" : "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_AGU_gaz_maps/MapServer",
                 "layers": [0,1,2],
                 "identifyid": [0,1,2],
-                "layerinfo": "Currently showing all water network except for treated water type. Zoom in to view treated water network</a>",
                 "legend": [0,1]
             },
             {
                 "name": "Street Block,Urban Design Area,Conservation & Monuments Plan",
-                "src": "https://wuat.ura.gov.sg/ArcGis/rest/services/maps2/MP14_SBUD_gaz_maps/MapServer",
+                "src": "https://wuat.ura.gov.sg/ArcGis/rest/services/maps2/MP14_SBUD_gaz_maps/MapServer", 
+                "identify" : "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_SBUD_gaz_maps/MapServer",             
                 "layers": [0,1,2],
                 "identifyid": [0,1,2],
-                "layerinfo": "Currently showing all water network except for treated water type. Zoom in to view treated water network</a>",
                 "legend": [0,1]
             }
         ]

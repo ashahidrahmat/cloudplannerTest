@@ -19,5 +19,6 @@
 export default {
     OneMapSearch: "https://developers.onemap.sg/commonapi/search",
     OneMapToken: "https://developers.onemap.sg/privateapi/auth/get/getToken",
-    OneMapReverseAddressSearch: "https://developers.onemap.sg/privateapi/commonsvc/revgeocode"
+    OneMapReverseAddressSearch: "https://developers.onemap.sg/privateapi/commonsvc/revgeocode",
+    ArcGisBufferService: "https://www.ura.gov.sg/arcgis/rest/services/Utilities/Geometry/GeometryServer/buffer"
 };

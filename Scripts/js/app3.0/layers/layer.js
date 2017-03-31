@@ -717,7 +717,7 @@ export default class Layer {
     }
 
     getLayerBufferIdentifyUrl() {
-        return this.getMapServiceUrl() + '/identify';
+        return this.opts.identify + '/identify';
     }
 
     abortBuffer() {

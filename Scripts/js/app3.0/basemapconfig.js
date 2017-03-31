@@ -81,38 +81,18 @@ let BasemapConfig = [{
     "name": "Landed Housing Areas Plan",
     "crs": "EPSG3857",
     "src": "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_LHA_gaz_maps/MapServer",
-    "description": "The Master Plan (MP) is the statutory land use plan which guides Singapore's development " +
-        "in the medium term over the next 10 to 15 years. It is reviewed every five years and " +
-        "translates the broad long-term strategies of the Concept Plan into detailed plans to guide " +
-        "the development of land and property. The Master Plan shows the permissible land use and " +
-        "density for developments in Singapore."
 }, {
     "name": "Building Height Plan",
     "crs": "EPSG3857",
-    "src": "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_BLDG_HT_gaz_maps/MapServer",
-    "description": "The Master Plan (MP) is the statutory land use plan which guides Singapore's development " +
-        "in the medium term over the next 10 to 15 years. It is reviewed every five years and " +
-        "translates the broad long-term strategies of the Concept Plan into detailed plans to guide " +
-        "the development of land and property. The Master Plan shows the permissible land use and " +
-        "density for developments in Singapore."
+    "src": "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_BLDG_HT_gaz_maps/MapServer"
 }, {
     "name": "Activity Generating Uses Plan",
     "crs": "EPSG3857",
-    "src": "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_AGU_gaz_maps/MapServer",
-    "description": "The Master Plan (MP) is the statutory land use plan which guides Singapore's development " +
-        "in the medium term over the next 10 to 15 years. It is reviewed every five years and " +
-        "translates the broad long-term strategies of the Concept Plan into detailed plans to guide " +
-        "the development of land and property. The Master Plan shows the permissible land use and " +
-        "density for developments in Singapore."
+    "src": "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_AGU_gaz_maps/MapServer"
 }, {
     "name": "Street Block,Urban Design Area,Conservation & Monuments Plan",
     "crs": "EPSG3857",
-    "src": "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_SBUD_gaz_maps/MapServer",
-    "description": "The Master Plan (MP) is the statutory land use plan which guides Singapore's development " +
-        "in the medium term over the next 10 to 15 years. It is reviewed every five years and " +
-        "translates the broad long-term strategies of the Concept Plan into detailed plans to guide " +
-        "the development of land and property. The Master Plan shows the permissible land use and " +
-        "density for developments in Singapore."
+    "src": "https://www.ura.gov.sg/ArcGis/rest/services/maps2/MP14_SBUD_gaz_maps/MapServer"
 }];
 
 export default BasemapConfig;
