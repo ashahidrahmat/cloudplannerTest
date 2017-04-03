@@ -4,16 +4,16 @@
  * AUTHOR          : yujianmin
  * DATE            : Nov 24, 2014
  * VERSION NO      : 2.0
- * PARAMETERS      : 
- * RETURN          :     
+ * PARAMETERS      :
+ * RETURN          :
  * USAGE NOTES     :
- * COMMENTS        : 
+ * COMMENTS        :
 ---------------------------------------------------------------------------------------------------
- * CHANGE LOG  	   : 
- * CHANGED BY      : 
- * DATE            : 
- * VERSION NO      : 
- * CHANGES         : 
+ * CHANGE LOG  	   :
+ * CHANGED BY      :
+ * DATE            :
+ * VERSION NO      :
+ * CHANGES         :
 --------------------------------------------------------------------------------------------------*/
 
 export default {
@@ -96,5 +96,7 @@ export default {
     CustomGeoPhotoData:81,
     ClearPhotoTempMarker:82,
     ToggleMobileNavBtn:83,
-    ToggleChatBot:84
+    ToggleChatBot:84,
+    TogglePostgresQuery:85,
+    DynamicQuery:86
 };

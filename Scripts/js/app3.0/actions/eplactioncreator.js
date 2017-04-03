@@ -4,16 +4,16 @@
  * AUTHOR          : louisz
  * DATE            : Feb 03, 2016
  * VERSION NO      : 1.0
- * PARAMETERS      : 
- * RETURN          :     
+ * PARAMETERS      :
+ * RETURN          :
  * USAGE NOTES     :
- * COMMENTS        : 
+ * COMMENTS        :
 ---------------------------------------------------------------------------------------------------
- * CHANGE LOG  	   : 
- * CHANGED BY      : 
- * DATE            : 
- * VERSION NO      : 
- * CHANGES         : 
+ * CHANGE LOG  	   :
+ * CHANGED BY      :
+ * DATE            :
+ * VERSION NO      :
+ * CHANGES         :
 --------------------------------------------------------------------------------------------------*/
 
 import WebApi from 'webapi';
@@ -569,6 +569,19 @@ class EplActionCreator {
         AppDispatcher.dispatch({
             actionType: EplConstants.ToggleChatBot
         });
+    }
+
+    togglePostgresQuery(){
+      AppDispatcher.dispatch({
+          actionType: EplConstants.TogglePostgresQuery
+      });
+    }
+
+    dynamicQuery(customData){
+      AppDispatcher.dispatch({
+          actionType: EplConstants.DynamicQuery,
+          customData: customData
+      });
     }
 }
 

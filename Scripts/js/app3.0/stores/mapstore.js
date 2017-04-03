@@ -39,6 +39,7 @@ import Map3DStore from 'stores/3dmapstore';
 import ClusterManager from 'stores/clustermanager';
 import Clusterstore from 'stores/clusterstore';
 import QuicklinkStore from 'stores/quicklinkstore';
+import QueryManager from 'stores/querymanager';
 
 class MapStore extends BaseStore {
 
@@ -127,6 +128,9 @@ class MapStore extends BaseStore {
 
         //config cluster manager
         this.configClusterManager(map);
+
+        //config for query api
+        this.configQueryManager(map);
     }
 
     destroy(mapId) {
@@ -487,7 +491,13 @@ class MapStore extends BaseStore {
         this.clusterManager.initialize();
     }
 
-    //disable map on click identify task 
+    //queryManager
+    configQueryManager(map) {
+        this.queryManager = new QueryManager(map);
+        this.queryManager.initialize();
+    }
+
+    //disable map on click identify task
     disableMapOnClickIdentifyHandler() {
         var map = this.firstMap;
         if (!map) {
@@ -497,7 +507,7 @@ class MapStore extends BaseStore {
         map.off('click', mapOnClickIdentifyHandler);
     }
 
-    //enable map on click identify task 
+    //enable map on click identify task
     enableMapOnClickIdentifyHandler() {
         var map = this.firstMap;
         if (!map) {

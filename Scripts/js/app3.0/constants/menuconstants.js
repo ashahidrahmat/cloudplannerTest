@@ -4,16 +4,16 @@
  * AUTHOR          : louisz
  * DATE            : Feb 03, 2016
  * VERSION NO      : 1.0
- * PARAMETERS      : 
- * RETURN          :     
+ * PARAMETERS      :
+ * RETURN          :
  * USAGE NOTES     :
- * COMMENTS        : 
+ * COMMENTS        :
 ---------------------------------------------------------------------------------------------------
- * CHANGE LOG  	   : 
- * CHANGED BY      : 
- * DATE            : 
- * VERSION NO      : 
- * CHANGES         : 
+ * CHANGE LOG  	   :
+ * CHANGED BY      :
+ * DATE            :
+ * VERSION NO      :
+ * CHANGES         :
 --------------------------------------------------------------------------------------------------*/
 
 export default {
@@ -29,7 +29,8 @@ export default {
     Modal: 9,
     GeoTagPhotoDetail:10,
     ToggleMobileNavBtn:11,
-    ChatBot:12
+    ChatBot:12,
+    Postgres:13
 }
 
 export let FilterState = {

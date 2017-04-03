@@ -74,7 +74,7 @@ class UiStore extends BaseStore {
     }
 
     toggleLayerSummaryByLayer(layerName) {
-        
+
         switch (this.uiState.displayMenu) {
             case MenuConstants.LeftPanel:
                 this._summaryLayer = layerName;
@@ -83,12 +83,12 @@ class UiStore extends BaseStore {
                 setTimeout(function() {
                     EplActionCreator.queryLayerSummary(layerName);
                 }, 10);
-                
+
                 break;
             case MenuConstants.LeftPanelWithSummary:
                 if (this._summaryLayer !== layerName) {
                     this._summaryLayer = layerName;
-                    
+
                     setTimeout(function() {
                         EplActionCreator.queryLayerSummary(layerName);
                     }, 10);
@@ -272,7 +272,7 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
         case EplConstants.AddLayer:
             AppDispatcher.waitFor([LayerManagerStore.dispatchToken]);
             let emitChanges = instance.setShowFilter(LayerManagerStore.hasLayerWithFilter());
-            
+
             if (!instance.toggleLayerInfo(LayerManagerStore.latestLayerHasInfo())) {
                 emitChanges = true;
             }
@@ -337,6 +337,10 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
             break;
         case EplConstants.ToggleChatBot:
             instance.toggleGroupMenu(MenuConstants.ChatBot);
+            instance.emitChanges();
+            break;
+        case EplConstants.TogglePostgresQuery:
+            instance.toggleGroupMenu(MenuConstants.Postgres);
             instance.emitChanges();
             break;
         default:
