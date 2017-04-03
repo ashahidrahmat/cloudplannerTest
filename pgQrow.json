@@ -1,0 +1,46 @@
+
+ {
+  "functions": {
+    "testget1": {
+      "custom": {
+        "excludePatterns": [
+
+        ],
+        "envVars": [
+
+        ]
+      },
+      "endpoints": [
+        {
+          "path": "examples/one",
+          "method": "GET",
+          "authorizationType": "none",
+          "apiKeyRequired": false,
+          "requestParameters": {
+            "integration.request.querystring.test": "method.request.querystring.test"
+          },
+          "requestTemplates": {
+            "application/json": "{\n\"test\": \"$input.params('test')\"}"
+          },
+          "responses": {
+            "400": {
+              "statusCode": "400"
+            },
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+
+              },
+              "responseModels": {
+
+              },
+              "responseTemplates": {
+                "application/json": ""
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
