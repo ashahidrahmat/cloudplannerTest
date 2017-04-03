@@ -304,9 +304,6 @@ export default class EplReact extends React.Component {
             borderWidth:'0px'
         }
 
-        let mapSwitchBtnStyle = {zIndex:'98',top:'64px', left: '50%',position:'absolute', cursor:'pointer'};
-
-        Util.isMobile() ? mapSwitchBtnStyle.left = '40%' : mapSwitchBtnStyle.left = '50%'
         //hide chatbot at the next tick
         setTimeout(()=>{
             $(this.refs.chatbot).hide();
@@ -584,14 +581,10 @@ export default class EplReact extends React.Component {
                     </Menu>
                 </PhoneBreakpoint>
                 <div ref="chatbot" className="chatbot" style={containerStyle}><iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe></div>
-                {
-                    !Util.isMobile() &&  
-                        <div className="chatbot-btn" style={{background:'white',zIndex:'500',width:'60px',height:'60px',bottom:'30px',right:'30px',position:'absolute',borderRadius:'60px', boxShadow:'3px 3px 7px #888888'}} onClick={this.toggleChatBot.bind(this)}>
-                            <i style={{margin:'13px',lineHeight: '3.7'}} className="iconfont icon-chat-1"></i>
-                        </div>
-
-                }
-                <ButtonGroup style={mapSwitchBtnStyle}>
+                <div className="chatbot-btn" onClick={this.toggleChatBot.bind(this)}>
+                    <i style={{margin:'13px',lineHeight: '4.2'}} className="iconfont icon-chat-1"></i>
+                </div>
+                <ButtonGroup className="map-switch-btn">
                     <Button onClick={this.toggle3D.bind(this,false)} active={!buildings} style={{outlineStyle: 'none'}}>2D</Button>
                     <Button onClick={this.toggle3D.bind(this,true)} active={buildings} style={{outlineStyle: 'none'}}>3D</Button>
                 </ButtonGroup>

@@ -42,7 +42,7 @@ class Basemap {
         this.opts = {
             url: basemap.src,
             minZoom: 12,
-            maxZoom: 18,
+            maxZoom: 19,
             continuousWorld: true,
             useCors: basemap.useCors | false,
             zIndex: 0
