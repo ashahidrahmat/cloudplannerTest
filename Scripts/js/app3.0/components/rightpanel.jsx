@@ -56,6 +56,7 @@ class RightPanel extends React.Component {
         Map3DStore.addChangeListener(this._onSiteInfoChange);
         LayerManagerStore.addChangeListener(this._onChange);
         this.centerMapOnIdentify();
+        Util.logPanelView("identify");
     }
 
     componentWillUnmount() {

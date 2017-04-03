@@ -96,6 +96,7 @@ export default class EplReact extends React.Component {
         UiStore.addChangeListener(this._onUiChange);
         SpeechStore.addChangeListener(this._onSpeechChange);
         MapStore.addChangeListener(this._onSiteInfoChange);
+        Util.logPanelView("Successful Login");
     }
 
     componentWillUnmount() {
@@ -175,6 +176,7 @@ export default class EplReact extends React.Component {
 
     setBasemap(name) {
         EplActionCreator.setBasemap(name);
+        Util.logBasemap(name);
     }
 
     showBasemapInfo(name) {
@@ -184,10 +186,12 @@ export default class EplReact extends React.Component {
 
     reset() {
         EplActionCreator.reset();
+        Util.logPanelView("Reset")
     }
 
     locateUser() {
         EplActionCreator.locateUser();
+        Util.logPanelView("Locate User")
     }
 
     onChange(event) {
@@ -231,9 +235,11 @@ export default class EplReact extends React.Component {
                 this.toggleLeftPanel();
             }
             this.setState({buildings: false})
+            Util.logPanelView("2D");
         } else {
             this.state.uiState.dualScreen = false;
             this.setState({buildings: true})
+            Util.logPanelView("3D");
         }
     }
 
@@ -259,6 +265,7 @@ export default class EplReact extends React.Component {
 
     toggleChatBot(){
         $(this.refs.chatbot).toggle();
+        Util.logPanelView("Chat Bot")
         //EplActionCreator.toggleChatBot();
     }
 
@@ -319,9 +326,7 @@ export default class EplReact extends React.Component {
                         }}>
                             {this.state.siteInfo.address}
                         </Navbar.Brand>
-
                     </Navbar.Header>
-
                 </Navbar>
             </PhoneBreakpoint>
         }
@@ -493,6 +498,9 @@ export default class EplReact extends React.Component {
                             </div>
                  }
                 </ReactCSSTransitionGroup>
+                {
+                    uiState.displayMenu === MenuConstants.Basemap && Util.logPanelView("Basemap")
+                }
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {uiState.dualScreen && <Dual/>}
                 </ReactCSSTransitionGroup>
@@ -512,7 +520,8 @@ export default class EplReact extends React.Component {
                 </DesktopBreakpoint>
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Buffer)
-                        && <Buffer key="buffer"/>}
+                        && <Buffer key="buffer"/> 
+                    }
                 </ReactCSSTransitionGroup>
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Draw)

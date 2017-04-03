@@ -22,8 +22,8 @@ import React from 'react';
 import Button from 'components/ui/button';
 import UpdateProfile from 'components/updateprofile';
 import EplActionCreator from 'actions/eplactioncreator';
-import SocialLogin from 'components/sociallogin'
-
+import SocialLogin from 'components/sociallogin';
+import Util from 'utils';
 
 export default class UserProfile extends React.Component {
 
@@ -35,6 +35,10 @@ export default class UserProfile extends React.Component {
             newPassword: '',
             confirmPassword: ''
         }
+    }
+
+    componentDidMount(){
+        Util.logPanelView("User Profile");
     }
 
     changePasswordFunc(e) {

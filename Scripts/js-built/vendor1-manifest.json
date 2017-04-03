@@ -125,80 +125,80 @@
       "id": 70,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/DOMChildrenOperations.js": {
+    "./node_modules/process/browser.js": {
       "id": 71,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/DOMNamespaces.js": {
+    "./node_modules/react-dom/lib/DOMChildrenOperations.js": {
       "id": 72,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/EventPluginRegistry.js": {
+    "./node_modules/react-dom/lib/DOMNamespaces.js": {
       "id": 73,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/EventPluginUtils.js": {
+    "./node_modules/react-dom/lib/EventPluginRegistry.js": {
       "id": 74,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/KeyEscapeUtils.js": {
+    "./node_modules/react-dom/lib/EventPluginUtils.js": {
       "id": 75,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/LinkedValueUtils.js": {
+    "./node_modules/react-dom/lib/KeyEscapeUtils.js": {
       "id": 76,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactComponentEnvironment.js": {
+    "./node_modules/react-dom/lib/LinkedValueUtils.js": {
       "id": 77,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactErrorUtils.js": {
+    "./node_modules/react-dom/lib/ReactComponentEnvironment.js": {
       "id": 78,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/ReactUpdateQueue.js": {
+    "./node_modules/react-dom/lib/ReactErrorUtils.js": {
       "id": 79,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/createMicrosoftUnsafeLocalFunction.js": {
+    "./node_modules/react-dom/lib/ReactUpdateQueue.js": {
       "id": 80,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/getEventCharCode.js": {
+    "./node_modules/react-dom/lib/createMicrosoftUnsafeLocalFunction.js": {
       "id": 81,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/getEventModifierState.js": {
+    "./node_modules/react-dom/lib/getEventCharCode.js": {
       "id": 82,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/getEventTarget.js": {
+    "./node_modules/react-dom/lib/getEventModifierState.js": {
       "id": 83,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/isEventSupported.js": {
+    "./node_modules/react-dom/lib/getEventTarget.js": {
       "id": 84,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/shouldUpdateReactComponent.js": {
+    "./node_modules/react-dom/lib/isEventSupported.js": {
       "id": 85,
       "meta": {}
     },
-    "./node_modules/react-dom/lib/validateDOMNesting.js": {
+    "./node_modules/react-dom/lib/shouldUpdateReactComponent.js": {
       "id": 86,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactComponent.js": {
+    "./node_modules/react-dom/lib/validateDOMNesting.js": {
       "id": 87,
       "meta": {}
     },
-    "./node_modules/react/lib/ReactNoopUpdateQueue.js": {
+    "./node_modules/react/lib/ReactComponent.js": {
       "id": 88,
       "meta": {}
     },
-    "./node_modules/process/browser.js": {
-      "id": 95,
+    "./node_modules/react/lib/ReactNoopUpdateQueue.js": {
+      "id": 89,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/msfnz.js": {
@@ -357,628 +357,624 @@
       "id": 155,
       "meta": {}
     },
-    "./node_modules/webpack/buildin/global.js": {
+    "./node_modules/leaflet/dist/leaflet-src.js": {
       "id": 193,
       "meta": {}
     },
-    "./node_modules/leaflet/dist/leaflet-src.js": {
+    "./node_modules/react-dom/index.js": {
       "id": 194,
       "meta": {}
     },
-    "./node_modules/react-dom/index.js": {
-      "id": 195,
-      "meta": {}
-    },
     "./node_modules/fbjs/lib/camelize.js": {
-      "id": 213,
+      "id": 212,
       "meta": {}
     },
     "./node_modules/fbjs/lib/camelizeStyleName.js": {
-      "id": 214,
+      "id": 213,
       "meta": {}
     },
     "./node_modules/fbjs/lib/containsNode.js": {
-      "id": 215,
+      "id": 214,
       "meta": {}
     },
     "./node_modules/fbjs/lib/createArrayFromMixed.js": {
-      "id": 216,
+      "id": 215,
       "meta": {}
     },
     "./node_modules/fbjs/lib/createNodesFromMarkup.js": {
-      "id": 217,
+      "id": 216,
       "meta": {}
     },
     "./node_modules/fbjs/lib/getMarkupWrap.js": {
-      "id": 218,
+      "id": 217,
       "meta": {}
     },
     "./node_modules/fbjs/lib/getUnboundedScrollPosition.js": {
-      "id": 219,
+      "id": 218,
       "meta": {}
     },
     "./node_modules/fbjs/lib/hyphenate.js": {
-      "id": 220,
+      "id": 219,
       "meta": {}
     },
     "./node_modules/fbjs/lib/hyphenateStyleName.js": {
-      "id": 221,
+      "id": 220,
       "meta": {}
     },
     "./node_modules/fbjs/lib/isNode.js": {
-      "id": 222,
+      "id": 221,
       "meta": {}
     },
     "./node_modules/fbjs/lib/isTextNode.js": {
-      "id": 223,
+      "id": 222,
       "meta": {}
     },
     "./node_modules/fbjs/lib/memoizeStringOnly.js": {
-      "id": 224,
+      "id": 223,
       "meta": {}
     },
     "./node_modules/proj4/lib/Proj.js": {
-      "id": 225,
+      "id": 224,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/gN.js": {
-      "id": 226,
+      "id": 225,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/imlfn.js": {
-      "id": 227,
+      "id": 226,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/pj_mlfn.js": {
-      "id": 228,
+      "id": 227,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/qsfnz.js": {
-      "id": 229,
+      "id": 228,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ARIADOMPropertyConfig.js": {
-      "id": 230,
+      "id": 229,
       "meta": {}
     },
     "./node_modules/react-dom/lib/AutoFocusUtils.js": {
-      "id": 231,
+      "id": 230,
       "meta": {}
     },
     "./node_modules/react-dom/lib/BeforeInputEventPlugin.js": {
-      "id": 232,
+      "id": 231,
       "meta": {}
     },
     "./node_modules/react-dom/lib/CSSPropertyOperations.js": {
-      "id": 233,
+      "id": 232,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ChangeEventPlugin.js": {
-      "id": 234,
+      "id": 233,
       "meta": {}
     },
     "./node_modules/react-dom/lib/Danger.js": {
-      "id": 235,
+      "id": 234,
       "meta": {}
     },
     "./node_modules/react-dom/lib/DefaultEventPluginOrder.js": {
-      "id": 236,
+      "id": 235,
       "meta": {}
     },
     "./node_modules/react-dom/lib/EnterLeaveEventPlugin.js": {
-      "id": 237,
+      "id": 236,
       "meta": {}
     },
     "./node_modules/react-dom/lib/FallbackCompositionState.js": {
-      "id": 238,
+      "id": 237,
       "meta": {}
     },
     "./node_modules/react-dom/lib/HTMLDOMPropertyConfig.js": {
-      "id": 239,
+      "id": 238,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactChildReconciler.js": {
-      "id": 240,
+      "id": 239,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactComponentBrowserEnvironment.js": {
-      "id": 241,
+      "id": 240,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactCompositeComponent.js": {
-      "id": 242,
+      "id": 241,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOM.js": {
-      "id": 243,
+      "id": 242,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMComponent.js": {
-      "id": 244,
+      "id": 243,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMContainerInfo.js": {
-      "id": 245,
+      "id": 244,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMEmptyComponent.js": {
-      "id": 246,
+      "id": 245,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMFeatureFlags.js": {
-      "id": 247,
+      "id": 246,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMIDOperations.js": {
-      "id": 248,
+      "id": 247,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMInput.js": {
-      "id": 249,
+      "id": 248,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMOption.js": {
-      "id": 250,
+      "id": 249,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMSelection.js": {
-      "id": 251,
+      "id": 250,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMTextComponent.js": {
-      "id": 252,
+      "id": 251,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMTextarea.js": {
-      "id": 253,
+      "id": 252,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDOMTreeTraversal.js": {
-      "id": 254,
+      "id": 253,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDefaultBatchingStrategy.js": {
-      "id": 255,
+      "id": 254,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactDefaultInjection.js": {
-      "id": 256,
+      "id": 255,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactElementSymbol.js": {
-      "id": 257,
+      "id": 256,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactEventEmitterMixin.js": {
-      "id": 258,
+      "id": 257,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactEventListener.js": {
-      "id": 259,
+      "id": 258,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactInjection.js": {
-      "id": 260,
+      "id": 259,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactMarkupChecksum.js": {
-      "id": 261,
+      "id": 260,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactMultiChild.js": {
-      "id": 262,
+      "id": 261,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactOwner.js": {
-      "id": 263,
+      "id": 262,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactPropTypesSecret.js": {
-      "id": 264,
+      "id": 263,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactReconcileTransaction.js": {
-      "id": 265,
+      "id": 264,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactRef.js": {
-      "id": 266,
+      "id": 265,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactServerRenderingTransaction.js": {
-      "id": 267,
+      "id": 266,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactServerUpdateQueue.js": {
-      "id": 268,
+      "id": 267,
       "meta": {}
     },
     "./node_modules/react-dom/lib/ReactVersion.js": {
-      "id": 269,
+      "id": 268,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SVGDOMPropertyConfig.js": {
-      "id": 270,
+      "id": 269,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SelectEventPlugin.js": {
-      "id": 271,
+      "id": 270,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SimpleEventPlugin.js": {
-      "id": 272,
+      "id": 271,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticAnimationEvent.js": {
-      "id": 273,
+      "id": 272,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticClipboardEvent.js": {
-      "id": 274,
+      "id": 273,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticCompositionEvent.js": {
-      "id": 275,
+      "id": 274,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticDragEvent.js": {
-      "id": 276,
+      "id": 275,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticFocusEvent.js": {
-      "id": 277,
+      "id": 276,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticInputEvent.js": {
-      "id": 278,
+      "id": 277,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticKeyboardEvent.js": {
-      "id": 279,
+      "id": 278,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticTouchEvent.js": {
-      "id": 280,
+      "id": 279,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticTransitionEvent.js": {
-      "id": 281,
+      "id": 280,
       "meta": {}
     },
     "./node_modules/react-dom/lib/SyntheticWheelEvent.js": {
-      "id": 282,
+      "id": 281,
       "meta": {}
     },
     "./node_modules/react-dom/lib/adler32.js": {
-      "id": 283,
+      "id": 282,
       "meta": {}
     },
     "./node_modules/react-dom/lib/dangerousStyleValue.js": {
-      "id": 284,
+      "id": 283,
       "meta": {}
     },
     "./node_modules/react-dom/lib/findDOMNode.js": {
-      "id": 285,
+      "id": 284,
       "meta": {}
     },
     "./node_modules/react-dom/lib/flattenChildren.js": {
-      "id": 286,
+      "id": 285,
       "meta": {}
     },
     "./node_modules/react-dom/lib/getEventKey.js": {
-      "id": 287,
+      "id": 286,
       "meta": {}
     },
     "./node_modules/react-dom/lib/getIteratorFn.js": {
-      "id": 288,
+      "id": 287,
       "meta": {}
     },
     "./node_modules/react-dom/lib/getNextDebugID.js": {
-      "id": 289,
+      "id": 288,
       "meta": {}
     },
     "./node_modules/react-dom/lib/getNodeForCharacterOffset.js": {
-      "id": 290,
+      "id": 289,
       "meta": {}
     },
     "./node_modules/react-dom/lib/getVendorPrefixedEventName.js": {
-      "id": 291,
+      "id": 290,
       "meta": {}
     },
     "./node_modules/react-dom/lib/quoteAttributeValueForBrowser.js": {
-      "id": 292,
+      "id": 291,
       "meta": {}
     },
     "./node_modules/react-dom/lib/renderSubtreeIntoContainer.js": {
-      "id": 293,
+      "id": 292,
       "meta": {}
     },
     "./node_modules/react/lib/KeyEscapeUtils.js": {
-      "id": 294,
+      "id": 293,
       "meta": {}
     },
     "./node_modules/react/lib/PooledClass.js": {
-      "id": 295,
+      "id": 294,
       "meta": {}
     },
     "./node_modules/react/lib/ReactChildren.js": {
-      "id": 296,
+      "id": 295,
       "meta": {}
     },
     "./node_modules/react/lib/ReactClass.js": {
-      "id": 297,
+      "id": 296,
       "meta": {}
     },
     "./node_modules/react/lib/ReactDOMFactories.js": {
-      "id": 298,
+      "id": 297,
       "meta": {}
     },
     "./node_modules/react/lib/ReactPropTypes.js": {
-      "id": 299,
+      "id": 298,
       "meta": {}
     },
     "./node_modules/react/lib/ReactPropTypesSecret.js": {
-      "id": 300,
+      "id": 299,
       "meta": {}
     },
     "./node_modules/react/lib/ReactPureComponent.js": {
-      "id": 301,
+      "id": 300,
       "meta": {}
     },
     "./node_modules/react/lib/ReactVersion.js": {
-      "id": 302,
+      "id": 301,
       "meta": {}
     },
     "./node_modules/react/lib/onlyChild.js": {
-      "id": 303,
+      "id": 302,
       "meta": {}
     },
     "./node_modules/react/lib/traverseAllChildren.js": {
-      "id": 304,
+      "id": 303,
       "meta": {}
     },
     "./node_modules/mgrs/mgrs.js": {
-      "id": 376,
+      "id": 375,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/pj_enfn.js": {
-      "id": 377,
+      "id": 376,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/pj_inv_mlfn.js": {
-      "id": 378,
+      "id": 377,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/toPoint.js": {
-      "id": 379,
+      "id": 378,
       "meta": {}
     },
     "./node_modules/proj4/lib/defs.js": {
-      "id": 380,
+      "id": 379,
       "meta": {}
     },
     "./node_modules/proj4/lib/extend.js": {
-      "id": 381,
+      "id": 380,
       "meta": {}
     },
     "./node_modules/proj4/lib/projString.js": {
-      "id": 382,
+      "id": 381,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/tmerc.js": {
-      "id": 383,
+      "id": 382,
       "meta": {}
     },
     "./node_modules/proj4/lib/transform.js": {
-      "id": 384,
+      "id": 383,
       "meta": {}
     },
     "./node_modules/proj4/lib/wkt.js": {
-      "id": 385,
+      "id": 384,
       "meta": {}
     },
     "./node_modules/esri-leaflet/dist/esri-leaflet-debug.js": {
-      "id": 540,
+      "id": 539,
       "meta": {}
     },
     "./node_modules/eventemitter2/lib/eventemitter2.js": {
-      "id": 541,
+      "id": 540,
       "meta": {}
     },
     "./node_modules/flux/index.js": {
-      "id": 542,
+      "id": 541,
       "meta": {}
     },
     "./node_modules/jquery/dist/jquery.js": {
-      "id": 543,
+      "id": 542,
       "meta": {}
     },
     "./node_modules/leaflet-draw/dist/leaflet.draw.js": {
-      "id": 544,
+      "id": 543,
       "meta": {}
     },
     "./node_modules/proj4leaflet/src/proj4leaflet.js": {
-      "id": 545,
+      "id": 544,
       "meta": {}
     },
     "./node_modules/flux/lib/Dispatcher.js": {
-      "id": 774,
+      "id": 773,
       "meta": {}
     },
     "./node_modules/proj4/lib/Point.js": {
-      "id": 776,
+      "id": 775,
       "meta": {}
     },
     "./node_modules/proj4/lib/adjust_axis.js": {
-      "id": 777,
+      "id": 776,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/adjust_zone.js": {
-      "id": 778,
+      "id": 777,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/iqsfnz.js": {
-      "id": 779,
+      "id": 778,
       "meta": {}
     },
     "./node_modules/proj4/lib/common/srat.js": {
-      "id": 780,
+      "id": 779,
       "meta": {}
     },
     "./node_modules/proj4/lib/constants/Datum.js": {
-      "id": 781,
+      "id": 780,
       "meta": {}
     },
     "./node_modules/proj4/lib/constants/Ellipsoid.js": {
-      "id": 782,
+      "id": 781,
       "meta": {}
     },
     "./node_modules/proj4/lib/constants/PrimeMeridian.js": {
-      "id": 783,
+      "id": 782,
       "meta": {}
     },
     "./node_modules/proj4/lib/constants/units.js": {
-      "id": 784,
+      "id": 783,
       "meta": {}
     },
     "./node_modules/proj4/lib/core.js": {
-      "id": 785,
+      "id": 784,
       "meta": {}
     },
     "./node_modules/proj4/lib/datum.js": {
-      "id": 786,
+      "id": 785,
       "meta": {}
     },
     "./node_modules/proj4/lib/datumUtils.js": {
-      "id": 787,
+      "id": 786,
       "meta": {}
     },
     "./node_modules/proj4/lib/datum_transform.js": {
-      "id": 788,
+      "id": 787,
       "meta": {}
     },
     "./node_modules/proj4/lib/deriveConstants.js": {
-      "id": 789,
+      "id": 788,
       "meta": {}
     },
     "./node_modules/proj4/lib/global.js": {
-      "id": 790,
+      "id": 789,
       "meta": {}
     },
     "./node_modules/proj4/lib/includedProjections.js": {
-      "id": 791,
+      "id": 790,
       "meta": {}
     },
     "./node_modules/proj4/lib/index.js": {
-      "id": 792,
+      "id": 791,
       "meta": {}
     },
     "./node_modules/proj4/lib/parseCode.js": {
-      "id": 793,
+      "id": 792,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections.js": {
-      "id": 794,
+      "id": 793,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/aea.js": {
-      "id": 795,
+      "id": 794,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/aeqd.js": {
-      "id": 796,
+      "id": 795,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/cass.js": {
-      "id": 797,
+      "id": 796,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/cea.js": {
-      "id": 798,
+      "id": 797,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/eqc.js": {
-      "id": 799,
+      "id": 798,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/eqdc.js": {
-      "id": 800,
+      "id": 799,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/gauss.js": {
-      "id": 801,
+      "id": 800,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/gnom.js": {
-      "id": 802,
+      "id": 801,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/krovak.js": {
-      "id": 803,
+      "id": 802,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/laea.js": {
-      "id": 804,
+      "id": 803,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/lcc.js": {
-      "id": 805,
+      "id": 804,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/longlat.js": {
-      "id": 806,
+      "id": 805,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/merc.js": {
-      "id": 807,
+      "id": 806,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/mill.js": {
-      "id": 808,
+      "id": 807,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/moll.js": {
-      "id": 809,
+      "id": 808,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/nzmg.js": {
-      "id": 810,
+      "id": 809,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/omerc.js": {
-      "id": 811,
+      "id": 810,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/poly.js": {
-      "id": 812,
+      "id": 811,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/sinu.js": {
-      "id": 813,
+      "id": 812,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/somerc.js": {
-      "id": 814,
+      "id": 813,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/stere.js": {
-      "id": 815,
+      "id": 814,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/sterea.js": {
-      "id": 816,
+      "id": 815,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/utm.js": {
-      "id": 817,
+      "id": 816,
       "meta": {}
     },
     "./node_modules/proj4/lib/projections/vandg.js": {
-      "id": 818,
+      "id": 817,
       "meta": {}
     },
     "./node_modules/proj4/lib/version-browser.js": {
-      "id": 819,
+      "id": 818,
       "meta": {}
     }
   }

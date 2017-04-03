@@ -21,6 +21,7 @@ import React from 'react';
 import EsriLeaflet from 'components/esrileaflet';
 import MapConstants from 'constants/mapconstants';
 import EplActionCreator from 'actions/eplactioncreator';
+import Util from 'utils';
 
 class Dual extends React.Component {
 
@@ -44,6 +45,8 @@ class Dual extends React.Component {
             'width': width >= 450 ? width : 450
         });
         EplActionCreator.resetMapSize();
+
+        Util.logPanelView("dual");
     }
 
     toggleDualBasemapMenu() {

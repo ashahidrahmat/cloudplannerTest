@@ -23,6 +23,7 @@ import FeatureConstants from 'constants/featureconstants';
 import * as d3 from 'd3';
 import Ps from 'perfect-scrollbar';
 import * as D from 'datejs';
+import ReactGA from 'react-ga';
 
 class Util {
     constructor() {
@@ -53,6 +54,8 @@ class Util {
         };
         this._map = null;
         this._identifyPoint = null;
+
+        ReactGA.initialize('UA-96667619-1');
     }
 
     /*use by geo photo*/
@@ -698,6 +701,37 @@ class Util {
         }
     }
 
+    logPanelView(panel) {
+        ReactGA.event({
+            category: 'Panel',
+            action: 'Opened a panel',
+            label: panel
+        });
+    }
+
+    logLayerView(layer) {
+        ReactGA.event({
+            category: 'Layer',
+            action: 'Selected a layer',
+            label: layer
+        });
+    }
+
+    logSearch(text, result) {
+        ReactGA.event({
+            category: 'Search',
+            action: 'Clicked on a Search Result',
+            label: text.toUpperCase()
+        });
+    }
+
+    logBasemap(basemap){
+        ReactGA.event({
+            category: 'Basemap',
+            action: 'Loaded a basemap',
+            label: basemap
+        });
+    }
 }
 
 export default (new Util());

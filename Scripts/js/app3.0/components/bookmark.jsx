@@ -41,6 +41,8 @@ class Bookmark extends React.Component {
         Util.setPerfectScrollbar(content);
        
         BookmarkStore.addChangeListener(this._onChange);
+
+        Util.logPanelView("bookmark");
     }
 
     componentWillUnmount() {
