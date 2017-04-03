@@ -19,6 +19,7 @@
 
 import React from 'react';
 import EplActionCreator from 'actions/eplactioncreator';
+import Util from 'utils';
 
 class Layer extends React.Component {
     constructor(props) {
@@ -31,6 +32,10 @@ class Layer extends React.Component {
     toggleLayer() {
         var layerName = this.props.layer.getName();
         //console.log(layerName);
+        if(!this.props.selected){
+            Util.logLayerView(layerName);
+        }
+
         this.props.selected ? EplActionCreator.removeLayer(layerName) : EplActionCreator.addLayer(layerName);
     }
 

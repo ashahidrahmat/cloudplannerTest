@@ -21,6 +21,7 @@
 import React from 'react';
 import LayerManagerStore from 'stores/layermanagerstore';
 import EplActionCreator from 'actions/eplactioncreator';
+import Util from 'utils';
 
 class Legend extends React.Component {
     constructor(props) {
@@ -40,6 +41,7 @@ class Legend extends React.Component {
 
     componentDidMount() {
         LayerManagerStore.addChangeListener(this._onChange);
+        Util.logPanelView("legend");
     }
 
     componentWillUnmount() {

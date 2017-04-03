@@ -28,6 +28,7 @@ import LayerManagerStore from 'stores/layermanagerstore';
 import UiStore from 'stores/uistore';
 import MenuConstants, {FilterState} from 'constants/menuconstants';
 import SpeechStore from 'stores/speechstore';
+import Util from 'utils';
 
 class SearchDisplayRows extends React.Component {
 
@@ -89,6 +90,8 @@ class SearchDisplayRows extends React.Component {
     }
 
     onClickJitProcessing(row) {
+        Util.logSearch(document.getElementById("query-search").value.toUpperCase(),row.display);
+
         SpeechStore.clearResults();
         EplActionCreator.clearSearchResults();
         Object.keys(row).map(key => {

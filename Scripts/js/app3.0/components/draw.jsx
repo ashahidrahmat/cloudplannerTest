@@ -45,7 +45,6 @@ class Draw extends React.Component {
     }
 
     componentDidMount() {
-
         let content = this.refs.cateContent;
         Util.setPerfectScrollbar(content)
 
@@ -53,6 +52,8 @@ class Draw extends React.Component {
         //DrawStore.disableMapOnClickIdentifyHandler();
         BufferStore.disableBufferDrawHandler();
         DrawStore._registeredDrawEventHandler = false;
+
+        Util.logPanelView("draw");
     }
 
     componentWillUnmount() {

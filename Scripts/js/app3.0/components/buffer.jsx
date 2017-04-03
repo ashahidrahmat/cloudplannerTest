@@ -102,6 +102,8 @@ class Buffer extends React.Component {
 
         let content = this.refs.bufferResults;
         Util.setPerfectScrollbar(content);
+
+        Util.logPanelView("buffer");
     }
 
 
