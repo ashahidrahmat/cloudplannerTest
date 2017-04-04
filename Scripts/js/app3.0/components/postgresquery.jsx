@@ -46,6 +46,36 @@ var emptyObject = (d) => {
 };
 
 
+var highlightFeature = (e) => {
+   var layer = e.target;
+
+ //console.log(layer)
+
+   layer.setStyle({
+       weight: 5,
+       color: '#666',
+       dashArray: '',
+       fillOpacity: 0.7
+   });
+
+   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+       layer.bringToFront();
+   }
+   //info.update(layer.feature.properties);
+}
+
+var geojson;
+
+var resetHighlight = (e) =>{
+ geojson.resetStyle(e.target);
+// info.update();
+}
+
+var zoomToFeature = (e) => {
+ map.fitBounds(e.target.getBounds());
+}
+
+
 class PostgresQuery extends React.Component {
 
     constructor(props) {
@@ -144,6 +174,8 @@ class PostgresQuery extends React.Component {
                     geojsonfeature: new L.geoJson(data,{style:scope.style,onEachFeature: scope.onEachFeature})
                   })
 
+                  geojson = new L.geoJson(data,{style:scope.style,onEachFeature: scope.onEachFeature})
+
                   scope.state.geojsonfeature.addTo(scope.state._map);
 
 
@@ -156,55 +188,28 @@ class PostgresQuery extends React.Component {
 
     }
 
+    style(feature){
 
-     style(feature) {
+       return {
+           fillColor: emptyObject(feature.properties.gid),
+           weight: 2,
+           opacity: 1,
+           color: 'white',
+           dashArray: '3',
+           fillOpacity: 0.7
+       };
+    }
 
-        return {
-            fillColor: emptyObject(feature.properties.gid),
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7
-        };
+    onEachFeature(feature, layer){
+
+       layer.on({
+           mouseover: highlightFeature,
+           mouseout: resetHighlight,
+           click: zoomToFeature
+       });
     }
 
 
-     onEachFeature(feature, layer) {
-       var scope = this;
-   		layer.on({
-   			mouseover: scope.highlightFeature,
-   			mouseout: scope.resetHighlight,
-   			click: scope.zoomToFeature
-   		});
-   	}
-
-    highlightFeature(e) {
-  		var layer = e.target;
-
-      console.log(layer)
-
-  		layer.setStyle({
-  			weight: 5,
-  			color: '#666',
-  			dashArray: '',
-  			fillOpacity: 0.7
-  		});
-
-  		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-  			layer.bringToFront();
-  		}
-  		//info.update(layer.feature.properties);
-  	}
-
-     resetHighlight(e) {
-      geojson.resetStyle(e.target);
-      info.update();
-    }
-
-     zoomToFeature(e) {
-      map.fitBounds(e.target.getBounds());
-    }
 
 
 
