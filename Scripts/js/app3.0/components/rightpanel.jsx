@@ -18,7 +18,6 @@
 "use strict";
 
 import React from 'react';
-import ReactDOM from 'react-dom'
 import UiStore from 'stores/uistore';
 import MapStore from 'stores/mapstore';
 import Map3DStore from 'stores/3dmapstore';
@@ -29,7 +28,10 @@ import Util from 'utils';
 import GeoPhotoDiv from 'components/geophoto/geophotodiv'
 import ClusterStore from 'stores/clusterstore';
 import L from 'leaflet';
-import Jrangeslider from 'components/ui/jrangeslider'
+import Ajax from 'wrapper/ajax';
+import $ from 'jquery';
+
+
 
 class RightPanel extends React.Component {
 
@@ -42,7 +44,8 @@ class RightPanel extends React.Component {
             siteInfo: MapStore.getSiteInfo() || Map3DStore.getSiteInfo(),
             selected: LayerManagerStore.getSelected(),
             identifyLoading: UiStore.getIdentifyLoadingState(),
-            nearbyJsonData:ClusterStore.getUATImageData()
+            nearbyJsonData: ClusterStore.getUATImageData(),
+            _map: Util.getMap()
         };
 
         this._onChange = this._onChange.bind(this);
@@ -113,13 +116,331 @@ class RightPanel extends React.Component {
 
     }
 
-    centerMapOnIdentify(){
+    centerMapOnIdentify() {
         let offset = 20;
-        if(Util.getIdentifyPoint()){
-            if(Util.getIdentifyPoint().point.x >= this.refs.siteInfoPanel.getBoundingClientRect().left - offset){
+        if (Util.getIdentifyPoint()) {
+            if (Util.getIdentifyPoint().point.x >= this.refs.siteInfoPanel.getBoundingClientRect().left - offset) {
                 Util.centerMap();
             }
         }
+    }
+
+    //Loading all twitter data
+    loadall() {
+
+        //loading json file from Ajax Call 
+        $.ajax({
+            dataType: 'json',
+            async: false,
+            url: '/Scripts/js/app3.0/libs/json/5k.json',
+            //url: 'https://search-es-twitter-demo-4hsdxr4pskvhdotrrb5dphs5ba.us-west-2.es.amazonaws.com/twitter/_search/?size=10&from=9000&pretty',
+            success: data => {
+                console.log("Successful Ajax call");
+                {
+
+                    var markerClusters = L.markerClusterGroup();
+                    //console.log(data.hits.hits);
+                    //For loop over Array for output 
+                    //     for (var i = 0; i < data.hits.hits.length; i++) {
+                    //         var obj = data.hits.hits[i];
+                    //         console.log(obj);
+                    //         var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                    //         m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                    //             + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                    //             + "<br>Text: " + obj._source.text + "</br>");
+                    //         markerClusters.addLayer(m);
+                    //         this.state._map.addLayer(markerClusters);
+
+                    //     }
+
+                    // }
+
+                    for (var i = 0; i < data.features.length; i++) {
+                        var obj = data.features[i];
+                        if (obj._source.sentiments == "Positive") {
+                            var icon6 = L.icon({
+                                iconUrl: 'Content/img/green-dot.png',
+                                iconAnchor: [16, 37]
+                            });
+                            var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                            m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                                + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                                + "<br>Text: " + obj._source.text + "</br>"
+                                + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                            markerClusters.addLayer(m);
+                            this.state._map.addLayer(markerClusters);
+                        }
+                        else if (obj._source.sentiments == "Negative") {
+                            var icon6 = L.icon({
+                                iconUrl: 'Content/img/pink-dot.png',
+                                iconAnchor: [16, 37]
+                            });
+                            var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                            m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                                + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                                + "<br>Text: " + obj._source.text + "</br>"
+                                + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                            markerClusters.addLayer(m);
+                            this.state._map.addLayer(markerClusters);
+                        }
+                        else {
+                            var icon6 = L.icon({
+                                iconUrl: 'Content/img/blue-dot.png',
+                                iconAnchor: [16, 37]
+                            });
+                            var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                            m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                                + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                                + "<br>Text: " + obj._source.text + "</br>"
+                                + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                            markerClusters.addLayer(m);
+                            this.state._map.addLayer(markerClusters);
+                        }
+
+                    }
+
+                }
+
+                return;
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
+    }
+
+    //Loading Posstive sentiments 
+    loadpositive() {
+        var icon6 = L.icon({
+            iconUrl: 'Content/img/green-dot.png',
+            iconAnchor: [16, 37]
+        });
+
+        //loading json file from Ajax Call 
+        $.ajax({
+            dataType: 'json',
+            async: false,
+            url: '/Scripts/js/app3.0/libs/json/5k.json',
+            //url: "https://search-es-twitter-demo-4hsdxr4pskvhdotrrb5dphs5ba.us-west-2.es.amazonaws.com/twitter/_search?q=sentiments:Positive&pretty",
+            success: data => {
+                console.log("Successful Ajax call");
+                {
+                    var markerClusters = L.markerClusterGroup();
+                    //For loop over Array for output 
+                    // for (var i = 0; i < data.hits.hits.length; i++) {
+                    //     var obj = data.hits.hits[i];
+                    //     var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                    //     m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                    //         + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                    //         + "<br>Text: " + obj._source.text + "</br>"
+                    //         + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                    //     markerClusters.addLayer(m);
+                    //     this.state._map.addLayer(markerClusters);
+                    // }
+
+                    for (var i = 0; i < data.features.length; i++) {
+                        var obj = data.features[i];
+                        if (obj._source.sentiments == "Positive") {
+                            var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                            m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                                + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                                + "<br>Text: " + obj._source.text + "</br>"
+                                + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                            markerClusters.addLayer(m);
+                            this.state._map.addLayer(markerClusters);
+                        }
+                    }
+                }
+                return;
+            },
+        });
+    }
+
+    //Loading Negative sentiments 
+    loadnegative() {
+        var icon6 = L.icon({
+            iconUrl: 'Content/img/pink-dot.png',
+            iconAnchor: [16, 37]
+        });
+
+        //loading json file from Ajax Call 
+        $.ajax({
+            dataType: 'json',
+            async: false,
+            url: '/Scripts/js/app3.0/libs/json/5k.json',
+            //url: 'https://search-es-twitter-demo-4hsdxr4pskvhdotrrb5dphs5ba.us-west-2.es.amazonaws.com/twitter/_search?q=*&pretty',
+            success: data => {
+                console.log("Successful Ajax call");
+                {
+                    var markerClusters = L.markerClusterGroup();
+                    //For loop over Array for output 
+                    // for (var i = 0; i < data.hits.hits.length; i++) {
+                    //     var obj = data.hits.hits[i];
+                    //     var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                    //     m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                    //         + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                    //         + "<br>Text: " + obj._source.text + "</br>"
+                    //         + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                    //     if (obj._source.sentiments === "Negative") {
+                    //         markerClusters.addLayer(m);
+                    //         this.state._map.addLayer(markerClusters);
+                    //     }
+                    // }
+
+                    for (var i = 0; i < data.features.length; i++) {
+                        var obj = data.features[i];
+                        if (obj._source.sentiments == "Negative") {
+                            var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                            m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                                + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                                + "<br>Text: " + obj._source.text + "</br>"
+                                + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                            markerClusters.addLayer(m);
+                            this.state._map.addLayer(markerClusters);
+                        }
+                    }
+                }
+                return;
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
+    }
+
+
+
+    //Search text for twitter   
+    searchtext() {
+        var icon6 = L.icon({
+            iconUrl: 'Content/img/green-dot.png',
+            iconAnchor: [16, 37]
+        });
+        var search = document.getElementById("twittertext").value;
+        console.log(search);
+
+        //loading json file from Ajax Call 
+        $.ajax({
+            dataType: 'json',
+            async: false,
+            //url: '/Scripts/js/app3.0/libs/json/5k.json',
+            url: "https://search-es-twitter-demo-4hsdxr4pskvhdotrrb5dphs5ba.us-west-2.es.amazonaws.com/twitter/_search?q=text:*" + search + "*&pretty",
+            success: data => {
+                console.log("Successful Text search");
+                {
+                    var markerClusters = L.markerClusterGroup();
+                    //For loop over Array for output 
+                    for (var i = 0; i < data.hits.hits.length; i++) {
+                        var obj = data.hits.hits[i];
+                        if (obj._source.sentiments == "Positive") {
+                            var icon6 = L.icon({
+                                iconUrl: 'Content/img/green-dot.png',
+                                iconAnchor: [16, 37]
+                            });
+                            var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                            m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                                + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                                + "<br>Text: " + obj._source.text + "</br>"
+                                + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                            markerClusters.addLayer(m);
+                            this.state._map.addLayer(markerClusters);
+                        }
+                        else if (obj._source.sentiments == "Negative"){
+                            var icon6 = L.icon({
+                                iconurl: 'Content/img/pink-dot.png',
+                                iconAnchor: [16, 37]
+                            });
+                            var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinatesp[0]],{icon:icon6});
+                            m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                                + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                                + "<br>Text: " + obj._source.text + "</br>"
+                                < "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                            markerClusters.addLayer(m);
+                            this.state._map.addLayer(markerClusters);
+                        }
+                        else 
+                        var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                        m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                            + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                            + "<br>Text: " + obj._source.text + "</br>"
+                            + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                        markerClusters.addLayer(m);
+                        this.state._map.addLayer(markerClusters);
+                    }
+                    //Search twitter Hastags 
+                    $.ajax({
+                        dataType: 'json',
+                        async: false,
+                        //url: '/Scripts/js/app3.0/libs/json/5k.json',
+                        url: "https://search-es-twitter-demo-4hsdxr4pskvhdotrrb5dphs5ba.us-west-2.es.amazonaws.com/twitter/_search?q=hashtags:*" + search + "&pretty",
+                        success: data => {
+                            console.log("Successful Hashtag Search");
+                            {
+                                var markerClusters = L.markerClusterGroup();
+                                //For loop over Array for output 
+                                for (var i = 0; i < data.hits.hits.length; i++) {
+                                    var obj = data.hits.hits[i];
+                                    var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                                    m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                                        + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                                        + "<br>Text: " + obj._source.text + "</br>"
+                                        + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                                    markerClusters.addLayer(m);
+                                    this.state._map.addLayer(markerClusters);
+                                }
+                            }
+                            return;
+                        },
+                        error: function (request, status, error) {
+                            console.log(error)
+                        }
+                    });
+                }
+                return;
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
+    }
+
+    //Search hashtags for twitter   
+    searchhash() {
+        var icon6 = L.icon({
+            iconUrl: 'Content/img/green-dot.png',
+            iconAnchor: [16, 37]
+        });
+        var search = document.getElementById("twitterhastag").value;
+        console.log(search);
+
+        //loading json file from Ajax Call 
+        $.ajax({
+            dataType: 'json',
+            async: false,
+            //url: '/Scripts/js/app3.0/libs/json/5k.json',
+            url: "https://search-es-twitter-demo-4hsdxr4pskvhdotrrb5dphs5ba.us-west-2.es.amazonaws.com/twitter/_search?q=hashtags:*" + search + "&pretty",
+            success: data => {
+                console.log("Successful Ajax call");
+                {
+                    var markerClusters = L.markerClusterGroup();
+                    //For loop over Array for output 
+                    for (var i = 0; i < data.hits.hits.length; i++) {
+                        var obj = data.hits.hits[i];
+                        var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
+                        m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
+                            + "<br>Sentiment: " + obj._source.sentiments + "</br>"
+                            + "<br>Text: " + obj._source.text + "</br>"
+                            + "<br>" + "<a href='https://twitter.com/intent/user?user_id=" + obj._source.user.id + "'>" + "Go to profile" + "</br>");
+                        markerClusters.addLayer(m);
+                        this.state._map.addLayer(markerClusters);
+                    }
+                }
+                return;
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
     }
 
     render() {
@@ -129,7 +450,7 @@ class RightPanel extends React.Component {
             resizeClass = expanded ? "reduce-icon expand-icon-color" : "expand-icon expand-icon-color",
             resizeInfoClass = expanded ? "icon-resize-small" : "icon-resize-full",
             resizeStyleMap = expanded ? { width: '66%' } : { width: '33%' },
-            iconClass = showSiteInfo ? "cate-up-icon" :  "cate-minus-icon",
+            iconClass = showSiteInfo ? "cate-up-icon" : "cate-minus-icon",
             siteClass = showSiteInfo ? "show" : "hide",
             siteInfo = this.state.siteInfo;
 
@@ -137,8 +458,8 @@ class RightPanel extends React.Component {
         var featureImgStyle;
 
         var tempLatLng = {
-            lat:Util.getIdentifyPoint().latLng.lat,
-            lng:Util.getIdentifyPoint().latLng.lng
+            lat: Util.getIdentifyPoint().latLng.lat,
+            lng: Util.getIdentifyPoint().latLng.lng
         }
 
         var temp = true, geoTagPhoto = [], photoCount = this.state.nearbyJsonData.length, currentDiameter, bounding;
@@ -146,10 +467,12 @@ class RightPanel extends React.Component {
         MapStore.removeCircles();
 
         //use circle marker as a reference
-        if(!Map3DStore.isInitialized()) {
-            currentDiameter = MapStore.createCircle([tempLatLng.lat,tempLatLng.lng], 100,{fill: false,
+        if (!Map3DStore.isInitialized()) {
+            currentDiameter = MapStore.createCircle([tempLatLng.lat, tempLatLng.lng], 100, {
+                fill: false,
                 color: 'none',
-                opacity: 0});
+                opacity: 0
+            });
             bounding = currentDiameter.getBounds();
         }
 
@@ -157,22 +480,22 @@ class RightPanel extends React.Component {
         this.state.nearbyJsonData.map((nearbyData, j) => {
 
             //is it in the buffer range?
-            if(bounding && bounding.contains([nearbyData.LatLng.lat,nearbyData.LatLng.lng])){
-                geoTagPhoto.push({nearbyData})
+            if (bounding && bounding.contains([nearbyData.LatLng.lat, nearbyData.LatLng.lng])) {
+                geoTagPhoto.push({ nearbyData })
             }
 
         });
 
-        if(geoTagPhoto.length > 0){
+        if (geoTagPhoto.length > 0) {
 
-            featureImgStyle={
-                display:'block'
+            featureImgStyle = {
+                display: 'block'
             }
 
-        }else{
+        } else {
 
-            featureImgStyle={
-                display:'none'
+            featureImgStyle = {
+                display: 'none'
             }
         }
 
@@ -186,7 +509,7 @@ class RightPanel extends React.Component {
                 </div>
                 <div id="si-content">
                     <div id="lr-ul">
-                        <IdentifyDisplay selected={this.state.selected} showId={this.state.showId} onRowClick={this._onRowClick.bind(this)}/>
+                        <IdentifyDisplay selected={this.state.selected} showId={this.state.showId} onRowClick={this._onRowClick.bind(this)} />
                     </div>
                     <div>
                         <div id="site-fixed" className="lr-title-wrapper site-fixed-unselected" onClick={this._onRowClick.bind(this)(infoId)}>
@@ -208,12 +531,16 @@ class RightPanel extends React.Component {
 
                             <div className="featured-image-wrapper">
 
-                         <div id="two" style={featureImgStyle}><GeoPhotoDiv photoCount={geoTagPhoto.length} geophoto ={geoTagPhoto}/></div>
+                                <div id="two" style={featureImgStyle}><GeoPhotoDiv photoCount={geoTagPhoto.length} geophoto={geoTagPhoto} /></div>
 
+                            </div>
                         </div>
-                        </div>
-                        <Jrangeslider/>
                     </div>
+                    <button onClick={this.loadall.bind(this)}> Load All Tweets </button>
+                    <button onClick={this.loadpositive.bind(this)}> Load Positive Tweets </button>
+                    <button onClick={this.loadnegative.bind(this)}> Load Negative Tweets </button>
+                    <input name="twittertext" id="twittertext" text="Search" type="text"></input>
+                    <input value="Search Text" type="submit" onClick={this.searchtext.bind(this)}></input>
                 </div>
             </div>
         );

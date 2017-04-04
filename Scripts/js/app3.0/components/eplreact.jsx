@@ -546,6 +546,10 @@ export default class EplReact extends React.Component {
                     {(uiState.displayMenu === MenuConstants.Bookmark)
                         &&<Bookmark key="bookmark"/>}
                 </ReactCSSTransitionGroup>
+                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+                    {(uiState.displayMenu === MenuConstants.Bookmark)
+                        &&<Bookmark key="bookmark"/>}
+                </ReactCSSTransitionGroup>
                 <ReactCSSTransitionGroup transitionName="slidedown" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.UserProfile)
                         && <UserProfile key="userprofile" onClose={this.closeMenu.bind(this)} username={uiState.username} extranet={uiState.extranet}/>
