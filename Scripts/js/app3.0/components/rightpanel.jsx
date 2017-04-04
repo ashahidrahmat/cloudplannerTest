@@ -528,17 +528,10 @@ class RightPanel extends React.Component {
                                     <tr><td>MP Name</td><td>{siteInfo.mp}</td></tr>
                                 </tbody>
                             </table>
-
                             <div className="featured-image-wrapper">
-
                                 <div id="two" style={featureImgStyle}><GeoPhotoDiv photoCount={geoTagPhoto.length} geophoto={geoTagPhoto} /></div>
-
                             </div>
                         </div>
-
-                        </div>
-
-
                     </div>
                     <button onClick={this.loadall.bind(this)}> Load All Tweets </button>
                     <button onClick={this.loadpositive.bind(this)}> Load Positive Tweets </button>

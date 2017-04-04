@@ -25,9 +25,9 @@ class Login extends React.Component {
 
     constructor() {
         super();
-        this.div = 
+        this.div =
         <div style={{height:'100%',width:'100%', background:'#4787ed'}}>
-            <div className="logo-div"> 
+            <div className="logo-div">
                 <img className="logo-div" src="Content/img/eplanner_logo_white.png" style={{width:'50px',height:'65px'}} />
                 <br />
                 <div className="login">
@@ -52,7 +52,7 @@ class Login extends React.Component {
     }
 
     onClick(){
-        if(this.state.password && this.state.password === "what"){
+        if(this.state.password && this.state.password === "cloudplanner"){
             this.div = <EplReact />
             this.forceUpdate();
         }
