@@ -33,48 +33,6 @@ import fancybox from 'fancybox';
 import QueryStore from 'stores/querystore'
 import Jrangeslider from 'components/ui/jrangeslider'
 
-var emptyObject = (d) => {
-
-  return d > 1000 ? '#800026' :
-   d > 40  ? '#BD0026' :
-   d > 30  ? '#E31A1C' :
-   d > 20  ? '#FC4E2A' :
-   d > 15   ? '#FD8D3C' :
-   d > 10   ? '#FEB24C' :
-   d > 5   ? '#FED976' :
-              '#FFEDA0';
-};
-
-
-var highlightFeature = (e) => {
-   var layer = e.target;
-
- //console.log(layer)
-
-   layer.setStyle({
-       weight: 5,
-       color: '#666',
-       dashArray: '',
-       fillOpacity: 0.7
-   });
-
-   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-       layer.bringToFront();
-   }
-   //info.update(layer.feature.properties);
-}
-
-var geojson;
-
-var resetHighlight = (e) =>{
- geojson.resetStyle(e.target);
-// info.update();
-}
-
-var zoomToFeature = (e) => {
- map.fitBounds(e.target.getBounds());
-}
-
 
 class PostgresQuery extends React.Component {
 
@@ -84,61 +42,34 @@ class PostgresQuery extends React.Component {
         this.state = {
             _map:Util.getMap(),
             uiState: UiStore.getUiState(),
-            showStatus : ClusterStore.getClusterStatus(),
-            nearbyJsonData : ClusterStore.getNearbyJsonData(),
-            clusterLayer : null,
-            tempMarker:null,
-            geojsonfeature:null
+            geojson: null
         };
-
-
-
-        this._onChange = this._onChange.bind(this);
-
-        this.showClusterStatus = this.showClusterStatus.bind(this);
 
         this._onUiChange = this._onUiChange.bind(this);
 
         this._onQueryChange = this._onQueryChange.bind(this);
-
-
     }
 
     componentDidMount() {
-        LayerManagerStore.addChangeListener(this._onChange);
-        ClusterStore.addChangeListener(this.showClusterStatus);
+
         UiStore.addChangeListener(this._onUiChange);
         QueryStore.addChangeListener(this._onQueryChange);
 
         let content = this.refs.cateContent;
         Util.setPerfectScrollbar(content);
         fancybox($);
+
+        //add map to outside variable
+
     }
 
     componentWillUnmount() {
-        LayerManagerStore.removeChangeListener(this._onChange);
-        ClusterStore.removeChangeListener(this.showClusterStatus);
+
         UiStore.removeChangeListener(this._onUiChange);
         QueryStore.removeChangeListener(this._onQueryChange);
 
     }
 
-    showClusterStatus(){
-
-        this.setState({
-            showStatus : ClusterStore.getClusterStatus()
-        });
-    }
-
-
-
-    _onChange() {
-
-        this.setState({
-            nearbyJsonData : ClusterStore.getNearbyJsonData()
-        });
-
-    }
 
     _onUiChange() {
 
@@ -162,21 +93,18 @@ class PostgresQuery extends React.Component {
 
       //EplActionCreator.dynamicQuery(this.state._map);
 
-      var scope =this;
-
             $.ajax({
                 dataType: 'json',
                 type:'GET',
                 url:'https://47ocijtui8.execute-api.us-east-1.amazonaws.com/v1/pgquery',
-                success:function(data) {
+                success:(data) => {
 
-                  scope.setState({
-                    geojsonfeature: new L.geoJson(data,{style:scope.style,onEachFeature: scope.onEachFeature})
-                  })
+                    this.setState({
+                        geojson:new L.geoJson(data,{style:this.style.bind(this),onEachFeature: this.onEachFeature.bind(this)})
+                    })
 
-                  geojson = new L.geoJson(data,{style:scope.style,onEachFeature: scope.onEachFeature})
-
-                  scope.state.geojsonfeature.addTo(scope.state._map);
+                    //add to map
+                    this.state.geojson.addTo(this.state._map);
 
 
                 },
@@ -188,10 +116,23 @@ class PostgresQuery extends React.Component {
 
     }
 
+    getColor(d) {
+		return d > 1000 ? '#800026' :
+			   d > 500  ? '#BD0026' :
+			   d > 200  ? '#E31A1C' :
+			   d > 100  ? '#FC4E2A' :
+			   d > 50   ? '#FD8D3C' :
+			   d > 20   ? '#FEB24C' :
+			   d > 10   ? '#FED976' :
+						  '#FFEDA0';
+	}
+
     style(feature){
+        //feature.properties.gid
+        let color = this.getColor(feature.properties.gid);
 
        return {
-           fillColor: emptyObject(feature.properties.gid),
+           fillColor: color,
            weight: 2,
            opacity: 1,
            color: 'white',
@@ -203,19 +144,43 @@ class PostgresQuery extends React.Component {
     onEachFeature(feature, layer){
 
        layer.on({
-           mouseover: highlightFeature,
-           mouseout: resetHighlight,
-           click: zoomToFeature
+           mouseover: this.highlightFeature,
+           mouseout: this.resetHighlight.bind(this),
+           click: this.zoomToFeature
        });
     }
 
 
+     highlightFeature(e) {
+		var layer = e.target;
 
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+		//info.update(layer.feature.properties);
+	}
+
+	 resetHighlight(e) {
+         if(this.state.geojson){
+             this.state.geojson.resetStyle(e.target);
+         }
+
+		//info.update();
+	}
+
+	 zoomToFeature(e) {
+		this._map.fitBounds(e.target.getBounds());
+	}
 
 
     render() {
-
-      console.log(this.state._map)
                     return (
                         <div id="legend-div" className="legend-color"  >
                             <div className="si-title-wrapper si-title-color">

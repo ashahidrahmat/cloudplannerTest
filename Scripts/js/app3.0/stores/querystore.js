@@ -23,24 +23,26 @@ import MapStore from 'stores/mapstore';
 import EplActionCreator from 'actions/eplactioncreator';
 import L from 'leaflet';
 import $ from 'jquery';
+import Util from 'utils';
 
 class QueryStore extends BaseStore {
 
     constructor() {
         super();
         this._queryManager = null;
+        this._map = Util.getMap();
     }
 
 dynamicQuery(map){
   console.log("querystore");
 
 
- this._queryManager = MapStore.queryManager;
- var queryManager = this._queryManager;
+ //this._queryManager = MapStore.queryManager;
+ //var queryManager = this._queryManager;
 
 console.log(map)
 
- queryManager.showLayer(map);
+ //queryManager.showLayer(map);
 
 }
 
