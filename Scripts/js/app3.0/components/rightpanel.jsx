@@ -128,7 +128,7 @@ class RightPanel extends React.Component {
     //Loading all twitter data
     loadall() {
 
-        //loading json file from Ajax Call 
+        //loading json file from Ajax Call
         $.ajax({
             dataType: 'json',
             async: false,
@@ -140,7 +140,7 @@ class RightPanel extends React.Component {
 
                     var markerClusters = L.markerClusterGroup();
                     //console.log(data.hits.hits);
-                    //For loop over Array for output 
+                    //For loop over Array for output
                     //     for (var i = 0; i < data.hits.hits.length; i++) {
                     //         var obj = data.hits.hits[i];
                     //         console.log(obj);
@@ -209,14 +209,14 @@ class RightPanel extends React.Component {
         });
     }
 
-    //Loading Posstive sentiments 
+    //Loading Posstive sentiments
     loadpositive() {
         var icon6 = L.icon({
             iconUrl: 'Content/img/green-dot.png',
             iconAnchor: [16, 37]
         });
 
-        //loading json file from Ajax Call 
+        //loading json file from Ajax Call
         $.ajax({
             dataType: 'json',
             async: false,
@@ -226,7 +226,7 @@ class RightPanel extends React.Component {
                 console.log("Successful Ajax call");
                 {
                     var markerClusters = L.markerClusterGroup();
-                    //For loop over Array for output 
+                    //For loop over Array for output
                     // for (var i = 0; i < data.hits.hits.length; i++) {
                     //     var obj = data.hits.hits[i];
                     //     var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
@@ -256,14 +256,14 @@ class RightPanel extends React.Component {
         });
     }
 
-    //Loading Negative sentiments 
+    //Loading Negative sentiments
     loadnegative() {
         var icon6 = L.icon({
             iconUrl: 'Content/img/pink-dot.png',
             iconAnchor: [16, 37]
         });
 
-        //loading json file from Ajax Call 
+        //loading json file from Ajax Call
         $.ajax({
             dataType: 'json',
             async: false,
@@ -273,7 +273,7 @@ class RightPanel extends React.Component {
                 console.log("Successful Ajax call");
                 {
                     var markerClusters = L.markerClusterGroup();
-                    //For loop over Array for output 
+                    //For loop over Array for output
                     // for (var i = 0; i < data.hits.hits.length; i++) {
                     //     var obj = data.hits.hits[i];
                     //     var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
@@ -310,7 +310,7 @@ class RightPanel extends React.Component {
 
 
 
-    //Search text for twitter   
+    //Search text for twitter
     searchtext() {
         var icon6 = L.icon({
             iconUrl: 'Content/img/green-dot.png',
@@ -319,7 +319,7 @@ class RightPanel extends React.Component {
         var search = document.getElementById("twittertext").value;
         console.log(search);
 
-        //loading json file from Ajax Call 
+        //loading json file from Ajax Call
         $.ajax({
             dataType: 'json',
             async: false,
@@ -329,7 +329,7 @@ class RightPanel extends React.Component {
                 console.log("Successful Text search");
                 {
                     var markerClusters = L.markerClusterGroup();
-                    //For loop over Array for output 
+                    //For loop over Array for output
                     for (var i = 0; i < data.hits.hits.length; i++) {
                         var obj = data.hits.hits[i];
                         if (obj._source.sentiments == "Positive") {
@@ -358,7 +358,7 @@ class RightPanel extends React.Component {
                             markerClusters.addLayer(m);
                             this.state._map.addLayer(markerClusters);
                         }
-                        else 
+                        else
                         var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
                         m.bindPopup("<br>User: " + obj._source.user.name + "</br>"
                             + "<br>Sentiment: " + obj._source.sentiments + "</br>"
@@ -367,7 +367,7 @@ class RightPanel extends React.Component {
                         markerClusters.addLayer(m);
                         this.state._map.addLayer(markerClusters);
                     }
-                    //Search twitter Hastags 
+                    //Search twitter Hastags
                     $.ajax({
                         dataType: 'json',
                         async: false,
@@ -377,7 +377,7 @@ class RightPanel extends React.Component {
                             console.log("Successful Hashtag Search");
                             {
                                 var markerClusters = L.markerClusterGroup();
-                                //For loop over Array for output 
+                                //For loop over Array for output
                                 for (var i = 0; i < data.hits.hits.length; i++) {
                                     var obj = data.hits.hits[i];
                                     var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
@@ -404,7 +404,7 @@ class RightPanel extends React.Component {
         });
     }
 
-    //Search hashtags for twitter   
+    //Search hashtags for twitter
     searchhash() {
         var icon6 = L.icon({
             iconUrl: 'Content/img/green-dot.png',
@@ -413,7 +413,7 @@ class RightPanel extends React.Component {
         var search = document.getElementById("twitterhastag").value;
         console.log(search);
 
-        //loading json file from Ajax Call 
+        //loading json file from Ajax Call
         $.ajax({
             dataType: 'json',
             async: false,
@@ -423,7 +423,7 @@ class RightPanel extends React.Component {
                 console.log("Successful Ajax call");
                 {
                     var markerClusters = L.markerClusterGroup();
-                    //For loop over Array for output 
+                    //For loop over Array for output
                     for (var i = 0; i < data.hits.hits.length; i++) {
                         var obj = data.hits.hits[i];
                         var m = L.marker([obj._source.coordinates.coordinates[1], obj._source.coordinates.coordinates[0]], { icon: icon6 });
@@ -535,6 +535,10 @@ class RightPanel extends React.Component {
 
                             </div>
                         </div>
+
+                        </div>
+
+
                     </div>
                     <button onClick={this.loadall.bind(this)}> Load All Tweets </button>
                     <button onClick={this.loadpositive.bind(this)}> Load Positive Tweets </button>

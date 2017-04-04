@@ -31,6 +31,7 @@ import $ from 'jquery';
 import Ajax from 'wrapper/ajax';
 import fancybox from 'fancybox';
 import QueryStore from 'stores/querystore'
+import Jrangeslider from 'components/ui/jrangeslider'
 
 var emptyObject = (d) => {
 
@@ -129,8 +130,8 @@ class PostgresQuery extends React.Component {
     toggleLayer(){
 
 
-      EplActionCreator.dynamicQuery(this.state._map);
-/*
+      //EplActionCreator.dynamicQuery(this.state._map);
+
       var scope =this;
 
             $.ajax({
@@ -152,7 +153,7 @@ class PostgresQuery extends React.Component {
                 }
             });
 
-            */
+
     }
 
 
@@ -218,7 +219,7 @@ class PostgresQuery extends React.Component {
                             </div>
 
                             <button onClick={this.toggleLayer.bind(this)}>Show</button>
-
+                            <Jrangeslider/>
                     </div>
                    );
             }
