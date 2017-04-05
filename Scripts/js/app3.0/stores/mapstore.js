@@ -40,6 +40,7 @@ import ClusterManager from 'stores/clustermanager';
 import Clusterstore from 'stores/clusterstore';
 import QuicklinkStore from 'stores/quicklinkstore';
 import QueryManager from 'stores/querymanager';
+import UploadStore from 'stores/uploadstore';
 
 class MapStore extends BaseStore {
 
@@ -168,7 +169,7 @@ class MapStore extends BaseStore {
     }
 
     reset(map) {
-        this.clearHighlights(map);
+        this.clearAllMapHighlights();
         map.setView(this.getDefaultCenter(), this.getDefaultZoom());
         this.setBasemapByMap(map, (map.mapId === MapConstants.Main ? this.defaultBasemapName : this.dualDefaultName));
 
@@ -452,6 +453,11 @@ class MapStore extends BaseStore {
 
     clearAllMapHighlights() {
         this._maps.map((map) => {
+            map.eachLayer(layer => {
+                if (!layer._url) {
+                    layer.remove();
+                }
+            });
             this.clearHighlights(map);
         });
     }
@@ -460,6 +466,10 @@ class MapStore extends BaseStore {
         this._maps.map((map) => {
             this.identifyMarker.remove();
         });
+    }
+
+    getMap() {
+        return this._maps[0];
     }
 
     clearHighlights(map) {
@@ -540,11 +550,11 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
                 break;
             case EplConstants.RemoveLayer:
                 instance.removeLayer(LayerManagerStore.getLayerByName(action.layerName));
-                instance.clearAllMapHighlights();
+                instance.clearHighlights();
                 break;
             case EplConstants.RemoveAllLayers:
                 instance.removeAllLayers(LayerManagerStore.getSelected());
-                instance.clearAllMapHighlights();
+                instance.clearHighlights();
                 instance.emitChanges();
                 break;
             case EplConstants.ShowLayerSummary:
@@ -574,7 +584,7 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
                 instance.emitChanges();
                 break;
             case EplConstants.ClearHighlights:
-                instance.clearAllMapHighlights();
+                instance.clearHighlights();
                 break;
             case EplConstants.SetMapsView:
                 instance.setMapsView(action.center, action.zoom);

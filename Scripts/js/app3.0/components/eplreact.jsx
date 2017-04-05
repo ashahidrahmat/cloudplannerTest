@@ -67,6 +67,7 @@ import $ from 'jquery';
 import {Menu,MainButton,ChildButton} from 'react-mfb-custom';
 // import ChatBot from 'components/chatbot';
 import Util from 'utils';
+import Upload from 'components/upload';
 
 export default class EplReact extends React.Component {
     constructor(props) {
@@ -173,6 +174,10 @@ export default class EplReact extends React.Component {
 
     showMetadata() {
         EplActionCreator.showModal(<Url url={ControllerUrl.Metadata}/>);
+    }
+
+    showUpload() {
+        EplActionCreator.showModal(<Upload />);
     }
 
     setBasemap(name) {
@@ -434,6 +439,10 @@ export default class EplReact extends React.Component {
                                                         <i className="iconfont icon-columns"></i>
                                                         <div className="iconfont-name">Dual</div>
                                                     </li>
+                                            }
+                                            {
+                                                !buildings
+                                                    && <li id="info-list" onClick={this.showUpload.bind(this)}><i className="iconfont icon-upload"></i><div className="iconfont-name">Upload</div></li>
                                             }
 
                                             {!buildings && <li id="base-map" onClick={this.toggleBasemapMenu.bind(this)}>
