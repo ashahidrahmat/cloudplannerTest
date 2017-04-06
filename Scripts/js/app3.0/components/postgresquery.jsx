@@ -48,6 +48,8 @@ class PostgresQuery extends React.Component {
         this._onUiChange = this._onUiChange.bind(this);
 
         this._onQueryChange = this._onQueryChange.bind(this);
+
+
     }
 
     componentDidMount() {
@@ -60,6 +62,8 @@ class PostgresQuery extends React.Component {
         fancybox($);
 
         //add map to outside variable
+
+
 
     }
 
@@ -181,6 +185,8 @@ class PostgresQuery extends React.Component {
 
 
     render() {
+
+         
                     return (
                         <div id="legend-div" className="legend-color"  >
                             <div className="si-title-wrapper si-title-color">
@@ -189,7 +195,7 @@ class PostgresQuery extends React.Component {
                             </div>
 
                             <button onClick={this.toggleLayer.bind(this)}>Show</button>
-                            <Jrangeslider/>
+                            <Jrangeslider geodata={this.state.geojson}/>
                     </div>
                    );
             }
