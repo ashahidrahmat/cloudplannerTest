@@ -28,6 +28,22 @@ class UploadStore extends BaseStore {
 
     constructor() {
         super();
+        this.layerGroup = new L.layerGroup();
+        this.layerGroupView = {};
+    }
+
+    setLayer(layer,name){
+        let map = MapStore.getMap();
+        this.layerGroup.addLayer(layer).addTo(map);
+        this.layerGroupView[name] = layer;
+        if(this.control){
+          this.control.remove();
+        }
+        this.control = L.control.layers(null,this.layerGroupView).addTo(map);
+    }
+
+    getLayerGroup(){
+        return this.layerGroup;
     }
 
     detectFormat(filename){
