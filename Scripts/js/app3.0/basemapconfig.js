@@ -18,23 +18,23 @@
 
 let BasemapConfig = [{
     "name": "OneMap 2.0",
-    "src": "http://maps-{s}.onemap.sg/v2/Default/{z}/{x}/{y}.png",
+    "src": "https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png",
     "internet": true
 }, {
     "name": "OneMap 2.0 (Night)",
-    "src": "http://maps-{s}.onemap.sg/v2/Night/{z}/{x}/{y}.png",
+    "src": "https://maps-{s}.onemap.sg/v3/Night/{z}/{x}/{y}.png",
     "internet": true
 }, {
     "name": "OneMap 2.0 (Grey)",
-    "src": "http://maps-{s}.onemap.sg/v2/Grey/{z}/{x}/{y}.png",
+    "src": "https://maps-{s}.onemap.sg/v3/Grey/{z}/{x}/{y}.png",
     "internet": true
 }, {
     "name": "OneMap 2.0 (Original)",
-    "src": "http://maps-{s}.onemap.sg/v2/Original/{z}/{x}/{y}.png",
+    "src": "https://maps-{s}.onemap.sg/v3/Original/{z}/{x}/{y}.png",
     "internet": true
 }, {
     "name": "OpenStreetMap",
-    "src": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "src": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     "internet": true
 }, {
     "name": "Google Map",
