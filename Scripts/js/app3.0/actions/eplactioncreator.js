@@ -370,6 +370,12 @@ class EplActionCreator {
         });
     }
 
+    drawStreetViewMarker() {
+        AppDispatcher.dispatch({
+            actionType: EplConstants.DrawStreetViewMarker
+        });
+    }
+
     updateDrawnItemColor(colorId) {
         AppDispatcher.dispatch({
             actionType: EplConstants.UpdateDrawnItemColor,

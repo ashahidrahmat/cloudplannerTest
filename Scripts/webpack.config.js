@@ -104,7 +104,7 @@ if (TARGET === 'start') {
 } else if (TARGET === 'dev' || !TARGET) {
     console.log("DEV Configuration");
     module.exports = merge(common, {
-        devtool: '#cheap-module-source-map',
+        devtool: 'source-map',
         plugins: [
             new webpack.optimize.UglifyJsPlugin({
                 test: /\.css$/,
@@ -115,7 +115,7 @@ if (TARGET === 'start') {
 } else {
     console.log("PRD Configuration");
     module.exports = merge(common, {
-        devtool: '#cheap-module-source-map',
+        devtool: 'eval',
         plugins: [
             new webpack.optimize.UglifyJsPlugin({
                 // Don't beautify output (enable for neater output)

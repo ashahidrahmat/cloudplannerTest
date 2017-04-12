@@ -98,5 +98,6 @@ export default {
     ToggleMobileNavBtn:83,
     ToggleChatBot:84,
     TogglePostgresQuery:85,
-    DynamicQuery:86
+    DynamicQuery:86,
+    DrawStreetViewMarker:87
 };

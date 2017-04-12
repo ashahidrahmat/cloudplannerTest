@@ -68,6 +68,7 @@ import {Menu,MainButton,ChildButton} from 'react-mfb-custom';
 // import ChatBot from 'components/chatbot';
 import Util from 'utils';
 import Upload from 'components/upload';
+import StreetView from 'components/streetview';
 
 export default class EplReact extends React.Component {
     constructor(props) {
@@ -170,6 +171,11 @@ export default class EplReact extends React.Component {
 
     toggleDraw() {
         EplActionCreator.toggleDraw();
+    }
+
+    toggleStreetView(){
+        // EplActionCreator.showModal(<StreetView latitude="42.345573" longitude="-71.098326"/>);
+        EplActionCreator.drawStreetViewMarker();
     }
 
     showMetadata() {
@@ -430,6 +436,10 @@ export default class EplReact extends React.Component {
                             <DesktopBreakpoint>
                                 <div className="right-tools" style={{float:"right"}}>
                                         <ul className="right-links">
+                                            <li id="dual-screen" onClick={this.toggleStreetView.bind(this)}>
+                                                 <i className="iconfont icon-picture"></i>
+                                                 <div className="iconfont-name">StreetView</div>
+                                             </li>
                                           <li id="dual-screen" onClick={this.togglePostgresQuery.bind(this)}>
                                                  <i className="iconfont icon-columns"></i>
                                                  <div className="iconfont-name">Postgres</div>

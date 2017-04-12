@@ -16,6 +16,7 @@
  * CHANGES         :
 ----------------------------------------------------------------------------*/
 
+import React from 'react';
 import BaseStore from 'stores/basestore';
 import EplConstants from 'constants/eplconstants';
 import AppDispatcher from 'dispatcher/appdispatcher';
@@ -23,7 +24,7 @@ import MapStore from 'stores/mapstore';
 import DrawConstants, {DrawColors} from 'constants/drawconstants';
 import EplActionCreator from 'actions/eplactioncreator';
 import L from 'leaflet';
-
+import StreetView from 'components/streetview';
 class DrawStore extends BaseStore {
 
     constructor() {
@@ -112,8 +113,19 @@ class DrawStore extends BaseStore {
 
     drawMarker(){
         var greenIcon = this._drawManager.icon;
+        if(this._drawnItem){
+            this._drawnItem.remove();
+        }
         this._drawnItem = new L.Draw.Marker(this._drawManager.map,  {
             icon: greenIcon
+        });
+    }
+
+    drawStreetViewMarker(){       
+        var icon = this._drawManager.streetViewIcon;
+        this._drawnItem = new L.Draw.Marker(this._drawManager.map,  {
+            icon: icon,
+            streetView: true
         });
     }
 
@@ -166,12 +178,23 @@ class DrawStore extends BaseStore {
 
         var drawManager = this._drawManager;
         if(drawManager){
-            drawManager.drawnItems.eachLayer(function(layer){
+            drawManager.drawnItems.eachLayer((layer) => {
                 layer.remove();
             });
         }
 
         this.setDrawResult('');
+    }
+
+    clearStreetViewMarker(){
+        var drawManager = this._drawManager;
+        if(drawManager && drawManager.drawnItems._layers){
+            drawManager.drawnItems.eachLayer((layer) => {
+                if(layer.options.icon === this._drawManager.streetViewIcon){
+                    layer.remove();
+                }        
+            });
+        }
     }
 
     updateDrawnItemColor(colorId){
@@ -184,6 +207,7 @@ class DrawStore extends BaseStore {
             var map = this._drawManager.map;
             map.off(this._drawStop, this.reactDrawStopHandler);
             map.on(this._drawStop, this.normalDrawStopHandler);
+            this.clearStreetViewMarker();
             this._drawnItem.disable();
             this._drawnItem = null;
             map.off(this._drawStop, this.normalDrawStopHandler);
@@ -207,9 +231,15 @@ class DrawStore extends BaseStore {
         switch (type){
             case 'marker':
                 if(this._layerGeoJSON){
-                    let markerRes = 'Location Lat/Lng: (' + this._layerGeoJSON.geometry.coordinates[1].toFixed(5) + 
-                                    ', ' + this._layerGeoJSON.geometry.coordinates[0].toFixed(5) + ')';
-                    this.setDrawResult(markerRes);
+                    if(this._drawnItem.options.streetView){
+                        if(this._layerGeoJSON){
+                            setTimeout(()=>EplActionCreator.showModal(<StreetView latitude={this._layerGeoJSON.geometry.coordinates[1].toFixed(7)} longitude={this._layerGeoJSON.geometry.coordinates[0].toFixed(7)} />),0);                        
+                        }
+                    } else {
+                        let markerRes = 'Location Lat/Lng: (' + this._layerGeoJSON.geometry.coordinates[1].toFixed(7) + 
+                                        ', ' + this._layerGeoJSON.geometry.coordinates[0].toFixed(7) + ')';
+                        this.setDrawResult(markerRes);
+                    }
                 }
             break;
 
@@ -299,6 +329,13 @@ var instance = new DrawStore();
 instance.dispatchToken = AppDispatcher.register(function(action) {
 
     switch(action.actionType) {
+        case EplConstants.DrawStreetViewMarker:
+            instance.drawPreprocess();
+            instance.drawStreetViewMarker();
+            instance.selectButtonStatus(DrawConstants.Marker);
+            instance.drawFeatureEnable();
+            instance.emitChanges();
+            break;
         case EplConstants.DrawMarker:
             instance.drawPreprocess();
             instance.drawMarker();

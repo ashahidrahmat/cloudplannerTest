@@ -27,6 +27,11 @@ export default class DrawManager {
             iconAnchor: [16, 37]
         });
 
+        this.streetViewIcon = L.icon({
+            iconUrl: 'Content/img/red-dot.png',
+            iconAnchor: [16, 37]
+        });
+
         //fix change basemap with drawing line/polygon bug
         let newUpdateGuide = function(t) {
             if(this._markers && this._markers.length) {

@@ -74,6 +74,13 @@ class Draw extends React.Component {
         }
     }
 
+    drawStreetViewMarker(){
+        //prevent multiple clicks to dispatch
+        if(!this.state.button[DrawConstants.Marker]){
+            EplActionCreator.drawStreetViewMarker();
+        }
+    }
+
     drawPolygon(){
         if(!this.state.button[DrawConstants.Polygon]){
             EplActionCreator.drawPolygon();
