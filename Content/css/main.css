@@ -5462,3 +5462,8 @@ pre {
 .leaflet-top {
     top: 50px;
 }
+
+#street-view {
+    height: 55vh;
+    width: 90vw;
+}
