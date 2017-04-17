@@ -32,7 +32,8 @@ import Ajax from 'wrapper/ajax';
 import fancybox from 'fancybox';
 import QueryStore from 'stores/querystore'
 import Jrangeslider from 'components/ui/jrangeslider'
-
+import {invokeApig} from 'components/restapi/awsLib';
+import config from 'components/restapi/config';
 
 class PostgresQuery extends React.Component {
 
@@ -183,10 +184,21 @@ class PostgresQuery extends React.Component {
 		this._map.fitBounds(e.target.getBounds());
 	}
 
+  query(){
+    console.log("query");
+
+    return invokeApig({
+      path: '/pgquery',
+      method: 'POST',
+      body: '{"myquery":"query1"}',
+    });
+
+  }
+
 
     render() {
 
-         
+
                     return (
                         <div id="legend-div" className="legend-color"  >
                             <div className="si-title-wrapper si-title-color">
@@ -195,6 +207,7 @@ class PostgresQuery extends React.Component {
                             </div>
 
                             <button onClick={this.toggleLayer.bind(this)}>Show</button>
+                              <button onClick={this.query.bind(this)}>query</button>
                             <Jrangeslider geodata={this.state.geojson}/>
                     </div>
                    );
