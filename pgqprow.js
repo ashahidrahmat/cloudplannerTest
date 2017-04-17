@@ -7,6 +7,7 @@ var Promise=require('bluebird');
 
 //test function
 //curl -X POST https://47ocijtui8.execute-api.us-east-1.amazonaws.com/v1/pgquery --data { "text": "Learn Serverless" }
+//http://serverless-stack.com/chapters/add-a-create-note-api.html
 export async function main(event, context, callback) {
 
 
