@@ -9,7 +9,7 @@ export async function invokeApig(
   const url = `${config.apiGateway.URL}${path}`;
 
 
-  //body = (body) ? JSON.stringify(body) : body;
+  body = (body) ? JSON.stringify(body) : body;
 
   const results = await fetch(url, {
     method,

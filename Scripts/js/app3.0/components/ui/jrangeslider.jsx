@@ -25,6 +25,9 @@ import $ from 'jquery';
 import Util from 'utils';
 import BarChart from 'components/charts/barchart';
 import {ChartColors, ChartOrientation} from 'constants/chartconstants';
+import {invokeApig} from 'components/restapi/awsLib';
+import config from 'components/restapi/config';
+import Promise from 'bluebird'
 
 class RangeSlider extends React.Component {
     constructor(props) {
@@ -34,8 +37,11 @@ class RangeSlider extends React.Component {
             _map:Util.getMap(),
             minMax:null,
             geojson: null,
-            info:null
-
+            info:null,
+            mapQuery:{},
+            timechartQuery:{},
+            barchartX:[],
+            barchartY:[]
         }
 
     }
@@ -44,7 +50,7 @@ class RangeSlider extends React.Component {
 
          var scope = this;
 
-         scope.toggleLayer();
+         //scope.toggleLayer();
 
          const parent = ReactDOM.findDOMNode(this);
 
@@ -60,7 +66,7 @@ class RangeSlider extends React.Component {
         scope.state.info.update = function (props) {
 
             this._div.innerHTML = '<h4>Number of Approved Planning Decisions</h4>' +  (props ?
-                '<b>Planing Area: ' + props.pln_area_n + '</b><br />' + props.gid + ' applications'
+                '<b>Hexagon ID: ' + props.id + '</b><br />' + props.total + ' applications'
                 : 'Hover over a hexagon');
         };
 
@@ -114,11 +120,25 @@ class RangeSlider extends React.Component {
      }
 
      componentWillUnmount() {
-       //const parent = ReactDOM.findDOMNode(this);
-       //$(parent).dateRangeSlider("destroy");
+
+         console.log("unmount?");
+
+         //remove layer
+         if (this.state._map.hasLayer(this.state.geojson)) {
+             this.state._map.removeLayer(this.state.geojson);
+         };
+
+         //remove all listener
+         this.state._map.removeEventListener();
+
+       const parent = ReactDOM.findDOMNode(this);
+       $(parent).dateRangeSlider("destroy");
+
+
+
    }
 
-   loadData(){
+   async loadData(){
        var xmin = this.state._map.getBounds().getSouthWest().lng;
        var ymin = this.state._map.getBounds().getSouthWest().lat;
        var xmax = this.state._map.getBounds().getNorthEast().lng;
@@ -126,11 +146,101 @@ class RangeSlider extends React.Component {
 
        var bounds = "ST_MakeEnvelope(" + xmin + ", " + ymin + ", " + xmax + ", " + ymax + ", 4326)";
 
-       //console.log(this.state.minMax)
+
+       if (this.state._map.hasLayer(this.state.geojson)) {
+           this.state._map.removeLayer(this.state.geojson);
+       };
+
+
+       this.state.geojson = null;
+
+       var myMapQuery = {
+           "startDate": this.state.minMax.s,
+           "endDate" : this.state.minMax.e,
+           "xmin" : xmin,
+           "ymin" : ymin,
+           "xmax" : xmax,
+           "ymax" : ymax
+       }
+
+       var myTimeChartQuery = {
+           "startDate": this.state.minMax.s,
+           "endDate" : this.state.minMax.e
+       }
+
+       this.setState({
+           mapQuery: myMapQuery,
+           timechartQuery: myMapQuery
+       })
+
+       var scope = this;
+
+      //query map result from api
+      let mapResult = await scope.mapQuery();
+
+      //query timechart result from api
+      let timeChartResult = await scope.timeChartQuery();
+
+
+       if(mapResult){
+
+           this.setState({
+               geojson:new L.geoJson(mapResult,{style:this.style.bind(this),onEachFeature: this.onEachFeature.bind(this)})
+           })
+
+           //add to map
+           this.state.geojson.addTo(this.state._map);
+       }
+
+       if(timeChartResult){
+           console.log(timeChartResult);
+
+           this.setState({
+               barchartX:[],
+               barchartY:[]
+           })
+
+           //save value to state
+
+           var tempX = [];
+           var tempY = [];
+           var i = 0;
+
+           for(i=0;i<timeChartResult.rows.length;i++){
+               tempX.push(timeChartResult.rows[i].decision_date.substring(0,10));
+               tempY.push(timeChartResult.rows[i].count);
+           }
+
+           this.setState({
+               barchartX:tempX,
+               barchartY:tempY
+           })
+
+
+       }else{
+           console.log("time chart api error")
+       }
    };
 
-   toggleLayer(){
+   mapQuery(){
+       return invokeApig({
+         path: '/pgquery/map',
+         method: 'POST',
+         body: this.state.mapQuery,
+       });
+   }
 
+   timeChartQuery(){
+       return invokeApig({
+         path: '/pgquery/timechart',
+         method: 'POST',
+         body: this.state.timechartQuery,
+       });
+   }
+
+
+
+   toggleLayer(){
 
      //EplActionCreator.dynamicQuery(this.state._map);
 
@@ -153,10 +263,7 @@ class RangeSlider extends React.Component {
                    console.log(error)
                }
            });
-
-
    }
-
 
        getColor(d) {
    		return d > 1000 ? '#800026' :
@@ -171,7 +278,7 @@ class RangeSlider extends React.Component {
 
        style(feature){
            //feature.properties.gid
-           let color = this.getColor(feature.properties.gid);
+           let color = this.getColor(feature.properties.total);
 
           return {
               fillColor: color,
@@ -224,12 +331,14 @@ class RangeSlider extends React.Component {
 
     render() {
 
-        let time =['x'],chartVolume = ['Time (24h)'];
-
-            time.push("12");
-            chartVolume.push("1")
+        let time =['x'],chartVolume = ['Decision Date'];
+        var i = 0;
 
 
+        for(i = 0;i < this.state.barchartX.length;i++){
+            time.push(this.state.barchartX[i]);
+            chartVolume.push(this.state.barchartY[i])
+        }
 
            let barData = [
                time,
@@ -238,13 +347,8 @@ class RangeSlider extends React.Component {
 
         return (
             <div>
-
-                        <div id="jrangeslider"></div>
-                    {<BarChart title={"Planning Decisions"} x='x' data = {barData} orientation={ChartOrientation.Vertical} />}
-
-
-
-
+            <div id="jrangeslider"></div>
+            {<BarChart title={"Planning Decisions"} x='x' data = {barData} orientation={ChartOrientation.Vertical} />}
             </div>
         );
     }

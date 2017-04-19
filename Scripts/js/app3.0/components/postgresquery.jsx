@@ -41,9 +41,14 @@ class PostgresQuery extends React.Component {
         super(props);
 
         this.state = {
+            showId: 0,
+            expanded: false,
+            selected: LayerManagerStore.getSelected(),
+            identifyLoading: UiStore.getIdentifyLoadingState(),
             _map:Util.getMap(),
             uiState: UiStore.getUiState(),
-            geojson: null
+            geojson: null,
+            unmountSlider:false
         };
 
         this._onUiChange = this._onUiChange.bind(this);
@@ -79,7 +84,8 @@ class PostgresQuery extends React.Component {
     _onUiChange() {
 
         this.setState({
-            uiState: UiStore.getUiState()
+            uiState: UiStore.getUiState(),
+            identifyLoading: UiStore.getIdentifyLoadingState()
         });
     }
 
@@ -195,20 +201,37 @@ class PostgresQuery extends React.Component {
 
   }
 
+  _toggleRightPanelExpansion(evt) {
+      this.setState({
+          expanded: !this.state.expanded
+      });
+
+  }
+
 
     render() {
 
+        var expanded = this.state.expanded,
+            resizeClass = expanded ? "reduce-icon expand-icon-color" : "expand-icon expand-icon-color",
+            resizeInfoClass = expanded ? "icon-resize-small" : "icon-resize-full",
+            resizeStyleMap = expanded ? { width: '66%' } : { width: '33%' };
+
 
                     return (
-                        <div id="legend-div" className="legend-color"  >
+                        <div id="legend-div" className="legend-color"  style={resizeStyleMap}>
                             <div className="si-title-wrapper si-title-color">
                                 <span className="si-title">Postgres Query</span>
                                 <span id="siteinfo-close" className="right-close-btn right-close-btn-color" onClick={this.closeRightMenu.bind(this)}><i className="icon-cancel-circled"></i></span>
+                                <span id="siteinfo-resize" className={resizeClass} onClick={this._toggleRightPanelExpansion.bind(this)}><i className={resizeInfoClass}></i></span>
                             </div>
 
                             <button onClick={this.toggleLayer.bind(this)}>Show</button>
                               <button onClick={this.query.bind(this)}>query</button>
-                            <Jrangeslider geodata={this.state.geojson}/>
+
+                          {
+                              this.state.unmountSlider? null:<Jrangeslider geodata={this.state.geojson}/>
+                          }
+
                     </div>
                    );
             }
