@@ -34,43 +34,26 @@ functions:
   #     domain api call
   # - authorizer: authenticate the api via Cognito User Pool. Update the 'arn'
   #     with your own User Pool ARN
-  pgtest:
-    handler: pg.main
-    events:
-      - http:
-          path: pgall
-          method: get
-          cors: true
-
-  pgQrow:
-    # Defines an HTTP API endpoint that calls the main function in pgrow.js
-    # - path: url path is /pgquery?=10
-    # - method: GET request
-    # - return: first 100 row of record
-    # - purpose: test rest api
-    handler: pgqrow.main
-    description: return number of rows in query
-    events:
-      - http:
-          path: pgquery
-          method: get
-          cors: true
-          integration: lambda
-          request:
-            passThrough: WHEN_NO_MATCH
-            parameters:
-              querystrings:
-                row: true
-
-  pgQProw:
-    # Defines an HTTP API endpoint that calls the main function in pgqprow.js
-    # - path: url path is /pgquery/{data}
+  pgmap:
+    # Defines an HTTP API endpoint that calls the main function in pgmap.js
+    # - path: url path is /pgquery/pgmap{data}
     # - method: POST request
-    # - return: first 100 row of record
-    # - purpose: try using post method
-    handler: pgqprow.main
+    # - return: geojson map features
+    handler: pgmap.main
     events:
       - http:
-          path: pgquery
+          path: pgquery/map
+          method: post
+          cors: true
+
+  pgtimechart:
+    # Defines an HTTP API endpoint that calls the main function in pgtimechart.js
+    # - path: url path is /pgquery/pgtimechart{data}
+    # - method: POST request
+    # - return: geojson map time aggregation values
+    handler: pgtimechart.main
+    events:
+      - http:
+          path: pgquery/timechart
           method: post
           cors: true
