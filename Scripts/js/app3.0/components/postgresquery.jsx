@@ -31,9 +31,10 @@ import $ from 'jquery';
 import Ajax from 'wrapper/ajax';
 import fancybox from 'fancybox';
 import QueryStore from 'stores/querystore'
-import Jrangeslider from 'components/ui/jrangeslider'
 import {invokeApig} from 'components/restapi/awsLib';
 import config from 'components/restapi/config';
+import BarChart from 'components/charts/barchart';
+import {ChartColors, ChartOrientation} from 'constants/chartconstants';
 
 class PostgresQuery extends React.Component {
 
@@ -43,12 +44,13 @@ class PostgresQuery extends React.Component {
         this.state = {
             showId: 0,
             expanded: false,
-            selected: LayerManagerStore.getSelected(),
             identifyLoading: UiStore.getIdentifyLoadingState(),
             _map:Util.getMap(),
             uiState: UiStore.getUiState(),
             geojson: null,
-            unmountSlider:false
+            unmountSlider:false,
+            barchartX:QueryStore.getBarchartDataX(),
+            barchartY:QueryStore.getBarchartDataY()
         };
 
         this._onUiChange = this._onUiChange.bind(this);
@@ -67,17 +69,15 @@ class PostgresQuery extends React.Component {
         Util.setPerfectScrollbar(content);
         fancybox($);
 
-        //add map to outside variable
-
-
+        //toggle jrangeslider
+        //shoe slider at the same time
+        EplActionCreator.togglejrangeslider("jrangeslider");
 
     }
 
     componentWillUnmount() {
-
         UiStore.removeChangeListener(this._onUiChange);
         QueryStore.removeChangeListener(this._onQueryChange);
-
     }
 
 
@@ -91,6 +91,10 @@ class PostgresQuery extends React.Component {
 
     _onQueryChange(){
 
+      this.setState({
+        barchartX:QueryStore.getBarchartDataX(),
+        barchartY:QueryStore.getBarchartDataY()
+      });
     }
 
 
@@ -100,9 +104,6 @@ class PostgresQuery extends React.Component {
     }
 
     toggleLayer(){
-
-
-      //EplActionCreator.dynamicQuery(this.state._map);
 
             $.ajax({
                 dataType: 'json',
@@ -216,6 +217,20 @@ class PostgresQuery extends React.Component {
             resizeInfoClass = expanded ? "icon-resize-small" : "icon-resize-full",
             resizeStyleMap = expanded ? { width: '66%' } : { width: '33%' };
 
+            let time =['x'],chartVolume = ['Decision Date'];
+            var i = 0;
+
+            if(this.state.barchartX != null){
+            for(i = 0;i < this.state.barchartX.length;i++){
+                time.push(this.state.barchartX[i]);
+                chartVolume.push(this.state.barchartY[i])
+            }
+          }
+               let barData = [
+                   time,
+                   chartVolume
+               ]
+
 
                     return (
                         <div id="legend-div" className="legend-color"  style={resizeStyleMap}>
@@ -228,10 +243,7 @@ class PostgresQuery extends React.Component {
                             <button onClick={this.toggleLayer.bind(this)}>Show</button>
                               <button onClick={this.query.bind(this)}>query</button>
 
-                          {
-                              this.state.unmountSlider? null:<Jrangeslider geodata={this.state.geojson}/>
-                          }
-
+                                {<BarChart title={"Planning Decisions"} x='x' data = {barData} orientation={ChartOrientation.Vertical} />}
                     </div>
                    );
             }

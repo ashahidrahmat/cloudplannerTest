@@ -31,23 +31,49 @@ class QueryStore extends BaseStore {
         super();
         this._queryManager = null;
         this._map = Util.getMap();
+        this.showjrangeslider = false;
+        this.barchartDataX=null;
+        this.barchartDataY=null;
     }
 
-dynamicQuery(map){
-  console.log("querystore");
+    getJrangesliderStatus(){
+      return this.showjrangeslider;
+    }
 
+    getBarchartDataX(){
+      return this.barchartDataX;
+    }
 
- //this._queryManager = MapStore.queryManager;
- //var queryManager = this._queryManager;
+    getBarchartDataY(){
+      return this.barchartDataY;
+    }
 
-console.log(map)
+togglejrangeslider(queryData){
 
- //queryManager.showLayer(map);
+  //show bottom jrangeslider
+  this.showjrangeslider = true;
 
+console.log(queryData);
+if(queryData){
+
+if(queryData.type == "barchart")
+  this.processBarchartData(queryData.data);
 }
 
+}
+processBarchartData(timeChartResult){
+  var tempX = [];
+  var tempY = [];
+  var i = 0;
 
+  for(i=0;i<timeChartResult.rows.length;i++){
+      tempX.push(timeChartResult.rows[i].decision_date.substring(0,10));
+      tempY.push(timeChartResult.rows[i].count);
+  }
 
+  this.barchartDataX=tempX;
+  this.barchartDataY=tempY;
+}
 
 }
 
@@ -57,8 +83,8 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
 
     switch(action.actionType) {
 
-        case EplConstants.DynamicQuery:
-            instance.dynamicQuery(action.customData);
+        case EplConstants.Togglejrangeslider:
+            instance.togglejrangeslider(action.customData);
             instance.emitChanges();
             break;
 

@@ -69,6 +69,8 @@ import {Menu,MainButton,ChildButton} from 'react-mfb-custom';
 import Util from 'utils';
 import Upload from 'components/upload';
 import StreetView from 'components/streetview';
+import QueryStore from 'stores/querystore'
+import JrangeTimesliderBottom from 'components/jrangesliderbottom'
 
 export default class EplReact extends React.Component {
     constructor(props) {
@@ -80,7 +82,8 @@ export default class EplReact extends React.Component {
             speech: SpeechStore.getSpeechState(),
             buildings: false,
             toggleNavButton: false,
-            siteInfo: MapStore.getSiteInfo() || Map3DStore.getSiteInfo()
+            siteInfo: MapStore.getSiteInfo() || Map3DStore.getSiteInfo(),
+            showJrangesliderBottom:QueryStore.getJrangesliderStatus()
         };
 
         //don't show default left panel on mobile
@@ -91,6 +94,7 @@ export default class EplReact extends React.Component {
         this._onUiChange = this._onUiChange.bind(this);
         this._onSpeechChange = this._onSpeechChange.bind(this);
         this._onSiteInfoChange = this._onSiteInfoChange.bind(this);
+        this._onQueryChange = this._onQueryChange.bind(this);
 
         WebApi.getOneMapToken();
     }
@@ -99,6 +103,7 @@ export default class EplReact extends React.Component {
         UiStore.addChangeListener(this._onUiChange);
         SpeechStore.addChangeListener(this._onSpeechChange);
         MapStore.addChangeListener(this._onSiteInfoChange);
+        QueryStore.addChangeListener(this._onQueryChange);
         Util.logPanelView("Successful Login");
     }
 
@@ -106,6 +111,11 @@ export default class EplReact extends React.Component {
         UiStore.removeChangeListener(this._onUiChange);
         SpeechStore.removeChangeListener(this._onSpeechChange);
         MapStore.removeChangeListener(this._onSiteInfoChange);
+        QueryStore.removeChangeListener(this._onQueryChange);
+    }
+
+    _onQueryChange(){
+      this.setState({showJrangesliderBottom:QueryStore.getJrangesliderStatus()});
     }
 
     _onSiteInfoChange() {
@@ -332,7 +342,7 @@ export default class EplReact extends React.Component {
             $(this.refs.chatbot).hide();
         },0);
 
-        let addressBarBottom;
+        let addressBarBottom,jrangesliderbottom;
         if (this.state.siteInfo.address != null) {
             addressBarBottom = <PhoneBreakpoint>
                 <Navbar fixedBottom>
@@ -347,9 +357,25 @@ export default class EplReact extends React.Component {
             </PhoneBreakpoint>
         }
 
+      if(this.state.showJrangesliderBottom) {
+        jrangesliderbottom = <DesktopBreakpoint>
+            <Navbar fixedBottom style={{width:"34%",height:"80px"}}>
+                <Navbar.Header>
+                    <Navbar.Brand style={{
+                        height: 'inherit'
+                    }}>
+                      <JrangeTimesliderBottom/>
+                    </Navbar.Brand>
+                </Navbar.Header>
+            </Navbar>
+        </DesktopBreakpoint>
+      }
+
         return (
             <div className="map-content">
                 {this.state.siteInfo.address != null && <div>{addressBarBottom}</div>}
+
+                {jrangesliderbottom}
 
                 <Navbar fluid fixedTop style={{
                         backgroundColor: '#FFFFFF',

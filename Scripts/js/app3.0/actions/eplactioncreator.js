@@ -583,9 +583,9 @@ class EplActionCreator {
       });
     }
 
-    dynamicQuery(customData){
+    togglejrangeslider(customData){
       AppDispatcher.dispatch({
-          actionType: EplConstants.DynamicQuery,
+          actionType: EplConstants.Togglejrangeslider,
           customData: customData
       });
     }
