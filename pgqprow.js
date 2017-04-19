@@ -20,30 +20,24 @@ export async function main(event, context, callback) {
     let query1 = 'select gid, pln_area_n, ST_AsGeoJSON(geom) AS geometry from s_pln_area limit 10';
     let query2 = 'select gid, pln_area_n, ST_AsGeoJSON(geom) AS geometry from s_pln_area limit 1';
 
-    var finalQuery='';
+
+    //var finalQuery='';
+    //must define datatype
+    var finalQuery={};
 
     const data = JSON.parse(event.body);
 
+    finalQuery = data;
 
+/*
     if(data.myquery == "query1"){
       finalQuery = query1;
   }else if(data.myquery == "query2"){
       finalQuery = query2;
     }
-
-
-/*
-    const response = {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true,
-      },
-      body: temp1
-    };
-
-    callback(null, response);
 */
+
+    //pass in the data from frontend
     //query for result
     let queryResult = await getQuery(finalQuery);
 
@@ -61,7 +55,7 @@ export async function main(event, context, callback) {
 
 };
 
- async function getQuery(finalQuery) {
+ async function getQuery(dataQuery) {
     return new Promise(
         (resolve, reject) => {
 
@@ -83,7 +77,15 @@ export async function main(event, context, callback) {
             }
           });
 
-          var data = knex.raw(finalQuery);
+        let s = dataQuery.startDate.substring(0,10);
+      	let e = dataQuery.endDate.substring(0,10);
+        let xmin = dataQuery.xmin;
+     	let ymin = dataQuery.ymin;
+     	let xmax = dataQuery.xmax;
+     	let ymax = dataQuery.ymax;
+      	let bounds = "ST_MakeEnvelope(" + xmin + ", " + ymin + ", " + xmax + ", " + ymax + ", 4326)";
+
+        var data = knex.raw("select r.id, r.total, ST_AsGeoJSON(g.geom  AS geometry from (select mkts_lotno as id, count(distinct(decision_no)) as total from planning_decisions pd where decision_date >= date'" + s +"' and decision_date < date '" + e + "' group by mkts_lotno) as r, s_cadastral_land_lot_1 g where r.id = g.lot_key and ST_INTERSECTS(g.geom, " + bounds + ")");
 
 
 
