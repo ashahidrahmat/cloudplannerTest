@@ -47,7 +47,7 @@ class UploadStore extends BaseStore {
     }
 
     detectFormat(filename){
-        var extension, obj;  
+        var extension, obj;
 
         if(typeof filename === "string"){
             extension = filename.substring(filename.indexOf('.')+1).toLowerCase();
@@ -104,32 +104,46 @@ class UploadStore extends BaseStore {
         })
     }
 
+    getCustomLayer(){
+        return L.geoJson(null, {
+             onEachFeature: function(feature, layer) {
+                if (feature.properties) {
+                    layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                        return k + ": " + feature.properties[k];
+                    }).join("<br />"), {
+                        maxHeight: 200
+                    });
+                }
+            }
+        });;  
+    }
+
     loadGeoJSON(geojson){
-        return Omnivore.geojson(geojson);
+        return Omnivore.geojson(geojson,null,this.getCustomLayer());
     }
 
     loadCSV(csv){
-        return Omnivore.csv(csv);
+        return Omnivore.csv(csv,null,this.getCustomLayer());
     }
 
     loadGPX(gpx){
-        return Omnivore.gpx(gpx);
+        return Omnivore.gpx(gpx,null,this.getCustomLayer());
     }
 
     loadTopoJSON(topojson){
-        return Omnivore.topojson(topojson);
+        return Omnivore.topojson(topojson,null,this.getCustomLayer());
     }
 
     loadWKT(wkt){
-        return Omnivore.wkt(wkt);
+        return Omnivore.wkt(wkt,null,this.getCustomLayer());
     }
 
     loadKML(kml){
-        return Omnivore.kml(kml);
+        return Omnivore.kml(kml,null,this.getCustomLayer());
     }
 
     loadPolyline(polyline){
-        return Omnivore.polyline(polyline);
+        return Omnivore.polyline(polyline,null,this.getCustomLayer());
     }
 
     loadGDB(gdb){
