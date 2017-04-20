@@ -37,6 +37,66 @@ import BarChart from 'components/charts/barchart';
 import {ChartColors, ChartOrientation} from 'constants/chartconstants';
 import PieChart from 'components/charts/piechart';
 import MapStore from 'stores/mapstore';
+import {
+Popover,
+Tooltip,
+Modal,
+Button
+} from 'react-bootstrap';
+
+const Example = React.createClass({
+  getInitialState() {
+    return { showModal: true };
+  },
+
+  close() {
+    this.setState({ showModal: false });
+  },
+
+  open() {
+    this.setState({ showModal: true });
+  },
+
+  render() {
+    const popover = (
+      <Popover id="modal-popover" title="popover">
+        very popover. such engagement
+      </Popover>
+    );
+    const tooltip = (
+      <Tooltip id="modal-tooltip">
+        wow.
+      </Tooltip>
+    );
+
+    return (
+      <div>
+        <p>Click to get the full Modal experience!</p>
+
+        <Button
+          bsStyle="primary"
+          bsSize="large"
+          onClick={this.open}
+        >
+          Launch demo modal
+        </Button>
+
+        <Modal show={this.state.showModal} onHide={this.close}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+             hi
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.close}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  }
+});
+
 
 class PostgresQuery extends React.Component {
 
@@ -141,6 +201,13 @@ class PostgresQuery extends React.Component {
 
   }
 
+  getDataQuery(evt){
+    console.log(evt);
+
+    //EplActionCreator.showModal("hi")
+
+  }
+
     render() {
 
         var expanded = this.state.expanded,
@@ -185,9 +252,9 @@ class PostgresQuery extends React.Component {
         var tableData = [];
         //populate table
         if(this.state.tablechartData != null){
-            console.log(this.state.tablechartData)
+            var scope = this;
             this.state.tablechartData.data.map((item, j) => {
-                tableData.push(<tr><td>{item.id}</td><td>{item.total}</td></tr>)
+                tableData.push(<tr onClick={scope.getDataQuery.bind(scope,item.id)}><td><a href="#">{item.id}</a></td><td>{item.total}</td></tr>)
         });
         }
 
@@ -216,6 +283,10 @@ class PostgresQuery extends React.Component {
                                           </tbody>
                                       </table>
                                   </div>
+
+                                    <Example/>
+
+
                     </div>
                     </div>
                    );

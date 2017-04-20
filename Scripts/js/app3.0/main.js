@@ -23,6 +23,6 @@ import EplReact         from 'components/eplreact';
 import Login			from 'components/login';
 
 ReactDOM.render(
-    <EplReact />,
+    <Login />,
     document.getElementById('epl')
 );
