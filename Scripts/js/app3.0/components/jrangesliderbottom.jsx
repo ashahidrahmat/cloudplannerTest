@@ -39,9 +39,13 @@ class RangeSliderBottom extends React.Component {
             info:null,
             mapQuery:{},
             timechartQuery:{},
+            piechartQuery:{},
             barchartX:[],
-            barchartY:[]
+            barchartY:[],
+            dataQuery:[]
         }
+
+        this.delayTimer;
 
     }
     componentDidMount() {
@@ -97,7 +101,11 @@ class RangeSliderBottom extends React.Component {
          //listen to maps moveend movement, need turn on postgres panel to start listening
          scope.state._map.on('moveend', function(x) {
      	       console.log("map moved");
-               scope.loadData()
+               this.delayTimer = setTimeout(() => {
+                   Util.loadingInProgress();
+                   scope.loadData()
+               }, 1500);
+
      	});
 
        // Preferred method
@@ -164,7 +172,8 @@ class RangeSliderBottom extends React.Component {
 
        this.setState({
            mapQuery: myMapQuery,
-           timechartQuery: myMapQuery
+           timechartQuery: myMapQuery,
+           piechartQuery:myMapQuery
        })
 
        var scope = this;
@@ -175,15 +184,40 @@ class RangeSliderBottom extends React.Component {
       //query timechart result from api
       let timeChartResult = await scope.timeChartQuery();
 
+      //query piechart result from api
+      let pieChartResult = await scope.pieChartQuery();
+
+      //query data from api
+      //let dataResult = await scope.dataQuery();
+
 
        if(mapResult){
-
            this.setState({
                geojson:new L.geoJson(mapResult,{style:this.style.bind(this),onEachFeature: this.onEachFeature.bind(this)})
            })
-
            //add to map
            this.state.geojson.addTo(this.state._map);
+
+           var tableResult = [];
+
+           var geoJsonLayer = new L.geoJson(mapResult);
+
+           //loop through geojson feature layers
+           geoJsonLayer.eachLayer(function(layer) {
+             tableResult.push(layer.feature.properties);
+           });
+
+
+           //pick only the properties
+           var chartData = {
+             "type":"tablechart",
+             data:tableResult
+           }
+
+           //send data to postgresquery.jsx to populate table
+           EplActionCreator.togglejrangeslider(chartData);
+
+
        }
 
        if(timeChartResult){
@@ -216,11 +250,16 @@ class RangeSliderBottom extends React.Component {
                barchartX:tempX,
                barchartY:tempY
            })
-
-
-       }else{
-           console.log("time chart api error")
        }
+
+       if(pieChartResult){
+           var chartData = {
+             "type":"piechart",
+             data:pieChartResult
+           }
+            EplActionCreator.togglejrangeslider(chartData);
+       }
+       Util.loadingComplete();
    };
 
    mapQuery(){
@@ -236,6 +275,22 @@ class RangeSliderBottom extends React.Component {
          path: '/pgquery/timechart',
          method: 'POST',
          body: this.state.timechartQuery,
+       });
+   }
+
+   pieChartQuery(){
+       return invokeApig({
+         path: '/pgquery/piechart',
+         method: 'POST',
+         body: this.state.piechartQuery,
+       });
+   }
+
+   dataQuery(){
+       return invokeApig({
+         path: '/pgquery/pgdata',
+         method: 'POST',
+         body: this.state.dataQuery,
        });
    }
 

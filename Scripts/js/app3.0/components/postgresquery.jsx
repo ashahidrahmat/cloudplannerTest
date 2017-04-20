@@ -35,6 +35,8 @@ import {invokeApig} from 'components/restapi/awsLib';
 import config from 'components/restapi/config';
 import BarChart from 'components/charts/barchart';
 import {ChartColors, ChartOrientation} from 'constants/chartconstants';
+import PieChart from 'components/charts/piechart';
+import MapStore from 'stores/mapstore';
 
 class PostgresQuery extends React.Component {
 
@@ -50,7 +52,9 @@ class PostgresQuery extends React.Component {
             geojson: null,
             unmountSlider:false,
             barchartX:QueryStore.getBarchartDataX(),
-            barchartY:QueryStore.getBarchartDataY()
+            barchartY:QueryStore.getBarchartDataY(),
+            piechartData:QueryStore.getPiechartData(),
+            tablechartData:QueryStore.getTablechartData()
         };
 
         this._onUiChange = this._onUiChange.bind(this);
@@ -61,6 +65,9 @@ class PostgresQuery extends React.Component {
     }
 
     componentDidMount() {
+
+        //disable map click
+        MapStore.disableMapOnClickIdentifyHandler();
 
         UiStore.addChangeListener(this._onUiChange);
         QueryStore.addChangeListener(this._onQueryChange);
@@ -76,6 +83,10 @@ class PostgresQuery extends React.Component {
     }
 
     componentWillUnmount() {
+
+        //enable map click
+        MapStore.enableMapOnClickIdentifyHandler();
+
         UiStore.removeChangeListener(this._onUiChange);
         QueryStore.removeChangeListener(this._onQueryChange);
     }
@@ -92,8 +103,10 @@ class PostgresQuery extends React.Component {
     _onQueryChange(){
 
       this.setState({
-        barchartX:QueryStore.getBarchartDataX(),
-        barchartY:QueryStore.getBarchartDataY()
+          barchartX:QueryStore.getBarchartDataX(),
+          barchartY:QueryStore.getBarchartDataY(),
+          piechartData:QueryStore.getPiechartData(),
+          tablechartData:QueryStore.getTablechartData()
       });
     }
 
@@ -103,104 +116,6 @@ class PostgresQuery extends React.Component {
         EplActionCreator.closeRightPanel();
     }
 
-    toggleLayer(){
-
-            $.ajax({
-                dataType: 'json',
-                type:'GET',
-                url:'https://47ocijtui8.execute-api.us-east-1.amazonaws.com/v1/pgquery',
-                success:(data) => {
-
-                    this.setState({
-                        geojson:new L.geoJson(data,{style:this.style.bind(this),onEachFeature: this.onEachFeature.bind(this)})
-                    })
-
-                    //add to map
-                    this.state.geojson.addTo(this.state._map);
-
-
-                },
-                error: function (request, status, error) {
-                    console.log(error)
-                }
-            });
-
-
-    }
-
-    getColor(d) {
-		return d > 1000 ? '#800026' :
-			   d > 500  ? '#BD0026' :
-			   d > 200  ? '#E31A1C' :
-			   d > 100  ? '#FC4E2A' :
-			   d > 50   ? '#FD8D3C' :
-			   d > 20   ? '#FEB24C' :
-			   d > 10   ? '#FED976' :
-						  '#FFEDA0';
-	}
-
-    style(feature){
-        //feature.properties.gid
-        let color = this.getColor(feature.properties.gid);
-
-       return {
-           fillColor: color,
-           weight: 2,
-           opacity: 1,
-           color: 'white',
-           dashArray: '3',
-           fillOpacity: 0.7
-       };
-    }
-
-    onEachFeature(feature, layer){
-
-       layer.on({
-           mouseover: this.highlightFeature,
-           mouseout: this.resetHighlight.bind(this),
-           click: this.zoomToFeature
-       });
-    }
-
-
-     highlightFeature(e) {
-		var layer = e.target;
-
-		layer.setStyle({
-			weight: 5,
-			color: '#666',
-			dashArray: '',
-			fillOpacity: 0.7
-		});
-
-		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-			layer.bringToFront();
-		}
-		//info.update(layer.feature.properties);
-	}
-
-	 resetHighlight(e) {
-         if(this.state.geojson){
-             this.state.geojson.resetStyle(e.target);
-         }
-
-		//info.update();
-	}
-
-	 zoomToFeature(e) {
-		this._map.fitBounds(e.target.getBounds());
-	}
-
-  query(){
-    console.log("query");
-
-    return invokeApig({
-      path: '/pgquery',
-      method: 'POST',
-      body: '{"myquery":"query1"}',
-    });
-
-  }
 
   _toggleRightPanelExpansion(evt) {
       this.setState({
@@ -209,27 +124,72 @@ class PostgresQuery extends React.Component {
 
   }
 
+  showChart(chartData){
+
+      //show barchart
+      var showchart = false;
+
+      if(chartData == null){
+          showchart = false
+      }else if(chartData != null && chartData.length == 0){
+          showchart = false
+      }else{
+          showchart = true;
+      }
+
+      return showchart;
+
+  }
 
     render() {
 
         var expanded = this.state.expanded,
             resizeClass = expanded ? "reduce-icon expand-icon-color" : "expand-icon expand-icon-color",
             resizeInfoClass = expanded ? "icon-resize-small" : "icon-resize-full",
-            resizeStyleMap = expanded ? { width: '66%' } : { width: '33%' };
+            resizeStyleMap = expanded ? { width: '66%' } : { width: '33%' },
+            siteClass = "show";
 
             let time =['x'],chartVolume = ['Decision Date'];
             var i = 0;
+            let barData = [];
 
             if(this.state.barchartX != null){
-            for(i = 0;i < this.state.barchartX.length;i++){
-                time.push(this.state.barchartX[i]);
-                chartVolume.push(this.state.barchartY[i])
-            }
+                //console.log(this.state.barchartX )
+
+                    for(i = 0;i < this.state.barchartX.length;i++){
+                        time.push(this.state.barchartX[i]);
+                        chartVolume.push(this.state.barchartY[i])
+                    }
+
+                    if(this.state.barchartX.length == 0){
+                        time.push(["12"]);
+                        chartVolume.push("1")
+                    }
+
+                barData = [
+                    time,
+                    chartVolume
+                ]
+
           }
-               let barData = [
-                   time,
-                   chartVolume
-               ]
+
+
+
+
+
+        //show barchart
+        var showTimeChartStatus = this.showChart(this.state.barchartX);
+        //show piechart
+        var showPieChartStatus = this.showChart(this.state.piechartData);
+
+        var tableData = [];
+        //populate table
+        if(this.state.tablechartData != null){
+            console.log(this.state.tablechartData)
+            this.state.tablechartData.data.map((item, j) => {
+                tableData.push(<tr><td>{item.id}</td><td>{item.total}</td></tr>)
+        });
+        }
 
 
                     return (
@@ -240,10 +200,23 @@ class PostgresQuery extends React.Component {
                                 <span id="siteinfo-resize" className={resizeClass} onClick={this._toggleRightPanelExpansion.bind(this)}><i className={resizeInfoClass}></i></span>
                             </div>
 
-                            <button onClick={this.toggleLayer.bind(this)}>Show</button>
-                              <button onClick={this.query.bind(this)}>query</button>
+                            <div className="legend-wrapper" ref="cateContent">
 
-                                {<BarChart title={"Planning Decisions"} x='x' data = {barData} orientation={ChartOrientation.Vertical} />}
+
+                                {showTimeChartStatus? <BarChart title={"Planning Decisions"} x='x' data = {barData} orientation={ChartOrientation.Vertical} /> : "no data available"}
+
+                                {showPieChartStatus? <PieChart title={"Application Type"}
+                                  data={this.state.piechartData} /> : ""}
+
+                                  <div className={siteClass + " site-fixed-info"}>
+                                      <table className="site-fixed-info-table" border="1">
+                                          <tbody>
+                                              <tr><td width="116px;">Lot_No</td><td>Count</td></tr>
+                                              {tableData}
+                                          </tbody>
+                                      </table>
+                                  </div>
+                    </div>
                     </div>
                    );
             }

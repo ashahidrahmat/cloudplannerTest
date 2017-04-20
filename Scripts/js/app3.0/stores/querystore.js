@@ -34,6 +34,8 @@ class QueryStore extends BaseStore {
         this.showjrangeslider = false;
         this.barchartDataX=null;
         this.barchartDataY=null;
+        this.piechartData=null;
+        this.tablechartData = null;
     }
 
     getJrangesliderStatus(){
@@ -48,19 +50,34 @@ class QueryStore extends BaseStore {
       return this.barchartDataY;
     }
 
+    getPiechartData(){
+      return this.piechartData;
+    }
+
+    getTablechartData(){
+      return this.tablechartData;
+    }
+
+
+
 togglejrangeslider(queryData){
 
   //show bottom jrangeslider
   this.showjrangeslider = true;
 
-console.log(queryData);
 if(queryData){
 
-if(queryData.type == "barchart")
-  this.processBarchartData(queryData.data);
+if(queryData.type == "barchart"){
+    this.processBarchartData(queryData.data);
+}else if(queryData.type == "piechart"){
+    this.processPiechartDate(queryData.data);
+}else if(queryData.type == "tablechart"){
+    this.processTablechartDate(queryData);
 }
 
 }
+}
+
 processBarchartData(timeChartResult){
   var tempX = [];
   var tempY = [];
@@ -73,6 +90,24 @@ processBarchartData(timeChartResult){
 
   this.barchartDataX=tempX;
   this.barchartDataY=tempY;
+}
+
+processPiechartDate(pieChartResult){
+
+var tempchartdata = [];
+
+var i = 0;
+
+for(i=0;i<pieChartResult.rows.length;i++){
+ tempchartdata.push([pieChartResult.rows[i].appl_type,pieChartResult.rows[i].count])
+}
+
+this.piechartData = tempchartdata;
+
+}
+
+processTablechartDate(tableChartResult){
+this.tablechartData = tableChartResult;
 }
 
 }

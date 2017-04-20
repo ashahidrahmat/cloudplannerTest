@@ -305,7 +305,7 @@ class Util {
         );
     }
 
-    //Returns true if it is a DOM element    
+    //Returns true if it is a DOM element
     isDomElement(o) {
         return (
             typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
@@ -347,7 +347,7 @@ class Util {
 
     /*getObjId = (function () {
         var keys = {};
-            
+
         return function (key) {
             if (!keys[key])
                 keys[key] = 0;
@@ -355,7 +355,16 @@ class Util {
             return keys[key]++;
         };
     }());*/
+    loadingInProgress(){
+        document.getElementById('loading-div').style.display = 'block';
+    }
 
+    loadingComplete(){
+        let loadDiv = document.getElementById('loading-div');
+        if(loadDiv){
+            loadDiv.style.display = 'none';
+        }
+    }
     parseFloat(val, rounding) {
             var invalidOrZero = !val || !('' + val).length || isNaN('' + val);
             rounding = rounding || 2;
@@ -380,7 +389,7 @@ class Util {
             return (parseInt(number) != number) ? d3.format(',.' + digits + 'f')(number) :
                 d3.format(',d')(number);
         }
-        //only show c3js chart tooltip for content with number > 0 
+        //only show c3js chart tooltip for content with number > 0
     formatChartTooltipByContent(d) {
         var vals = [];
         for (let ele of d) {
@@ -649,7 +658,7 @@ class Util {
 
         return csvStr;
     }
-    
+
     capitalizeFirstLetter(str) {
         return str.split(' ').map(s => {
             //todo: remove hardcode
