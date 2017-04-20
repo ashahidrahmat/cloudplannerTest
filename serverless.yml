@@ -57,3 +57,27 @@ functions:
           path: pgquery/timechart
           method: post
           cors: true
+
+  pgapptype:
+    # Defines an HTTP API endpoint that calls the main function in pgpiechart.js
+    # - path: url path is /pgquery/piechart{data}
+    # - method: POST request
+    # - return: geojson map application type aggregation values
+    handler: pgapptype.main
+    events:
+      - http:
+          path: pgquery/piechart
+          method: post
+          cors: true
+
+  pgdata:
+    # Defines an HTTP API endpoint that calls the main function in pgtimechart.js
+    # - path: url path is /pgquery/pgtimechart{data}
+    # - method: POST request
+    # - return: records of specific lot key planning_decisions
+    handler: pgdata.main
+    events:
+      - http:
+          path: pgquery/pgdata
+          method: post
+          cors: true
