@@ -100,7 +100,7 @@ class RangeSliderBottom extends React.Component {
 
          //listen to maps moveend movement, need turn on postgres panel to start listening
          scope.state._map.on('moveend', function(x) {
-     	       console.log("map moved");
+     	       //console.log("map moved");
                this.delayTimer = setTimeout(() => {
                    Util.loadingInProgress();
                    scope.loadData()
@@ -110,8 +110,8 @@ class RangeSliderBottom extends React.Component {
 
        // Preferred method
        $(parent).on("valuesChanged", function(e, data){
-         //console.log("Something moved. min: " + data.values.min + " max: " + data.values.max);
-
+         //console.log("value changed");
+          Util.loadingInProgress();
          var s = data.values.min.toISOString();
  	   	 var e = data.values.max.toISOString();
 
@@ -119,11 +119,8 @@ class RangeSliderBottom extends React.Component {
          scope.setState({
              minMax: {"s":s,"e":e}
          })
-
          scope.loadData()
-         //this.loadData(s,e).bind(this);
        });
-
      }
 
      componentWillUnmount() {
@@ -155,11 +152,12 @@ class RangeSliderBottom extends React.Component {
 
 
        if (this.state._map.hasLayer(this.state.geojson)) {
+         console.log("remove layer from map")
            this.state._map.removeLayer(this.state.geojson);
+
        };
 
-
-       this.state.geojson = null;
+        this.state.geojson = null;
 
        var myMapQuery = {
            "startDate": this.state.minMax.s,
@@ -170,22 +168,16 @@ class RangeSliderBottom extends React.Component {
            "ymax" : ymax
        }
 
-       this.setState({
-           mapQuery: myMapQuery,
-           timechartQuery: myMapQuery,
-           piechartQuery:myMapQuery
-       })
-
        var scope = this;
 
       //query map result from api
-      let mapResult = await scope.mapQuery();
+      let mapResult = await scope.mapQuery(myMapQuery);
 
       //query timechart result from api
-      let timeChartResult = await scope.timeChartQuery();
+      let timeChartResult = await scope.timeChartQuery(myMapQuery);
 
       //query piechart result from api
-      let pieChartResult = await scope.pieChartQuery();
+      let pieChartResult = await scope.pieChartQuery(myMapQuery);
 
       //query data from api
       //let dataResult = await scope.dataQuery();
@@ -202,16 +194,19 @@ class RangeSliderBottom extends React.Component {
 
            var geoJsonLayer = new L.geoJson(mapResult);
 
+
+
            //loop through geojson feature layers
            geoJsonLayer.eachLayer(function(layer) {
              tableResult.push(layer.feature.properties);
            });
-
-
+           console.log(mapResult)
            //pick only the properties
+           //add in date for table data query usage
            var chartData = {
              "type":"tablechart",
-             data:tableResult
+             data:tableResult,
+             date:{"startDate":this.state.minMax.s,"endDate":this.state.minMax.e}
            }
 
            //send data to postgresquery.jsx to populate table
@@ -221,12 +216,7 @@ class RangeSliderBottom extends React.Component {
        }
 
        if(timeChartResult){
-           //console.log(timeChartResult);
-
-           this.setState({
-               barchartX:[],
-               barchartY:[]
-           })
+           console.log(timeChartResult);
 
            //save value to state
 
@@ -262,27 +252,27 @@ class RangeSliderBottom extends React.Component {
        Util.loadingComplete();
    };
 
-   mapQuery(){
+   mapQuery(query){
        return invokeApig({
          path: '/pgquery/map',
          method: 'POST',
-         body: this.state.mapQuery,
+         body: query,
        });
    }
 
-   timeChartQuery(){
+   timeChartQuery(query){
        return invokeApig({
          path: '/pgquery/timechart',
          method: 'POST',
-         body: this.state.timechartQuery,
+         body: query,
        });
    }
 
-   pieChartQuery(){
+   pieChartQuery(query){
        return invokeApig({
          path: '/pgquery/piechart',
          method: 'POST',
-         body: this.state.piechartQuery,
+         body: query,
        });
    }
 

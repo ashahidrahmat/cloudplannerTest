@@ -374,7 +374,6 @@ export default class EplReact extends React.Component {
         return (
             <div className="map-content">
                 {this.state.siteInfo.address != null && <div>{addressBarBottom}</div>}
-
                 {jrangesliderbottom}
 
                 <Navbar fluid fixedTop style={{

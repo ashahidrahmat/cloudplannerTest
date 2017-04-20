@@ -69,13 +69,13 @@ class ChatBot extends React.Component {
             height: '100%',
             borderWidth:'0px'
         }
-        
+
         if(this.state.showAll){
             divs = <iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
         } else {
             divs = <iframe style={iframeStyle} src='https://webchat.botframework.com/embed/cookiespam?s=YTXPT_ESNFA.cwA.Wyk.ZHgNMzAl7U3CKgKlFqrnq8lAtKWcTM6acdQ1dBs8S2o'></iframe>
         }
-        
+
         return (<div style={containerStyle}>{divs}</div>);
     }
 }

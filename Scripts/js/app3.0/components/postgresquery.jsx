@@ -37,65 +37,9 @@ import BarChart from 'components/charts/barchart';
 import {ChartColors, ChartOrientation} from 'constants/chartconstants';
 import PieChart from 'components/charts/piechart';
 import MapStore from 'stores/mapstore';
-import {
-Popover,
-Tooltip,
-Modal,
-Button
-} from 'react-bootstrap';
+import ReactBootstrapModal from 'components/reactbootstrapmodal'
 
-const Example = React.createClass({
-  getInitialState() {
-    return { showModal: true };
-  },
 
-  close() {
-    this.setState({ showModal: false });
-  },
-
-  open() {
-    this.setState({ showModal: true });
-  },
-
-  render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = (
-      <Tooltip id="modal-tooltip">
-        wow.
-      </Tooltip>
-    );
-
-    return (
-      <div>
-        <p>Click to get the full Modal experience!</p>
-
-        <Button
-          bsStyle="primary"
-          bsSize="large"
-          onClick={this.open}
-        >
-          Launch demo modal
-        </Button>
-
-        <Modal show={this.state.showModal} onHide={this.close}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-             hi
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
-});
 
 
 class PostgresQuery extends React.Component {
@@ -106,15 +50,14 @@ class PostgresQuery extends React.Component {
         this.state = {
             showId: 0,
             expanded: false,
-            identifyLoading: UiStore.getIdentifyLoadingState(),
-            _map:Util.getMap(),
-            uiState: UiStore.getUiState(),
             geojson: null,
             unmountSlider:false,
             barchartX:QueryStore.getBarchartDataX(),
             barchartY:QueryStore.getBarchartDataY(),
             piechartData:QueryStore.getPiechartData(),
-            tablechartData:QueryStore.getTablechartData()
+            tablechartData:QueryStore.getTablechartData(),
+            showtabledetails:{},
+            queryDate:QueryStore.getQueryDate()
         };
 
         this._onUiChange = this._onUiChange.bind(this);
@@ -154,10 +97,6 @@ class PostgresQuery extends React.Component {
 
     _onUiChange() {
 
-        this.setState({
-            uiState: UiStore.getUiState(),
-            identifyLoading: UiStore.getIdentifyLoadingState()
-        });
     }
 
     _onQueryChange(){
@@ -166,7 +105,8 @@ class PostgresQuery extends React.Component {
           barchartX:QueryStore.getBarchartDataX(),
           barchartY:QueryStore.getBarchartDataY(),
           piechartData:QueryStore.getPiechartData(),
-          tablechartData:QueryStore.getTablechartData()
+          tablechartData:QueryStore.getTablechartData(),
+          queryDate:QueryStore.getQueryDate()
       });
     }
 
@@ -202,14 +142,16 @@ class PostgresQuery extends React.Component {
   }
 
   getDataQuery(evt){
-    console.log(evt);
 
     //EplActionCreator.showModal("hi")
-
+    this.setState({
+      showtabledetails:{"show":true,"lotNo":evt,"date":this.state.queryDate}
+    })
   }
 
     render() {
 
+     
         var expanded = this.state.expanded,
             resizeClass = expanded ? "reduce-icon expand-icon-color" : "expand-icon expand-icon-color",
             resizeInfoClass = expanded ? "icon-resize-small" : "icon-resize-full",
@@ -219,39 +161,31 @@ class PostgresQuery extends React.Component {
             let time =['x'],chartVolume = ['Decision Date'];
             var i = 0;
             let barData = [];
+            var showTimeChartStatus = false;
 
             if(this.state.barchartX != null){
-                //console.log(this.state.barchartX )
 
-                    for(i = 0;i < this.state.barchartX.length;i++){
-                        time.push(this.state.barchartX[i]);
-                        chartVolume.push(this.state.barchartY[i])
-                    }
+              showTimeChartStatus = true
+              for(i = 0;i < this.state.barchartX.length;i++){
+                  time.push(this.state.barchartX[i]);
+                  chartVolume.push(this.state.barchartY[i])
+              }
 
-                    if(this.state.barchartX.length == 0){
-                        time.push(["12"]);
-                        chartVolume.push("1")
-                    }
-
-                barData = [
-                    time,
-                    chartVolume
-                ]
-
-          }
+              barData = [
+                  time,
+                  chartVolume
+              ]
+            }
 
 
 
-
-
-        //show barchart
-        var showTimeChartStatus = this.showChart(this.state.barchartX);
         //show piechart
         var showPieChartStatus = this.showChart(this.state.piechartData);
 
         var tableData = [];
         //populate table
         if(this.state.tablechartData != null){
+          //console.log(this.state.tablechartData)
             var scope = this;
             this.state.tablechartData.data.map((item, j) => {
                 tableData.push(<tr onClick={scope.getDataQuery.bind(scope,item.id)}><td><a href="#">{item.id}</a></td><td>{item.total}</td></tr>)
@@ -284,7 +218,7 @@ class PostgresQuery extends React.Component {
                                       </table>
                                   </div>
 
-                                    <Example/>
+                                  <ReactBootstrapModal data={this.state.showtabledetails} />
 
 
                     </div>

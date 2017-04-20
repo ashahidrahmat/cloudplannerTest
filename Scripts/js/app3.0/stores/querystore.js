@@ -36,6 +36,7 @@ class QueryStore extends BaseStore {
         this.barchartDataY=null;
         this.piechartData=null;
         this.tablechartData = null;
+        this.queryDate=null;
     }
 
     getJrangesliderStatus(){
@@ -58,6 +59,10 @@ class QueryStore extends BaseStore {
       return this.tablechartData;
     }
 
+    getQueryDate(){
+      return this.queryDate;
+    }
+
 
 
 togglejrangeslider(queryData){
@@ -72,6 +77,11 @@ if(queryData.type == "barchart"){
 }else if(queryData.type == "piechart"){
     this.processPiechartDate(queryData.data);
 }else if(queryData.type == "tablechart"){
+  console.log(queryData)
+
+    //add date
+    this.queryDate = queryData.date;
+
     this.processTablechartDate(queryData);
 }
 
