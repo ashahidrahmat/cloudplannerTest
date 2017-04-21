@@ -69,6 +69,7 @@ class MapStore extends BaseStore {
             EplActionCreator.identify(e.latlng);
         };
         this.circles = [];
+        this.controls = [];
     }
 
     initialize(mapId, domNode) {
@@ -165,6 +166,7 @@ class MapStore extends BaseStore {
         Clusterstore.clearGeoPhotoLayer();
         QuicklinkStore.clearUI();
         this.removeCircles();
+        this.removeControls();
         L.DomUtil.get('loading-div').style.display = 'none';
     }
 
@@ -172,7 +174,7 @@ class MapStore extends BaseStore {
         this.clearAllMapHighlights();
         map.setView(this.getDefaultCenter(), this.getDefaultZoom());
         this.setBasemapByMap(map, (map.mapId === MapConstants.Main ? this.defaultBasemapName : this.dualDefaultName));
-
+        this.removeControls();
         this.identifyMarker.remove();
     }
 
@@ -398,6 +400,28 @@ class MapStore extends BaseStore {
             circle.remove();
         })
         this.circles = [];
+    }
+
+    addControl(control){
+        let c = control.addTo(this._maps[0]);
+        this.controls.push(c);
+        return c;
+    }
+    
+    removeControl(control){
+        this._maps[0].removeControl(control);
+
+        let index = this.controls.indexOf(control);
+        if(index !== -1){
+            this.controls.splice(index,1);  
+        }
+    }
+
+    removeControls(){     
+        this.controls.forEach((control)=>{
+            this.removeControl(control);
+        });
+        this.controls = [];
     }
 
     highlightZoomCenter(geometry, zoom, center) {

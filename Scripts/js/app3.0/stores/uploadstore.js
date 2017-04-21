@@ -37,9 +37,12 @@ class UploadStore extends BaseStore {
         this.layerGroup.addLayer(layer).addTo(map);
         this.layerGroupView[name] = layer;
         if(this.control){
+          MapStore.removeControl(this.control);
           this.control.remove();
+          this.control = null;
         }
-        this.control = L.control.layers(null,this.layerGroupView).addTo(map);
+        this.control = L.control.layers(null,this.layerGroupView);
+        MapStore.addControl(this.control);
     }
 
     getLayerGroup(){
