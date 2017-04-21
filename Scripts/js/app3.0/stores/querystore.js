@@ -77,8 +77,6 @@ if(queryData.type == "barchart"){
 }else if(queryData.type == "piechart"){
     this.processPiechartDate(queryData.data);
 }else if(queryData.type == "tablechart"){
-  console.log(queryData)
-
     //add date
     this.queryDate = queryData.date;
 

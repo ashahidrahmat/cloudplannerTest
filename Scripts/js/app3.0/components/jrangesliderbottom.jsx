@@ -70,7 +70,7 @@ class RangeSliderBottom extends React.Component {
 
             this._div.innerHTML = '<h4>Number of Approved Planning Decisions</h4>' +  (props ?
                 '<b>Hexagon ID: ' + props.id + '</b><br />' + props.total + ' applications'
-                : 'Hover over a hexagon');
+                : 'Hover over a planning area');
         };
 
         scope.state.info.addTo(this.state._map);
@@ -152,7 +152,7 @@ class RangeSliderBottom extends React.Component {
 
 
        if (this.state._map.hasLayer(this.state.geojson)) {
-         console.log("remove layer from map")
+         //console.log("remove layer from map")
            this.state._map.removeLayer(this.state.geojson);
 
        };
@@ -200,7 +200,7 @@ class RangeSliderBottom extends React.Component {
            geoJsonLayer.eachLayer(function(layer) {
              tableResult.push(layer.feature.properties);
            });
-           console.log(mapResult)
+
            //pick only the properties
            //add in date for table data query usage
            var chartData = {
@@ -216,8 +216,6 @@ class RangeSliderBottom extends React.Component {
        }
 
        if(timeChartResult){
-           console.log(timeChartResult);
-
            //save value to state
 
            var tempX = [];
@@ -228,12 +226,6 @@ class RangeSliderBottom extends React.Component {
              data:timeChartResult
            }
 
-/*
-           for(i=0;i<timeChartResult.rows.length;i++){
-               tempX.push(timeChartResult.rows[i].decision_date.substring(0,10));
-               tempY.push(timeChartResult.rows[i].count);
-           }
-*/
              EplActionCreator.togglejrangeslider(chartData);
 
            this.setState({

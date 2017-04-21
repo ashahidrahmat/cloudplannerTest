@@ -119,7 +119,8 @@ class PostgresQuery extends React.Component {
 
   _toggleRightPanelExpansion(evt) {
       this.setState({
-          expanded: !this.state.expanded
+          expanded: !this.state.expanded,
+           showtabledetails:{"show":false,"lotNo":evt,"date":this.state.queryDate}
       });
 
   }
@@ -151,7 +152,7 @@ class PostgresQuery extends React.Component {
 
     render() {
 
-     
+
         var expanded = this.state.expanded,
             resizeClass = expanded ? "reduce-icon expand-icon-color" : "expand-icon expand-icon-color",
             resizeInfoClass = expanded ? "icon-resize-small" : "icon-resize-full",
@@ -186,10 +187,13 @@ class PostgresQuery extends React.Component {
         //populate table
         if(this.state.tablechartData != null){
           //console.log(this.state.tablechartData)
+          if(this.state.tablechartData.length != 0){
             var scope = this;
+            tableData.push(<tr><td width="116px;">Lot_No</td><td>Count</td></tr>)
             this.state.tablechartData.data.map((item, j) => {
                 tableData.push(<tr onClick={scope.getDataQuery.bind(scope,item.id)}><td><a href="#">{item.id}</a></td><td>{item.total}</td></tr>)
-        });
+        })
+        }
         }
 
 
@@ -212,7 +216,6 @@ class PostgresQuery extends React.Component {
                                   <div className={siteClass + " site-fixed-info"}>
                                       <table className="site-fixed-info-table" border="1">
                                           <tbody>
-                                              <tr><td width="116px;">Lot_No</td><td>Count</td></tr>
                                               {tableData}
                                           </tbody>
                                       </table>

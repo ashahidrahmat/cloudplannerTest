@@ -53,10 +53,15 @@ class ReactBootstrapModal extends React.Component {
 
     }
 
+
+    componentWillUnmount() {
+        console.log("unmout react bootstrap")
+
+    }
+
     async componentWillReceiveProps(nextProps){
 
       if(nextProps.data.show){
-        console.log(nextProps)
       //query for data api
         var myDataQuery = {
             "s": nextProps.data.date.startDate,
@@ -103,16 +108,6 @@ class ReactBootstrapModal extends React.Component {
       );
         return (
           <div>
-            <p>Click to get the full Modal experience!</p>
-
-            <Button
-              bsStyle="primary"
-              bsSize="large"
-              onClick={this.open}
-            >
-              Launch demo modal
-            </Button>
-
             <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
               <Modal.Header closeButton>
                 <Modal.Title>Modal heading</Modal.Title>
