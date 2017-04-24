@@ -1,17 +1,18 @@
 {
-    "name": "cloudplanner",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "NODE_ENV=production node index.js -p --env.prod=true",
-        "concat-css": "cat Content/css/* > all.css"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "compression": "^1.6.2",
-        "express": "^4.15.2",
-        "path": "^0.12.7"
-    }
+  "name": "cloudplanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js -p --env.prod=true",
+    "concat-css": "cat Content/css/* > all.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.6.2",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.6",
+    "path": "^0.12.7"
+  }
 }
