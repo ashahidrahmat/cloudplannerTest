@@ -30,7 +30,8 @@ export default {
     GeoTagPhotoDetail:10,
     ToggleMobileNavBtn:11,
     ChatBot:12,
-    Postgres:13
+    Postgres:13,
+    Social: 14
 }
 
 export let FilterState = {

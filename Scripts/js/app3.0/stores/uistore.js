@@ -343,6 +343,10 @@ instance.dispatchToken = AppDispatcher.register(function(action) {
             instance.toggleGroupMenu(MenuConstants.Postgres);
             instance.emitChanges();
             break;
+        case EplConstants.ToggleSocialMedia:
+            instance.toggleGroupMenu(MenuConstants.Social);
+            instance.emitChanges();
+            break;
         default:
             //no op
     }

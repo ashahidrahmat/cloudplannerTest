@@ -582,6 +582,13 @@ class EplActionCreator {
           actionType: EplConstants.TogglePostgresQuery
       });
     }
+    
+    toggleSocialMedia(){
+      AppDispatcher.dispatch({
+          actionType: EplConstants.ToggleSocialMedia
+      });
+    }
+
 
     togglejrangeslider(customData){
       AppDispatcher.dispatch({

@@ -99,5 +99,6 @@ export default {
     ToggleChatBot:84,
     TogglePostgresQuery:85,
     Togglejrangeslider:86,
-    DrawStreetViewMarker:87
+    DrawStreetViewMarker:87, 
+    ToggleSocialMedia:88
 };

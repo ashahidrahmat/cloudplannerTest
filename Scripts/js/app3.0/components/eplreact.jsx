@@ -50,6 +50,7 @@ import Quicklink from 'components/quicklink/quicklink';
 import GeoTagPhotoDetail from 'components/geophoto/geotagphotodetail';
 import WebApi from 'webapi';
 import PostgresQuery from 'components/postgresquery'
+import SocialAnalysis from 'components/socialanalysis'
 import DesktopBreakpoint from 'components/breakpoints/desktop_breakpoint';
 import TabletBreakpoint from 'components/breakpoints/tablet_breakpoint';
 import PhoneBreakpoint from 'components/breakpoints/phone_breakpoint';
@@ -295,6 +296,10 @@ export default class EplReact extends React.Component {
         EplActionCreator.togglePostgresQuery();
     }
 
+    toggleSocialMedia(){
+        EplActionCreator.toggleSocialMedia();
+    }
+
     render() {
         var basemaps = !this.state.buildings
                 ? MapStore.getBasemaps()
@@ -469,6 +474,10 @@ export default class EplReact extends React.Component {
                                                  <i className="iconfont icon-columns"></i>
                                                  <div className="iconfont-name">Postgres</div>
                                              </li>
+                                             <li id="dual-screen" onClick={this.toggleSocialMedia.bind(this)}>
+                                                 <i className="iconfont icon-columns"></i>
+                                                 <div className="iconfont-name">Social</div>
+                                             </li>
                                             {!buildings
                                                 && <li id="dual-screen" onClick={this.toggleDualScreen.bind(this)}>
                                                         <i className="iconfont icon-columns"></i>
@@ -612,6 +621,11 @@ export default class EplReact extends React.Component {
                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
                     {(uiState.displayMenu === MenuConstants.Postgres)
                         && <PostgresQuery key="postgresquery"/>
+                    }
+                </ReactCSSTransitionGroup>
+                 <ReactCSSTransitionGroup transitionName="rightpanel" transitionAppear={true} transitionAppearTimeout={800} transitionEnterTimeout={800} transitionLeaveTimeout={800}>
+                    {(uiState.displayMenu === MenuConstants.Social)
+                        && <SocialAnalysis key="socialmediaanalysis"/>
                     }
                 </ReactCSSTransitionGroup>
                 <PhoneBreakpoint>
